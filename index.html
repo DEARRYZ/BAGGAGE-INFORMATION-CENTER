@@ -170,6 +170,11 @@ main.view-in{animation:viewIn .32s cubic-bezier(.22,1,.36,1)}
 .dc-exb{margin-top:6px;padding:8px;border:1px dashed var(--line);border-radius:10px;background:var(--card)}.dc-exb[hidden]{display:none}
 .dcard.file-over{outline:3px dashed var(--pri2);outline-offset:-3px}
 .rn-row{display:grid;grid-template-columns:64px 1.4fr 1fr;gap:6px;align-items:center}.rn-row input{padding:6px 8px}
+.aq{display:flex;align-items:center;gap:10px;margin:2px 0 12px;flex-wrap:wrap}.aq input{max-width:430px}
+.tg{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 9px;border-radius:10px;margin:0 4px 3px 0;white-space:nowrap}.tg-t{color:#fff}
+.tg-p{background:#d9f2e3;color:#14663a;border:1px solid #9fd8b6}.tg-a{background:#dcebfb;color:#0b4f8a;border:1px solid #9ec5ee}
+:root[data-theme="dark"] .tg-p{background:#123422;color:#7bd6a0;border-color:#1f6b45}:root[data-theme="dark"] .tg-a{background:#10294a;color:#8ec3f5;border-color:#1f4f86}
+.gres .tags{margin:3px 0 1px}
 .pub{text-align:center;font-size:11.5px;color:var(--mut);padding:8px 18px 80px}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px;align-items:start}
 .pcard{border:1px solid var(--line);border-top:4px solid var(--cc,#5f6f82);border-radius:12px;background:var(--card);padding:10px 12px}.pc-h{display:flex;align-items:center;gap:6px;margin-bottom:6px}.pc-h b{flex:1;min-width:0;overflow-wrap:anywhere;color:var(--ink)}
@@ -305,8 +310,9 @@ header{padding:6px 10px}
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.2.0";
+const VERSION="1.2.1";
 const CHANGELOG=[
+ {v:"1.2.1",d:"2026-10-22",items:["Email Directory: every airline now has its own search box (above its subjects) that finds subjects, stations, email addresses and remarks inside that airline only, highlights the matches and shows how many emails are displayed.","Advance Search Bar and Email Templates: template results, cards and the template window now show colour tags — 'To passenger' or 'To airline' (who the message is for) and the type of report (AHL, DPR, OHD, Switch bag, Forward …)."]},
  {v:"1.2.0",d:"2026-10-20",items:["Split view: using the Advance Search Bar no longer closes split view — the result opens in the pane you were not using (the other pane keeps what you were doing).","Split view: a search result can now be dragged straight onto the left or right pane (or onto the page to start a split view).","Split view: the two panes can be resized by dragging the divider between them (double-click it to reset to 50 / 50, or focus it and use the arrow keys). Your size is remembered on this device."]},
  {v:"1.1.9",d:"2026-10-19",items:["Email Templates: the content can now also be chosen in Chinese (中文) — new 中文 button next to EN / ไทย in the template list and in the template window. Subject stays in English; copy and the Outlook draft use the language you choose. Chinese text is translated from the English version — please review before sending, and edit it if needed.","The names (and icons) of the main sections can now be changed: ⚙ Options ▸ Rename sections. Menu buttons, page titles, home cards and search follow the new names."]},
  {v:"1.1.8",d:"2026-10-18",items:["Contact History (Phone Pick-up and Office 1st floor): new Hide / Show statistics button to collapse the charts area (your choice is remembered on this device).","Phone view: the top header bar is smaller and more compact (shorter title, small search bar, one-line clocks, no long subtitle).","Airlines Policy, Documents and TELEX: ➕ Add airline is now available at any time, so you can add more airlines freely in each section (no need to start from Email Directory).","Bug fix: removed technical back-end wording (cloud / sync messages) from the screens and from this update history."]},
@@ -488,6 +494,12 @@ function mountTelex(root){
   return {refresh:draw,goto(p){S.q="";qi.value="";if(p.air)S.sel=p.air;draw();const el=p.aid?$(`[data-aid="${p.aid}"]`,root):null;if(el){el.scrollIntoView({block:"center"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),2200)}}};
 }
 
+/* colour tags for templates: who the message is for + type of report */
+const TYPE_COL={AHL:"#0e6fc0",DPR:"#c0392b",OHD:"#1d8a4e","SWITCH BAG (CBT)":"#7b4fb3",FORWARD:"#d98a00","CUSTOMS/SECURITY":"#8a5a00","FOUND PROPERTY":"#0e8a8a","PASSENGER RECORD":"#5f6f82","TRANSFER COMPENSATE":"#c2477a"};
+function tagsHTML(t){
+  const toAir=(t.aud||"")!=="Passenger";
+  return `<span class="tg ${toAir?"tg-a":"tg-p"}">${toAir?"✈️ To airline":"👤 To passenger"}</span>`+(t.type?`<span class="tg tg-t" style="background:${TYPE_COL[t.type]||"#5f6f82"}">${esc(t.type)}</span>`:"");
+}
 /* ============ EMAIL MODULE ============ */
 function airLabel(a){return AIRNAMES[a]||a}
 function tTitle(t,lang){return lang==="th"&&t.titleTh?t.titleTh:t.titleEn}
@@ -510,7 +522,7 @@ function mountEmail(root){
     const pi=pageInfo(rs.length,S.page);S.page=pi.p;const pageRs=rs.slice(pi.a,pi.b);
     meta.textContent=`${rs.length?`${pi.a+1}–${pi.b}`:0} of ${rs.length} templates (${DB.templates.length} total) · page ${pi.p}/${pi.pages} · ${{th:"Thai",zh:"Chinese"}[lang]||"English"} version`;
     $(".pgw",root).innerHTML=pagerHTML(rs.length,S.page);
-    grid.innerHTML=rs.length?pageRs.map(t=>`<div class="tcard" data-id="${t.id}"><div><span class="chip al">${esc(airLabel(t.airline))}</span><span class="chip ty">${esc(t.type)}</span><span class="chip au">To: ${esc(t.aud)}</span>${lang==="th"&&(!t.th)?'<span class="chip tr">No Thai</span>':""}${lang==="th"&&t.thAuto?'<span class="chip tr">Auto-translated</span>':""}${lang==="zh"&&!zhOf(t)?'<span class="chip tr">No Chinese</span>':""}${lang==="zh"&&zhOf(t)&&zhIsAuto(t)?'<span class="chip tr">Auto-translated</span>':""}</div><h4>${esc(dEn(t))}</h4>${dTh(t)?`<div class="th-sub">${esc(dTh(t))}</div>`:""}<div class="subj">${t.subject?"Subject: "+esc(t.subject):"&nbsp;"}</div></div>`).join(""):`<div class="empty" style="grid-column:1/-1">No templates match your filters.</div>`;
+    grid.innerHTML=rs.length?pageRs.map(t=>`<div class="tcard" data-id="${t.id}"><div><span class="chip al">${esc(airLabel(t.airline))}</span>${tagsHTML(t)}${lang==="th"&&(!t.th)?'<span class="chip tr">No Thai</span>':""}${lang==="th"&&t.thAuto?'<span class="chip tr">Auto-translated</span>':""}${lang==="zh"&&!zhOf(t)?'<span class="chip tr">No Chinese</span>':""}${lang==="zh"&&zhOf(t)&&zhIsAuto(t)?'<span class="chip tr">Auto-translated</span>':""}</div><h4>${esc(dEn(t))}</h4>${dTh(t)?`<div class="th-sub">${esc(dTh(t))}</div>`:""}<div class="subj">${t.subject?"Subject: "+esc(t.subject):"&nbsp;"}</div></div>`).join(""):`<div class="empty" style="grid-column:1/-1">No templates match your filters.</div>`;
     $$("[data-lang]",root).forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
   }
   root.addEventListener("input",e=>{const f=e.target.dataset.f;if(f){S[f]=e.target.value;S.page=1;list()}});
@@ -541,7 +553,7 @@ function draftMail(kind,subject,body){
 function viewTemplate(id){
   const t=DB.templates.find(x=>x.id===id);if(!t)return;
   const lang=DB.ui.lang;
-  modal(`<div class="mhead"><div style="min-width:0"><span class="chip al">${esc(airLabel(t.airline))}</span><span class="chip ty">${esc(t.type)}</span><span class="chip au">To: ${esc(t.aud)}</span><h3 style="margin:6px 0 0">${esc(dEn(t))}</h3>${dTh(t)?`<div class="th-sub">${esc(dTh(t))}</div>`:""}</div><button class="btn sm x" data-close>✕</button></div>
+  modal(`<div class="mhead"><div style="min-width:0"><span class="chip al">${esc(airLabel(t.airline))}</span>${tagsHTML(t)}<h3 style="margin:6px 0 0">${esc(dEn(t))}</h3>${dTh(t)?`<div class="th-sub">${esc(dTh(t))}</div>`:""}</div><button class="btn sm x" data-close>✕</button></div>
   <div class="seg" style="margin:8px 0"><button data-ml="en" class="${lang==="en"?"on":""}">EN</button><button data-ml="th" class="${lang==="th"?"on":""}">ไทย</button><button data-ml="zh" class="${lang==="zh"?"on":""}">中文</button></div>
   <div id="mv"></div>
   <div class="lbl">Update history</div><ul class="hist" style="margin:0;padding-left:18px;font-size:13px">${(t.hist||[]).length?t.hist.slice().reverse().map(h=>`<li>${esc(h.d)} : ${esc(h.t)}</li>`).join(""):"<li>No history</li>"}</ul>
@@ -1284,7 +1296,8 @@ function sampleQR(){
   return {id:uid("al"),code:"QR",name:"Qatar Airways",subjects:[newSubject("BKK Station Staff Email",false),s2,newSubject("Report Email",false)]};
 }
 function mountEmailDir(root){
-  const S={sel:null,q:"",edit:false};
+  const S={sel:null,q:"",edit:false,aq:"",aqFor:null};
+  const aqh=t=>S.aq?hl(t,S.aq):esc(t);
   root.innerHTML=`<div class="sec-head"><h2>${secH("emaildir")}</h2><span class="hint" id="ed-n"></span><div class="right"><button class="btn sm" data-a="editmode" id="ed-em">✏️ Edit mode</button><span class="hint">Copy separator</span><div class="seg" id="ed-sep"><button data-sep="; ">;</button><button data-sep=", ">,</button></div><button class="btn sm" data-a="imp">⬆ Import emails</button><button class="btn sm" data-a="exp">⬇ Export</button><button class="btn sm" data-a="bulkair">＋ Bulk add</button><button class="btn pri sm" data-a="addair">＋ Add airline</button></div></div>
   <div class="edwrap"><div class="edside"><input id="ed-q" type="search" autocomplete="off" placeholder="🔍 Find airline, code, email…"><div class="edlist"></div></div><div class="dirbody"></div></div>`;
   const sepNow=()=>DB.ui.sep||"; ";
@@ -1293,13 +1306,13 @@ function mountEmailDir(root){
   const getS=(a,sid)=>a.subjects.find(s=>s.id===sid);
   const getL=(s,gid)=>gid?s.groups.find(g=>g.id===gid).emails:s.emails;
   function emailRows(list,sid,gid){
-    return list&&list.length?list.map(e=>`<div class="erow" data-eid="${e.id}"><span class="addr" data-a="copyone" data-v="${esc(e.addr)}" title="Click to copy">${esc(e.addr)}</span>${e.remark?`<span class="cmt">— ${esc(e.remark)}</span>`:""}<span class="eact"><button class="btn sm" data-a="editemail" data-s="${sid}" data-g="${gid||""}" data-e="${e.id}" title="Edit">✏️</button><button class="btn sm danger" data-a="delemail" data-s="${sid}" data-g="${gid||""}" data-e="${e.id}" title="Remove">✕</button></span></div>`).join(""):`<div class="crumb" style="padding:6px 2px">No email yet</div>`;
+    return list&&list.length?list.map(e=>`<div class="erow" data-eid="${e.id}"><span class="addr" data-a="copyone" data-v="${esc(e.addr)}" title="Click to copy">${aqh(e.addr)}</span>${e.remark?`<span class="cmt">— ${aqh(e.remark)}</span>`:""}<span class="eact"><button class="btn sm" data-a="editemail" data-s="${sid}" data-g="${gid||""}" data-e="${e.id}" title="Edit">✏️</button><button class="btn sm danger" data-a="delemail" data-s="${sid}" data-g="${gid||""}" data-e="${e.id}" title="Remove">✕</button></span></div>`).join(""):`<div class="crumb" style="padding:6px 2px">No email yet</div>`;
   }
-  function subjHTML(s){
-    const total=uniqAddr(listEmails(s)).length;
-    return `<div class="scardx" data-sid="${s.id}" data-grouped="${s.grouped?1:0}"><div class="subj-h"><div style="min-width:0"><span class="grab" draggable="true" data-dk="subj" data-sid="${s.id}" title="Drag to reorder this subject">⠿</span><b>${esc(s.name)}</b>${s.grouped?'<span class="chip ty" style="margin-left:8px">by station</span>':""}${s.note?`<div class="crumb">${esc(s.note)}</div>`:""}</div>
+  function subjHTML(s,full=s){
+    const total=uniqAddr(listEmails(full)).length,og=g=>(full.groups||[]).find(x=>x.id===g.id)||g;
+    return `<div class="scardx" data-sid="${s.id}" data-grouped="${s.grouped?1:0}"><div class="subj-h"><div style="min-width:0"><span class="grab" draggable="true" data-dk="subj" data-sid="${s.id}" title="Drag to reorder this subject">⠿</span><b>${aqh(s.name)}</b>${s.grouped?'<span class="chip ty" style="margin-left:8px">by station</span>':""}${s.note?`<div class="crumb">${aqh(s.note)}</div>`:""}</div>
       <div class="row"><button class="btn sm pri" data-a="copysubj" data-s="${s.id}" ${total?"":"disabled"}>📋 Copy all (${total})</button>${s.grouped?`<button class="btn sm" data-a="addgrp" data-s="${s.id}">＋ Station</button>`:`<button class="btn sm" data-a="addemail" data-s="${s.id}">＋ Email</button>`}<button class="btn sm" data-a="editsubj" data-s="${s.id}" title="Edit subject">✏️</button><button class="btn sm danger" data-a="delsubj" data-s="${s.id}" title="Delete subject">🗑</button></div></div>
-      ${s.grouped?((s.groups||[]).map(g=>`<div class="grp" data-gid="${g.id}" data-sid="${s.id}"><div class="grp-h"><span class="grab" draggable="true" data-dk="grp" data-sid="${s.id}" data-gid="${g.id}" title="Drag to reorder, or drop onto another station-grouped subject">⠿</span><b>📍 ${esc(g.station)}</b><span class="crumb">${(g.emails||[]).length} email(s)</span><span class="row" style="margin-left:auto"><button class="btn sm" data-a="copygrp" data-s="${s.id}" data-g="${g.id}" ${(g.emails||[]).length?"":"disabled"}>📋 Copy group</button><button class="btn sm" data-a="addemail" data-s="${s.id}" data-g="${g.id}">＋ Email</button><button class="btn sm" data-a="editgrp" data-s="${s.id}" data-g="${g.id}">✏️</button><button class="btn sm danger" data-a="delgrp" data-s="${s.id}" data-g="${g.id}">🗑</button></span></div>${emailRows(g.emails,s.id,g.id)}</div>`).join("")||`<div class="crumb" style="padding:6px 2px">No station yet — click “＋ Station”</div>`):emailRows(s.emails,s.id,null)}</div>`;
+      ${s.grouped?((s.groups||[]).map(g=>`<div class="grp" data-gid="${g.id}" data-sid="${s.id}"><div class="grp-h"><span class="grab" draggable="true" data-dk="grp" data-sid="${s.id}" data-gid="${g.id}" title="Drag to reorder, or drop onto another station-grouped subject">⠿</span><b>📍 ${aqh(g.station)}</b><span class="crumb">${(og(g).emails||[]).length} email(s)</span><span class="row" style="margin-left:auto"><button class="btn sm" data-a="copygrp" data-s="${s.id}" data-g="${g.id}" ${(og(g).emails||[]).length?"":"disabled"}>📋 Copy group</button><button class="btn sm" data-a="addemail" data-s="${s.id}" data-g="${g.id}">＋ Email</button><button class="btn sm" data-a="editgrp" data-s="${s.id}" data-g="${g.id}">✏️</button><button class="btn sm danger" data-a="delgrp" data-s="${s.id}" data-g="${g.id}">🗑</button></span></div>${emailRows(g.emails,s.id,g.id)}</div>`).join("")||`<div class="crumb" style="padding:6px 2px">No station yet — click “＋ Station”</div>`):emailRows(s.emails,s.id,null)}</div>`;
   }
   const cntOf=a=>a.subjects.reduce((n,s)=>n+uniqAddr(listEmails(s)).length,0);
   function matches(a,q){
@@ -1320,7 +1333,25 @@ function mountEmailDir(root){
     const body=$(".dirbody",root),a=air(S.sel);
     if(!DB.emaildir.length){body.innerHTML=`<div class="empty"><p>No airline in the directory yet.</p><div class="row" style="justify-content:center"><button class="btn pri" data-a="bulkair">＋ Bulk add airlines (paste a list)</button><button class="btn" data-a="addair">＋ Add one airline</button><button class="btn" data-a="fromtpl">Create from Email Templates</button><button class="btn" data-a="sample">Load example (QR)</button></div></div>`;return}
     if(!a){body.innerHTML=`<div class="empty">Select an airline from the list.</div>`;return}
-    body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}</h3><span class="crumb">${cntOf(a)} email(s) · ${a.subjects.length} subject(s) · drag ⠿ to reorder subjects / stations</span></div><span class="row"><button class="btn sm" data-a="pin" data-s="${a.id}">${a.fav?"★ Pinned":"☆ Pin"}</button><button class="btn sm" data-a="editair">✏️ Edit airline</button><button class="btn sm danger" data-a="delair">🗑 Delete</button><button class="btn sm pri" data-a="addsubj">＋ Add subject</button></span></div>${a.subjects.map(subjHTML).join("")||`<div class="empty">No subject yet — click “＋ Add subject”.</div>`}`;
+    if(document.activeElement?.id==="ed-aq"&&S.aqFor===a.id&&$("#ed-subs",root)){drawSubs();return}   /* keep typing focus while data refreshes */
+    if(S.aqFor!==a.id){S.aq="";S.aqFor=a.id}
+    body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}</h3><span class="crumb">${cntOf(a)} email(s) · ${a.subjects.length} subject(s) · drag ⠿ to reorder subjects / stations</span></div><span class="row"><button class="btn sm" data-a="pin" data-s="${a.id}">${a.fav?"★ Pinned":"☆ Pin"}</button><button class="btn sm" data-a="editair">✏️ Edit airline</button><button class="btn sm danger" data-a="delair">🗑 Delete</button><button class="btn sm pri" data-a="addsubj">＋ Add subject</button></span></div>${a.subjects.length?`<div class="aq"><input id="ed-aq" type="search" autocomplete="off" placeholder="🔍 Search inside ${esc(a.code)} — subject, station, email, remark…" value="${esc(S.aq)}"><span class="crumb" id="ed-aqn"></span></div>`:""}<div id="ed-subs"></div>`;
+    drawSubs();
+  }
+  function drawSubs(){
+    const box=$("#ed-subs",root),a=air(S.sel);if(!box||!a)return;
+    const tk=S.aq.trim().toLowerCase().split(/\s+/).filter(Boolean),all=t=>tk.every(w=>t.includes(w)),low=(...x)=>x.filter(Boolean).join(" ").toLowerCase();
+    let shown=0;const out=[];
+    a.subjects.forEach(s=>{
+      if(!tk.length){out.push(subjHTML(s));return}
+      if(all(low(s.name,s.note))){out.push(subjHTML(s));shown+=uniqAddr(listEmails(s)).length;return}
+      if(s.grouped){
+        const gs=(s.groups||[]).map(g=>{const gHit=all(low(g.station)),es=(g.emails||[]).filter(e=>gHit||all(low(g.station,e.addr,e.remark)));return es.length?{...g,emails:es}:null}).filter(Boolean);
+        if(gs.length){out.push(subjHTML({...s,groups:gs},s));shown+=uniqAddr(gs.flatMap(g=>g.emails)).length}
+      }else{const es=(s.emails||[]).filter(e=>all(low(e.addr,e.remark)));if(es.length){out.push(subjHTML({...s,emails:es},s));shown+=uniqAddr(es).length}}
+    });
+    box.innerHTML=out.join("")||(tk.length?`<div class="empty">No match for “${esc(S.aq)}” in ${esc(a.code)}.</div>`:`<div class="empty">No subject yet — click “＋ Add subject”.</div>`);
+    const n=$("#ed-aqn",root);if(n)n.textContent=tk.length?`${shown} of ${cntOf(a)} email(s) shown`:"";
   }
   function draw(){
     if(!air(S.sel)){const v=visible();S.sel=(v[0]||DB.emaildir.slice().sort((x,y)=>x.code.localeCompare(y.code))[0])?.id||null}
@@ -1587,6 +1618,7 @@ function mountEmailDir(root){
     });
   }
   applyMode();
+  root.addEventListener("input",e=>{if(e.target.id==="ed-aq"){S.aq=e.target.value;drawSubs()}});
   const qi=$("#ed-q",root);
   qi.addEventListener("input",()=>{S.q=qi.value;const v=visible();if(v.length&&!v.some(a=>a.id===S.sel))S.sel=v[0].id;drawList();drawBody()});
   qi.addEventListener("keydown",e=>{
@@ -2053,7 +2085,7 @@ document.addEventListener("drop",e=>{const z=e.target.closest?.(".dzone");if(!z)
 function buildIndex(){
   const ix=[];
   SECTIONS.forEach(s=>ix.push({sec:s.id,secName:s.short,title:s.name,sub:s.desc,crumb:"Section",text:(s.name+" "+s.desc+" "+s.kw).toLowerCase(),go:()=>go(s.id)}));
-  DB.templates.forEach(t=>ix.push({sec:"email",secName:"Email Templates",title:dEn(t)+(dTh(t)?" · "+dTh(t):""),sub:(t.subject?"Subject: "+t.subject+" — ":"")+t.en.replace(/\s+/g," ").slice(0,110),crumb:`Email Templates › ${airLabel(t.airline)} › ${t.type}`,text:[t.airline,airLabel(t.airline),t.type,t.aud,t.titleEn,t.titleTh,dEn(t),dTh(t),t.subject,t.en,t.th,zhOf(t)].join(" ").toLowerCase(),go:()=>go("email",{tpl:t.id})}));
+  DB.templates.forEach(t=>ix.push({sec:"email",secName:"Email Templates",title:dEn(t)+(dTh(t)?" · "+dTh(t):""),sub:(t.subject?"Subject: "+t.subject+" — ":"")+t.en.replace(/\s+/g," ").slice(0,110),crumb:`Email Templates › ${airLabel(t.airline)} › ${t.type}`,text:[t.airline,airLabel(t.airline),t.type,t.aud,t.titleEn,t.titleTh,dEn(t),dTh(t),t.subject,t.en,t.th,zhOf(t)].join(" ").toLowerCase(),tags:tagsHTML(t),go:()=>go("email",{tpl:t.id})}));
   ["phone","office"].forEach(k=>DB[k].forEach(r=>ix.push({sec:"contact",secName:"Contact History",title:`${r.ref||"(no case ref)"} — ${r.topic}`,sub:`${r.contact?r.contact+" · ":""}${r.status} · ${r.remark||""}`.slice(0,120),crumb:`Contact History › ${CFG[k].label} › ${fmt(r.ts)}`,text:[r.ref,r.contact,r.topic,r.rtype,r.remark,r.status,CFG[k].label,"contact history"].join(" ").toLowerCase(),go:()=>go("contact",{tab:k,q:r.ref||r.contact||""})})));
   DB.sorting.filter(r=>!isMockRec(r)).forEach(r=>{const cm=(r.history||[]).filter(x=>/^(Comment|Note):/.test(x.text)).map(x=>x.text);ix.push({sec:"sorting",secName:"Sorting Bag Record",title:`${r.tagNumber} — ${r.flightNumber} (${r.flightDate})`,sub:`${r.color||""} · ${r.status} · AHL/Email: ${r.ahlCase||"—"}${cm.length?" · "+cm[cm.length-1]:""}`.slice(0,140),crumb:`Sorting Bag Record › Dashboard › ${r.createdAt||""}`,text:[r.tagNumber,r.flightNumber,r.flightDate,r.color,r.ahlCase,r.status,(r.history||[]).map(x=>x.text).join(" "),"sorting bag record tbt"].join(" ").toLowerCase(),go:()=>go("sorting",{q:r.tagNumber})})});
   DB.emaildir.forEach(a=>{const at=airTitle(a),pd=policyFor(a).doc;
@@ -2108,7 +2140,7 @@ function hubHTML(o){
   return `<div class="hubc"><div style="font-weight:700;margin-bottom:6px">✈️ ${esc(o.code)}${o.name?" · "+esc(o.name):""} <span class="hint">— jump to</span></div><div class="row">${o.ed?btn("emaildir",`📇 Emails <b>${eml}</b>`)+btn("policy","📘 Policy"):""}${o.tx?btn("telex",`📠 TELEX <b>${txUniq(o.tx.groups.flatMap(g=>g.addrs.map(x=>x.addr))).length}</b>`):""}${o.tpl?btn("tpl",`✉️ Templates <b>${o.tpl}</b>`):""}</div></div>`;
 }
 function chipsHTML(counts,total){return `<span class="hint">Search in:</span><button class="gchip ${gScope?"":"on"}" data-sc="">All <b>${total}</b></button>`+SECTIONS.map(s=>`<button class="gchip ${gScope===s.id?"on":""}" data-sc="${s.id}">${s.icon} ${esc(s.short)} <b>${counts[s.id]||0}</b></button>`).join("")}
-function itemHTML(it,n,q){return `<div class="it${it.copy?" hascp":""}" data-n="${n}" draggable="true"><div class="t"><span class="src s-${it.sec}">${esc(it.secName)}</span>${hl(it.title,q)}</div><div class="crumb">📍 ${esc(it.crumb)}</div><div class="s">${hl(it.sub,q)}</div>${it.copy?`<button class="gcp" data-cp="${n}" title="Copy ${esc(it.copy)}">📋 Copy</button>`:""}</div>`}
+function itemHTML(it,n,q){return `<div class="it${it.copy?" hascp":""}" data-n="${n}" draggable="true"><div class="t"><span class="src s-${it.sec}">${esc(it.secName)}</span>${hl(it.title,q)}</div>${it.tags?`<div class="tags">${it.tags}</div>`:""}<div class="crumb">📍 ${esc(it.crumb)}</div><div class="s">${hl(it.sub,q)}</div>${it.copy?`<button class="gcp" data-cp="${n}" title="Copy ${esc(it.copy)}">📋 Copy</button>`:""}</div>`}
 function gsearch(){
   const raw=gq.value,pq=parseQ(raw),q=pq.q.toLowerCase(),eff=gScope||pq.scope||"",idx=getIndex(),counts={};
   gq.placeholder=gScope?`Search in ${SECTIONS.find(s=>s.id===gScope).short}…`:G_PH;
