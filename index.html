@@ -42,7 +42,9 @@ header{background:linear-gradient(120deg,#07345e,#0b4f8a 60%,#0e6fc0);color:#fff
 .src{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:10px;background:var(--pri);color:#fff;margin-right:6px;vertical-align:1px}
 .src.s-policy{background:#7b4fb3}.src.s-contact{background:#1d8a4e}
 .crumb{font-size:12px;color:var(--mut)}
-nav.bar{max-width:1500px;margin:12px auto 0;padding:0 18px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+nav.bar{margin:0;padding:8px max(18px,calc((100% - 1500px)/2 + 18px));display:flex;gap:8px;flex-wrap:wrap;align-items:center;position:sticky;top:calc(var(--hh,64px) + env(safe-area-inset-top,0px));z-index:28;background:var(--bg);transition:box-shadow .2s}
+nav.bar.stuck{box-shadow:0 3px 10px rgba(0,0,0,.12)}
+@media(max-width:700px){nav.bar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:6px 12px}nav.bar::-webkit-scrollbar{display:none}nav.bar .btn{flex:none;white-space:nowrap}nav.bar .sp{display:none}}
 nav.bar .btn.on{background:var(--pri);color:#fff;border-color:var(--pri)}
 nav.bar .sp{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 nav.bar select{width:auto;padding:5px 9px}
@@ -175,6 +177,15 @@ main.view-in{animation:viewIn .32s cubic-bezier(.22,1,.36,1)}
 .tg-p{background:#d9f2e3;color:#14663a;border:1px solid #9fd8b6}.tg-a{background:#dcebfb;color:#0b4f8a;border:1px solid #9ec5ee}
 :root[data-theme="dark"] .tg-p{background:#123422;color:#7bd6a0;border-color:#1f6b45}:root[data-theme="dark"] .tg-a{background:#10294a;color:#8ec3f5;border-color:#1f4f86}
 .gres .tags{margin:3px 0 1px}
+.xl{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-2px 0 10px;font-size:12.5px;color:var(--mut)}
+.xlb{border:1px solid var(--line);background:var(--card);color:var(--pri);border-radius:14px;padding:2px 10px;font-weight:600;cursor:pointer;transition:background-color .15s,color .15s,transform .12s}.xlb:hover{background:var(--pri);color:#fff}.xlb:active{transform:scale(.95)}.xlb i{font-style:normal;opacity:.7;margin-left:3px}
+.qf{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.tcard{position:relative}.tc-top{padding-right:26px}.star-t{position:absolute;top:6px;right:8px;border:none;background:transparent;font-size:19px;line-height:1;color:var(--mut);cursor:pointer;padding:2px 4px;transition:transform .15s,color .15s}.star-t:hover{transform:scale(1.2);color:#e8a317}.star-t.on{color:#e8a317}
+.tg[data-tgt]{cursor:pointer}.tg[data-tgt]:hover{filter:brightness(1.12);box-shadow:0 0 0 2px rgba(14,111,192,.35)}
+.qa-w{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}.qa{border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:16px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:background-color .15s,color .15s,transform .12s}.qa:hover{background:var(--pri);color:#fff;border-color:var(--pri)}.qa:active{transform:scale(.95)}
+.wg-ck{cursor:default}.wg-ck input[type=checkbox]{width:18px;height:18px;margin-top:2px;flex:none;cursor:pointer}.ck-t{flex:1;min-width:0;overflow-wrap:anywhere;cursor:text}.ck-edit{flex:1;padding:2px 6px;font-size:13.5px}
+.ck-x{border:none;background:transparent;color:var(--mut);cursor:pointer;opacity:0;margin-left:auto;padding:0 4px;transition:opacity .15s,color .15s}.wg-ck:hover .ck-x,.ck-x:focus{opacity:1}.ck-x:hover{color:var(--bad)}@media(hover:none){.ck-x{opacity:.6}}
+.wg-add{margin-top:6px;padding:5px 9px;font-size:13px}.lk{border:none;background:none;color:var(--pri);cursor:pointer;padding:0;font-size:12px;text-decoration:underline}
 .pub{text-align:center;font-size:11.5px;color:var(--mut);padding:8px 18px 80px}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px;align-items:start}
 .pcard{border:1px solid var(--line);border-top:4px solid var(--cc,#5f6f82);border-radius:12px;background:var(--card);padding:10px 12px}.pc-h{display:flex;align-items:center;gap:6px;margin-bottom:6px}.pc-h b{flex:1;min-width:0;overflow-wrap:anywhere;color:var(--ink)}
@@ -310,8 +321,9 @@ header{padding:6px 10px}
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.2.1";
+const VERSION="1.2.2";
 const CHANGELOG=[
+ {v:"1.2.2",d:"2026-10-23",items:["Easier to reach what you need: the menu bar now stays at the top while you scroll (and scrolls sideways on phones), and the browser Back button goes back to the previous section.","The airline you picked stays selected when you switch between Email Directory, Airlines Policy, Documents and TELEX, and a new “QR in: …” bar under each airline jumps to the same airline in the other sections with one click.","New ⚡ Quick access card on the home page (your favorites + recently opened items) and a “Recently opened” list in the search box.","Email Templates: ⭐ favorites (shown first), quick filters (All / To passenger / To airline / Favorites) and clickable colour tags that filter the list.","Home: the Checklist widget can now be edited without Customize mode — add items in the box, tick them, double-click an item to rename it, ✕ to remove, “Clear done”."]},
  {v:"1.2.1",d:"2026-10-22",items:["Email Directory: every airline now has its own search box (above its subjects) that finds subjects, stations, email addresses and remarks inside that airline only, highlights the matches and shows how many emails are displayed.","Advance Search Bar and Email Templates: template results, cards and the template window now show colour tags — 'To passenger' or 'To airline' (who the message is for) and the type of report (AHL, DPR, OHD, Switch bag, Forward …)."]},
  {v:"1.2.0",d:"2026-10-20",items:["Split view: using the Advance Search Bar no longer closes split view — the result opens in the pane you were not using (the other pane keeps what you were doing).","Split view: a search result can now be dragged straight onto the left or right pane (or onto the page to start a split view).","Split view: the two panes can be resized by dragging the divider between them (double-click it to reset to 50 / 50, or focus it and use the arrow keys). Your size is remembered on this device."]},
  {v:"1.1.9",d:"2026-10-19",items:["Email Templates: the content can now also be chosen in Chinese (中文) — new 中文 button next to EN / ไทย in the template list and in the template window. Subject stays in English; copy and the Outlook draft use the language you choose. Chinese text is translated from the English version — please review before sending, and edit it if needed.","The names (and icons) of the main sections can now be changed: ⚙ Options ▸ Rename sections. Menu buttons, page titles, home cards and search follow the new names."]},
@@ -364,7 +376,7 @@ const zhIsAuto=t=>t.zh?!!t.zhAuto:!!zhOf(t);
 const SEED_BY_ID=Object.fromEntries(SEED.map(t=>[t.id,t]));
 const dEn=t=>{const s=SHORT_T[t.id],o=SEED_BY_ID[t.id];return s&&o&&t.titleEn===o.titleEn?s[0]:t.titleEn};
 const dTh=t=>{const s=SHORT_T[t.id],o=SEED_BY_ID[t.id];return s&&o&&t.titleTh===o.titleTh?s[1]:t.titleTh};
-const HOME_SEED=[{"id":"h-hero","type":"hero","title":"Welcome 👋","desc":"Central information center for baggage service operations of BFS ground handling airlines at Bangkok-Suvarnabhumi. Choose a section to begin, or use the Advance Search Bar above to find any topic.","size":"l","ord":0},{"id":"h-kpi","type":"kpi","size":"l","ord":10},{"id":"h-email","type":"section","sec":"email","size":"s","ord":20},{"id":"h-policy","type":"section","sec":"policy","size":"s","ord":30},{"id":"h-contact","type":"section","sec":"contact","size":"s","ord":40},{"id":"h-sorting","type":"section","sec":"sorting","size":"s","ord":50},{"id":"h-emaildir","type":"section","sec":"emaildir","size":"s","ord":60},{"id":"h-documents","type":"section","sec":"documents","size":"s","ord":65}];
+const HOME_SEED=[{"id":"h-hero","type":"hero","title":"Welcome 👋","desc":"Central information center for baggage service operations of BFS ground handling airlines at Bangkok-Suvarnabhumi. Choose a section to begin, or use the Advance Search Bar above to find any topic.","size":"l","ord":0},{"id":"h-quick","type":"quick","size":"l","ord":5},{"id":"h-kpi","type":"kpi","size":"l","ord":10},{"id":"h-email","type":"section","sec":"email","size":"s","ord":20},{"id":"h-policy","type":"section","sec":"policy","size":"s","ord":30},{"id":"h-contact","type":"section","sec":"contact","size":"s","ord":40},{"id":"h-sorting","type":"section","sec":"sorting","size":"s","ord":50},{"id":"h-emaildir","type":"section","sec":"emaildir","size":"s","ord":60},{"id":"h-documents","type":"section","sec":"documents","size":"s","ord":65}];
 
 /* ============ STORE ============ */
 const LS="bfs-info-center-v1";
@@ -441,11 +453,12 @@ function mountTelex(root){
     const org=txUniq(a.groups.filter(g=>/origin/i.test(g.title)).flatMap(g=>g.addrs.map(x=>x.addr))),dst=txUniq(a.groups.filter(g=>/destination/i.test(g.title)).flatMap(g=>g.addrs.map(x=>x.addr))),all=allOf(a);
     body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(a.code)} · ${esc(a.name)}</h3><span class="crumb">${all.length} address(es) · click an address to copy it</span></div>
       <span class="row"><button class="btn sm pri" data-x="copyall" ${all.length?"":"disabled"}>📋 Copy all (${all.length})</button>${org.length&&dst.length?`<button class="btn sm" data-x="copyorg">📋 Origin (${org.length})</button><button class="btn sm" data-x="copydst">📋 Destination (${dst.length})</button>`:""}<button class="btn sm" data-x="editair">✏️ Edit airline</button><button class="btn sm danger" data-x="delair">🗑 Delete</button><button class="btn sm pri" data-x="addgrp">＋ Group</button></span></div>
+      ${xlinks(a.code,"telex")}
       ${a.groups.map(g=>`<div class="scardx" data-gid="${g.id}"><div class="subj-h"><div><b>${/destination/i.test(g.title)?"🎯":"📍"} ${esc(g.title)}</b> <span class="crumb">${g.addrs.length} address(es)</span></div><span class="row"><button class="btn sm pri" data-x="copygrp" data-g="${g.id}" ${g.addrs.length?"":"disabled"}>📋 Copy (${txUniq(g.addrs.map(x=>x.addr)).length})</button><button class="btn sm" data-x="addaddr" data-g="${g.id}">＋ Address</button><button class="btn sm" data-x="editgrp" data-g="${g.id}">✏️</button><button class="btn sm danger" data-x="delgrp" data-g="${g.id}">🗑</button></span></div>
         <div class="tx-w">${g.addrs.map(x=>`<span class="tx-i" data-aid="${x.id}"><button class="tx-a" data-x="copyone" data-v="${esc(x.addr)}" title="Click to copy">${txHTML(x.addr)}</button>${x.remark?`<span class="cmt">${esc(x.remark)}</span>`:""}<span class="eact"><button class="btn sm" data-x="editaddr" data-g="${g.id}" data-e="${x.id}">✏️</button><button class="btn sm danger" data-x="deladdr" data-g="${g.id}" data-e="${x.id}">✕</button></span></span>`).join("")||`<span class="crumb">No address yet</span>`}</div></div>`).join("")||`<div class="empty">No group yet.</div>`}
       <div class="scardx"><div class="subj-h"><b>📝 Notes</b><button class="btn sm" data-x="editnote">✏️ Edit</button></div>${a.notes&&a.notes.trim()?String(a.notes).split("\n").filter(s=>s.trim()).map(l=>`<div class="pl">${esc(l)}</div>`).join(""):`<div class="crumb">No notes</div>`}</div>`;
   }
-  function draw(){if(!air(S.sel))S.sel=(visible()[0]||DB.telex[0])?.id||null;drawList();drawBody()}
+  function draw(){if(!air(S.sel))S.sel=(visible().find(a=>a.code===LASTAIR)||visible()[0]||DB.telex[0])?.id||null;drawList();drawBody()}
   function applyMode(){root.classList.toggle("txview",!S.edit);const b=$("#tx-em",root);b.textContent=S.edit?"✅ Exit edit mode":"✏️ Edit mode";b.classList.toggle("pri",S.edit);root.classList.toggle("txediting",S.edit)}
   function toggleEdit(){
     if(S.edit){S.edit=false;applyMode();toast("Edit mode off");return}
@@ -470,7 +483,7 @@ function mountTelex(root){
     const t=e.target.closest("[data-x]");if(!t)return;const k=t.dataset.x,a=air(S.sel),g=a&&t.dataset.g?a.groups.find(z=>z.id===t.dataset.g):null;
     if(!S.edit&&DB.telex.length&&["editair","delair","addgrp","editgrp","delgrp","addaddr","editaddr","deladdr","editnote"].includes(k)){toast("Turn on Edit mode first");return}
     const cp=(l,label)=>{const u=txUniq(l);if(!u.length){toast("Nothing to copy");return}copy(u.join(txSepV()),`Copied ${u.length} address(es) — ${label}`)};
-    if(k==="sel"){S.sel=t.dataset.s;drawList();drawBody()}
+    if(k==="sel"){S.sel=t.dataset.s;drawList();drawBody();noteAir("telex",air(S.sel)?.code)}
     else if(k==="editmode")toggleEdit();
     else if(k==="addair")airForm();
     else if(k==="editair")airForm(a);
@@ -494,20 +507,54 @@ function mountTelex(root){
   return {refresh:draw,goto(p){S.q="";qi.value="";if(p.air)S.sel=p.air;draw();const el=p.aid?$(`[data-aid="${p.aid}"]`,root):null;if(el){el.scrollIntoView({block:"center"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),2200)}}};
 }
 
+/* ---- quick access: same airline across sections, recent items, cross-links ---- */
+let LASTAIR=null;
+function noteRecent(it){const key=it.k+"|"+(it.id||it.s+"|"+it.c),l=(DB.ui.recent||[]).filter(x=>x.key!==key);l.unshift({...it,key});DB.ui.recent=l.slice(0,12);save()}
+function noteAir(kind,code){if(!code)return;LASTAIR=code;noteRecent({k:"air",s:kind,c:code})}
+function recentLabel(r){
+  if(r.k==="tpl"){const t=DB.templates.find(x=>x.id===r.id);return t?{l:`✉️ ${dEn(t)}`,o:r}:null}
+  if(r.k==="air"){const s=r.s==="telex"?{icon:"📠",short:"TELEX"}:SECTIONS.find(x=>x.id===r.s),a=r.s==="telex"?DB.telex.find(x=>x.code===r.c):DB.emaildir.find(x=>x.code===r.c);return s&&a?{l:`${s.icon} ${r.c} · ${s.short}`,o:r}:null}
+  return null;
+}
+const quickRecents=()=>(DB.ui.recent||[]).map(recentLabel).filter(Boolean).slice(0,8);
+function quickFavs(){
+  const out=[];DB.templates.filter(t=>t.fav).slice(0,10).forEach(t=>out.push({l:`⭐ ${dEn(t)}`,o:{k:"tpl",id:t.id}}));
+  DB.emaildir.filter(a=>a.fav).slice(0,10).forEach(a=>out.push({l:`📌 ${a.code} · ${a.name}`,o:{k:"air",s:"emaildir",c:a.code}}));
+  return out;
+}
+function goXL(kind,code){
+  LASTAIR=code;const ed=DB.emaildir.find(a=>a.code===code),tx=DB.telex.find(a=>a.code===code);
+  if(kind!=="tpl")noteRecent({k:"air",s:kind,c:code});
+  if(kind==="telex"){if(tx)go("email",{telex:{air:tx.id}});else toast("This airline is not in TELEX yet")}
+  else if(kind==="tpl"){const t=DB.templates.find(x=>(x.airline||"").split("/").map(c=>c.trim().toUpperCase()).includes(String(code).toUpperCase()));go("email",{airFilter:t?t.airline:code})}
+  else if(ed)go(kind,{air:ed.id});else toast("This airline is not in the list yet");
+}
+function openRecent(o){if(o.k==="tpl")go("email",{tpl:o.id});else if(o.k==="air")goXL(o.s,o.c)}
+function xlinks(code,cur){
+  if(!code)return"";const C=String(code).toUpperCase();
+  const ed=DB.emaildir.find(a=>a.code===code),tx=DB.telex.find(a=>a.code===code),tn=DB.templates.filter(t=>(t.airline||"").split("/").map(c=>c.trim().toUpperCase()).includes(C)).length;
+  const sec=id=>SECTIONS.find(s=>s.id===id),b=(k,l)=>`<button class="xlb" data-xl="${k}" data-code="${esc(code)}">${l}</button>`,out=[];
+  if(ed)["emaildir","policy","documents"].forEach(k=>{if(k!==cur&&sec(k))out.push(b(k,`${esc(sec(k).icon)} ${esc(sec(k).short)}`))});
+  if(tx&&cur!=="telex")out.push(b("telex","📠 TELEX"));
+  if(tn&&cur!=="tpl")out.push(b("tpl",`✉️ Templates <i>${tn}</i>`));
+  return out.length?`<div class="xl"><span>${esc(code)} in:</span>${out.join("")}</div>`:"";
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-xl]");if(b)goXL(b.dataset.xl,b.dataset.code)});
 /* colour tags for templates: who the message is for + type of report */
 const TYPE_COL={AHL:"#0e6fc0",DPR:"#c0392b",OHD:"#1d8a4e","SWITCH BAG (CBT)":"#7b4fb3",FORWARD:"#d98a00","CUSTOMS/SECURITY":"#8a5a00","FOUND PROPERTY":"#0e8a8a","PASSENGER RECORD":"#5f6f82","TRANSFER COMPENSATE":"#c2477a"};
-function tagsHTML(t){
-  const toAir=(t.aud||"")!=="Passenger";
-  return `<span class="tg ${toAir?"tg-a":"tg-p"}">${toAir?"✈️ To airline":"👤 To passenger"}</span>`+(t.type?`<span class="tg tg-t" style="background:${TYPE_COL[t.type]||"#5f6f82"}">${esc(t.type)}</span>`:"");
+function tagsHTML(t,f){
+  const toAir=(t.aud||"")!=="Passenger",ca=f?` data-tgt="aud:${toAir?"a":"p"}" title="Click to filter"`:"",ct=f?` data-tgt="type:${esc(t.type||"")}" title="Click to filter"`:"";
+  return `<span class="tg ${toAir?"tg-a":"tg-p"}"${ca}>${toAir?"✈️ To airline":"👤 To passenger"}</span>`+(t.type?`<span class="tg tg-t" style="background:${TYPE_COL[t.type]||"#5f6f82"}"${ct}>${esc(t.type)}</span>`:"");
 }
 /* ============ EMAIL MODULE ============ */
 function airLabel(a){return AIRNAMES[a]||a}
 function tTitle(t,lang){return lang==="th"&&t.titleTh?t.titleTh:t.titleEn}
 function tBody(t,lang){return lang==="zh"&&zhOf(t)?zhOf(t):lang==="th"&&t.th?t.th:t.en}
 function mountEmail(root){
-  const S={q:"",air:"",type:"",page:1};
+  const S={q:"",air:"",type:"",aud:"",fav:false,page:1};
   root.innerHTML=`<div class="tabs"><button class="btn on" data-etab="tpl">✉️ Email Templates</button><button class="btn" data-etab="telex">📠 Teletype Address (TELEX)</button></div><div id="tab-tpl"><div class="sec-head"><h2>${secH("email")}</h2><div class="right"><button class="btn pri sm" data-act="new">＋ New template</button><div class="seg" role="group" aria-label="Language"><button data-lang="en">EN</button><button data-lang="th">ไทย</button><button data-lang="zh">中文</button></div></div></div>
   <div class="filters"><input data-f="q" type="search" placeholder="Search topic, type or airline…"><select data-f="air"></select><select data-f="type"></select><button class="btn" data-act="clear">Clear</button></div>
+  <div class="qf" id="tpl-qf"></div>
   <div class="row" style="justify-content:space-between"><div class="meta"></div>${perSel()}</div><div class="grid"></div><div class="pgw"></div></div><div id="tab-telex" hidden></div>`;
   const grid=$(".grid",root),meta=$(".meta",root);
   function opts(){
@@ -518,21 +565,25 @@ function mountEmail(root){
   }
   function list(){
     const lang=DB.ui.lang,q=S.q.toLowerCase().split(/\s+/).filter(Boolean);
-    const rs=DB.templates.slice().sort((a,b)=>(a.ord??0)-(b.ord??0)).filter(t=>(!S.air||t.airline===S.air)&&(!S.type||t.type===S.type)&&q.every(w=>[t.airline,airLabel(t.airline),t.type,t.aud,t.titleEn,t.titleTh,dEn(t),dTh(t),t.subject,t.en,t.th,zhOf(t)].join(" ").toLowerCase().includes(w)));
+    const rs=DB.templates.slice().sort((a,b)=>(b.fav?1:0)-(a.fav?1:0)||(a.ord??0)-(b.ord??0)).filter(t=>(!S.air||t.airline===S.air)&&(!S.type||t.type===S.type)&&(!S.aud||(S.aud==="p"?t.aud==="Passenger":t.aud!=="Passenger"))&&(!S.fav||t.fav)&&q.every(w=>[t.airline,airLabel(t.airline),t.type,t.aud,t.titleEn,t.titleTh,dEn(t),dTh(t),t.subject,t.en,t.th,zhOf(t)].join(" ").toLowerCase().includes(w)));
     const pi=pageInfo(rs.length,S.page);S.page=pi.p;const pageRs=rs.slice(pi.a,pi.b);
     meta.textContent=`${rs.length?`${pi.a+1}–${pi.b}`:0} of ${rs.length} templates (${DB.templates.length} total) · page ${pi.p}/${pi.pages} · ${{th:"Thai",zh:"Chinese"}[lang]||"English"} version`;
     $(".pgw",root).innerHTML=pagerHTML(rs.length,S.page);
-    grid.innerHTML=rs.length?pageRs.map(t=>`<div class="tcard" data-id="${t.id}"><div><span class="chip al">${esc(airLabel(t.airline))}</span>${tagsHTML(t)}${lang==="th"&&(!t.th)?'<span class="chip tr">No Thai</span>':""}${lang==="th"&&t.thAuto?'<span class="chip tr">Auto-translated</span>':""}${lang==="zh"&&!zhOf(t)?'<span class="chip tr">No Chinese</span>':""}${lang==="zh"&&zhOf(t)&&zhIsAuto(t)?'<span class="chip tr">Auto-translated</span>':""}</div><h4>${esc(dEn(t))}</h4>${dTh(t)?`<div class="th-sub">${esc(dTh(t))}</div>`:""}<div class="subj">${t.subject?"Subject: "+esc(t.subject):"&nbsp;"}</div></div>`).join(""):`<div class="empty" style="grid-column:1/-1">No templates match your filters.</div>`;
+    $("#tpl-qf",root).innerHTML=[["","All"],["p","👤 To passenger"],["a","✈️ To airline"],["fav","⭐ Favorites"]].map(([k,l])=>{const on=k==="fav"?S.fav:k===""?(!S.aud&&!S.fav):S.aud===k;return `<button class="gchip${on?" on":""}" data-qf="${k}">${l}</button>`}).join("");
+    grid.innerHTML=rs.length?pageRs.map(t=>`<div class="tcard" data-id="${t.id}"><button class="star-t${t.fav?" on":""}" data-fav="${t.id}" title="${t.fav?"Remove from favorites":"Add to favorites"}">${t.fav?"★":"☆"}</button><div class="tc-top"><span class="chip al">${esc(airLabel(t.airline))}</span>${tagsHTML(t,1)}${lang==="th"&&(!t.th)?'<span class="chip tr">No Thai</span>':""}${lang==="th"&&t.thAuto?'<span class="chip tr">Auto-translated</span>':""}${lang==="zh"&&!zhOf(t)?'<span class="chip tr">No Chinese</span>':""}${lang==="zh"&&zhOf(t)&&zhIsAuto(t)?'<span class="chip tr">Auto-translated</span>':""}</div><h4>${esc(dEn(t))}</h4>${dTh(t)?`<div class="th-sub">${esc(dTh(t))}</div>`:""}<div class="subj">${t.subject?"Subject: "+esc(t.subject):"&nbsp;"}</div></div>`).join(""):`<div class="empty" style="grid-column:1/-1">No templates match your filters.</div>`;
     $$("[data-lang]",root).forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
   }
   root.addEventListener("input",e=>{const f=e.target.dataset.f;if(f){S[f]=e.target.value;S.page=1;list()}});
   root.addEventListener("change",e=>{const f=e.target.dataset.f;if(f&&S[f]!==e.target.value){S[f]=e.target.value;S.page=1;list()}});
   root.addEventListener("click",e=>{
     const tb=e.target.closest("[data-etab]");if(tb){showTab(tb.dataset.etab);return}
+    const qf=e.target.closest("[data-qf]");if(qf){const k=qf.dataset.qf;S.page=1;if(k==="fav"){S.fav=!S.fav;S.aud=""}else{S.fav=false;S.aud=k}list();return}
+    const fv=e.target.closest("[data-fav]");if(fv){const t=DB.templates.find(x=>x.id===fv.dataset.fav);if(t)putItem("templates",{...t,fav:!t.fav});return}
+    const tg=e.target.closest("[data-tgt]");if(tg){const [k,v]=tg.dataset.tgt.split(":");S.page=1;if(k==="aud")S.aud=S.aud===v?"":v;else{S.type=S.type===v?"":v;const sl=$("[data-f=type]",root);if(sl)sl.value=S.type}list();return}
     const pg=e.target.closest("[data-pg]");if(pg){if(!pg.disabled){S.page=+pg.dataset.pg;list();grid.scrollIntoView({block:"start"})}return}
     const lb=e.target.closest("[data-lang]");if(lb){DB.ui.lang=lb.dataset.lang;save();refreshAll();return}
     const a=e.target.closest("[data-act]");
-    if(a){if(a.dataset.act==="new")editTemplate();if(a.dataset.act==="clear"){S.q=S.air=S.type="";S.page=1;$("[data-f=q]",root).value="";opts();list()}return}
+    if(a){if(a.dataset.act==="new")editTemplate();if(a.dataset.act==="clear"){S.q=S.air=S.type="";S.aud="";S.fav=false;S.page=1;$("[data-f=q]",root).value="";opts();list()}return}
     const c=e.target.closest(".tcard");if(c)viewTemplate(c.dataset.id);
   });
   const tx=mountTelex($("#tab-telex",root));
@@ -552,12 +603,12 @@ function draftMail(kind,subject,body){
 }
 function viewTemplate(id){
   const t=DB.templates.find(x=>x.id===id);if(!t)return;
-  const lang=DB.ui.lang;
+  const lang=DB.ui.lang;noteRecent({k:"tpl",id:t.id});
   modal(`<div class="mhead"><div style="min-width:0"><span class="chip al">${esc(airLabel(t.airline))}</span>${tagsHTML(t)}<h3 style="margin:6px 0 0">${esc(dEn(t))}</h3>${dTh(t)?`<div class="th-sub">${esc(dTh(t))}</div>`:""}</div><button class="btn sm x" data-close>✕</button></div>
   <div class="seg" style="margin:8px 0"><button data-ml="en" class="${lang==="en"?"on":""}">EN</button><button data-ml="th" class="${lang==="th"?"on":""}">ไทย</button><button data-ml="zh" class="${lang==="zh"?"on":""}">中文</button></div>
   <div id="mv"></div>
   <div class="lbl">Update history</div><ul class="hist" style="margin:0;padding-left:18px;font-size:13px">${(t.hist||[]).length?t.hist.slice().reverse().map(h=>`<li>${esc(h.d)} : ${esc(h.t)}</li>`).join(""):"<li>No history</li>"}</ul>
-  <div class="row" style="margin-top:14px;justify-content:flex-end"><button class="btn danger" data-del>🗑 Delete</button><button class="btn" data-edit>✏️ Edit</button></div>`,(bg,close)=>{
+  <div class="row" style="margin-top:14px;justify-content:flex-end"><button class="btn" data-favm>${t.fav?"★ In favorites":"☆ Add to favorites"}</button><button class="btn danger" data-del>🗑 Delete</button><button class="btn" data-edit>✏️ Edit</button></div>`,(bg,close)=>{
     let L=lang;
     const show=()=>{
       const body=tBody(t,L),noTh=L==="th"&&!t.th,noZh=L==="zh"&&!zhOf(t);
@@ -573,6 +624,7 @@ function viewTemplate(id){
       const ml=e.target.closest("[data-ml]");if(ml){L=ml.dataset.ml;show()}
       if(e.target.closest("#ol-go"))draftMail($("#ol-t",bg).value,t.subject||"",tBody(t,L));
       const c=e.target.closest("[data-c]");if(c&&!String(getSelection()).trim()){const txt=c.dataset.c==="s"?t.subject:tBody(t,L);if(txt){copy(txt,c.dataset.c==="s"?"Subject copied ✓":"Content copied ✓");c.classList.add("copied");setTimeout(()=>c.classList.remove("copied"),1400)}}
+      const fm=e.target.closest("[data-favm]");if(fm){const tt=DB.templates.find(x=>x.id===t.id)||t,nv=!tt.fav;putItem("templates",{...tt,fav:nv});fm.textContent=nv?"★ In favorites":"☆ Add to favorites"}
       if(e.target.closest("[data-edit]")){close();editTemplate(t.id)}
       if(e.target.closest("[data-del]")&&confirm("Delete this template?")){delItem("templates",t.id);close();toast("Deleted")}
     });
@@ -719,12 +771,13 @@ function mountPolicy(root){
     const p=policyFor(a),d=p.doc;
     body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}${d.fsc?' <span class="chip au" title="Full Service Carrier">FSC</span>':""}</h3><span class="crumb">${d.cards.length} card(s) · drag ⠿ to reorder · everything is editable</span></div>
       <span class="row"><button class="btn sm" data-a="editnote">📝 ${d.note?"Edit":"Add"} mention</button>${p.seed&&p.saved?`<button class="btn sm danger" data-a="restore" title="Discard edits and reload the data from the Excel file">↺ Restore from file</button>`:""}<button class="btn sm pri" data-a="addcard">＋ Add card</button></span></div>
+      ${xlinks(a.code,"policy")}
       ${d.note?`<div class="note" style="font-weight:600">📌 ${esc(d.note)}</div>`:""}
       ${p.seed||d.cards.length?"":`<div class="note">ℹ️ <b>${esc(a.code)}</b> has no policy yet. Click “＋ Add card” to start its policy.</div>`}
       <div class="pgrid">${d.cards.map(cardHTML).join("")||`<div class="empty" style="grid-column:1/-1">No card yet.</div>`}</div>`;
   }
   function draw(){
-    if(!air(S.sel)){const v=visible();S.sel=(v[0]||DB.emaildir[0])?.id||null}
+    if(!air(S.sel)){const v=visible();S.sel=(v.find(a=>a.code===LASTAIR)||v[0]||DB.emaildir[0])?.id||null}
     drawList();drawBody();
   }
   /* ---------- forms ---------- */
@@ -765,7 +818,7 @@ function mountPolicy(root){
   root.addEventListener("click",e=>{
     const t=e.target.closest("[data-a]");if(!t)return;const k=t.dataset.a,a=air(S.sel);
     if(k==="addairline"){addSharedAirline(id=>{S.sel=id;S.q="";const qq=$("#po-q",root);if(qq)qq.value="";draw()});return}
-    if(k==="sel"){S.sel=t.dataset.s;drawList();drawBody()}
+    if(k==="sel"){S.sel=t.dataset.s;drawList();drawBody();noteAir("policy",air(S.sel)?.code)}
     else if(k==="addcard")addForm();
     else if(k==="editnote")noteForm();
     else if(k==="editcard"){const c=policyFor(a).doc.cards.find(z=>z.id===t.dataset.c);if(c)cardForm(c)}
@@ -989,10 +1042,14 @@ function listen(col){
     else if(snap.metadata.fromCache&&!seen[col]&&snap.empty){updateStatus();return}
     if(snap.docChanges().length||!smeta[col].applied){
       smeta[col].applied=true;
-      DB[col]=snap.docs.map(d=>({...d.data(),id:d.id}));normalize();save();refreshAll();if(col==="home")ensureDocsCard();
+      DB[col]=snap.docs.map(d=>({...d.data(),id:d.id}));normalize();save();refreshAll();if(col==="home"){ensureDocsCard();ensureQuickCard()}
     }
     updateStatus();
   },err=>cloudErr(err));
+}
+function ensureQuickCard(){
+  if(DB.ui.quickCard)return;DB.ui.quickCard=1;save();
+  if(DB.home.length&&!DB.home.some(c=>c.type==="quick"))putItem("home",{id:"h-quick",type:"quick",size:"l",ord:5});
 }
 function ensureDocsCard(){
   if(DB.ui.docsCard)return;DB.ui.docsCard=1;save();
@@ -1335,7 +1392,7 @@ function mountEmailDir(root){
     if(!a){body.innerHTML=`<div class="empty">Select an airline from the list.</div>`;return}
     if(document.activeElement?.id==="ed-aq"&&S.aqFor===a.id&&$("#ed-subs",root)){drawSubs();return}   /* keep typing focus while data refreshes */
     if(S.aqFor!==a.id){S.aq="";S.aqFor=a.id}
-    body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}</h3><span class="crumb">${cntOf(a)} email(s) · ${a.subjects.length} subject(s) · drag ⠿ to reorder subjects / stations</span></div><span class="row"><button class="btn sm" data-a="pin" data-s="${a.id}">${a.fav?"★ Pinned":"☆ Pin"}</button><button class="btn sm" data-a="editair">✏️ Edit airline</button><button class="btn sm danger" data-a="delair">🗑 Delete</button><button class="btn sm pri" data-a="addsubj">＋ Add subject</button></span></div>${a.subjects.length?`<div class="aq"><input id="ed-aq" type="search" autocomplete="off" placeholder="🔍 Search inside ${esc(a.code)} — subject, station, email, remark…" value="${esc(S.aq)}"><span class="crumb" id="ed-aqn"></span></div>`:""}<div id="ed-subs"></div>`;
+    body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}</h3><span class="crumb">${cntOf(a)} email(s) · ${a.subjects.length} subject(s) · drag ⠿ to reorder subjects / stations</span></div><span class="row"><button class="btn sm" data-a="pin" data-s="${a.id}">${a.fav?"★ Pinned":"☆ Pin"}</button><button class="btn sm" data-a="editair">✏️ Edit airline</button><button class="btn sm danger" data-a="delair">🗑 Delete</button><button class="btn sm pri" data-a="addsubj">＋ Add subject</button></span></div>${xlinks(a.code,"emaildir")}${a.subjects.length?`<div class="aq"><input id="ed-aq" type="search" autocomplete="off" placeholder="🔍 Search inside ${esc(a.code)} — subject, station, email, remark…" value="${esc(S.aq)}"><span class="crumb" id="ed-aqn"></span></div>`:""}<div id="ed-subs"></div>`;
     drawSubs();
   }
   function drawSubs(){
@@ -1354,7 +1411,7 @@ function mountEmailDir(root){
     const n=$("#ed-aqn",root);if(n)n.textContent=tk.length?`${shown} of ${cntOf(a)} email(s) shown`:"";
   }
   function draw(){
-    if(!air(S.sel)){const v=visible();S.sel=(v[0]||DB.emaildir.slice().sort((x,y)=>x.code.localeCompare(y.code))[0])?.id||null}
+    if(!air(S.sel)){const v=visible();S.sel=(v.find(a=>a.code===LASTAIR)||v[0]||DB.emaildir.slice().sort((x,y)=>x.code.localeCompare(y.code))[0])?.id||null}
     drawList();drawBody();
   }
   function bulkForm(){
@@ -1443,7 +1500,7 @@ function mountEmailDir(root){
     if(!S.edit&&DB.emaildir.length&&["addair","bulkair","imp","editair","delair","addsubj","editsubj","delsubj","addgrp","editgrp","delgrp","addemail","editemail","delemail","sample","fromtpl"].includes(k)){toast("Turn on Edit mode first");return}
     const sj=a&&sid?getS(a,sid):null,gp=sj&&gid?sj.groups.find(x=>x.id===gid):null;
     const cp=(list,label)=>{const u=uniqAddr(list);if(!u.length){toast("Nothing to copy");return}copy(u.join(sepNow()),`Copied ${u.length} email(s) — ${label}`)};
-    if(k==="sel"){S.sel=sid;drawList();drawBody()}
+    if(k==="sel"){S.sel=sid;drawList();drawBody();noteAir("emaildir",air(S.sel)?.code)}
     else if(k==="pin"){mut(sid,x=>{x.fav=!x.fav})}
     else if(k==="bulkair")bulkForm();
     else if(k==="imp")importForm();
@@ -1669,7 +1726,8 @@ function mountHome(root){
   function widgetHTML(w,edit){
     const T=W_TYPES[w.type];if(!T)return"";let b="";
     if(w.type==="note")b=`<div class="wg-note" style="background:${W_COLORS[w.color]||W_COLORS.yellow};${w.color==="none"?"":"color:#1c2b3a"}">${nl(w.text)||'<span class="crumb">Empty note</span>'}</div>`;
-    else if(w.type==="check"){const it=w.items||[],d=it.filter(x=>x.done).length;b=it.length?`<div class="crumb">${d}/${it.length} done</div>`+it.map(x=>`<label class="wg-ck"><input type="checkbox" data-ck="${w.id}" data-i="${x.id}" ${x.done?"checked":""}><span class="${x.done?"dn":""}">${esc(x.t)}</span></label>`).join(""):'<span class="crumb">No items</span>'}
+    else if(w.type==="check"){const it=w.items||[],d=it.filter(x=>x.done).length;
+      b=`<div class="crumb">${it.length?`${d}/${it.length} done`:"No items yet"}${d?` · <button class="lk" data-ckclear="${w.id}">Clear done</button>`:""}</div>`+it.map(x=>`<div class="wg-ck"><input type="checkbox" data-ck="${w.id}" data-i="${x.id}" ${x.done?"checked":""}><span class="ck-t ${x.done?"dn":""}" data-cked="${w.id}" data-i="${x.id}" title="Double-click to edit">${esc(x.t)}</span><button class="ck-x" data-ckdel="${w.id}" data-i="${x.id}" title="Remove">✕</button></div>`).join("")+`<input class="wg-add" data-ckadd="${w.id}" placeholder="＋ Add item… (press Enter)" autocomplete="off">`}
     else if(w.type==="clock")b=`<div class="wg-clk" data-wtz="${esc(w.tz||"off:0")}"><b>--:--:--</b><span></span><small>${esc(TZAPI.labelOf(w.tz||"off:0"))}</small></div>`;
     else if(w.type==="links")b=(w.links||[]).map(l=>`<a class="btn sm wg-lk" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")||'<span class="crumb">No links</span>';
     else if(w.type==="stat"){const s=W_STATS[w.metric]||W_STATS.templates;b=`<div class="wg-stat"><b>${s[1]()}</b><span>${esc(s[0])}</span></div>`}
@@ -1692,6 +1750,9 @@ function mountHome(root){
     if(c.type==="hero")return `<div class="hcard hhero sz-${sz}" data-cid="${c.id}">${tools}<div class="hc-b"><h1>${esc(c.title)}</h1><p>${nl(c.desc)}</p></div></div>`;
     if(c.type==="kpi"){const k=(n,l)=>`<div class="kpi"><b>${n}</b><span>${l}</span></div>`;
       return `<div class="hcard sz-${sz}" data-cid="${c.id}">${tools}<div class="hc-b"><div class="kpis" style="margin:0">${k(DB.templates.length,"Email templates")}${k(DB.emaildir.length,"Airlines in directory")}${k(DB.phone.length,"Phone records")}${k(DB.office.length,"Office records")}${k(DB.sorting.filter(r=>!/^REC-100[12]$/.test(r.id)).length,"Sorting bags")}</div></div></div>`}
+    if(c.type==="quick"){
+      const chip=x=>`<button class="qa" data-qk="${x.o.k}" data-qid="${esc(x.o.id||"")}" data-qs="${esc(x.o.s||"")}" data-qc="${esc(x.o.c||"")}">${esc(x.l)}</button>`,fv=quickFavs(),rc=quickRecents();
+      return `<div class="hcard sz-${sz}" data-cid="${c.id}">${tools}<div class="hc-b"><h3 style="margin-top:0">⚡ Quick access</h3><div class="lbl">⭐ Favorites &amp; pinned</div><div class="qa-w">${fv.length?fv.map(chip).join(""):'<span class="crumb">Tap ☆ on a template, or pin an airline in Email Directory — it will appear here.</span>'}</div><div class="lbl">🕘 Recently opened</div><div class="qa-w">${rc.length?rc.map(chip).join(""):'<span class="crumb">Nothing opened yet.</span>'}</div></div></div>`}
     if(c.type==="widgets"){const ws=c.widgets||[],lim=W_LIMIT[sz];
       return `<div class="hcard sz-${sz}" data-cid="${c.id}">${tools}<div class="hc-b">${c.title?`<h3 style="margin-top:0;padding-right:${S.edit?"150px":"0"}">${esc(c.title)}</h3>`:(S.edit?'<div style="height:30px"></div>':"")}${ws.length?`<div class="wg-grid">${ws.slice(0,lim).map(w=>widgetHTML(w,S.edit)).join("")}</div>`:`<div class="crumb">Empty widget card${S.edit?"":" — open ⚙ Options ▸ Customize home to add widgets"}.</div>`}${S.edit?`<button class="btn sm pri" data-h="wadd" data-c="${c.id}" ${ws.length>=lim?"disabled":""} style="margin-top:10px">＋ Widget (${ws.length}/${lim})</button>`:""}</div></div>`}
     if(c.type==="section"){const s=secOf(c.sec);if(!s)return"";
@@ -1706,10 +1767,11 @@ function mountHome(root){
     $$("[data-hi]",root).forEach(async el=>{const s=await getHomeImg(el.dataset.hi);if(s&&el.isConnected)el.style.backgroundImage=`url("${s}")`});
     if(S.first){S.first=false;const g=$(".hgrid",root);if(g){g.classList.add("hanim");[...g.children].forEach((el,i)=>el.style.setProperty("--i",i))}}
     tickW();
+    if(S.focusCk){const i=$(`[data-ckadd="${S.focusCk}"]`,root);S.focusCk=null;if(i)i.focus()}
   }
   /* ---------- card form ---------- */
   function editForm(c){
-    let newImg;const isNew=!DB.home.some(x=>x.id===c.id),isK=c.type==="kpi",isW=c.type==="widgets",hasT=!isK,hasD=!isK&&!isW,custom=c.type==="custom",hasP=hasT&&!isW&&c.type!=="hero",s0=c.type==="section"?secOf(c.sec):null;
+    let newImg;const isNew=!DB.home.some(x=>x.id===c.id),isK=c.type==="kpi"||c.type==="quick",isW=c.type==="widgets",hasT=!isK,hasD=!isK&&!isW,custom=c.type==="custom",hasP=hasT&&!isW&&c.type!=="hero",s0=c.type==="section"?secOf(c.sec):null;
     modal(`<div class="mhead"><h3>${isNew?"Add":"Edit"} card</h3><button class="btn sm x" data-close>✕</button></div><div class="fg" style="margin-top:8px">
      ${hasT?`<div class="full"><label>Title${s0?` (leave empty to use “${esc(s0.name)}”)`:isW?" (optional)":""}</label><input id="hc-t" value="${esc(c.title||"")}"></div>`:""}
      ${hasD?`<div class="full"><label>Description${s0?" (leave empty for the default)":""}</label><textarea id="hc-d" rows="4">${esc(c.desc||"")}</textarea></div>`:""}
@@ -1738,7 +1800,7 @@ function mountHome(root){
     });
   }
   function addForm(){
-    modal(`<div class="mhead"><h3>Add card</h3><button class="btn sm x" data-close>✕</button></div><div class="fg" style="margin-top:8px"><div class="full"><label>Card type</label><select id="ha-t"><option value="custom">Custom card (text, photo, optional link)</option><option value="widgets">Widget card — blank, holds 2–4 widgets</option><option value="section">Section shortcut</option><option value="kpi">Statistics counters</option><option value="hero">Welcome banner</option></select></div><div class="full" id="ha-sw" style="display:none"><label>Section</label><select id="ha-s">${SECTIONS.map(s=>`<option value="${s.id}">${s.icon} ${esc(s.name)}</option>`).join("")}</select></div></div><div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="ha-ok">Continue</button></div>`,(bg,close)=>{
+    modal(`<div class="mhead"><h3>Add card</h3><button class="btn sm x" data-close>✕</button></div><div class="fg" style="margin-top:8px"><div class="full"><label>Card type</label><select id="ha-t"><option value="custom">Custom card (text, photo, optional link)</option><option value="widgets">Widget card — blank, holds 2–4 widgets</option><option value="section">Section shortcut</option><option value="quick">Quick access (favorites &amp; recent)</option><option value="kpi">Statistics counters</option><option value="hero">Welcome banner</option></select></div><div class="full" id="ha-sw" style="display:none"><label>Section</label><select id="ha-s">${SECTIONS.map(s=>`<option value="${s.id}">${s.icon} ${esc(s.name)}</option>`).join("")}</select></div></div><div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="ha-ok">Continue</button></div>`,(bg,close)=>{
       $("#ha-t",bg).onchange=e=>{$("#ha-sw",bg).style.display=e.target.value==="section"?"":"none"};
       $("#ha-ok",bg).onclick=()=>{const t=$("#ha-t",bg).value,c={id:uid("h"),type:t,size:t==="custom"||t==="section"?"s":t==="widgets"?"m":"l",title:t==="hero"?"Welcome":"",desc:""};if(t==="widgets")c.widgets=[];if(t==="section")c.sec=$("#ha-s",bg).value;close();setTimeout(()=>editForm(c),50)};
     });
@@ -1796,11 +1858,33 @@ function mountHome(root){
       else if(k==="wdel"&&c){if(confirm("Remove this widget?"))putItem("home",{...c,widgets:(c.widgets||[]).filter(x=>x.id!==t.dataset.w)})}
       return;
     }
+    const qa=e.target.closest(".qa");if(qa&&!S.edit){openRecent({k:qa.dataset.qk,id:qa.dataset.qid,s:qa.dataset.qs,c:qa.dataset.qc});return}
     const g=e.target.closest("[data-go]");if(g&&!S.edit&&!e.target.closest("a"))go(g.dataset.go);
   });
   root.addEventListener("change",e=>{
     const ck=e.target.dataset?.ck;if(!ck)return;const c=DB.home.find(x=>x.id===e.target.closest("[data-cid]")?.dataset.cid);if(!c)return;
     putItem("home",{...c,widgets:(c.widgets||[]).map(w=>w.id!==ck?w:{...w,items:(w.items||[]).map(i=>i.id===e.target.dataset.i?{...i,done:e.target.checked}:i)})});
+  });
+  /* ---------- checklist widget: edit without Customize mode ---------- */
+  const ckUpdate=(e,wid,fn)=>{const c=DB.home.find(x=>x.id===e.target.closest("[data-cid]")?.dataset.cid);if(!c)return;putItem("home",{...c,widgets:(c.widgets||[]).map(w=>w.id!==wid?w:{...w,items:fn(w.items||[])})})};
+  root.addEventListener("keydown",e=>{
+    const ad=e.target.dataset?.ckadd;
+    if(ad&&e.key==="Enter"){const v=e.target.value.trim();if(!v)return;e.preventDefault();S.focusCk=ad;ckUpdate(e,ad,it=>it.concat({id:uid("i"),t:v,done:false}))}
+    if(e.target.classList?.contains("ck-edit")){if(e.key==="Enter")e.target.blur();if(e.key==="Escape"){e.target.dataset.cancel="1";e.target.blur()}}
+  });
+  root.addEventListener("focusout",e=>{
+    const el=e.target;if(!el.classList?.contains("ck-edit"))return;
+    if(el.dataset.cancel){draw();return}
+    const wid=el.dataset.w,iid=el.dataset.i,v=el.value.trim();
+    ckUpdate(e,wid,it=>v?it.map(x=>x.id===iid?{...x,t:v}:x):it.filter(x=>x.id!==iid));
+  });
+  root.addEventListener("dblclick",e=>{
+    const s=e.target.closest("[data-cked]");if(!s)return;
+    const inp=document.createElement("input");inp.className="ck-edit";inp.value=s.textContent;inp.dataset.w=s.dataset.cked;inp.dataset.i=s.dataset.i;s.replaceWith(inp);inp.focus();inp.select();
+  });
+  root.addEventListener("click",e=>{
+    const d=e.target.closest("[data-ckdel]");if(d){ckUpdate(e,d.dataset.ckdel,it=>it.filter(x=>x.id!==d.dataset.i));return}
+    const c=e.target.closest("[data-ckclear]");if(c)ckUpdate(e,c.dataset.ckclear,it=>it.filter(x=>!x.done));
   });
   /* ---------- drag & drop ---------- */
   let DRAG=null;
@@ -1935,9 +2019,9 @@ function mountDocuments(root){
     if(!a){body.innerHTML=`<div class="empty">Select an airline from the list.</div>`;return}
     const d=docFor(a);
     body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}</h3><span class="crumb">${d.items.length} document(s) · ${docFileCount(d)} file(s) · everything is editable</span></div><span class="row"><button class="btn sm pri" data-a="add" data-cat="flight">＋ Add document</button></span></div>
-    <div class="dcats">${D_CATS.map(([k,ic,nm])=>{const its=d.items.filter(i=>i.cat===k);return `<div class="dcat"><div class="dcat-h"><b>${ic} ${nm}</b><span class="crumb">${its.length}</span><button class="btn sm" data-a="add" data-cat="${k}" title="Add a document to ${nm}">＋</button></div>${its.map(itemHTML).join("")||'<div class="crumb">No document yet</div>'}</div>`}).join("")}</div>`;
+    ${xlinks(a.code,"documents")}<div class="dcats">${D_CATS.map(([k,ic,nm])=>{const its=d.items.filter(i=>i.cat===k);return `<div class="dcat"><div class="dcat-h"><b>${ic} ${nm}</b><span class="crumb">${its.length}</span><button class="btn sm" data-a="add" data-cat="${k}" title="Add a document to ${nm}">＋</button></div>${its.map(itemHTML).join("")||'<div class="crumb">No document yet</div>'}</div>`}).join("")}</div>`;
   }
-  function draw(){if(!air(S.sel)){const v=visible();S.sel=(v[0]||DB.emaildir[0])?.id||null}drawList();drawBody()}
+  function draw(){if(!air(S.sel)){const v=visible();S.sel=(v.find(a=>a.code===LASTAIR)||v[0]||DB.emaildir[0])?.id||null}drawList();drawBody()}
   function docForm(cat,it){
     const isNew=!it,o=it||{id:uid("d"),cat,title:"",note:"",files:[],exNote:"",exFiles:[]};
     modal(`<div class="mhead"><h3>${isNew?"Add":"Edit"} document</h3><button class="btn sm x" data-close>✕</button></div><div class="fg" style="margin-top:8px">
@@ -1967,7 +2051,7 @@ function mountDocuments(root){
   root.addEventListener("click",e=>{
     const t=e.target.closest("[data-a]");if(!t)return;const k=t.dataset.a,a=air(S.sel),d=a?docFor(a):null,i=d&&t.dataset.d?findItem(d,t.dataset.d):null,f=i&&t.dataset.f?(i[t.dataset.k]||[]).find(x=>x.id===t.dataset.f):null;
     if(k==="addairline"){addSharedAirline(id=>{S.sel=id;S.q="";const qq=$("#dc-q",root);if(qq)qq.value="";draw()});return}
-    if(k==="sel"){S.sel=t.dataset.s;drawList();drawBody()}
+    if(k==="sel"){S.sel=t.dataset.s;drawList();drawBody();noteAir("documents",air(S.sel)?.code)}
     else if(k==="add")docForm(t.dataset.cat||"flight");
     else if(k==="edit"&&i)docForm(i.cat,i);
     else if(k==="del"&&i){const n=(i.files||[]).length+(i.exFiles||[]).length;if(confirm(`Delete “${i.title}”${n?` and its ${n} attached file(s)`:""}?`)){[...(i.files||[]),...(i.exFiles||[])].forEach(removeFile);mut(x=>{x.items=x.items.filter(z=>z.id!==i.id)})}}
@@ -2011,13 +2095,17 @@ const MOD={email:mountEmail,policy:mountPolicy,contact:mountContact,sorting:moun
 let VIEW={mode:"home",a:"email",b:"contact"};
 let mounted={};
 function refreshAll(){if(secSig()!==SECSIG){applySectionNames();render();return}Object.values(mounted).forEach(m=>m.refresh());renderHomeKpi()}
+let NAVSIG="",NAVPOP=false;
+function syncHistory(){const sig=VIEW.mode+"|"+VIEW.a+"|"+VIEW.b;if(sig===NAVSIG)return;const st={mode:VIEW.mode,a:VIEW.a,b:VIEW.b};try{if(!NAVSIG||NAVPOP)history.replaceState(st,"");else history.pushState(st,"")}catch(e){}NAVSIG=sig}
+window.addEventListener("popstate",e=>{const s=e.state;if(!s||!s.mode)return;VIEW.mode=s.mode;VIEW.a=s.a;VIEW.b=s.b;NAVPOP=true;try{render()}finally{NAVPOP=false}});
 function renderNav(){
   $("#nav").innerHTML=`<button class="btn ${VIEW.mode==="home"?"on":""}" data-v="home">🏠 Home</button>`+SECTIONS.map(s=>`<button class="btn ${VIEW.mode==="single"&&VIEW.a===s.id?"on":""}" data-s="${s.id}" draggable="true">${s.icon} ${s.short}</button>`).join("")+
   `<div class="sp"><span class="hint">↕ Drag a section button onto the page to split</span><button class="btn ${VIEW.mode==="split"?"on":""}" data-v="split" title="Show two sections side by side">⫿⫿ Split view</button>${VIEW.mode==="split"?`<select data-sel="a">${SECTIONS.map(s=>`<option value="${s.id}"${VIEW.a===s.id?" selected":""}>${s.short}</option>`).join("")}</select><span>＋</span><select data-sel="b">${SECTIONS.map(s=>`<option value="${s.id}"${VIEW.b===s.id?" selected":""}>${s.short}</option>`).join("")}</select>`:""}</div>`;
 }
+const _rn=renderNav;renderNav=function(){_rn();const n=$("#nav"),b=$("#nav .btn.on");if(b&&n.scrollWidth>n.clientWidth)n.scrollLeft=b.offsetLeft-n.clientWidth/2+b.offsetWidth/2};
 function renderHomeKpi(){const k=$("#kpis");if(k)k.innerHTML=`<div class="kpi"><b>${DB.templates.length}</b><span>Email templates</span></div><div class="kpi"><b>${DB.phone.length}</b><span>Phone records</span></div><div class="kpi"><b>${DB.office.length}</b><span>Office records</span></div><div class="kpi"><b>${DB.sorting.length}</b><span>Sorting bags</span></div>`}
 function render(){
-  renderNav();mounted={};const m=$("#main");m.classList.remove("view-in");void m.offsetWidth;m.classList.add("view-in");
+  renderNav();syncHistory();mounted={};const m=$("#main");m.classList.remove("view-in");void m.offsetWidth;m.classList.add("view-in");
   if(VIEW.mode==="home"){m.innerHTML="<div></div>";mounted["home#0"]=mountHome(m.firstChild);return}
   const ids=VIEW.mode==="split"?[VIEW.a,VIEW.b]:[VIEW.a];
   const sp=VIEW.mode==="split",r=splitRatio();
@@ -2103,7 +2191,7 @@ function buildIndex(){
     a.groups.forEach(g=>g.addrs.forEach(x=>ix.push({sec:"email",secName:"Email Templates",title:x.addr,sub:`${at} · ${g.title}`+(x.remark?" · "+x.remark:""),crumb:`Email Templates › Teletype Address (TELEX) › ${at} › ${g.title}`,text:["telex teletype address",at,g.title,x.addr,x.remark].join(" ").toLowerCase(),copy:x.addr,go:()=>go("email",{telex:{air:a.id,aid:x.id}})})))});
   return ix;
 }
-let gItems=[],gAct=-1,gScope="",gLimit=40,gT=null;
+let gItems=[],gAct=-1,gScope="",gLimit=40,gT=null,gRO=[];
 const gq=$("#gq"),gres=$("#gres"),G_PH="Search anything — airline code, topic, email, case no.   ( press / )",RK="bfs-recent-search";
 gq.placeholder=G_PH;
 const recents=()=>{try{return JSON.parse(localStorage.getItem(RK)||"[]")}catch(e){return[]}};
@@ -2146,7 +2234,7 @@ function gsearch(){
   gq.placeholder=gScope?`Search in ${SECTIONS.find(s=>s.id===gScope).short}…`:G_PH;
   if(q.length<2){
     idx.forEach(i=>counts[i.sec]=(counts[i.sec]||0)+1);gItems=[];gAct=-1;const rc=recents();
-    gres.innerHTML=`<div class="gh">${chipsHTML(counts,idx.length)}</div><div style="padding:12px 14px;color:var(--mut);font-size:13px;line-height:1.7">Type at least 2 characters.<br>💡 <b>Tips:</b> type an airline code (<code>QR</code>) for a quick jump · <code>policy: rush bag</code> · <code>telex: JL</code> · <code>dir: bkkll</code> · <code>docs: form</code> · press <kbd>/</kbd> or <kbd>Ctrl</kbd>+<kbd>K</kbd> to search from anywhere · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> copies an address.</div>`+(rc.length?`<div class="edh" style="padding:4px 14px;display:flex;justify-content:space-between">Recent searches<span data-rcx style="cursor:pointer;text-transform:none">Clear</span></div>`+rc.map(r=>`<div class="it" data-rc="${esc(r)}">🕘 ${esc(r)}</div>`).join(""):"");
+    gres.innerHTML=`<div class="gh">${chipsHTML(counts,idx.length)}</div><div style="padding:12px 14px;color:var(--mut);font-size:13px;line-height:1.7">Type at least 2 characters.<br>💡 <b>Tips:</b> type an airline code (<code>QR</code>) for a quick jump · <code>policy: rush bag</code> · <code>telex: JL</code> · <code>dir: bkkll</code> · <code>docs: form</code> · press <kbd>/</kbd> or <kbd>Ctrl</kbd>+<kbd>K</kbd> to search from anywhere · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> copies an address.</div>`+((gRO=quickRecents().slice(0,6)).length?`<div class="edh" style="padding:4px 14px">Recently opened</div>`+gRO.map((x,i)=>`<div class="it" data-ro="${i}">${esc(x.l)}</div>`).join(""):"")+(rc.length?`<div class="edh" style="padding:4px 14px;display:flex;justify-content:space-between">Recent searches<span data-rcx style="cursor:pointer;text-transform:none">Clear</span></div>`+rc.map(r=>`<div class="it" data-rc="${esc(r)}">🕘 ${esc(r)}</div>`).join(""):"");
     gres.classList.add("on");return;
   }
   const w=q.split(/\s+/);
@@ -2184,7 +2272,7 @@ gq.addEventListener("keydown",e=>{
   if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();gAct=Math.max(0,Math.min(its.length-1,gAct+(e.key==="ArrowDown"?1:-1)));its.forEach((x,n)=>x.classList.toggle("act",n===gAct));its[gAct]?.scrollIntoView({block:"nearest"})}
   if(e.key==="Enter"){e.preventDefault();const el=its[gAct],n=el?+el.dataset.n:(gItems.length?0:-1);
     if(e.ctrlKey||e.metaKey){const it=gItems[isNaN(n)?0:n];if(it?.copy)copy(it.copy,"Copied "+it.copy);return}
-    if(el?.dataset.rc){gq.value=el.dataset.rc;gsearch()}else if(el?.dataset.more){gLimit+=40;gsearch()}else if(n>=0&&!isNaN(n))pick(n)}
+    if(el?.dataset.ro){gres.classList.remove("on");openRecent(gRO[+el.dataset.ro].o)}else if(el?.dataset.rc){gq.value=el.dataset.rc;gsearch()}else if(el?.dataset.more){gLimit+=40;gsearch()}else if(n>=0&&!isNaN(n))pick(n)}
   if(e.key==="Escape"){gres.classList.remove("on");gq.blur()}
 });
 function pick(n){const it=gItems[n];addRecent(gq.value);gres.classList.remove("on");it?.go()}
@@ -2194,6 +2282,7 @@ gres.addEventListener("mousedown",e=>{
   const cp=e.target.closest("[data-cp]");if(cp){e.preventDefault();const it=gItems[+cp.dataset.cp];if(it?.copy)copy(it.copy,"Copied "+it.copy);return}
   const sg=e.target.closest("[data-sg]");if(sg){e.preventDefault();gq.value=sg.dataset.sg;gsearch();return}
   if(e.target.closest("[data-rcx]")){e.preventDefault();try{localStorage.removeItem(RK)}catch(x){}gsearch();return}
+  const ro=e.target.closest("[data-ro]");if(ro){e.preventDefault();gres.classList.remove("on");openRecent(gRO[+ro.dataset.ro].o);return}
   const rc=e.target.closest("[data-rc]");if(rc){e.preventDefault();gq.value=rc.dataset.rc;gLimit=40;gsearch();return}
   if(e.target.closest("[data-more]")){e.preventDefault();gLimit+=40;gsearch();return}
 });
@@ -2534,9 +2623,10 @@ function openTool(){
   document.addEventListener("pointerdown",e=>{if(!menu.hidden&&!e.target.closest("#toolFab"))closeMenu()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});
 })();
+{const hd=$("header"),nv=$("#nav"),setHH=()=>{document.documentElement.style.setProperty("--hh",hd.offsetHeight+"px")};setHH();if(window.ResizeObserver)new ResizeObserver(setHH).observe(hd);addEventListener("scroll",()=>nv.classList.toggle("stuck",scrollY>60),{passive:true})}
 render();
 initCloud();
-setTimeout(()=>{if(!fdb)ensureDocsCard()},6000);
+setTimeout(()=>{if(!fdb){ensureDocsCard();ensureQuickCard()}},6000);
 </script>
 </body>
 </html>
