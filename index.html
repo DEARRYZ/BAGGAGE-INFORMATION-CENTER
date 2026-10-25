@@ -186,6 +186,13 @@ main.view-in{animation:viewIn .32s cubic-bezier(.22,1,.36,1)}
 .wg-ck{cursor:default}.wg-ck input[type=checkbox]{width:18px;height:18px;margin-top:2px;flex:none;cursor:pointer}.ck-t{flex:1;min-width:0;overflow-wrap:anywhere;cursor:text}.ck-edit{flex:1;padding:2px 6px;font-size:13.5px}
 .ck-x{border:none;background:transparent;color:var(--mut);cursor:pointer;opacity:0;margin-left:auto;padding:0 4px;transition:opacity .15s,color .15s}.wg-ck:hover .ck-x,.ck-x:focus{opacity:1}.ck-x:hover{color:var(--bad)}@media(hover:none){.ck-x{opacity:.6}}
 .wg-add{margin-top:6px;padding:5px 9px;font-size:13px}.lk{border:none;background:none;color:var(--pri);cursor:pointer;padding:0;font-size:12px;text-decoration:underline}
+.wgb{border:none;background:transparent;font-size:13px;line-height:1.2;padding:1px 4px;cursor:pointer;opacity:.4;border-radius:6px;filter:grayscale(.6);transition:opacity .15s,background-color .15s,transform .12s,filter .15s}.wgb:hover{opacity:1;background:var(--soft);filter:none}.wgb.on{opacity:1;filter:none;background:rgba(232,163,23,.28)}.wgb.dng{color:var(--bad);filter:none}.wgb:active{transform:scale(.88)}.wg:hover .wgb{opacity:.85}@media(hover:none){.wgb{opacity:.8}}
+.wg-tools{display:flex;gap:2px;align-items:center}.wg-dt{width:100%;margin-top:6px;padding:3px 6px;font-size:12px}.note-edit{width:100%;font-size:13px;padding:6px 8px}
+#wdock{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:58;max-width:calc(100vw - 150px)}#wdock[hidden]{display:none}
+#wdockChips{display:flex;gap:6px;flex-wrap:wrap}
+.wchip{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:18px;padding:5px 12px;font-size:12.5px;font-weight:700;box-shadow:var(--shadow);cursor:pointer;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-variant-numeric:tabular-nums;transition:background-color .15s,color .15s,transform .12s,border-color .15s}.wchip:hover{border-color:var(--pri2)}.wchip:active{transform:scale(.94)}.wchip.on{background:var(--pri);color:#fff;border-color:var(--pri)}.wchip.up{background:var(--bad);color:#fff;border-color:var(--bad)}.wchip small{font-weight:500;opacity:.8}
+#wdockPop{position:absolute;left:0;bottom:calc(100% + 8px);width:320px;max-width:calc(100vw - 24px);max-height:min(62vh,440px);overflow:auto;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 36px rgba(0,0,0,.4);padding:10px;animation:popIn .18s cubic-bezier(.2,.9,.3,1)}#wdockPop[hidden]{display:none}
+.wdp-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:13px}.wdp-i{margin-bottom:8px}.wdp-f{text-align:right}
 .pub{text-align:center;font-size:11.5px;color:var(--mut);padding:8px 18px 80px}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px;align-items:start}
 .pcard{border:1px solid var(--line);border-top:4px solid var(--cc,#5f6f82);border-radius:12px;background:var(--card);padding:10px 12px}.pc-h{display:flex;align-items:center;gap:6px;margin-bottom:6px}.pc-h b{flex:1;min-width:0;overflow-wrap:anywhere;color:var(--ink)}
@@ -321,8 +328,9 @@ header{padding:6px 10px}
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.2.2";
+const VERSION="1.2.3";
 const CHANGELOG=[
+ {v:"1.2.3",d:"2026-10-25",items:["Widgets can now be pinned (📌) so that Notes, Countdowns, Checklists, clocks and counters show as small icons at the bottom-left of every page — tap an icon to open the full widget without going back to the home page.","Countdown: the date and time can be changed directly on the widget (no Customize mode needed); Notes can be edited by double-clicking; 📌 and ✏️ are now always available on every widget."]},
  {v:"1.2.2",d:"2026-10-23",items:["Easier to reach what you need: the menu bar now stays at the top while you scroll (and scrolls sideways on phones), and the browser Back button goes back to the previous section.","The airline you picked stays selected when you switch between Email Directory, Airlines Policy, Documents and TELEX, and a new “QR in: …” bar under each airline jumps to the same airline in the other sections with one click.","New ⚡ Quick access card on the home page (your favorites + recently opened items) and a “Recently opened” list in the search box.","Email Templates: ⭐ favorites (shown first), quick filters (All / To passenger / To airline / Favorites) and clickable colour tags that filter the list.","Home: the Checklist widget can now be edited without Customize mode — add items in the box, tick them, double-click an item to rename it, ✕ to remove, “Clear done”."]},
  {v:"1.2.1",d:"2026-10-22",items:["Email Directory: every airline now has its own search box (above its subjects) that finds subjects, stations, email addresses and remarks inside that airline only, highlights the matches and shows how many emails are displayed.","Advance Search Bar and Email Templates: template results, cards and the template window now show colour tags — 'To passenger' or 'To airline' (who the message is for) and the type of report (AHL, DPR, OHD, Switch bag, Forward …)."]},
  {v:"1.2.0",d:"2026-10-20",items:["Split view: using the Advance Search Bar no longer closes split view — the result opens in the pane you were not using (the other pane keeps what you were doing).","Split view: a search result can now be dragged straight onto the left or right pane (or onto the page to start a split view).","Split view: the two panes can be resized by dragging the divider between them (double-click it to reset to 50 / 50, or focus it and use the arrow keys). Your size is remembered on this device."]},
@@ -1717,30 +1725,164 @@ const W_LIMIT={s:2,m:3,l:4};
 const W_TYPES={note:{i:"📝",n:"Note"},check:{i:"✅",n:"Checklist"},clock:{i:"🕐",n:"World clock"},links:{i:"🔗",n:"Quick links"},stat:{i:"📊",n:"Counter"},countdown:{i:"⏳",n:"Countdown"}};
 const W_STATS={templates:["Email templates",()=>DB.templates.length],airlines:["Airlines in directory",()=>DB.emaildir.length],telex:["TELEX airlines",()=>DB.telex.length],phone:["Phone records (all)",()=>DB.phone.length],phoneToday:["Phone records today",()=>DB.phone.filter(r=>dayKey(r.ts)===todayStr()).length],office:["Office records (all)",()=>DB.office.length],officeToday:["Office records today",()=>DB.office.filter(r=>dayKey(r.ts)===todayStr()).length],sorting:["Sorting bags",()=>DB.sorting.filter(r=>!/^REC-100[12]$/.test(r.id)).length],sortPending:["Sorting bags pending",()=>DB.sorting.filter(r=>r.status==="Pending"&&!/^REC-100[12]$/.test(r.id)).length]};
 const W_COLORS={yellow:"#fff3b0",blue:"#cfe8ff",green:"#d4f3dc",pink:"#ffd9e4",none:"transparent"};
+/* ---- widgets: shared rendering + editing (used by the home page and the pinned-widget dock) ---- */
+const nlW=t=>esc(t||"").replace(/\n/g,"<br>").replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+function widgetHTML(w,edit){
+  const T=W_TYPES[w.type];if(!T)return"";let b="";
+  if(w.type==="note")b=`<div class="wg-note" data-note="${w.id}" title="Double-click to edit" style="background:${W_COLORS[w.color]||W_COLORS.yellow};${w.color==="none"?"":"color:#1c2b3a"}">${nlW(w.text)||'<span class="crumb">Empty note</span>'}</div>`;
+  else if(w.type==="check"){const it=w.items||[],d=it.filter(x=>x.done).length;
+    b=`<div class="crumb">${it.length?`${d}/${it.length} done`:"No items yet"}${d?` · <button class="lk" data-ckclear="${w.id}">Clear done</button>`:""}</div>`+it.map(x=>`<div class="wg-ck"><input type="checkbox" data-ck="${w.id}" data-i="${x.id}" ${x.done?"checked":""}><span class="ck-t ${x.done?"dn":""}" data-cked="${w.id}" data-i="${x.id}" title="Double-click to edit">${esc(x.t)}</span><button class="ck-x" data-ckdel="${w.id}" data-i="${x.id}" title="Remove">✕</button></div>`).join("")+`<input class="wg-add" data-ckadd="${w.id}" placeholder="＋ Add item… (press Enter)" autocomplete="off">`}
+  else if(w.type==="clock")b=`<div class="wg-clk" data-wtz="${esc(w.tz||"off:0")}"><b>--:--:--</b><span></span><small>${esc(TZAPI.labelOf(w.tz||"off:0"))}</small></div>`;
+  else if(w.type==="links")b=(w.links||[]).map(l=>`<a class="btn sm wg-lk" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")||'<span class="crumb">No links</span>';
+  else if(w.type==="stat"){const s=W_STATS[w.metric]||W_STATS.templates;b=`<div class="wg-stat"><b>${s[1]()}</b><span>${esc(s[0])}</span></div>`}
+  else if(w.type==="countdown")b=`<div class="wg-cd" data-cd="${esc(w.target||"")}"><b>--</b><small>${esc(w.target?w.target.replace("T"," "):"No date set")}</small><input type="datetime-local" class="wg-dt" data-cdset="${w.id}" value="${esc(w.target||"")}" title="Change the date and time"></div>`;
+  const tools=`<span class="wg-tools"><button class="wgb${w.pin?" on":""}" data-h="wpin" data-w="${w.id}" title="${w.pin?"Shown on every page — click to unpin":"Show on every page (small icon)"}">📌</button><button class="wgb" data-h="wedit" data-w="${w.id}" title="Edit widget">✏️</button>${edit?`<button class="wgb dng" data-h="wdel" data-w="${w.id}" title="Remove widget">✕</button>`:""}</span>`;
+  return `<div class="wg wg-${w.type}" data-wid="${w.id}"><div class="wg-h"><span>${T.i} ${esc(w.title||T.n)}</span>${tools}</div><div class="wg-b">${b}</div></div>`;
+}
+function tickWidgets(root){
+  $$("[data-wtz]",root).forEach(e=>{const n=TZAPI.now(e.dataset.wtz);e.children[0].textContent=n.time;e.children[1].textContent=n.date});
+  $$("[data-cd]",root).forEach(e=>{const t=e.dataset.cd?new Date(e.dataset.cd).getTime():NaN;let x="--";
+    if(!isNaN(t)){let s=Math.floor((t-Date.now())/1000);if(s<=0)x="Time's up";else{const d=Math.floor(s/86400);s%=86400;x=(d?d+"d ":"")+[Math.floor(s/3600),Math.floor(s%3600/60),s%60].map(v=>String(v).padStart(2,"0")).join(":")}}
+    e.children[0].textContent=x});
+}
+function widgetForm(cid,w){
+  const card=DB.home.find(x=>x.id===cid);if(!card)return;
+  const isNew=!w,base=w||{id:uid("w"),type:"note"};
+  const body=(t,x)=>{
+    if(t==="note")return `<div class="full"><label>Text</label><textarea id="wf-text" rows="5">${esc(x.text||"")}</textarea></div><div class="full"><label>Colour</label><select id="wf-color">${Object.keys(W_COLORS).map(k=>`<option${(x.color||"yellow")===k?" selected":""}>${k}</option>`).join("")}</select></div>`;
+    if(t==="check")return `<div class="full"><label>Checklist items — one per line (tick them on the home page)</label><textarea id="wf-items" rows="6">${esc((x.items||[]).map(i=>i.t).join("\n"))}</textarea></div>`;
+    if(t==="clock")return `<div class="full"><label>Time zone</label><input id="wf-q" type="search" placeholder="Search city or UTC…" autocomplete="off"><select id="wf-tz" size="7" style="margin-top:6px"></select></div>`;
+    if(t==="links")return `<div class="full"><label>Links — one per line: Label | https://address</label><textarea id="wf-links" rows="5" placeholder="Thai Airways | https://thaiairways.com">${esc((x.links||[]).map(l=>l.label+" | "+l.url).join("\n"))}</textarea></div>`;
+    if(t==="stat")return `<div class="full"><label>What to count</label><select id="wf-m">${Object.entries(W_STATS).map(([k,v])=>`<option value="${k}"${(x.metric||"templates")===k?" selected":""}>${v[0]}</option>`).join("")}</select></div>`;
+    if(t==="countdown")return `<div class="full"><label>Count down to</label><input id="wf-dt" type="datetime-local" value="${esc(x.target||"")}"></div>`;
+    return"";
+  };
+  modal(`<div class="mhead"><h3>${isNew?"Add":"Edit"} widget</h3><button class="btn sm x" data-close>✕</button></div><div class="fg" style="margin-top:8px">
+    <div><label>Widget type</label><select id="wf-t" ${isNew?"":"disabled"}>${Object.entries(W_TYPES).map(([k,v])=>`<option value="${k}"${base.type===k?" selected":""}>${v.i} ${v.n}</option>`).join("")}</select></div>
+    <div><label>Title (optional)</label><input id="wf-title" value="${esc(base.title||"")}"></div><div class="full"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="wf-pin" ${base.pin?"checked":""} style="width:auto"> 📌 Show this widget on every page (small icon at the bottom-left)</label></div><div class="full" id="wf-body" style="display:contents"></div></div>
+    <div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="wf-ok">Save widget</button></div>`,(bg,close)=>{
+    let tzSel=base.tz||"off:0";
+    const drawTz=()=>{const sel=$("#wf-tz",bg);if(!sel)return;const q=($("#wf-q",bg).value||"").trim().toLowerCase();
+      sel.innerHTML=TZAPI.items.filter(i=>!q||i.key.includes(q)||i.group.toLowerCase().includes(q)).map(i=>`<option value="${esc(i.v)}"${i.v===tzSel?" selected":""}>${esc(i.label)}${i.sub?" ("+esc(i.sub)+")":""}${i.group!=="UTC offsets"?" — "+esc(i.group):""}</option>`).join("");
+      sel.onchange=()=>{tzSel=sel.value}};
+    const show=()=>{const t=$("#wf-t",bg).value;$("#wf-body",bg).innerHTML=body(t,t===base.type?base:{});if(t==="clock"){$("#wf-q",bg).addEventListener("input",drawTz);drawTz();$("#wf-tz",bg)?.querySelector("option[selected]")?.scrollIntoView({block:"center"})}};
+    $("#wf-t",bg).onchange=show;show();
+    $("#wf-ok",bg).onclick=()=>{
+      const t=$("#wf-t",bg).value,o={id:base.id,type:t,title:$("#wf-title",bg).value.trim(),pin:$("#wf-pin",bg).checked};
+      if(t==="note"){o.text=$("#wf-text",bg).value.trim();o.color=$("#wf-color",bg).value}
+      else if(t==="check"){const old=base.items||[];o.items=$("#wf-items",bg).value.split("\n").map(s=>s.trim()).filter(Boolean).map(s=>{const m=old.find(i=>i.t===s);return{id:m?m.id:uid("i"),t:s,done:m?m.done:false}})}
+      else if(t==="clock")o.tz=tzSel;
+      else if(t==="links"){o.links=$("#wf-links",bg).value.split("\n").map(s=>s.trim()).filter(Boolean).map(s=>{const p=s.split("|").map(x=>x.trim());return p.length>1?{label:p[0]||p[1],url:p.slice(1).join("|").trim()}:{label:s,url:s}}).filter(l=>/^https?:\/\//i.test(l.url));if(!o.links.length){toast("Add at least one link starting with https://");return}}
+      else if(t==="stat")o.metric=$("#wf-m",bg).value;
+      else if(t==="countdown"){o.target=$("#wf-dt",bg).value;if(!o.target){toast("Pick a date and time");return}}
+      const ws=(card.widgets||[]).slice();const i=ws.findIndex(x=>x.id===o.id);if(i>=0)ws[i]=o;else ws.push(o);
+      putItem("home",{...card,widgets:ws});close();toast("Saved ✓");
+    };
+  });
+}
+
+let WFOCUS=null;
+const focusPending=()=>{if(!WFOCUS)return;const i=document.querySelector(`[data-ckadd="${WFOCUS}"]`);WFOCUS=null;if(i)i.focus()};
+const widgetOwner=el=>DB.home.find(x=>x.id===el.closest("[data-cid]")?.dataset.cid);
+function updWidget(el,wid,fn){const c=widgetOwner(el);if(!c)return;putItem("home",{...c,widgets:(c.widgets||[]).map(w=>w.id!==wid?w:fn(w))})}
+const updItems=(el,wid,fn)=>updWidget(el,wid,w=>({...w,items:fn(w.items||[])}));
+function bindWidgetEvents(root){
+  root.addEventListener("change",e=>{
+    const t=e.target,ck=t.dataset?.ck;
+    if(ck){updItems(t,ck,it=>it.map(i=>i.id===t.dataset.i?{...i,done:t.checked}:i));return}
+    const cs=t.dataset?.cdset;if(cs&&t.value)updWidget(t,cs,w=>({...w,target:t.value}));
+  });
+  root.addEventListener("keydown",e=>{
+    const t=e.target,ad=t.dataset?.ckadd;
+    if(ad&&e.key==="Enter"){const v=t.value.trim();if(!v)return;e.preventDefault();t.value="";WFOCUS=ad;updItems(t,ad,it=>it.concat({id:uid("i"),t:v,done:false}));return}
+    if(t.classList?.contains("ck-edit")||t.classList?.contains("note-edit")){
+      if(e.key==="Escape"){t.dataset.cancel="1";t.blur()}
+      else if(e.key==="Enter"&&(t.classList.contains("ck-edit")||e.ctrlKey||e.metaKey)){e.preventDefault();t.blur()}
+    }
+  });
+  root.addEventListener("focusout",e=>{
+    const t=e.target;
+    if(t.classList?.contains("ck-edit")){
+      if(t.dataset.cancel){refreshAll();return}
+      const v=t.value.trim(),wid=t.dataset.w,iid=t.dataset.i;
+      updItems(t,wid,it=>v?it.map(x=>x.id===iid?{...x,t:v}:x):it.filter(x=>x.id!==iid));
+    }else if(t.classList?.contains("note-edit")){
+      if(t.dataset.cancel){refreshAll();return}
+      updWidget(t,t.dataset.w,w=>({...w,text:t.value.trim()}));
+    }
+  });
+  root.addEventListener("dblclick",e=>{
+    const s=e.target.closest("[data-cked]");
+    if(s){const inp=document.createElement("input");inp.className="ck-edit";inp.value=s.textContent;inp.dataset.w=s.dataset.cked;inp.dataset.i=s.dataset.i;s.replaceWith(inp);inp.focus();inp.select();return}
+    const n=e.target.closest("[data-note]");
+    if(n){const w=(widgetOwner(n)?.widgets||[]).find(x=>x.id===n.dataset.note),ta=document.createElement("textarea");ta.className="note-edit";ta.rows=4;ta.value=w?.text||"";ta.dataset.w=n.dataset.note;n.replaceWith(ta);ta.focus()}
+  });
+  root.addEventListener("click",e=>{
+    const d=e.target.closest("[data-ckdel]");if(d){updItems(d,d.dataset.ckdel,it=>it.filter(x=>x.id!==d.dataset.i));return}
+    const c=e.target.closest("[data-ckclear]");if(c)updItems(c,c.dataset.ckclear,it=>it.filter(x=>!x.done));
+  });
+}
+/* ---- pinned widgets: small icons at the bottom-left of every page ---- */
+const pinnedWidgets=()=>DB.home.flatMap(c=>(c.widgets||[]).filter(w=>w.pin).map(w=>({c,w})));
+const DS={open:null};let dockEl,dockChips,dockPop;
+function chipHTML(w){
+  const T=W_TYPES[w.type];if(!T)return"";let t="",extra="";
+  if(w.type==="note")t=w.title||(w.text||"Note").split("\n")[0].slice(0,18);
+  else if(w.type==="check"){const it=w.items||[];t=`${it.filter(x=>x.done).length}/${it.length}`+(w.title?" "+w.title:"")}
+  else if(w.type==="countdown")t=`<span data-dcd="${esc(w.target||"")}">--</span>`;
+  else if(w.type==="clock")t=`<span data-dtz="${esc(w.tz||"off:0")}">--:--</span>`;
+  else if(w.type==="stat"){const s=W_STATS[w.metric]||W_STATS.templates;t=`${s[1]()} <small>${esc(w.title||s[0])}</small>`}
+  else t=esc(w.title||T.n);
+  return `<button class="wchip${DS.open===w.id?" on":""}" data-wchip="${w.id}" title="${esc(w.title||T.n)}">${T.i} ${w.type==="note"?esc(t):t}</button>`;
+}
+function tickDock(){
+  if(!dockEl||dockEl.hidden)return;
+  $$("[data-dcd]",dockChips).forEach(e=>{const t=e.dataset.dcd?new Date(e.dataset.dcd).getTime():NaN;let x="--",up=false;
+    if(!isNaN(t)){let s=Math.floor((t-Date.now())/1000);if(s<=0){x="Time's up";up=true}else{const d=Math.floor(s/86400);s%=86400;const hh=Math.floor(s/3600),mm=Math.floor(s%3600/60),ss=s%60,p=v=>String(v).padStart(2,"0");x=d?`${d}d ${p(hh)}:${p(mm)}`:`${p(hh)}:${p(mm)}:${p(ss)}`}}
+    e.textContent=x;e.closest(".wchip")?.classList.toggle("up",up)});
+  $$("[data-dtz]",dockChips).forEach(e=>{e.textContent=TZAPI.now(e.dataset.dtz).time.slice(0,5)});
+  tickWidgets(dockPop);
+}
+function renderDock(){
+  if(!dockEl)return;
+  const list=pinnedWidgets();dockEl.hidden=!list.length;
+  if(DS.open&&DS.open!=="*"&&!list.some(x=>x.w.id===DS.open))DS.open=null;
+  if(!list.length)DS.open=null;
+  const max=4;
+  dockChips.innerHTML=list.slice(0,max).map(x=>chipHTML(x.w)).join("")+(list.length>max?`<button class="wchip${DS.open==="*"?" on":""}" data-wchip="*">⋯ +${list.length-max}</button>`:"");
+  if(!DS.open){dockPop.hidden=true;tickDock();return}
+  const a=document.activeElement;
+  if(!dockPop.hidden&&dockPop.contains(a)&&a.value&&/\b(wg-add|ck-edit|note-edit)\b/.test(a.className)){tickDock();return}   /* do not wipe what is being typed */
+  const sel=DS.open==="*"?list:list.filter(x=>x.w.id===DS.open);
+  dockPop.innerHTML=`<div class="wdp-h"><b>${DS.open==="*"?"📌 Pinned widgets":""}</b><button class="btn sm" data-wd="close" title="Close">✕</button></div>`+sel.map(({c,w})=>`<div class="wdp-i" data-cid="${c.id}">${widgetHTML(w,false)}</div>`).join("")+`<div class="wdp-f"><button class="lk" data-wd="home">Open the home page</button></div>`;
+  dockPop.hidden=false;tickDock();focusPending();
+}
+function initDock(){
+  dockEl=document.createElement("div");dockEl.id="wdock";dockEl.hidden=true;
+  dockEl.innerHTML='<div id="wdockPop" hidden></div><div id="wdockChips"></div>';document.body.appendChild(dockEl);
+  dockPop=$("#wdockPop",dockEl);dockChips=$("#wdockChips",dockEl);
+  dockChips.addEventListener("click",e=>{const b=e.target.closest("[data-wchip]");if(!b)return;DS.open=DS.open===b.dataset.wchip?null:b.dataset.wchip;renderDock()});
+  dockPop.addEventListener("click",e=>{
+    const t=e.target.closest("[data-h]");
+    if(t){const c=DB.home.find(x=>x.id===t.closest("[data-cid]")?.dataset.cid);if(!c)return;
+      if(t.dataset.h==="wpin")putItem("home",{...c,widgets:(c.widgets||[]).map(w=>w.id===t.dataset.w?{...w,pin:!w.pin}:w)});
+      else if(t.dataset.h==="wedit")widgetForm(c.id,(c.widgets||[]).find(x=>x.id===t.dataset.w));
+      return}
+    const d=e.target.closest("[data-wd]");if(!d)return;
+    if(d.dataset.wd==="close"){DS.open=null;renderDock()}
+    else if(d.dataset.wd==="home"){DS.open=null;renderDock();VIEW.mode="home";render()}
+  });
+  bindWidgetEvents(dockPop);
+  document.addEventListener("pointerdown",e=>{if(DS.open&&!e.target.closest("#wdock")&&!e.target.closest(".modalbg")){DS.open=null;renderDock()}});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&DS.open){DS.open=null;renderDock()}});
+  setInterval(tickDock,1000);renderDock();
+}
 function mountHome(root){
   const S={edit:false,first:true};
   const cards=()=>DB.home.slice().sort((a,b)=>(a.ord??0)-(b.ord??0));
   const secOf=id=>SECTIONS.find(s=>s.id===id);
   const nl=t=>esc(t||"").replace(/\n/g,"<br>").replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
-  /* ---------- widgets ---------- */
-  function widgetHTML(w,edit){
-    const T=W_TYPES[w.type];if(!T)return"";let b="";
-    if(w.type==="note")b=`<div class="wg-note" style="background:${W_COLORS[w.color]||W_COLORS.yellow};${w.color==="none"?"":"color:#1c2b3a"}">${nl(w.text)||'<span class="crumb">Empty note</span>'}</div>`;
-    else if(w.type==="check"){const it=w.items||[],d=it.filter(x=>x.done).length;
-      b=`<div class="crumb">${it.length?`${d}/${it.length} done`:"No items yet"}${d?` · <button class="lk" data-ckclear="${w.id}">Clear done</button>`:""}</div>`+it.map(x=>`<div class="wg-ck"><input type="checkbox" data-ck="${w.id}" data-i="${x.id}" ${x.done?"checked":""}><span class="ck-t ${x.done?"dn":""}" data-cked="${w.id}" data-i="${x.id}" title="Double-click to edit">${esc(x.t)}</span><button class="ck-x" data-ckdel="${w.id}" data-i="${x.id}" title="Remove">✕</button></div>`).join("")+`<input class="wg-add" data-ckadd="${w.id}" placeholder="＋ Add item… (press Enter)" autocomplete="off">`}
-    else if(w.type==="clock")b=`<div class="wg-clk" data-wtz="${esc(w.tz||"off:0")}"><b>--:--:--</b><span></span><small>${esc(TZAPI.labelOf(w.tz||"off:0"))}</small></div>`;
-    else if(w.type==="links")b=(w.links||[]).map(l=>`<a class="btn sm wg-lk" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")||'<span class="crumb">No links</span>';
-    else if(w.type==="stat"){const s=W_STATS[w.metric]||W_STATS.templates;b=`<div class="wg-stat"><b>${s[1]()}</b><span>${esc(s[0])}</span></div>`}
-    else if(w.type==="countdown")b=`<div class="wg-cd" data-cd="${esc(w.target||"")}"><b>--</b><small>${esc(w.target?w.target.replace("T"," "):"No date set")}</small></div>`;
-    const tools=edit?`<span class="wg-tools"><button class="btn sm" data-h="wedit" data-w="${w.id}" title="Edit widget">✏️</button><button class="btn sm danger" data-h="wdel" data-w="${w.id}" title="Remove widget">✕</button></span>`:"";
-    return `<div class="wg wg-${w.type}" data-wid="${w.id}"><div class="wg-h"><span>${T.i} ${esc(w.title||T.n)}</span>${tools}</div><div class="wg-b">${b}</div></div>`;
-  }
-  function tickW(){
-    $$("[data-wtz]",root).forEach(e=>{const n=TZAPI.now(e.dataset.wtz);e.children[0].textContent=n.time;e.children[1].textContent=n.date});
-    $$("[data-cd]",root).forEach(e=>{const t=e.dataset.cd?new Date(e.dataset.cd).getTime():NaN;let x="--";
-      if(!isNaN(t)){let s=Math.floor((t-Date.now())/1000);if(s<=0)x="Time's up";else{const d=Math.floor(s/86400);s%=86400;x=(d?d+"d ":"")+[Math.floor(s/3600),Math.floor(s%3600/60),s%60].map(v=>String(v).padStart(2,"0")).join(":")}}
-      e.children[0].textContent=x});
-  }
+  function tickW(){tickWidgets(root)}
   const iv=setInterval(()=>{if(!root.isConnected){clearInterval(iv);return}tickW()},1000);
   /* ---------- cards ---------- */
   function cardHTML(c){
@@ -1767,7 +1909,7 @@ function mountHome(root){
     $$("[data-hi]",root).forEach(async el=>{const s=await getHomeImg(el.dataset.hi);if(s&&el.isConnected)el.style.backgroundImage=`url("${s}")`});
     if(S.first){S.first=false;const g=$(".hgrid",root);if(g){g.classList.add("hanim");[...g.children].forEach((el,i)=>el.style.setProperty("--i",i))}}
     tickW();
-    if(S.focusCk){const i=$(`[data-ckadd="${S.focusCk}"]`,root);S.focusCk=null;if(i)i.focus()}
+    focusPending();
   }
   /* ---------- card form ---------- */
   function editForm(c){
@@ -1805,42 +1947,6 @@ function mountHome(root){
       $("#ha-ok",bg).onclick=()=>{const t=$("#ha-t",bg).value,c={id:uid("h"),type:t,size:t==="custom"||t==="section"?"s":t==="widgets"?"m":"l",title:t==="hero"?"Welcome":"",desc:""};if(t==="widgets")c.widgets=[];if(t==="section")c.sec=$("#ha-s",bg).value;close();setTimeout(()=>editForm(c),50)};
     });
   }
-  /* ---------- widget form ---------- */
-  function widgetForm(cid,w){
-    const card=DB.home.find(x=>x.id===cid);if(!card)return;
-    const isNew=!w,base=w||{id:uid("w"),type:"note"};
-    const body=(t,x)=>{
-      if(t==="note")return `<div class="full"><label>Text</label><textarea id="wf-text" rows="5">${esc(x.text||"")}</textarea></div><div class="full"><label>Colour</label><select id="wf-color">${Object.keys(W_COLORS).map(k=>`<option${(x.color||"yellow")===k?" selected":""}>${k}</option>`).join("")}</select></div>`;
-      if(t==="check")return `<div class="full"><label>Checklist items — one per line (tick them on the home page)</label><textarea id="wf-items" rows="6">${esc((x.items||[]).map(i=>i.t).join("\n"))}</textarea></div>`;
-      if(t==="clock")return `<div class="full"><label>Time zone</label><input id="wf-q" type="search" placeholder="Search city or UTC…" autocomplete="off"><select id="wf-tz" size="7" style="margin-top:6px"></select></div>`;
-      if(t==="links")return `<div class="full"><label>Links — one per line: Label | https://address</label><textarea id="wf-links" rows="5" placeholder="Thai Airways | https://thaiairways.com">${esc((x.links||[]).map(l=>l.label+" | "+l.url).join("\n"))}</textarea></div>`;
-      if(t==="stat")return `<div class="full"><label>What to count</label><select id="wf-m">${Object.entries(W_STATS).map(([k,v])=>`<option value="${k}"${(x.metric||"templates")===k?" selected":""}>${v[0]}</option>`).join("")}</select></div>`;
-      if(t==="countdown")return `<div class="full"><label>Count down to</label><input id="wf-dt" type="datetime-local" value="${esc(x.target||"")}"></div>`;
-      return"";
-    };
-    modal(`<div class="mhead"><h3>${isNew?"Add":"Edit"} widget</h3><button class="btn sm x" data-close>✕</button></div><div class="fg" style="margin-top:8px">
-      <div><label>Widget type</label><select id="wf-t" ${isNew?"":"disabled"}>${Object.entries(W_TYPES).map(([k,v])=>`<option value="${k}"${base.type===k?" selected":""}>${v.i} ${v.n}</option>`).join("")}</select></div>
-      <div><label>Title (optional)</label><input id="wf-title" value="${esc(base.title||"")}"></div><div class="full" id="wf-body" style="display:contents"></div></div>
-      <div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="wf-ok">Save widget</button></div>`,(bg,close)=>{
-      let tzSel=base.tz||"off:0";
-      const drawTz=()=>{const sel=$("#wf-tz",bg);if(!sel)return;const q=($("#wf-q",bg).value||"").trim().toLowerCase();
-        sel.innerHTML=TZAPI.items.filter(i=>!q||i.key.includes(q)||i.group.toLowerCase().includes(q)).map(i=>`<option value="${esc(i.v)}"${i.v===tzSel?" selected":""}>${esc(i.label)}${i.sub?" ("+esc(i.sub)+")":""}${i.group!=="UTC offsets"?" — "+esc(i.group):""}</option>`).join("");
-        sel.onchange=()=>{tzSel=sel.value}};
-      const show=()=>{const t=$("#wf-t",bg).value;$("#wf-body",bg).innerHTML=body(t,t===base.type?base:{});if(t==="clock"){$("#wf-q",bg).addEventListener("input",drawTz);drawTz();$("#wf-tz",bg)?.querySelector("option[selected]")?.scrollIntoView({block:"center"})}};
-      $("#wf-t",bg).onchange=show;show();
-      $("#wf-ok",bg).onclick=()=>{
-        const t=$("#wf-t",bg).value,o={id:base.id,type:t,title:$("#wf-title",bg).value.trim()};
-        if(t==="note"){o.text=$("#wf-text",bg).value.trim();o.color=$("#wf-color",bg).value}
-        else if(t==="check"){const old=base.items||[];o.items=$("#wf-items",bg).value.split("\n").map(s=>s.trim()).filter(Boolean).map(s=>{const m=old.find(i=>i.t===s);return{id:m?m.id:uid("i"),t:s,done:m?m.done:false}})}
-        else if(t==="clock")o.tz=tzSel;
-        else if(t==="links"){o.links=$("#wf-links",bg).value.split("\n").map(s=>s.trim()).filter(Boolean).map(s=>{const p=s.split("|").map(x=>x.trim());return p.length>1?{label:p[0]||p[1],url:p.slice(1).join("|").trim()}:{label:s,url:s}}).filter(l=>/^https?:\/\//i.test(l.url));if(!o.links.length){toast("Add at least one link starting with https://");return}}
-        else if(t==="stat")o.metric=$("#wf-m",bg).value;
-        else if(t==="countdown"){o.target=$("#wf-dt",bg).value;if(!o.target){toast("Pick a date and time");return}}
-        const ws=(card.widgets||[]).slice();const i=ws.findIndex(x=>x.id===o.id);if(i>=0)ws[i]=o;else ws.push(o);
-        putItem("home",{...card,widgets:ws});close();toast("Saved ✓");
-      };
-    });
-  }
   /* ---------- events ---------- */
   root.addEventListener("click",e=>{
     const t=e.target.closest("[data-h]");
@@ -1855,37 +1961,14 @@ function mountHome(root){
       else if(k==="del"&&c){if(confirm(`Delete this card${c.title?` “${c.title}”`:""}?`)){if(c.hasImg)delHomeImg(c.id);delItem("home",c.id)}}
       else if(k==="wadd"&&c)widgetForm(c.id);
       else if(k==="wedit"&&c)widgetForm(c.id,(c.widgets||[]).find(x=>x.id===t.dataset.w));
+      else if(k==="wpin"&&c)putItem("home",{...c,widgets:(c.widgets||[]).map(w=>w.id===t.dataset.w?{...w,pin:!w.pin}:w)});
       else if(k==="wdel"&&c){if(confirm("Remove this widget?"))putItem("home",{...c,widgets:(c.widgets||[]).filter(x=>x.id!==t.dataset.w)})}
       return;
     }
     const qa=e.target.closest(".qa");if(qa&&!S.edit){openRecent({k:qa.dataset.qk,id:qa.dataset.qid,s:qa.dataset.qs,c:qa.dataset.qc});return}
     const g=e.target.closest("[data-go]");if(g&&!S.edit&&!e.target.closest("a"))go(g.dataset.go);
   });
-  root.addEventListener("change",e=>{
-    const ck=e.target.dataset?.ck;if(!ck)return;const c=DB.home.find(x=>x.id===e.target.closest("[data-cid]")?.dataset.cid);if(!c)return;
-    putItem("home",{...c,widgets:(c.widgets||[]).map(w=>w.id!==ck?w:{...w,items:(w.items||[]).map(i=>i.id===e.target.dataset.i?{...i,done:e.target.checked}:i)})});
-  });
-  /* ---------- checklist widget: edit without Customize mode ---------- */
-  const ckUpdate=(e,wid,fn)=>{const c=DB.home.find(x=>x.id===e.target.closest("[data-cid]")?.dataset.cid);if(!c)return;putItem("home",{...c,widgets:(c.widgets||[]).map(w=>w.id!==wid?w:{...w,items:fn(w.items||[])})})};
-  root.addEventListener("keydown",e=>{
-    const ad=e.target.dataset?.ckadd;
-    if(ad&&e.key==="Enter"){const v=e.target.value.trim();if(!v)return;e.preventDefault();S.focusCk=ad;ckUpdate(e,ad,it=>it.concat({id:uid("i"),t:v,done:false}))}
-    if(e.target.classList?.contains("ck-edit")){if(e.key==="Enter")e.target.blur();if(e.key==="Escape"){e.target.dataset.cancel="1";e.target.blur()}}
-  });
-  root.addEventListener("focusout",e=>{
-    const el=e.target;if(!el.classList?.contains("ck-edit"))return;
-    if(el.dataset.cancel){draw();return}
-    const wid=el.dataset.w,iid=el.dataset.i,v=el.value.trim();
-    ckUpdate(e,wid,it=>v?it.map(x=>x.id===iid?{...x,t:v}:x):it.filter(x=>x.id!==iid));
-  });
-  root.addEventListener("dblclick",e=>{
-    const s=e.target.closest("[data-cked]");if(!s)return;
-    const inp=document.createElement("input");inp.className="ck-edit";inp.value=s.textContent;inp.dataset.w=s.dataset.cked;inp.dataset.i=s.dataset.i;s.replaceWith(inp);inp.focus();inp.select();
-  });
-  root.addEventListener("click",e=>{
-    const d=e.target.closest("[data-ckdel]");if(d){ckUpdate(e,d.dataset.ckdel,it=>it.filter(x=>x.id!==d.dataset.i));return}
-    const c=e.target.closest("[data-ckclear]");if(c)ckUpdate(e,c.dataset.ckclear,it=>it.filter(x=>!x.done));
-  });
+  bindWidgetEvents(root);
   /* ---------- drag & drop ---------- */
   let DRAG=null;
   const clr=()=>$$(".dz-before,.dz-after,.dragging",root).forEach(x=>x.classList.remove("dz-before","dz-after","dragging"));
@@ -2094,7 +2177,7 @@ function openRenameSections(){
 const MOD={email:mountEmail,policy:mountPolicy,contact:mountContact,sorting:mountSorting,documents:mountDocuments,emaildir:mountEmailDir};
 let VIEW={mode:"home",a:"email",b:"contact"};
 let mounted={};
-function refreshAll(){if(secSig()!==SECSIG){applySectionNames();render();return}Object.values(mounted).forEach(m=>m.refresh());renderHomeKpi()}
+function refreshAll(){if(secSig()!==SECSIG){applySectionNames();render();renderDock();return}Object.values(mounted).forEach(m=>m.refresh());renderHomeKpi();renderDock()}
 let NAVSIG="",NAVPOP=false;
 function syncHistory(){const sig=VIEW.mode+"|"+VIEW.a+"|"+VIEW.b;if(sig===NAVSIG)return;const st={mode:VIEW.mode,a:VIEW.a,b:VIEW.b};try{if(!NAVSIG||NAVPOP)history.replaceState(st,"");else history.pushState(st,"")}catch(e){}NAVSIG=sig}
 window.addEventListener("popstate",e=>{const s=e.state;if(!s||!s.mode)return;VIEW.mode=s.mode;VIEW.a=s.a;VIEW.b=s.b;NAVPOP=true;try{render()}finally{NAVPOP=false}});
@@ -2625,6 +2708,7 @@ function openTool(){
 })();
 {const hd=$("header"),nv=$("#nav"),setHH=()=>{document.documentElement.style.setProperty("--hh",hd.offsetHeight+"px")};setHH();if(window.ResizeObserver)new ResizeObserver(setHH).observe(hd);addEventListener("scroll",()=>nv.classList.toggle("stuck",scrollY>60),{passive:true})}
 render();
+initDock();
 initCloud();
 setTimeout(()=>{if(!fdb){ensureDocsCard();ensureQuickCard()}},6000);
 </script>
