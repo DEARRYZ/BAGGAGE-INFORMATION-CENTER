@@ -311,6 +311,39 @@ header{padding:6px 10px}
 #clocks .clk2{gap:4px}
 .tzbtn{font-size:10.5px;padding:1px 6px;max-width:110px}
 }
+
+/* v1.2.4 UI refresh */
+:root{--r:14px;--shadow:0 1px 2px rgba(15,35,60,.06),0 6px 18px rgba(15,35,60,.07)}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.btn{border-radius:10px;min-height:36px;font-weight:600}
+.btn:hover{box-shadow:0 2px 8px rgba(15,35,60,.12);transform:translateY(-1px)}
+.btn:active{transform:none}
+.btn.pri{background:linear-gradient(135deg,var(--pri),var(--pri2));border-color:transparent;box-shadow:0 2px 8px rgba(14,111,192,.28)}
+input,select,textarea{border-radius:10px;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pri2);box-shadow:0 0 0 3px rgba(14,111,192,.18)}
+#nav button{border-radius:999px;font-weight:600;transition:.18s}
+#nav button.on,#nav button.active{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;border-color:transparent;box-shadow:0 2px 8px rgba(14,111,192,.3)}
+.tile,.card,.chartbox,.hcard{border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--line)}
+.tile{transition:transform .18s,box-shadow .18s}.tile:hover{transform:translateY(-2px)}
+.tw{border-radius:var(--r);box-shadow:var(--shadow);background:var(--card)}
+th{position:sticky;top:0;z-index:1}
+tbody tr:nth-child(even){background:color-mix(in srgb,var(--soft) 40%,transparent)}
+tbody tr:hover{background:var(--soft)}
+td,th{padding:10px 12px}
+.modal{border-radius:18px}
+.sec-head h2{letter-spacing:-.2px}
+@media(min-width:1100px){.tiles{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}}
+@media(max-width:700px){
+ body{font-size:14.5px}
+ .modalbg{align-items:flex-end;padding:0}
+ .modal{max-width:100%;border-radius:20px 20px 0 0;max-height:94vh;overflow:auto;padding:16px 14px calc(16px + env(safe-area-inset-bottom,0px))}
+ .sec-head{flex-wrap:wrap;gap:6px}.sec-head .right{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+ .sec-head .right .btn{white-space:nowrap}
+ .tiles{grid-template-columns:repeat(2,1fr)}
+ td,th{padding:8px 9px}
+}
+@media(pointer:coarse){.btn,input,select{min-height:42px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -328,8 +361,9 @@ header{padding:6px 10px}
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.2.3";
+const VERSION="1.2.4";
 const CHANGELOG=[
+ {v:"1.2.4",d:"2026-10-26",items:["Fresh look for every device: softer cards and buttons, pill-style menu, clearer tables, larger touch targets on phones and tablets, and pop-up windows that open as a bottom sheet on phones.","Sorting Bag Record: New record now asks where the baggage was found (JAAT Room, BFS LL Office, Belt 23, Sorting Area/TBT, or Other with required details). The location shows in the list, search and the PDF slip.","Sorting Bag Record: the PDF slip now prints a real, scannable Code 128 barcode of the tag number (previously only a decorative pattern)."]},
  {v:"1.2.3",d:"2026-10-25",items:["Widgets can now be pinned (📌) so that Notes, Countdowns, Checklists, clocks and counters show as small icons at the bottom-left of every page — tap an icon to open the full widget without going back to the home page.","Countdown: the date and time can be changed directly on the widget (no Customize mode needed); Notes can be edited by double-clicking; 📌 and ✏️ are now always available on every widget."]},
  {v:"1.2.2",d:"2026-10-23",items:["Easier to reach what you need: the menu bar now stays at the top while you scroll (and scrolls sideways on phones), and the browser Back button goes back to the previous section.","The airline you picked stays selected when you switch between Email Directory, Airlines Policy, Documents and TELEX, and a new “QR in: …” bar under each airline jumps to the same airline in the other sections with one click.","New ⚡ Quick access card on the home page (your favorites + recently opened items) and a “Recently opened” list in the search box.","Email Templates: ⭐ favorites (shown first), quick filters (All / To passenger / To airline / Favorites) and clickable colour tags that filter the list.","Home: the Checklist widget can now be edited without Customize mode — add items in the box, tick them, double-click an item to rename it, ✕ to remove, “Clear done”."]},
  {v:"1.2.1",d:"2026-10-22",items:["Email Directory: every airline now has its own search box (above its subjects) that finds subjects, stations, email addresses and remarks inside that airline only, highlights the matches and shows how many emails are displayed.","Advance Search Bar and Email Templates: template results, cards and the template window now show colour tags — 'To passenger' or 'To airline' (who the message is for) and the type of report (AHL, DPR, OHD, Switch bag, Forward …)."]},
@@ -1141,15 +1175,26 @@ const SLIP_CSS=`.sl{font-family:Sarabun,Arial,sans-serif;color:#0f172a;backgroun
 .sl .sig{margin-top:16px;padding-top:14px;border-top:2px solid #0f172a;display:grid;grid-template-columns:1fr 1fr;gap:32px;text-align:center}.sl .line{border-bottom:1px solid #1e293b;height:40px;margin-bottom:4px}
 .sl .badge{border:1px solid #0f172a;border-radius:4px;padding:3px 12px;font-weight:700;text-transform:uppercase;display:inline-block}.sl .ft{margin-top:14px;padding-top:6px;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;font-size:8px;color:#94a3b8}
 .sl table{width:100%;border-collapse:collapse;font-size:10px}.sl th,.sl td{border:1px solid #1e293b;padding:5px;text-align:left;vertical-align:middle}.sl th{background:#f1f5f9}.sl .kp{display:flex;gap:16px;border:1px solid #1e293b;background:#f8fafc;padding:8px;margin-bottom:10px;justify-content:space-around;border-radius:4px}`;
+const C128=["212222", "222122", "222221", "121223", "121322", "131222", "122213", "122312", "132212", "221213", "221312", "231212", "112232", "122132", "122231", "113222", "123122", "123221", "223211", "221132", "221231", "213212", "223112", "312131", "311222", "321122", "321221", "312212", "322112", "322211", "212123", "212321", "232121", "111323", "131123", "131321", "112313", "132113", "132311", "211313", "231113", "231311", "112133", "112331", "132131", "113123", "113321", "133121", "313121", "211331", "231131", "213113", "213311", "213131", "311123", "311321", "331121", "312113", "312311", "332111", "314111", "221411", "431111", "111224", "111422", "121124", "121421", "141122", "141221", "112214", "112412", "122114", "122411", "142112", "142211", "241211", "221114", "413111", "241112", "134111", "111242", "121142", "121241", "114212", "124112", "124211", "411212", "421112", "421211", "212141", "214121", "412121", "111143", "111341", "131141", "114113", "114311", "411113", "411311", "113141", "114131", "311141", "411131", "211412", "211214", "211232", "2331112"];
+function code128SVG(text,h){
+  text=String(text||"").replace(/[^\x20-\x7e]/g,"?");const mw=2;
+  const codes=[104];let sum=104;[...text].forEach((ch,i)=>{const v=ch.charCodeAt(0)-32;codes.push(v);sum+=v*(i+1)});
+  codes.push(sum%103);codes.push(106);
+  let x=20,bars="";codes.forEach(cd=>{const p=C128[cd];for(let i=0;i<p.length;i++){const w=+p[i]*mw;if(i%2===0)bars+=`<rect x="${x}" y="0" width="${w}" height="${h}" fill="#000"/>`;x+=w}});
+  const W=x+20;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${h}" width="${W}" height="${h}" shape-rendering="crispEdges" style="background:#fff;display:block;margin:auto"><rect width="${W}" height="${h}" fill="#fff"/>${bars}</svg>`;
+}
+const S_LOCS=["JAAT Room","BFS LL Office","Belt 23","Sorting Area/TBT","Other"];
+const locText=r=>r.foundLoc||"-";
 function slipHTML(r,photo){
   const hist=(r.history||[]).map(h=>`<div class="hi"><span>${esc(h.time)}:</span> ${esc(h.text)}</div>`).join("")||"<i>No notes available.</i>";
   const bg=r.status==="Pending"?"#dbeafe":"#fee2e2";
   return `<div class="sl-wrap" style="width:794px"><style>${SLIP_CSS}</style><div class="sl">
   <div class="hd"><div><h1>BANGKOK AIRPORT (BKK)</h1><h2>SORTING AREA / TBT - BAGGAGE TRANSFER SLIP</h2><div class="mono" style="font-size:9px;color:#64748b">DOC REF: BKK-TBT-LOG-${esc(String(r.id).replace("REC-",""))}</div></div>
    <div style="text-align:right"><span class="badge" style="background:${bg}">${esc(r.status)}</span><div style="font-size:9px;color:#64748b;margin-top:4px">Printed: ${nowStr()}</div></div></div>
-  <div class="tagbox"><div><div class="lb">PRIMARY BAGGAGE TAG NUMBER</div><div class="tag mono">${esc(r.tagNumber)}</div></div><div><div class="bar"></div><div class="mono" style="font-size:9px;text-align:center;font-weight:700">*${esc(r.tagNumber)}*</div></div></div>
+  <div class="tagbox"><div><div class="lb">PRIMARY BAGGAGE TAG NUMBER</div><div class="tag mono">${esc(r.tagNumber)}</div></div><div style="background:#fff;padding:2px 0">${code128SVG(r.tagNumber,46)}<div class="mono" style="font-size:10px;text-align:center;font-weight:700;letter-spacing:1px">${esc(r.tagNumber)}</div></div></div>
   <div class="mt g2"><div><div class="lb">FLIGHT &amp; DATE</div><div class="v">${esc(r.flightNumber)} (${esc(r.flightDate)})</div></div><div><div class="lb">AHL CASE / CONTACT EMAIL</div><div class="v">${esc(r.ahlCase)}</div></div>
-   <div><div class="lb">BAG COLOR</div><div class="v"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #94a3b8;background:${colorHex(r.color)};vertical-align:-1px"></span> ${esc(r.color)}</div></div><div><div class="lb">RECORD CREATION TIMESTAMP</div><div class="mono">${esc(r.createdAt)}</div></div></div>
+   <div><div class="lb">BAGGAGE FOUND LOCATION</div><div class="v">${esc(locText(r))}</div></div><div><div class="lb">BAG COLOR</div><div class="v"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #94a3b8;background:${colorHex(r.color)};vertical-align:-1px"></span> ${esc(r.color)}</div></div><div><div class="lb">RECORD CREATION TIMESTAMP</div><div class="mono">${esc(r.createdAt)}</div></div></div>
   <div class="g2" style="margin-bottom:14px"><div class="box"><div class="lb" style="margin-bottom:6px">ATTACHED BAGGAGE PHOTO</div>${photo?`<img src="${photo}">`:`<div style="text-align:center;color:#94a3b8;padding:40px 0;font-weight:600">No Image Attachment Provided</div>`}</div>
    <div class="box"><div class="lb" style="margin-bottom:6px">COMMENTS &amp; OPERATIONAL AUDIT TRAIL</div>${hist}</div></div>
   <div class="sig"><div><div class="line"></div><b>Handover Officer Signature</b><div style="font-size:9px;color:#64748b">Bangkok Airport Sorting Area / TBT Staff</div></div><div><div class="line"></div><b>Receiving Representative Signature</b><div style="font-size:9px;color:#64748b">Airlines Lost &amp; Found / AHL Officer</div></div></div>
@@ -1226,7 +1271,7 @@ function mountSorting(root){
    <button class="btn pri sm" data-a="add">＋ Add baggage record</button><button class="btn sm" data-a="csv">⬇ Export CSV</button><button class="btn sm" data-a="pdf">📄 Summary PDF</button><button class="btn sm" data-a="tpl">Template</button>
    <label class="btn sm" style="margin:0">⬆ Import CSV<input type="file" accept=".csv" data-a="imp" hidden></label><button class="btn sm" data-a="legacy" title="One-time import from the previous standalone Sorting app">⬆ Import from old app</button></div></div>
   <div class="tiles"></div>
-  <div class="sfbar"><div><small>Search Tag / AHL Case / Email</small><input data-f="q" type="search" placeholder="e.g. BKK12345 or AHL…"></div><div><small>Flight number</small><input data-f="flight" type="search" placeholder="e.g. TG910"></div><div><small>Flight date</small><input data-f="date" type="date"></div>
+  <div class="sfbar"><div><small>Search Tag / AHL Case / Email / Location</small><input data-f="q" type="search" placeholder="e.g. BKK12345 or AHL…"></div><div><small>Flight number</small><input data-f="flight" type="search" placeholder="e.g. TG910"></div><div><small>Flight date</small><input data-f="date" type="date"></div>
    <div><small>Status</small><select data-f="st"><option value="">All statuses</option>${S_STATUS.map(s=>`<option>${s}</option>`).join("")}</select></div><div><small>&nbsp;</small><button class="btn" data-a="clear" title="Reset filters (date = today)">Clear</button></div></div>
   <div class="sfbar2"><div><small>Recorded from</small><input data-f="from" type="date"></div><div><small>Recorded to</small><input data-f="to" type="date"></div><div class="row"><button class="btn sm" data-a="today">📅 Today</button><button class="btn sm" data-a="alldates">All dates</button></div></div>
   <div class="row" style="justify-content:space-between"><div class="meta" id="cnt"></div>${perSel()}</div><div class="tw"></div><div class="pgw"></div>`;
@@ -1235,7 +1280,7 @@ function mountSorting(root){
   const dateOk=r=>{const d=recDate(r);return(!F.from||d>=F.from)&&(!F.to||d<=F.to)};
   function baseOk(){
     const q=F.q.toLowerCase().trim(),fl=F.flight.toLowerCase().trim();
-    return r=>(!q||String(r.tagNumber).toLowerCase().includes(q)||String(r.ahlCase).toLowerCase().includes(q))&&(!fl||String(r.flightNumber).toLowerCase().includes(fl))&&(!F.date||r.flightDate===F.date)&&(!F.st||r.status===F.st);
+    return r=>(!q||String(r.tagNumber).toLowerCase().includes(q)||String(r.ahlCase).toLowerCase().includes(q)||String(r.foundLoc||"").toLowerCase().includes(q))&&(!fl||String(r.flightNumber).toLowerCase().includes(fl))&&(!F.date||r.flightDate===F.date)&&(!F.st||r.status===F.st);
   }
   function filtered(){return recs().filter(r=>baseOk()(r)&&dateOk(r)).sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)))}
   const syncInputs=()=>$$("[data-f]",root).forEach(i=>{if(i.dataset.f in F)i.value=F[i.dataset.f]});
@@ -1245,9 +1290,10 @@ function mountSorting(root){
     {const dateOn=F.from||F.to,outside=dateOn?all.filter(r=>baseOk()(r)&&!dateOk(r)).length:0;
       $("#cnt",root).innerHTML=`${rs.length?`${pi.a+1}–${pi.b}`:0} of ${rs.length} matching record(s) (${all.length} total) · page ${pi.p}/${pi.pages}`+(dateOn?` · 🕒 recorded ${esc(F.from||"…")} → ${esc(F.to||"…")}`:"")+(outside?` · <a href="#" data-a="alldates" style="font-weight:700">${outside} more outside these dates — show all</a>`:"")}
     $(".pgw",root).innerHTML=pagerHTML(rs.length,F.page);
-    $(".tw",root).innerHTML=rs.length?`<table><thead><tr><th>Photo</th><th>Tag number</th><th>Recorded (date · time)</th><th>Flight / date</th><th>Bag color</th><th>AHL match / email</th><th>Latest comment / notes</th><th>Status</th><th>Actions</th></tr></thead><tbody>${pr.map(r=>{const c=lastComment(r);return `<tr>
+    $(".tw",root).innerHTML=rs.length?`<table><thead><tr><th>Photo</th><th>Tag number</th><th>Found at</th><th>Recorded (date · time)</th><th>Flight / date</th><th>Bag color</th><th>AHL match / email</th><th>Latest comment / notes</th><th>Status</th><th>Actions</th></tr></thead><tbody>${pr.map(r=>{const c=lastComment(r);return `<tr>
       <td>${r.thumb?`<img class="thumb" src="${r.thumb}" data-ph="${r.id}" alt="photo" title="Click to enlarge">`:`<div class="thumb nothumb" title="No photo">📷</div>`}</td>
       <td><b style="font-family:ui-monospace,monospace">${esc(r.tagNumber)}</b></td>
+      <td>${esc(locText(r))}</td>
       <td style="white-space:nowrap"><b>${esc(recDate(r))}</b><div class="crumb">🕒 ${esc(recTime(r))}</div></td>
       <td><b>${esc(r.flightNumber)}</b><div class="crumb">${esc(r.flightDate)}</div></td>
       <td><span class="chip"><i class="dot" style="background:${colorHex(r.color)}"></i>${esc(r.color)}</span></td>
@@ -1265,11 +1311,13 @@ function mountSorting(root){
      <div><label>2. Flight number *</label><input id="s-fl" placeholder="e.g. TG910 / NH806"></div><div><label>Flight date *</label><input id="s-dt" type="date" value="${todayStr()}"></div>
      <div class="full"><label>3. Baggage color *</label><div class="row" id="s-sw" style="margin-bottom:6px">${Object.entries(S_COLORS).map(([n,h])=>`<button type="button" class="swatch" data-col="${n}" title="${n}" style="background:${h}"></button>`).join("")}</div><input id="s-col" placeholder="Selected or custom color name"></div>
      <div class="full"><label>4. AHL case match number / contact email *</label><input id="s-ahl" placeholder="e.g. BKKTG10293 or officer@airport.com"></div>
+     <div class="full"><label>Baggage found location *</label><select id="s-loc"><option value="">Select location…</option>${S_LOCS.map(l=>`<option>${l}</option>`).join("")}</select><input id="s-loco" placeholder="Other location details (required)" style="display:none;margin-top:6px"></div>
      <div class="full"><label>Initial comment / location notes</label><textarea id="s-cm" rows="2" placeholder="Optional location notes (e.g. Belt 4 left behind, handle broken)…"></textarea></div>
      <div class="full"><label>5. Attach baggage photo (optional · max 5 MB)</label><div class="drop" id="s-drop"><input id="s-ph" type="file" accept="image/*" hidden><div id="s-up">📷 Tap to attach 1 photo of the baggage<br><small>JPG, PNG, WEBP</small></div><div id="s-pv" style="display:none"><img id="s-img" style="max-height:130px;border-radius:8px"><div class="row" style="justify-content:center;margin-top:6px"><span class="hint" id="s-sz"></span><button type="button" class="btn sm danger" id="s-rm">Remove photo</button></div></div></div></div>
     </div>
     <div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="s-save">✔ Submit baggage record</button></div>`,(bg,close)=>{
       $("#s-sw",bg).addEventListener("click",e=>{const b=e.target.closest("[data-col]");if(b){$("#s-col",bg).value=b.dataset.col;$$(".swatch",bg).forEach(x=>x.classList.toggle("on",x===b))}});
+      $("#s-loc",bg).onchange=e=>{const o=e.target.value==="Other";$("#s-loco",bg).style.display=o?"":"none";if(o)$("#s-loco",bg).focus()};
       $("#s-up",bg).onclick=()=>$("#s-ph",bg).click();
       $("#s-ph",bg).onchange=e=>{
         const f=e.target.files[0];if(!f)return;if(f.size>5*1024*1024){toast("File exceeds 5 MB — attach a smaller image");e.target.value="";return}
@@ -1278,9 +1326,12 @@ function mountSorting(root){
       $("#s-rm",bg).onclick=()=>{photo=null;$("#s-ph",bg).value="";$("#s-up",bg).style.display="";$("#s-pv",bg).style.display="none"};
       $("#s-save",bg).onclick=async()=>{
         const g=i=>$("#"+i,bg).value.trim(),tag=g("s-tag"),fl=g("s-fl"),dt=g("s-dt"),col=g("s-col"),ahl=g("s-ahl"),cm=g("s-cm");
-        if(!tag||!fl||!dt||!col||!ahl){toast("Please fill in all required (*) fields");return}
+        const loc=g("s-loc"),loco=g("s-loco");
+        if(!tag||!fl||!dt||!col||!ahl||!loc){toast("Please fill in all required (*) fields");return}
+        if(loc==="Other"&&!loco){toast("Please enter the other location details");$("#s-loco",bg).focus();return}
+        const foundLoc=loc==="Other"?"Other: "+loco:loc;
         const t=nowStr(),id="REC-"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
-        const rec={id,tagNumber:tag,flightNumber:fl,flightDate:dt,color:col,ahlCase:ahl,status:"Pending",createdAt:t,history:[{time:t,text:"Record created in Sorting Area / TBT."}]};
+        const rec={id,tagNumber:tag,flightNumber:fl,flightDate:dt,color:col,ahlCase:ahl,status:"Pending",createdAt:t,foundLoc,history:[{time:t,text:"Record created. Baggage found at: "+foundLoc+"."}]};
         if(cm)rec.history.push({time:t,text:"Note: "+cm});
         if(photo){try{rec.thumb=await makeThumb(photo);rec.hasPhoto=true;setPhoto(id,photo)}catch(e){}}
         putItem("sorting",rec);close();toast(`Baggage tag #${tag} recorded ✓`);
