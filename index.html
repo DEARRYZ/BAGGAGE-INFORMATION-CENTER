@@ -344,6 +344,20 @@ td,th{padding:10px 12px}
 }
 @media(pointer:coarse){.btn,input,select{min-height:42px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* v1.2.8 administrator mode + Office/JAAT record */
+body:not(.adm-on) .adm{display:none!important}
+#admPill{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;align-items:center;gap:8px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-left:4px solid #1d8a4e;border-radius:999px;padding:4px 6px 4px 12px;box-shadow:var(--shadow);font-size:13px}
+#admPill[hidden]{display:none}#admPill b{font-variant-numeric:tabular-nums;min-width:36px;text-align:center}#admPill .btn{min-height:30px;padding:2px 10px}
+.st-SDone{background:#d9f2e3;color:#14663a}
+.szt{margin-top:2px}.szt .jcnt{background:#c0392b;color:#fff;border-radius:10px;padding:0 7px;font-size:11.5px;margin-left:4px}.szt .jcnt:empty{display:none}
+.jb{display:inline-block;border-radius:10px;padding:1px 9px;font-size:12px;font-weight:700;white-space:nowrap}
+.jb-ok{background:#dcebfb;color:#0b4f8a}.jb-due{background:#ffe3b0;color:#8a4b00}.jb-over{background:#f9d2cd;color:#9b2c1f}.jb-done{background:#d9f2e3;color:#14663a}
+.jalert{border:1px solid #e9a99f;border-left:5px solid #c0392b;background:color-mix(in srgb,#c0392b 9%,var(--card));border-radius:12px;padding:10px 14px;margin:8px 0 12px}
+.jal{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.jal-i{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 8px}
+tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr.jrow-over{background:color-mix(in srgb,#c0392b 14%,var(--card))}tbody tr.jrow-done{opacity:.72}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .jb-ok{background:#12304d;color:#9cc8f0}:root:not([data-theme="light"]) .jb-due{background:#47330a;color:#f0c55e}:root:not([data-theme="light"]) .jb-over{background:#451b16;color:#f0a79e}:root:not([data-theme="light"]) .jb-done,:root:not([data-theme="light"]) .st-SDone{background:#123422;color:#7bd6a0}}
+:root[data-theme="dark"] .jb-ok{background:#12304d;color:#9cc8f0}:root[data-theme="dark"] .jb-due{background:#47330a;color:#f0c55e}:root[data-theme="dark"] .jb-over{background:#451b16;color:#f0a79e}:root[data-theme="dark"] .jb-done,:root[data-theme="dark"] .st-SDone{background:#123422;color:#7bd6a0}
 </style>
 </head>
 <body>
@@ -355,14 +369,16 @@ td,th{padding:10px 12px}
 </div></header>
 <nav class="bar" id="nav"></nav>
 <main id="main"></main>
-<div id="toolFab"><div id="optMenu" hidden><button class="om-i" data-om="custom"><span>🛠</span><div><b>Customize home</b><small>Move, resize and edit home cards &amp; widgets</small></div></button><button class="om-i" data-om="data"><span>💾</span><div><b>Data &amp; backup</b><small>Export / import backup, reset templates</small></div></button><button class="om-i" data-om="rename"><span>🏷️</span><div><b>Rename sections</b><small>Change the names of the main sections</small></div></button></div><button id="gearBtn" class="fabb" title="Options" aria-label="Open options menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="toolBtn" class="fabb" title="Reduce file size (PDF / images)" aria-label="Open file size reducer"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M12 9v7m-3-3 3 3 3-3"/></svg></button></div>
+<div id="toolFab"><div id="optMenu" hidden><button class="om-i" data-om="admin"><span id="om-ai">🔐</span><div><b id="om-at">Administrator</b><small id="om-as">Log in to edit or delete content</small></div></button><button class="om-i adm" data-om="custom"><span>🛠</span><div><b>Customize home</b><small>Move, resize and edit home cards &amp; widgets</small></div></button><button class="om-i adm" data-om="data"><span>💾</span><div><b>Data &amp; backup</b><small>Export / import backup, reset templates</small></div></button><button class="om-i adm" data-om="rename"><span>🏷️</span><div><b>Rename sections</b><small>Change the names of the main sections</small></div></button></div><button id="gearBtn" class="fabb" title="Options" aria-label="Open options menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="toolBtn" class="fabb" title="Reduce file size (PDF / images)" aria-label="Open file size reducer"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M12 9v7m-3-3 3 3 3-3"/></svg></button></div>
 <footer class="pub">Published by Kongkit C.</footer>
 <footer class="ver"><button class="btn sm" id="verBtn">v<span id="verNum"></span> · Update history</button></footer>
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.2.7";
+const VERSION="1.2.9";
 const CHANGELOG=[
+ {v:"1.2.9",d:"2026-10-27",items:["Office/JAAT: the entering day now counts as day 1, so a bag that enters on 23 Oct must be taken out on 27 Oct (day 5); the maximum stay is day 7. The due date defaults to day 5.","Sorting records: up to 5 flight numbers can be added (for connecting / transfer flights).","Administrator mode: only 1 recovery question has to be answered (date of birth, name of pet or last 4 digits of ID card). Any answers given must be correct."]},
+ {v:"1.2.8",d:"2026-10-27",items:["New hidden Administrator mode (⚙ gear button → 🔐 Administrator). Editing and deleting in Email Templates, TELEX, Airlines Policy, Documents, Email Directory and Home customisation (also Rename sections and Data & backup) is now hidden until an administrator logs in. Contact History and Sorting baggage records stay open for everyone.","Administrator passwords: up to 2, set up the first time and synced to every device; add, change or delete them inside Administrator mode. Forgot password: answer 3 recovery questions (date of birth, name of pet, last 4 digits of ID card). Stays logged in for the session and logs out automatically after 10 minutes without activity (a countdown pill is shown at the bottom left).","Sorting Bag Record is split into two sub-sections: 🧳 Sorting Area / TBT Record (unchanged) and 🏢 Office/JAAT Record. JAAT records have an Enter date and a Due date (day 5 from entering; a bag may stay at most 7 days). Bags that reached day 5 or more are flagged, and a notice with a Re-confirm take out button appears when adding a new record. JAAT status is Pending / Done."]},
  {v:"1.2.7",d:"2026-10-27",items:["Bug fix: airline 3-digit codes re-checked against the official IATA member list. Airlines that match IATA are marked ✔ IATA in ✈ Airline codes; wrong codes were corrected, missing airlines were added (e.g. Thai Airways TG 217, Thai Lion Air SL 310, Nok Air DD 596, Myanmar Airways International 8M 599) and airlines no longer on the IATA list were removed. Airlines not yet checked are marked (not verified)."]},
  {v:"1.2.6",d:"2026-10-27",items:["Bug fix: airline code list checked against the official IATA member list; Aero Republica (P5) has no 3-digit code on IATA, so the unverified code 845 was removed."]},
  {v:"1.2.5",d:"2026-10-27",items:["Sorting Bag Record: enter the 10-digit tag (e.g. 0738123221 or 2738123221) and the IATA designator is shown automatically (VN123221). The first digit is ignored; digits 2-4 are matched to the airline 3-digit code (313 airlines loaded from the IATA roster).","You can also type the IATA designator + 6 digits (VN123221); it is converted to the 10-digit tag automatically, and the barcode on the PDF slip always shows the 10-digit number.","New ✈ Airline codes button in Sorting Bag Record: add, change or delete airlines and their 3-digit codes freely."]},
@@ -476,7 +492,7 @@ const txSepV=()=>DB.ui.txSep===undefined?" ":DB.ui.txSep;
 const txHTML=s=>/^XXX/.test(s)?`<i class="xr">XXX</i>${esc(s.slice(3))}`:esc(s);
 function mountTelex(root){
   const S={sel:null,q:"",edit:false};
-  root.innerHTML=`<div class="sec-head"><h2>📠 Teletype Address (TELEX)</h2><span class="hint" id="tx-n"></span><div class="right"><button class="btn sm" data-x="editmode" id="tx-em">✏️ Edit mode</button><span class="hint">Copy separator</span><div class="seg" id="tx-sep"><button data-sep=" ">space</button><button data-sep=", ">,</button><button data-sep="; ">;</button><button data-sep="\\n">new line</button></div><button class="btn pri sm" data-x="addair">＋ Add airline</button></div></div>
+  root.innerHTML=`<div class="sec-head"><h2>📠 Teletype Address (TELEX)</h2><span class="hint" id="tx-n"></span><div class="right"><button class="btn sm adm" data-x="editmode" id="tx-em">✏️ Edit mode</button><span class="hint">Copy separator</span><div class="seg" id="tx-sep"><button data-sep=" ">space</button><button data-sep=", ">,</button><button data-sep="; ">;</button><button data-sep="\\n">new line</button></div><button class="btn pri sm adm" data-x="addair">＋ Add airline</button></div></div>
   <div class="edwrap"><div class="edside"><input id="tx-q" type="search" autocomplete="off" placeholder="🔍 Find airline or address…"><div class="edlist"></div></div><div class="dirbody"></div></div>`;
   const air=id=>DB.telex.find(a=>a.id===id);
   const allOf=a=>txUniq(a.groups.flatMap(g=>g.addrs.map(x=>x.addr)));
@@ -493,15 +509,15 @@ function mountTelex(root){
   function drawBody(){
     $$("#tx-sep button",root).forEach(b=>b.classList.toggle("on",b.dataset.sep.replace("\\n","\n")===txSepV()));
     const body=$(".dirbody",root),a=air(S.sel);
-    if(!DB.telex.length){body.innerHTML=`<div class="empty"><p>No airline yet.</p><button class="btn pri" data-x="addair">＋ Add airline</button></div>`;return}
+    if(!DB.telex.length){body.innerHTML=`<div class="empty"><p>No airline yet.</p><button class="btn pri adm" data-x="addair">＋ Add airline</button></div>`;return}
     if(!a){body.innerHTML=`<div class="empty">Select an airline from the list.</div>`;return}
     const org=txUniq(a.groups.filter(g=>/origin/i.test(g.title)).flatMap(g=>g.addrs.map(x=>x.addr))),dst=txUniq(a.groups.filter(g=>/destination/i.test(g.title)).flatMap(g=>g.addrs.map(x=>x.addr))),all=allOf(a);
     body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(a.code)} · ${esc(a.name)}</h3><span class="crumb">${all.length} address(es) · click an address to copy it</span></div>
-      <span class="row"><button class="btn sm pri" data-x="copyall" ${all.length?"":"disabled"}>📋 Copy all (${all.length})</button>${org.length&&dst.length?`<button class="btn sm" data-x="copyorg">📋 Origin (${org.length})</button><button class="btn sm" data-x="copydst">📋 Destination (${dst.length})</button>`:""}<button class="btn sm" data-x="editair">✏️ Edit airline</button><button class="btn sm danger" data-x="delair">🗑 Delete</button><button class="btn sm pri" data-x="addgrp">＋ Group</button></span></div>
+      <span class="row"><button class="btn sm pri" data-x="copyall" ${all.length?"":"disabled"}>📋 Copy all (${all.length})</button>${org.length&&dst.length?`<button class="btn sm" data-x="copyorg">📋 Origin (${org.length})</button><button class="btn sm" data-x="copydst">📋 Destination (${dst.length})</button>`:""}<button class="btn sm adm" data-x="editair">✏️ Edit airline</button><button class="btn sm danger adm" data-x="delair">🗑 Delete</button><button class="btn sm pri adm" data-x="addgrp">＋ Group</button></span></div>
       ${xlinks(a.code,"telex")}
-      ${a.groups.map(g=>`<div class="scardx" data-gid="${g.id}"><div class="subj-h"><div><b>${/destination/i.test(g.title)?"🎯":"📍"} ${esc(g.title)}</b> <span class="crumb">${g.addrs.length} address(es)</span></div><span class="row"><button class="btn sm pri" data-x="copygrp" data-g="${g.id}" ${g.addrs.length?"":"disabled"}>📋 Copy (${txUniq(g.addrs.map(x=>x.addr)).length})</button><button class="btn sm" data-x="addaddr" data-g="${g.id}">＋ Address</button><button class="btn sm" data-x="editgrp" data-g="${g.id}">✏️</button><button class="btn sm danger" data-x="delgrp" data-g="${g.id}">🗑</button></span></div>
-        <div class="tx-w">${g.addrs.map(x=>`<span class="tx-i" data-aid="${x.id}"><button class="tx-a" data-x="copyone" data-v="${esc(x.addr)}" title="Click to copy">${txHTML(x.addr)}</button>${x.remark?`<span class="cmt">${esc(x.remark)}</span>`:""}<span class="eact"><button class="btn sm" data-x="editaddr" data-g="${g.id}" data-e="${x.id}">✏️</button><button class="btn sm danger" data-x="deladdr" data-g="${g.id}" data-e="${x.id}">✕</button></span></span>`).join("")||`<span class="crumb">No address yet</span>`}</div></div>`).join("")||`<div class="empty">No group yet.</div>`}
-      <div class="scardx"><div class="subj-h"><b>📝 Notes</b><button class="btn sm" data-x="editnote">✏️ Edit</button></div>${a.notes&&a.notes.trim()?String(a.notes).split("\n").filter(s=>s.trim()).map(l=>`<div class="pl">${esc(l)}</div>`).join(""):`<div class="crumb">No notes</div>`}</div>`;
+      ${a.groups.map(g=>`<div class="scardx" data-gid="${g.id}"><div class="subj-h"><div><b>${/destination/i.test(g.title)?"🎯":"📍"} ${esc(g.title)}</b> <span class="crumb">${g.addrs.length} address(es)</span></div><span class="row"><button class="btn sm pri" data-x="copygrp" data-g="${g.id}" ${g.addrs.length?"":"disabled"}>📋 Copy (${txUniq(g.addrs.map(x=>x.addr)).length})</button><button class="btn sm adm" data-x="addaddr" data-g="${g.id}">＋ Address</button><button class="btn sm adm" data-x="editgrp" data-g="${g.id}">✏️</button><button class="btn sm danger adm" data-x="delgrp" data-g="${g.id}">🗑</button></span></div>
+        <div class="tx-w">${g.addrs.map(x=>`<span class="tx-i" data-aid="${x.id}"><button class="tx-a" data-x="copyone" data-v="${esc(x.addr)}" title="Click to copy">${txHTML(x.addr)}</button>${x.remark?`<span class="cmt">${esc(x.remark)}</span>`:""}<span class="eact"><button class="btn sm adm" data-x="editaddr" data-g="${g.id}" data-e="${x.id}">✏️</button><button class="btn sm danger adm" data-x="deladdr" data-g="${g.id}" data-e="${x.id}">✕</button></span></span>`).join("")||`<span class="crumb">No address yet</span>`}</div></div>`).join("")||`<div class="empty">No group yet.</div>`}
+      <div class="scardx"><div class="subj-h"><b>📝 Notes</b><button class="btn sm adm" data-x="editnote">✏️ Edit</button></div>${a.notes&&a.notes.trim()?String(a.notes).split("\n").filter(s=>s.trim()).map(l=>`<div class="pl">${esc(l)}</div>`).join(""):`<div class="crumb">No notes</div>`}</div>`;
   }
   function draw(){if(!air(S.sel))S.sel=(visible().find(a=>a.code===LASTAIR)||visible()[0]||DB.telex[0])?.id||null;drawList();drawBody()}
   function applyMode(){root.classList.toggle("txview",!S.edit);const b=$("#tx-em",root);b.textContent=S.edit?"✅ Exit edit mode":"✏️ Edit mode";b.classList.toggle("pri",S.edit);root.classList.toggle("txediting",S.edit)}
@@ -597,7 +613,7 @@ function tTitle(t,lang){return lang==="th"&&t.titleTh?t.titleTh:t.titleEn}
 function tBody(t,lang){return lang==="zh"&&zhOf(t)?zhOf(t):lang==="th"&&t.th?t.th:t.en}
 function mountEmail(root){
   const S={q:"",air:"",type:"",aud:"",fav:false,page:1};
-  root.innerHTML=`<div class="tabs"><button class="btn on" data-etab="tpl">✉️ Email Templates</button><button class="btn" data-etab="telex">📠 Teletype Address (TELEX)</button></div><div id="tab-tpl"><div class="sec-head"><h2>${secH("email")}</h2><div class="right"><button class="btn pri sm" data-act="new">＋ New template</button><div class="seg" role="group" aria-label="Language"><button data-lang="en">EN</button><button data-lang="th">ไทย</button><button data-lang="zh">中文</button></div></div></div>
+  root.innerHTML=`<div class="tabs"><button class="btn on" data-etab="tpl">✉️ Email Templates</button><button class="btn" data-etab="telex">📠 Teletype Address (TELEX)</button></div><div id="tab-tpl"><div class="sec-head"><h2>${secH("email")}</h2><div class="right"><button class="btn pri sm adm" data-act="new">＋ New template</button><div class="seg" role="group" aria-label="Language"><button data-lang="en">EN</button><button data-lang="th">ไทย</button><button data-lang="zh">中文</button></div></div></div>
   <div class="filters"><input data-f="q" type="search" placeholder="Search topic, type or airline…"><select data-f="air"></select><select data-f="type"></select><button class="btn" data-act="clear">Clear</button></div>
   <div class="qf" id="tpl-qf"></div>
   <div class="row" style="justify-content:space-between"><div class="meta"></div>${perSel()}</div><div class="grid"></div><div class="pgw"></div></div><div id="tab-telex" hidden></div>`;
@@ -653,7 +669,7 @@ function viewTemplate(id){
   <div class="seg" style="margin:8px 0"><button data-ml="en" class="${lang==="en"?"on":""}">EN</button><button data-ml="th" class="${lang==="th"?"on":""}">ไทย</button><button data-ml="zh" class="${lang==="zh"?"on":""}">中文</button></div>
   <div id="mv"></div>
   <div class="lbl">Update history</div><ul class="hist" style="margin:0;padding-left:18px;font-size:13px">${(t.hist||[]).length?t.hist.slice().reverse().map(h=>`<li>${esc(h.d)} : ${esc(h.t)}</li>`).join(""):"<li>No history</li>"}</ul>
-  <div class="row" style="margin-top:14px;justify-content:flex-end"><button class="btn" data-favm>${t.fav?"★ In favorites":"☆ Add to favorites"}</button><button class="btn danger" data-del>🗑 Delete</button><button class="btn" data-edit>✏️ Edit</button></div>`,(bg,close)=>{
+  <div class="row" style="margin-top:14px;justify-content:flex-end"><button class="btn" data-favm>${t.fav?"★ In favorites":"☆ Add to favorites"}</button><button class="btn danger adm" data-del>🗑 Delete</button><button class="btn adm" data-edit>✏️ Edit</button></div>`,(bg,close)=>{
     let L=lang;
     const show=()=>{
       const body=tBody(t,L),noTh=L==="th"&&!t.th,noZh=L==="zh"&&!zhOf(t);
@@ -778,11 +794,11 @@ function openPolicyFile(f){
 }
 function filesHTML(c){
   const fl=c.files||[];if(!fl.length)return"";
-  return `<div class="pc-files">${fl.map(f=>`<span class="fchip" data-a="openfile" data-c="${c.id}" data-f="${f.id}" title="${esc(f.name)} · ${fmtSize(f.size)}">${f.thumb?`<img src="${f.thumb}" alt="">`:(f.type==="application/pdf"?"📄":"🖼")}<span>${esc(f.name)}</span><button class="fx" data-a="delfile" data-c="${c.id}" data-f="${f.id}" title="Remove attachment">✕</button></span>`).join("")}</div>`;
+  return `<div class="pc-files">${fl.map(f=>`<span class="fchip" data-a="openfile" data-c="${c.id}" data-f="${f.id}" title="${esc(f.name)} · ${fmtSize(f.size)}">${f.thumb?`<img src="${f.thumb}" alt="">`:(f.type==="application/pdf"?"📄":"🖼")}<span>${esc(f.name)}</span><button class="fx adm" data-a="delfile" data-c="${c.id}" data-f="${f.id}" title="Remove attachment">✕</button></span>`).join("")}</div>`;
 }
 function mountPolicy(root){
   const S={sel:null,q:""};
-  root.innerHTML=`<div class="sec-head"><h2>${secH("policy")}</h2><span class="hint" id="po-n"></span><div class="right"><button class="btn pri sm" data-a="addairline">➕ Add airline</button></div></div>
+  root.innerHTML=`<div class="sec-head"><h2>${secH("policy")}</h2><span class="hint" id="po-n"></span><div class="right"><button class="btn pri sm adm" data-a="addairline">➕ Add airline</button></div></div>
   <div class="edwrap"><div class="edside"><input id="po-q" type="search" autocomplete="off" placeholder="🔍 Find airline or policy text…"><div class="edlist"></div></div><div class="dirbody"></div></div><input type="file" id="po-f" multiple hidden accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp">`;
   const air=id=>DB.emaildir.find(a=>a.id===id);
   const matches=(a,q)=>{if(!q)return true;const p=policyFor(a).doc,h=[a.code,a.name,p.note,...p.cards.map(c=>c.title+" "+cardText(c))].join(" ").toLowerCase();return q.toLowerCase().split(/\s+/).every(w=>h.includes(w))};
@@ -807,15 +823,15 @@ function mountPolicy(root){
       const ch=String(c.text||"").split(/[,\n]/).map(s=>s.trim()).filter(Boolean);
       body=ch.length?ch.map(x=>`<span class="chip tag">${esc(x)}</span>`).join(""):`<div class="crumb">Nothing recorded — click ✏️ to add, e.g. VJ-PAX 4, TK-THY 02</div>`;
     }else body=nlHTML(c.text)||`<div class="crumb">Nothing recorded — click ✏️ to add</div>`;
-    return `<div class="pcard" data-cid="${c.id}" style="--cc:${col}"><div class="pc-h"><span class="grab" draggable="true" data-dk="pcard" data-cid="${c.id}" title="Drag to reorder">⠿</span><b>${esc(c.title)}</b><span class="pc-act"><button class="btn sm" data-a="attach" data-c="${c.id}" title="Attach PDF / image">📎</button><button class="btn sm" data-a="editcard" data-c="${c.id}" title="Edit">✏️</button><button class="btn sm danger" data-a="delcard" data-c="${c.id}" title="Delete card">🗑</button></span></div><div class="pc-b">${body}</div>${filesHTML(c)}</div>`;
+    return `<div class="pcard" data-cid="${c.id}" style="--cc:${col}"><div class="pc-h"><span class="grab adm" draggable="true" data-dk="pcard" data-cid="${c.id}" title="Drag to reorder">⠿</span><b>${esc(c.title)}</b><span class="pc-act"><button class="btn sm adm" data-a="attach" data-c="${c.id}" title="Attach PDF / image">📎</button><button class="btn sm adm" data-a="editcard" data-c="${c.id}" title="Edit">✏️</button><button class="btn sm danger adm" data-a="delcard" data-c="${c.id}" title="Delete card">🗑</button></span></div><div class="pc-b">${body}</div>${filesHTML(c)}</div>`;
   }
   function drawBody(){
     const body=$(".dirbody",root),a=air(S.sel);
-    if(!DB.emaildir.length){body.innerHTML=`<div class="empty"><p>No airline yet.</p><button class="btn pri" data-a="addairline">➕ Add airline</button></div>`;return}
+    if(!DB.emaildir.length){body.innerHTML=`<div class="empty"><p>No airline yet.</p><button class="btn pri adm" data-a="addairline">➕ Add airline</button></div>`;return}
     if(!a){body.innerHTML=`<div class="empty">Select an airline from the list.</div>`;return}
     const p=policyFor(a),d=p.doc;
     body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}${d.fsc?' <span class="chip au" title="Full Service Carrier">FSC</span>':""}</h3><span class="crumb">${d.cards.length} card(s) · drag ⠿ to reorder · everything is editable</span></div>
-      <span class="row"><button class="btn sm" data-a="editnote">📝 ${d.note?"Edit":"Add"} mention</button>${p.seed&&p.saved?`<button class="btn sm danger" data-a="restore" title="Discard edits and reload the data from the Excel file">↺ Restore from file</button>`:""}<button class="btn sm pri" data-a="addcard">＋ Add card</button></span></div>
+      <span class="row"><button class="btn sm adm" data-a="editnote">📝 ${d.note?"Edit":"Add"} mention</button>${p.seed&&p.saved?`<button class="btn sm danger adm" data-a="restore" title="Discard edits and reload the data from the Excel file">↺ Restore from file</button>`:""}<button class="btn sm pri adm" data-a="addcard">＋ Add card</button></span></div>
       ${xlinks(a.code,"policy")}
       ${d.note?`<div class="note" style="font-weight:600">📌 ${esc(d.note)}</div>`:""}
       ${p.seed||d.cards.length?"":`<div class="note">ℹ️ <b>${esc(a.code)}</b> has no policy yet. Click “＋ Add card” to start its policy.</div>`}
@@ -1036,7 +1052,7 @@ function normalize(){DB.templates.forEach(t=>{if(t.ord==null)t.ord=parseInt(Stri
 normalize();
 function cloudErr(e){CLOUD.err=e?.code||String(e);setCloud("error",CLOUD.err)}
 function putItem(col,o){o=clean(o);const i=DB[col].findIndex(x=>x.id===o.id);if(i>=0)DB[col][i]=o;else DB[col].push(o);save();refreshAll();if(fdb)fdb.collection(col).doc(o.id).set(o).catch(cloudErr)}
-function delItem(col,id){DB[col]=DB[col].filter(x=>x.id!==id);save();refreshAll();if(fdb)fdb.collection(col).doc(id).delete().catch(cloudErr)}
+function delItem(col,id){if(["templates","emaildir","policy","telex","home","docs","settings"].includes(col)&&!(typeof ADM!=="undefined"&&ADM.on)){toast("Administrator login required");return}DB[col]=DB[col].filter(x=>x.id!==id);save();refreshAll();if(fdb)fdb.collection(col).doc(id).delete().catch(cloudErr)}
 function batchOps(ops){if(!fdb)return;for(let i=0;i<ops.length;i+=400){const b=fdb.batch();ops.slice(i,i+400).forEach(o=>{const r=fdb.collection(o.col).doc(o.id);o.data?b.set(r,o.data):b.delete(r)});b.commit().catch(cloudErr)}}
 function replaceAll(d){const ops=[];COLS.forEach(c=>{const nw=(d[c]||[]).map(clean);DB[c].forEach(x=>{if(!nw.some(y=>y.id===x.id))ops.push({col:c,id:x.id})});nw.forEach(x=>ops.push({col:c,id:x.id,data:x}));DB[c]=nw});normalize();save();batchOps(ops);render()}
 function resetTemplates(){const sd=clean(SEED),ops=[];DB.templates.forEach(x=>{if(!sd.some(y=>y.id===x.id))ops.push({col:"templates",id:x.id})});sd.forEach(x=>ops.push({col:"templates",id:x.id,data:x}));DB.templates=sd;normalize();save();batchOps(ops);render()}
@@ -1121,6 +1137,25 @@ const S_COLORS={Black:"#1e293b",Silver:"#94a3b8",Red:"#ef4444",Blue:"#3b82f6",Ye
 const colorHex=n=>S_COLORS[Object.keys(S_COLORS).find(k=>k.toLowerCase()===String(n||"").trim().toLowerCase())]||"#94a3b8";
 const nowStr=()=>fmt(new Date().toISOString());
 const S_STATUS=["Pending","Forwarded"];
+const J_STATUS=["Pending","Done"];
+/* Office/JAAT room: a bag may stay max 7 days, but must be taken out on day 5 counted from the day it entered */
+const DAYMS=864e5,JAAT_OUT=5,JAAT_MAX=7;
+const dnum=s=>{const m=/^(\d{4})-(\d\d)-(\d\d)/.exec(s||"");return m?Date.UTC(+m[1],+m[2]-1,+m[3])/DAYMS:NaN};
+const addDays=(s,n)=>new Date((dnum(s)+n)*DAYMS).toISOString().slice(0,10);
+const zoneOf=r=>r.zone==="jaat"?"jaat":"tbt";
+const jEnter=r=>r.enterDate||String(r.createdAt||"").slice(0,10);
+const jDue=r=>r.dueDate||addDays(jEnter(r),JAAT_OUT-1);
+const jAge=r=>dnum(todayStr())-dnum(jEnter(r))+1; /* day number: entering day = day 1 (enter 23 Oct -> take out 27 Oct) */
+const jTrig=r=>Math.min(dnum(jDue(r)),dnum(jEnter(r))+JAAT_OUT-1);
+const jState=r=>r.status==="Done"?"done":jAge(r)>=JAAT_MAX?"over":dnum(todayStr())>=jTrig(r)?"due":"ok";
+const jDueList=()=>DB.sorting.filter(r=>!isMockRec(r)&&zoneOf(r)==="jaat"&&r.status==="Pending"&&jState(r)!=="ok").sort((a,b)=>jAge(b)-jAge(a));
+function jBadge(r){
+  const s=jState(r),a=jAge(r);
+  if(s==="done")return `<span class="jb jb-done">✔ Taken out${r.outDate?" · "+esc(r.outDate):""}</span>`;
+  if(s==="over")return `<span class="jb jb-over">⛔ Day ${a} · over ${JAAT_MAX}-day limit</span>`;
+  if(s==="due")return `<span class="jb jb-due">⚠ Day ${a} · take out now</span>`;
+  const left=jTrig(r)-dnum(todayStr());return `<span class="jb jb-ok">Day ${a} · ${left} day${left===1?"":"s"} to take-out</span>`;
+}
 const LEGACY_CFG={apiKey:"AIzaSyBWKh8DEoHCtWkkq--jyCCHDnrtsDp-DgM",authDomain:"sortingtbt-b32b7.firebaseapp.com",projectId:"sortingtbt-b32b7",storageBucket:"sortingtbt-b32b7.firebasestorage.app",messagingSenderId:"239038388981",appId:"1:239038388981:web:8024f82f225e80b012c3bc"};
 const isMockRec=r=>/^REC-100[12]$/.test(r.id);
 const lastComment=r=>{const c=(r.history||[]).filter(h=>/^(Comment|Note):/.test(h.text));return{n:c.length,t:c.length?c[c.length-1].text.replace(/^(Comment|Note):\s*/,""):""}};
@@ -1189,7 +1224,7 @@ function code128SVG(text,h){
 }
 const S_LOCS=["JAAT Room","BFS LL Office","Belt 23","Sorting Area/TBT","Other"];
 const locText=r=>r.foundLoc||"-";
-const TAG_AIR_DEF=[["245","0B","BBN Airlines Indonesia",1],["997","BG","Biman Bangladesh Airlines",1],["474","NT","Binter Canarias",1],["404","BZ","Blue Bird Airways",1],["930","OB","BoA Boliviana de Aviacion",1],["276","TF","Braathens Regional Airways",1],["125","BA","British Airways",1],["082","SN","Brussels Airlines",1],["623","FB","Bulgaria Air",1],["396","BF","French Bee",1],["126","GA","Garuda Indonesia",1],["593","XY","Flynas",1],["130","5F","FLYONE",1],["944","ZQ","German Airways",1],["402","G6","GlobalX",1],["666","FU","Fuzhou Airlines",1],["606","A9","Georgian Airways",1],["744","X7","Challenge Airlines (BE)",1],["700","5C","Challenge Airlines (IL)",1],["811","EU","Chengdu Airlines",1],["297","CI","China Airlines",1],["112","CK","China Cargo Airlines",1],["781","MU","China Eastern",1],["987","G5","China Express Airlines",1],["804","CF","China Postal Airlines",1],["784","CZ","China Southern Airlines",1],["822","KN","China United Airlines",1],["525","B7","UNI AIR",1],["676","VO","Universal Air",1],["886","UQ","Urumqi Air",1],["016","UA","United Airlines",1],["406","5X","UPS Airlines",1],["779","BS","US-Bangla Airlines",1],["298","UT","UTair",1],["250","HY","Uzbekistan Airways",1],["978","VJ","Vietjet",1],["738","VN","Vietnam Airlines",1],["731","MF","Xiamen Airlines",1],["040","QC","Camair-Co",1],["124","AH","Air Algérie",1],["514","G9","Air Arabia",1],["465","KC","Air Astana",1],["610","2A","Air Astra",1],["318","CC","Air Atlanta Icelandic",1],["760","UU","Air Austral",1],["657","BT","Air Baltic",1],["636","BP","Air Botswana",1],["381","SM","Air Cairo",1],["190","TY","Air Caledonie",1],["730","GT","Air Guilin",1],["288","LD","Air Hong Kong",1],["236","IX","Air India Express",1],["120","JS","Air Koryo",1],["675","NX","Air Macau",1],["239","MK","Air Mauritius",1],["400","4O","Air Montenegro",1],["086","NZ","Air New Zealand",1],["656","PX","Air Niugini",1],["643","KM","KM Malta Airlines",1],["180","KE","Korean Air",1],["833","KY","Kunming Airlines",1],["229","KU","Kuwait Airways",1],["002","B0","La Compagnie",1],["068","TM","LAM",1],["627","QV","Lao Airlines",1],["957","JJ","LATAM Airlines Brasil",1],["035","4C","LATAM Airlines Colombia",1],["462","XL","LATAM Airlines Ecuador",1],["806","7C","Jeju Air",1],["279","B6","JetBlue",1],["718","LJ","Jin Air",1],["151","R5","Jordan Aviation",1],["018","HO","Juneyao Airlines",1],["384","RQ","Kam Air",1],["448","VL","Lufthansa City Airlines",1],["129","MP","Martinair Cargo",1],["865","M7","MasAir",1],["495","L6","Mauritania Airlines International",1],["734","4M","Mavi Gök Airlines",1],["076","ME","MEA",1],["289","OM","MIAT Mongolian Airlines",1],["716","MB","MNG Airlines",1],["599","8M","Myanmar Airways International",1],["665","UB","Myanmar National Airlines",1],["416","N8","National Airlines",1],["123","ON","Nauru Airlines",1],["866","BK","Okay Airways",1],["050","OA","Olympic Air",1],["910","WY","Oman Air",1],["559","OF","Overland Airways",1],["214","PK","Pakistan International Airlines",1],["211","2P","PAL Express",1],["445","ZP","Paranair",1],["505","UF","PAS",1],["624","PC","Pegasus Airlines",1],["415","HP","PopulAir",1],["451","PD","Porter Airlines",1],["408","M4","Poste Air Cargo",1],["031","PW","Precision Air",1],["433","P6","Privilege Style",1],["659","P0","Proflight Zambia",1],["912","QW","Qingdao Airlines",1],["122","RX","Riyadh Air",1],["195","FV","Rossiya Airlines",1],["147","AT","Royal Air Maroc",1],["672","BI","Royal Brunei",1],["512","RJ","Royal Jordanian",1],["299","DR","Ruili Airlines",1],["701","WF","Wideroe",1],["825","2W","World2Fly",1],["860","YG","YTO Cargo Airlines",1],["832","GB","ABX Air",1],["390","A3","Aegean Airlines",1],["053","EI","Aer Lingus",1],["970","M0","Aero Mongolia",1],["555","SU","Aeroflot",1],["419","XZ","Aeroitalia",1],["044","AR","Aerolineas Argentinas",1],["139","AM","Aeromexico",1],["394","AW","Africa World Airlines",1],["188","K6","Air Cambodia",1],["014","AC","Air Canada",1],["427","TX","Air Caraibes",1],["856","9H","Air Changan",1],["999","CA","Air China",1],["146","XK","Air Corsica",1],["101","EN","Air Dolomiti",1],["996","UX","Air Europa",1],["057","AF","Air France",1],["631","GL","Air Greenland",1],["694","YW","Air Nostrum",1],["710","P4","Air Peace",1],["350","YP","Air Premia",1],["490","HC","Air Senegal",1],["115","JU","Air Serbia",1],["061","HM","Air Seychelles",1],["135","VT","Air Tahiti",1],["244","TN","Air Tahiti Nui",1],["197","TC","Air Tanzania",1],["649","TS","Air Transat",1],["264","NF","Air Vanuatu",1],["063","SB","Aircalin",1],["521","RE","Airhub Airlines",1],["330","D4","Airline GEO SKY",1],["749","4Z","Airlink",1],["994","KJ","AIRZETA",1],["204","VF","AJet",1],["516","QP","Akasa Air",1],["027","AS","Alaska Airlines",1],["110","UJ","AlMasria Universal Airlines",1],["948","8R","Amelia",1],["001","AA","American Airlines",1],["205","NH","ANA",1],["275","GP","APG Airlines",1],["181","DM","Arajet",1],["238","IZ","Arkia Israeli Airlines",1],["988","OZ","Asiana Airlines",1],["032","KP","ASKY",1],["756","3V","ASL Airlines Belgium",1],["558","5O","ASL Airlines France",1],["914","5H","ASL Airlines Ireland",1],["767","RC","Atlantic Airways",1],["369","5Y","Atlas Air",1],["257","OS","Austrian",1],["134","AV","Avianca",1],["133","LR","Avianca Costa Rica",1],["547","2K","Avianca Ecuador",1],["771","J2","Azerbaijan Airlines",1],["331","S4","Azores Airlines",1],["577","AD","Azul Brazilian Airlines",1],["367","J4","Badr Airlines",1],["111","UP","Bahamasair",1],["926","QH","Bamboo Airways",1],["829","PG","Bangkok Airways",1],["938","ID","Batik Air",1],["816","OD","Batik Air Malaysia",1],["386","B5","BBN Airlines",1],["898","JD","Capital Airlines",1],["489","W8","Cargojet Airways",1],["172","CV","Cargolux",1],["106","BW","Caribbean Airlines",1],["021","V3","Carpatair",1],["160","CX","Cathay Pacific",1],["203","5J","Cebu Pacific",1],["225","5Z","CemAir",1],["581","CS","Chair Airlines",1],["980","CE","Chalair",1],["629","QG","Citilink",1],["689","WX","CityJet",1],["246","VE","Clic Air",1],["881","DE","Condor",1],["230","CM","COPA Airlines",1],["395","XC","Corendon Airlines",1],["923","SS","Corsair International",1],["831","OU","Croatia Airlines",1],["136","CU","Cubana",1],["078","CY","Cyprus Airways",1],["467","T3","Eastern Airways",1],["945","WK","Edelweiss Air",1],["077","MS","Egyptair",1],["114","LY","EL AL",1],["355","E7","Estafeta Cargo",1],["071","ET","Ethiopian Airlines",1],["607","EY","Etihad Airways",1],["551","YU","EuroAtlantic Airways",1],["615","QY","European Air Transport",1],["104","EW","Eurowings",1],["176","EK","Emirates",1],["127","G3","GOL Linhas Aereas",1],["283","HB","Greater Bay Airlines",1],["072","GF","Gulf Air",1],["872","GX","GX Airlines",1],["880","HU","Hainan Airlines",1],["173","HA","Hawaiian Airlines",1],["836","NS","Hebei Airlines",1],["770","EO","Ikar",1],["312","6E","IndiGo",1],["096","IR","Iran Air",1],["491","B9","Iran Airtour Airline",1],["815","EP","Iran Aseman Airlines",1],["818","6H","Israir",1],["055","AZ","ITA Airways",1],["131","JL","Japan Airlines",1],["353","NU","Japan Transocean Air",1],["486","J9","Jazeera Airways",1],["891","GJ","Loong Air",1],["080","LO","LOT Polish Airlines",1],["859","8L","Lucky Air",1],["220","LH","Lufthansa",1],["020","LH","Lufthansa Cargo",1],["683","CL","Lufthansa CityLine",1],["149","LG","Luxair",1],["258","MD","Madagascar Airlines",1],["232","MH","Malaysia Airlines",1],["803","AE","Mandarin Airlines",1],["703","NO","Neos",1],["477","NE","Nesma Airlines",1],["808","7H","New Pacific Airlines",1],["325","NP","Nile Air",1],["933","KZ","Nippon Cargo Airlines",1],["596","DD","Nok Air",1],["476","Y7","NordStar",1],["216","N4","Nordwind Airlines",1],["796","BJ","Nouvelair",1],["362","7R","RusLine",1],["459","WB","RwandAir",1],["421","S7","S7 Airlines",1],["640","FA","Safair",1],["960","OV","Salam Air",1],["117","SK","SAS",1],["737","SP","SATA Air Acores",1],["065","SV","Saudi Arabian Airlines",1],["655","DV","SCAT Airlines",1],["668","TR","Scoot",1],["193","IE","Solomon Airlines",1],["413","SZ","Somon Air",1],["083","SA","South African Airways",1],["526","WN","Southwest Airlines",1],["263","2S","Southwind Airlines",1],["775","SG","SpiceJet",1],["603","UL","SriLankan Airlines",1],["189","JX","STARLUX Airlines",1],["337","SY","Sun Country Airlines",1],["564","XQ","SunExpress",1],["871","Y8","Suparna Airlines",1],["221","WT","Swiftair",1],["724","LX","SWISS",1],["070","RB","Syrianair",1],["118","DT","TAAG Angola Airlines",1],["202","TA","TACA",1],["411","5U","TAG Airlines",1],["722","TW","T'way Air",1],["281","RO","TAROM",1],["217","TG","Thai Airways International",1],["310","SL","Thai Lion Air",1],["826","GS","Tianjin Airlines",1],["088","TV","Tibet Airlines",1],["617","X3","TUIfly",1],["199","TU","Tunisair",1],["235","TK","Turkish Airlines",1],["034","U8","TUS Airways",1],["932","VS","Virgin Atlantic",1],["795","VA","Virgin Australia",1],["678","2Z","Voepass Linhas Aereas",1],["036","Y4","Volaris",1],["712","V7","Volotea",1],["030","VY","Vueling",1],["460","EB","Wamos Air",1],["847","PN","West Air",1],["838","WS","WestJet",1],["097","WI","White coloured by you",1],["081","QF","Qantas Airways",1],["157","QR","Qatar Airways",1],["618","SQ","Singapore Airlines",1],["706","KQ","Kenya Airways",1],["260","FJ","Fiji Airways",1],["479","ZH","Shenzhen Airlines",1],["876","3U","Sichuan Airlines",1],["192","PY","Surinam Airways",1],["605","H2","SKY Airline",1],["098","AI","Air India",1],["074","KL","KLM Royal Dutch Airlines",1],["064","OK","Czech Airlines (CSA)",0],["006","DL","Delta Air Lines",0],["695","BR","EVA Air",0],["023","FX","FedEx Express",0],["105","AY","Finnair",0],["141","FZ","flydubai",0],["388","4U","Germanwings",0],["851","HX","Hong Kong Airlines",0],["128","UO","Hong Kong Express Airways",0],["075","IB","Iberia",0],["360","EVE","Iberojet",0],["108","FI","Icelandair",0],["029","JQ","Jetstar Airways",0],["272","K4","Kalitta Air",0],["544","LP","LATAM Airlines Peru",0],["682","LM","LOGINAIR",0],["079","PR","Philippine Airlines",0],["324","SC","Shandong Airlines",0],["774","FM","Shanghai Airlines",0],["501","7L","Silk Way West Airlines",0],["797","QS","Smartwings",0],["487","NK","Spirit Airlines",0],["089","9C","Spring Airlines",0],["200","SD","Sudan Airways",0],["696","VR","TACV Cabo Verde Airlines",0],["269","EQ","TAME Linea Aerea del Ecuador",0],["047","TP","TAP Air Portugal",0],["309","KR","Cambodia Airways",0],["634","KB","Drukair - Royal Bhutan",0],["953","RY","Jiangxi Air",0],["890","JR","Joy Air",0],["746","PQ","SkyUp Airlines",0],["212","DK","Sunclass Airlines",0],["515","SF","Tassili Airlines",0],["153","9N","Tropic Air",0]];
+const TAG_AIR_DEF=[["079","PR","Philippine Airlines",1],["663","PU","Plus Ultra",1],["403","PO","Polar Air Cargo",1],["921","O3","SF Airlines",1],["324","SC","Shandong Airlines",1],["774","FM","Shanghai Airlines",1],["479","ZH","Shenzhen Airlines",1],["876","3U","Sichuan Airlines",1],["501","7L","Silk Way West Airlines",1],["618","SQ","Singapore Airlines",1],["605","H2","SKY Airline",1],["633","GQ","Sky express",1],["010","PQ","SkyUp Airlines",1],["316","5N","Smartavia",1],["797","QS","Smartwings",1],["193","IE","Solomon Airlines",1],["413","SZ","Somon Air",1],["083","SA","South African Airways",1],["526","WN","Southwest Airlines",1],["263","2S","Southwind Airlines",1],["775","SG","SpiceJet",1],["603","UL","SriLankan Airlines",1],["189","JX","STARLUX Airlines",1],["337","SY","Sun Country Airlines",1],["564","XQ","SunExpress",1],["871","Y8","Suparna Airlines",1],["221","WT","Swiftair",1],["724","LX","SWISS",1],["070","RB","Syrianair",1],["411","5U","TAG Airlines",1],["768","TI","Tailwind Airlines",1],["047","TP","TAP Air Portugal",1],["281","RO","TAROM",1],["217","TG","Thai Airways International",1],["310","SL","Thai Lion Air",1],["826","GS","Tianjin Airlines",1],["722","TW","Trinity Airways",1],["617","X3","TUIfly",1],["199","TU","Tunisair",1],["074","KL","KLM",1],["643","KM","KM Malta Airlines",1],["180","KE","Korean Air",1],["833","KY","Kunming Airlines",1],["229","KU","Kuwait Airways",1],["002","B0","La Compagnie",1],["068","TM","LAM",1],["627","QV","Lao Airlines",1],["462","XL","LATAM Airlines Ecuador",1],["045","LA","LATAM Airlines Group",1],["692","PZ","LATAM Airlines Paraguay",1],["544","LP","LATAM Airlines Peru",1],["549","M3","LATAM Cargo Brasil",1],["145","UC","LATAM Cargo Chile",1],["441","FC","Link Airways",1],["990","JT","Lion Air",1],["682","LM","Loganair",1],["891","GJ","Loong Air",1],["815","EP","Iran Aseman Airlines",1],["818","6H","Israir",1],["055","AZ","ITA Airways",1],["131","JL","Japan Airlines",1],["353","NU","Japan Transocean Air",1],["486","J9","Jazeera Airways",1],["619","JG","JD Airlines",1],["806","7C","Jeju Air",1],["973","JA","JetSMART Chile",1],["984","J6","JetSMART Colombia",1],["981","JZ","JetSMART Peru",1],["718","LJ","Jin Air",1],["151","R5","Jordan Aviation",1],["018","HO","Juneyao Airlines",1],["384","RQ","Kam Air",1],["706","KQ","Kenya Airways",1],["880","HU","Hainan Airlines",1],["173","HA","Hawaiian Airlines",1],["836","NS","Hebei Airlines",1],["769","H9","Himalaya Airlines",1],["128","UO","Hong Kong Express Airways",1],["075","IB","Iberia",1],["182","6O","Iberojet",1],["783","E9","Iberojet Airlines",1],["704","QI","Ibom Air",1],["108","FI","Icelandair",1],["770","EO","Ikar",1],["312","6E","IndiGo",1],["096","IR","Iran Air",1],["491","B9","Iran Airtour Airline",1],["560","F3","flyadeal",1],["164","FS","FlyArystan",1],["141","FZ","flydubai",1],["277","J7","FlyGabon",1],["593","XY","Flynas",1],["130","5F","FLYONE",1],["396","BF","French Bee",1],["422","F9","Frontier Airlines",1],["606","A9","Georgian Airways",1],["944","ZQ","German Airways",1],["059","GW","GetJet Airlines",1],["698","GE","Global Airways and Lift",1],["402","G6","GlobalX",1],["127","G3","GOL Linhas Aereas",1],["283","HB","Greater Bay Airlines",1],["072","GF","Gulf Air",1],["872","GX","GX Airlines",1],["169","HR","Hahnair",1],["078","CY","Cyprus Airways",1],["006","DL","Delta Air Lines",1],["936","D0","DHL Air",1],["155","ES","DHL Air (Bahrain)",1],["693","4Y","Discover Airlines",1],["515","SF","Domestic Airlines",1],["787","KB","Drukair - Royal Bhutan Airlines",1],["839","ZE","Eastar Jet",1],["104","EW","Eurowings",1],["695","BR","EVA Air",1],["334","FN","Fastjet Zimbabwe",1],["023","FX","FedEx Express",1],["260","FJ","Fiji Airways",1],["105","AY","Finnair",1],["365","W2","FlexFlight",1],["017","IF","Fly Baghdad",1],["245","0B","BBN Airlines Indonesia",1],["997","BG","Biman Bangladesh Airlines",1],["474","NT","Binter Canarias",1],["404","BZ","Blue Bird Airways",1],["930","OB","BoA Boliviana de Aviacion",1],["276","TF","Braathens Regional Airways",1],["125","BA","British Airways",1],["082","SN","Brussels Airlines",1],["623","FB","Bulgaria Air",1],["126","GA","Garuda Indonesia",1],["666","FU","Fuzhou Airlines",1],["744","X7","Challenge Airlines (BE)",1],["700","5C","Challenge Airlines (IL)",1],["811","EU","Chengdu Airlines",1],["297","CI","China Airlines",1],["112","CK","China Cargo Airlines",1],["781","MU","China Eastern",1],["987","G5","China Express Airlines",1],["804","CF","China Postal Airlines",1],["784","CZ","China Southern Airlines",1],["822","KN","China United Airlines",1],["525","B7","UNI AIR",1],["676","VO","Universal Air",1],["886","UQ","Urumqi Air",1],["016","UA","United Airlines",1],["406","5X","UPS Airlines",1],["779","BS","US-Bangla Airlines",1],["298","UT","UTair",1],["250","HY","Uzbekistan Airways",1],["978","VJ","Vietjet",1],["738","VN","Vietnam Airlines",1],["731","MF","Xiamen Airlines",1],["040","QC","Camair-Co",1],["124","AH","Air Algérie",1],["514","G9","Air Arabia",1],["465","KC","Air Astana",1],["610","2A","Air Astra",1],["318","CC","Air Atlanta Icelandic",1],["760","UU","Air Austral",1],["657","BT","Air Baltic",1],["636","BP","Air Botswana",1],["381","SM","Air Cairo",1],["190","TY","Air Caledonie",1],["730","GT","Air Guilin",1],["288","LD","Air Hong Kong",1],["236","IX","Air India Express",1],["120","JS","Air Koryo",1],["675","NX","Air Macau",1],["239","MK","Air Mauritius",1],["400","4O","Air Montenegro",1],["086","NZ","Air New Zealand",1],["656","PX","Air Niugini",1],["957","JJ","LATAM Airlines Brasil",1],["035","4C","LATAM Airlines Colombia",1],["279","B6","JetBlue",1],["448","VL","Lufthansa City Airlines",1],["129","MP","Martinair Cargo",1],["865","M7","MasAir",1],["495","L6","Mauritania Airlines International",1],["734","4M","Mavi Gök Airlines",1],["076","ME","MEA",1],["289","OM","MIAT Mongolian Airlines",1],["716","MB","MNG Airlines",1],["599","8M","Myanmar Airways International",1],["665","UB","Myanmar National Airlines",1],["416","N8","National Airlines",1],["123","ON","Nauru Airlines",1],["866","BK","Okay Airways",1],["050","OA","Olympic Air",1],["910","WY","Oman Air",1],["559","OF","Overland Airways",1],["214","PK","Pakistan International Airlines",1],["211","2P","PAL Express",1],["445","ZP","Paranair",1],["505","UF","PAS",1],["624","PC","Pegasus Airlines",1],["415","HP","PopulAir",1],["451","PD","Porter Airlines",1],["408","M4","Poste Air Cargo",1],["031","PW","Precision Air",1],["433","P6","Privilege Style",1],["659","P0","Proflight Zambia",1],["912","QW","Qingdao Airlines",1],["122","RX","Riyadh Air",1],["195","FV","Rossiya Airlines",1],["147","AT","Royal Air Maroc",1],["672","BI","Royal Brunei",1],["512","RJ","Royal Jordanian",1],["299","DR","Ruili Airlines",1],["701","WF","Wideroe",1],["825","2W","World2Fly",1],["860","YG","YTO Cargo Airlines",1],["832","GB","ABX Air",1],["390","A3","Aegean Airlines",1],["053","EI","Aer Lingus",1],["970","M0","Aero Mongolia",1],["555","SU","Aeroflot",1],["419","XZ","Aeroitalia",1],["044","AR","Aerolineas Argentinas",1],["139","AM","Aeromexico",1],["394","AW","Africa World Airlines",1],["188","K6","Air Cambodia",1],["014","AC","Air Canada",1],["427","TX","Air Caraibes",1],["856","9H","Air Changan",1],["999","CA","Air China",1],["146","XK","Air Corsica",1],["101","EN","Air Dolomiti",1],["996","UX","Air Europa",1],["057","AF","Air France",1],["631","GL","Air Greenland",1],["694","YW","Air Nostrum",1],["710","P4","Air Peace",1],["350","YP","Air Premia",1],["490","HC","Air Senegal",1],["115","JU","Air Serbia",1],["061","HM","Air Seychelles",1],["135","VT","Air Tahiti",1],["244","TN","Air Tahiti Nui",1],["197","TC","Air Tanzania",1],["649","TS","Air Transat",1],["264","NF","Air Vanuatu",1],["063","SB","Aircalin",1],["521","RE","Airhub Airlines",1],["330","D4","Airline GEO SKY",1],["749","4Z","Airlink",1],["994","KJ","AIRZETA",1],["204","VF","AJet",1],["516","QP","Akasa Air",1],["027","AS","Alaska Airlines",1],["110","UJ","AlMasria Universal Airlines",1],["948","8R","Amelia",1],["001","AA","American Airlines",1],["205","NH","ANA",1],["275","GP","APG Airlines",1],["181","DM","Arajet",1],["238","IZ","Arkia Israeli Airlines",1],["988","OZ","Asiana Airlines",1],["032","KP","ASKY",1],["756","3V","ASL Airlines Belgium",1],["558","5O","ASL Airlines France",1],["914","5H","ASL Airlines Ireland",1],["767","RC","Atlantic Airways",1],["369","5Y","Atlas Air",1],["257","OS","Austrian",1],["134","AV","Avianca",1],["133","LR","Avianca Costa Rica",1],["547","2K","Avianca Ecuador",1],["771","J2","Azerbaijan Airlines",1],["331","S4","Azores Airlines",1],["577","AD","Azul Brazilian Airlines",1],["367","J4","Badr Airlines",1],["111","UP","Bahamasair",1],["926","QH","Bamboo Airways",1],["829","PG","Bangkok Airways",1],["938","ID","Batik Air",1],["816","OD","Batik Air Malaysia",1],["386","B5","BBN Airlines",1],["898","JD","Capital Airlines",1],["489","W8","Cargojet Airways",1],["172","CV","Cargolux",1],["106","BW","Caribbean Airlines",1],["021","V3","Carpatair",1],["160","CX","Cathay Pacific",1],["203","5J","Cebu Pacific",1],["225","5Z","CemAir",1],["581","CS","Chair Airlines",1],["980","CE","Chalair",1],["629","QG","Citilink",1],["689","WX","CityJet",1],["246","VE","Clic Air",1],["881","DE","Condor",1],["230","CM","COPA Airlines",1],["395","XC","Corendon Airlines",1],["923","SS","Corsair International",1],["831","OU","Croatia Airlines",1],["136","CU","Cubana",1],["467","T3","Eastern Airways",1],["945","WK","Edelweiss Air",1],["077","MS","Egyptair",1],["114","LY","EL AL",1],["355","E7","Estafeta Cargo",1],["071","ET","Ethiopian Airlines",1],["607","EY","Etihad Airways",1],["551","YU","EuroAtlantic Airways",1],["615","QY","European Air Transport",1],["176","EK","Emirates",1],["080","LO","LOT Polish Airlines",1],["859","8L","Lucky Air",1],["220","LH","Lufthansa",1],["020","LH","Lufthansa Cargo",1],["683","CL","Lufthansa CityLine",1],["149","LG","Luxair",1],["258","MD","Madagascar Airlines",1],["232","MH","Malaysia Airlines",1],["803","AE","Mandarin Airlines",1],["703","NO","Neos",1],["477","NE","Nesma Airlines",1],["808","7H","New Pacific Airlines",1],["325","NP","Nile Air",1],["933","KZ","Nippon Cargo Airlines",1],["596","DD","Nok Air",1],["476","Y7","NordStar",1],["216","N4","Nordwind Airlines",1],["796","BJ","Nouvelair",1],["362","7R","RusLine",1],["459","WB","RwandAir",1],["421","S7","S7 Airlines",1],["640","FA","Safair",1],["960","OV","Salam Air",1],["117","SK","SAS",1],["737","SP","SATA Air Acores",1],["065","SV","Saudi Arabian Airlines",1],["655","DV","SCAT Airlines",1],["668","TR","Scoot",1],["118","DT","TAAG Angola Airlines",1],["202","TA","TACA",1],["088","TV","Tibet Airlines",1],["235","TK","Turkish Airlines",1],["034","U8","TUS Airways",1],["932","VS","Virgin Atlantic",1],["795","VA","Virgin Australia",1],["678","2Z","Voepass Linhas Aereas",1],["036","Y4","Volaris",1],["712","V7","Volotea",1],["030","VY","Vueling",1],["460","EB","Wamos Air",1],["847","PN","West Air",1],["838","WS","WestJet",1],["097","WI","White coloured by you",1],["081","QF","Qantas Airways",1],["157","QR","Qatar Airways",1],["192","PY","Surinam Airways",1],["098","AI","Air India",1],["851","HX","Hong Kong Airlines",0]];
 function tagAirMaps(){
   const cust=((DB.settings||[]).find(x=>x.id==="tagair")||{}).list||[],m={},byD={};
   TAG_AIR_DEF.forEach(a=>{m[a[0]]={p:a[0],d:a[1],n:a[2],v:a[3]}});
@@ -1223,24 +1258,24 @@ function openTagAir(){
 }
 function slipHTML(r,photo){
   const hist=(r.history||[]).map(h=>`<div class="hi"><span>${esc(h.time)}:</span> ${esc(h.text)}</div>`).join("")||"<i>No notes available.</i>";
-  const bg=r.status==="Pending"?"#dbeafe":"#fee2e2";
+  const bg=r.status==="Pending"?"#dbeafe":r.status==="Done"?"#d1fae5":"#fee2e2",jz=zoneOf(r)==="jaat";
   return `<div class="sl-wrap" style="width:794px"><style>${SLIP_CSS}</style><div class="sl">
-  <div class="hd"><div><h1>BANGKOK AIRPORT (BKK)</h1><h2>SORTING AREA / TBT - BAGGAGE TRANSFER SLIP</h2><div class="mono" style="font-size:9px;color:#64748b">DOC REF: BKK-TBT-LOG-${esc(String(r.id).replace("REC-",""))}</div></div>
+  <div class="hd"><div><h1>BANGKOK AIRPORT (BKK)</h1><h2>${jz?"OFFICE / JAAT ROOM - BAGGAGE RECORD SLIP":"SORTING AREA / TBT - BAGGAGE TRANSFER SLIP"}</h2><div class="mono" style="font-size:9px;color:#64748b">DOC REF: BKK-${jz?"JAAT":"TBT"}-LOG-${esc(String(r.id).replace("REC-",""))}</div></div>
    <div style="text-align:right"><span class="badge" style="background:${bg}">${esc(r.status)}</span><div style="font-size:9px;color:#64748b;margin-top:4px">Printed: ${nowStr()}</div></div></div>
   <div class="tagbox"><div><div class="lb">PRIMARY BAGGAGE TAG NUMBER</div><div class="tag mono">${esc(tIata(r)||r.tagNumber)}</div>${tIata(r)?`<div class="mono" style="font-size:10px;color:#475569">10-digit: ${esc(r.tagNumber)}</div>`:""}</div><div style="background:#fff;padding:2px 0">${code128SVG(r.tagNumber,46)}<div class="mono" style="font-size:10px;text-align:center;font-weight:700;letter-spacing:1px">${esc(r.tagNumber)}</div></div></div>
   <div class="mt g2"><div><div class="lb">FLIGHT &amp; DATE</div><div class="v">${esc(r.flightNumber)} (${esc(r.flightDate)})</div></div><div><div class="lb">AHL CASE / CONTACT EMAIL</div><div class="v">${esc(r.ahlCase)}</div></div>
-   <div><div class="lb">BAGGAGE FOUND LOCATION</div><div class="v">${esc(locText(r))}</div></div><div><div class="lb">BAG COLOR</div><div class="v"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #94a3b8;background:${colorHex(r.color)};vertical-align:-1px"></span> ${esc(r.color)}</div></div><div><div class="lb">RECORD CREATION TIMESTAMP</div><div class="mono">${esc(r.createdAt)}</div></div></div>
+   <div><div class="lb">BAGGAGE FOUND LOCATION</div><div class="v">${esc(locText(r))}</div></div><div><div class="lb">BAG COLOR</div><div class="v"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #94a3b8;background:${colorHex(r.color)};vertical-align:-1px"></span> ${esc(r.color)}</div></div><div><div class="lb">RECORD CREATION TIMESTAMP</div><div class="mono">${esc(r.createdAt)}</div></div>${jz?`<div><div class="lb">ENTER DATE → DUE DATE (TAKE OUT)</div><div class="v">${esc(jEnter(r))} → ${esc(jDue(r))}</div></div><div><div class="lb">TAKEN OUT OF JAAT ROOM</div><div class="v">${r.outDate?esc(r.outDate):"Not yet"}</div></div>`:""}</div>
   <div class="g2" style="margin-bottom:14px"><div class="box"><div class="lb" style="margin-bottom:6px">ATTACHED BAGGAGE PHOTO</div>${photo?`<img src="${photo}">`:`<div style="text-align:center;color:#94a3b8;padding:40px 0;font-weight:600">No Image Attachment Provided</div>`}</div>
    <div class="box"><div class="lb" style="margin-bottom:6px">COMMENTS &amp; OPERATIONAL AUDIT TRAIL</div>${hist}</div></div>
   <div class="sig"><div><div class="line"></div><b>Handover Officer Signature</b><div style="font-size:9px;color:#64748b">Bangkok Airport Sorting Area / TBT Staff</div></div><div><div class="line"></div><b>Receiving Representative Signature</b><div style="font-size:9px;color:#64748b">Airlines Lost &amp; Found / AHL Officer</div></div></div>
   <div class="ft"><span>Official Suvarnabhumi Airport Operational Document</span><span>Published by Kongkit</span></div></div></div>`;
 }
-function summaryHTML(rs){
-  const p=rs.filter(r=>r.status==="Pending").length,f=rs.filter(r=>r.status==="Forwarded").length;
+function summaryHTML(rs,z){
+  const jz=z==="jaat",p=rs.filter(r=>r.status==="Pending").length,f=rs.filter(r=>r.status===(jz?"Done":"Forwarded")).length;
   return `<div class="sl-wrap" style="width:1123px"><style>${SLIP_CSS}</style><div class="sl">
-  <div class="hd" style="align-items:center"><h1 style="font-size:16px">BANGKOK AIRPORT (BKK) SORTING AREA / TBT</h1><div style="text-align:right;font-size:10px"><b>Generated: ${nowStr()}</b><div style="color:#64748b">Terminal Operational Log</div></div></div>
-  <div class="kp"><div><b>Total Bags:</b> <b class="mono">${rs.length}</b></div><div style="color:#1d4ed8"><b>Pending Bags:</b> <b class="mono">${p}</b></div><div style="color:#b91c1c"><b>Forwarded Bags:</b> <b class="mono">${f}</b></div></div>
-  <table><thead><tr><th style="width:48px;text-align:center">Photo</th><th>Tag Number</th><th>Flight / Date</th><th>Color</th><th>AHL / Email</th><th>Status</th><th>Latest Note</th></tr></thead><tbody>${rs.map(r=>`<tr><td style="text-align:center">${r.thumb?`<img src="${r.thumb}" style="width:26px;height:26px;object-fit:cover;border-radius:3px">`:"-"}</td><td class="mono"><b>${esc(r.tagNumber)}</b></td><td>${esc(r.flightNumber)} (${esc(r.flightDate)})</td><td>${esc(r.color)}</td><td>${esc(r.ahlCase)}</td><td style="font-weight:700;color:${r.status==="Pending"?"#1e40af":"#991b1b"}">${esc(r.status)}</td><td><i>${esc(lastComment(r).t||"-")}</i></td></tr>`).join("")}</tbody></table>
+  <div class="hd" style="align-items:center"><h1 style="font-size:16px">BANGKOK AIRPORT (BKK) ${jz?"OFFICE / JAAT ROOM":"SORTING AREA / TBT"}</h1><div style="text-align:right;font-size:10px"><b>Generated: ${nowStr()}</b><div style="color:#64748b">Terminal Operational Log</div></div></div>
+  <div class="kp"><div><b>Total Bags:</b> <b class="mono">${rs.length}</b></div><div style="color:#1d4ed8"><b>Pending Bags:</b> <b class="mono">${p}</b></div><div style="color:${jz?"#047857":"#b91c1c"}"><b>${jz?"Done Bags":"Forwarded Bags"}:</b> <b class="mono">${f}</b></div></div>
+  <table><thead><tr><th style="width:48px;text-align:center">Photo</th><th>Tag Number</th><th>Flight / Date</th><th>Color</th><th>AHL / Email</th><th>Status</th><th>Latest Note</th></tr></thead><tbody>${rs.map(r=>`<tr><td style="text-align:center">${r.thumb?`<img src="${r.thumb}" style="width:26px;height:26px;object-fit:cover;border-radius:3px">`:"-"}</td><td class="mono"><b>${esc(r.tagNumber)}</b></td><td>${esc(r.flightNumber)} (${esc(r.flightDate)})</td><td>${esc(r.color)}</td><td>${esc(r.ahlCase)}</td><td style="font-weight:700;color:${r.status==="Pending"?"#1e40af":r.status==="Done"?"#047857":"#991b1b"}">${esc(r.status)}${jz?`<div style="font-weight:400;font-size:9px">in ${esc(jEnter(r))} · due ${esc(jDue(r))}</div>`:""}</td><td><i>${esc(lastComment(r).t||"-")}</i></td></tr>`).join("")}</tbody></table>
   <div class="ft" style="justify-content:flex-end"><span>Published by Kongkit</span></div></div></div>`;
 }
 const LIB={h2c:["https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"],pdf:["https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"]};
@@ -1301,31 +1336,36 @@ async function importLegacySorting(){
   }catch(e){toast("Import failed: "+(e.code||e.message))}
 }
 function mountSorting(root){
-  const F={q:"",flight:"",date:"",st:"",from:todayStr(),to:todayStr(),page:1};
-  root.innerHTML=`<div class="sec-head"><h2>${secH("sorting")}</h2><span class="hint">BKK TBT sorting area</span><div class="right">
-   <button class="btn sm" onclick="openTagAir()">✈ Airline codes</button><button class="btn pri sm" data-a="add">＋ Add baggage record</button><button class="btn sm" data-a="csv">⬇ Export CSV</button><button class="btn sm" data-a="pdf">📄 Summary PDF</button><button class="btn sm" data-a="tpl">Template</button>
-   <label class="btn sm" style="margin:0">⬆ Import CSV<input type="file" accept=".csv" data-a="imp" hidden></label><button class="btn sm" data-a="legacy" title="One-time import from the previous standalone Sorting app">⬆ Import from old app</button></div></div>
-  <div class="tiles"></div>
-  <div class="sfbar"><div><small>Search Tag / AHL Case / Email / Location</small><input data-f="q" type="search" placeholder="e.g. VN123221, 0738123221 or AHL"></div><div><small>Flight number</small><input data-f="flight" type="search" placeholder="e.g. TG910"></div><div><small>Flight date</small><input data-f="date" type="date"></div>
-   <div><small>Status</small><select data-f="st"><option value="">All statuses</option>${S_STATUS.map(s=>`<option>${s}</option>`).join("")}</select></div><div><small>&nbsp;</small><button class="btn" data-a="clear" title="Reset filters (date = today)">Clear</button></div></div>
-  <div class="sfbar2"><div><small>Recorded from</small><input data-f="from" type="date"></div><div><small>Recorded to</small><input data-f="to" type="date"></div><div class="row"><button class="btn sm" data-a="today">📅 Today</button><button class="btn sm" data-a="alldates">All dates</button></div></div>
-  <div class="row" style="justify-content:space-between"><div class="meta" id="cnt"></div>${perSel()}</div><div class="tw"></div><div class="pgw"></div>`;
-  const recs=()=>DB.sorting.filter(r=>!isMockRec(r));
-  const recDate=r=>String(r.createdAt||"").slice(0,10),recTime=r=>String(r.createdAt||"").slice(11,16);
+  let Z=DB.ui.sZone==="jaat"?"jaat":"tbt";
+  const J=()=>Z==="jaat",STL=()=>J()?J_STATUS:S_STATUS;
+  const defD=()=>J()?{from:"",to:""}:{from:todayStr(),to:todayStr()};
+  const F={q:"",flight:"",date:"",st:"",page:1,due:false,...defD()};
+  const recs=()=>DB.sorting.filter(r=>!isMockRec(r)&&zoneOf(r)===Z);
+  const recDate=r=>J()?jEnter(r):String(r.createdAt||"").slice(0,10),recTime=r=>String(r.createdAt||"").slice(11,16);
   const dateOk=r=>{const d=recDate(r);return(!F.from||d>=F.from)&&(!F.to||d<=F.to)};
   function baseOk(){
     const q=F.q.toLowerCase().trim(),fl=F.flight.toLowerCase().trim();
-    return r=>(!q||String(r.tagNumber).toLowerCase().includes(q)||tIata(r).toLowerCase().includes(q)||String(r.ahlCase).toLowerCase().includes(q)||String(r.foundLoc||"").toLowerCase().includes(q))&&(!fl||String(r.flightNumber).toLowerCase().includes(fl))&&(!F.date||r.flightDate===F.date)&&(!F.st||r.status===F.st);
+    return r=>(!q||String(r.tagNumber).toLowerCase().includes(q)||tIata(r).toLowerCase().includes(q)||String(r.ahlCase).toLowerCase().includes(q)||String(r.foundLoc||"").toLowerCase().includes(q))&&(!fl||String(r.flightNumber).toLowerCase().includes(fl))&&(!F.date||r.flightDate===F.date)&&(!F.st||r.status===F.st)&&(!F.due||(r.status==="Pending"&&jState(r)!=="ok"));
   }
-  function filtered(){return recs().filter(r=>baseOk()(r)&&dateOk(r)).sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)))}
+  function filtered(){
+    const l=recs().filter(r=>baseOk()(r)&&dateOk(r));
+    return J()?l.sort((a,b)=>(a.status==="Done")-(b.status==="Done")||dnum(jEnter(a))-dnum(jEnter(b))||String(b.createdAt).localeCompare(String(a.createdAt)))
+              :l.sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)));
+  }
   const syncInputs=()=>$$("[data-f]",root).forEach(i=>{if(i.dataset.f in F)i.value=F[i.dataset.f]});
-  function draw(){
-    const all=recs(),rs=filtered(),pi=pageInfo(rs.length,F.page);F.page=pi.p;const pr=rs.slice(pi.a,pi.b);
-    $(".tiles",root).innerHTML=`<div class="tile"><b>${all.length}</b><span>Total recorded bags</span></div><div class="tile"><b style="color:var(--ok)">${all.filter(r=>recDate(r)===todayStr()).length}</b><span>Recorded today</span></div><div class="tile"><b style="color:var(--pri2)">${all.filter(r=>r.status==="Pending").length}</b><span>Pending bags</span></div><div class="tile"><b style="color:var(--bad)">${all.filter(r=>r.status==="Forwarded").length}</b><span>Forwarded bags</span></div>`;
-    {const dateOn=F.from||F.to,outside=dateOn?all.filter(r=>baseOk()(r)&&!dateOk(r)).length:0;
-      $("#cnt",root).innerHTML=`${rs.length?`${pi.a+1}–${pi.b}`:0} of ${rs.length} matching record(s) (${all.length} total) · page ${pi.p}/${pi.pages}`+(dateOn?` · 🕒 recorded ${esc(F.from||"…")} → ${esc(F.to||"…")}`:"")+(outside?` · <a href="#" data-a="alldates" style="font-weight:700">${outside} more outside these dates — show all</a>`:"")}
-    $(".pgw",root).innerHTML=pagerHTML(rs.length,F.page);
-    $(".tw",root).innerHTML=rs.length?`<table><thead><tr><th>Photo</th><th>Tag number</th><th>Found at</th><th>Recorded (date · time)</th><th>Flight / date</th><th>Bag color</th><th>AHL match / email</th><th>Latest comment / notes</th><th>Status</th><th>Actions</th></tr></thead><tbody>${pr.map(r=>{const c=lastComment(r);return `<tr>
+  function build(){
+    root.innerHTML=`<div class="sec-head"><h2>${secH("sorting")}</h2><span class="hint">${J()?`Office / JAAT room · take out on day ${JAAT_OUT} · never beyond day ${JAAT_MAX}`:"BKK TBT sorting area"}</span><div class="right">
+     <button class="btn sm" onclick="openTagAir()">✈ Airline codes</button><button class="btn pri sm" data-a="add">${J()?"＋ Add JAAT record":"＋ Add baggage record"}</button><button class="btn sm" data-a="csv">⬇ Export CSV</button><button class="btn sm" data-a="pdf">📄 Summary PDF</button><button class="btn sm" data-a="tpl">Template</button>
+     <label class="btn sm" style="margin:0">⬆ Import CSV<input type="file" accept=".csv" data-a="imp" hidden></label>${J()?"":`<button class="btn sm" data-a="legacy" title="One-time import from the previous standalone Sorting app">⬆ Import from old app</button>`}</div></div>
+    <div class="tabs szt"><button class="btn${J()?"":" on"}" data-z="tbt">🧳 Sorting Area / TBT Record</button><button class="btn${J()?" on":""}" data-z="jaat">🏢 Office/JAAT Record <span class="jcnt" id="sz-b"></span></button></div>
+    <div id="jalert"></div><div class="tiles"></div>
+    <div class="sfbar"><div><small>Search Tag / AHL Case / Email / Location</small><input data-f="q" type="search" placeholder="e.g. VN123221, 0738123221 or AHL"></div><div><small>Flight number</small><input data-f="flight" type="search" placeholder="e.g. TG910"></div><div><small>Flight date</small><input data-f="date" type="date"></div>
+     <div><small>Status</small><select data-f="st"><option value="">All statuses</option>${STL().map(s=>`<option>${s}</option>`).join("")}</select></div><div><small>&nbsp;</small><button class="btn" data-a="clear" title="Reset filters">Clear</button></div></div>
+    <div class="sfbar2"><div><small>${J()?"Entered from":"Recorded from"}</small><input data-f="from" type="date"></div><div><small>${J()?"Entered to":"Recorded to"}</small><input data-f="to" type="date"></div><div class="row"><button class="btn sm" data-a="today">📅 Today</button><button class="btn sm" data-a="alldates">All dates</button>${J()?`<button class="btn sm" data-a="due" id="jdue">⚠ Due for take-out</button>`:""}</div></div>
+    <div class="row" style="justify-content:space-between"><div class="meta" id="cnt"></div>${perSel()}</div><div class="tw"></div><div class="pgw"></div>`;
+    syncInputs();draw();
+  }
+  function rowTBT(r){const c=lastComment(r);return `<tr>
       <td>${r.thumb?`<img class="thumb" src="${r.thumb}" data-ph="${r.id}" alt="photo" title="Click to enlarge">`:`<div class="thumb nothumb" title="No photo">📷</div>`}</td>
       <td><b style="font-family:ui-monospace,monospace">${esc(tIata(r)||r.tagNumber)}</b>${tIata(r)?`<div class="hint mono" style="font-size:10.5px">${esc(r.tagNumber)}</div>`:""}</td>
       <td>${esc(locText(r))}</td>
@@ -1335,42 +1375,122 @@ function mountSorting(root){
       <td>${esc(r.ahlCase)}</td>
       <td class="rm"><div class="crumb" style="font-style:italic">${c.n?`“${esc(c.t)}”`:"No comments added yet"}</div><button class="btn sm" data-cm="${r.id}">💬 Manage comments (${c.n})</button></td>
       <td><select class="st st-S${r.status}" data-sst="${r.id}">${S_STATUS.map(s=>`<option${s===r.status?" selected":""}>${s}</option>`).join("")}</select></td>
-      <td style="white-space:nowrap"><button class="btn sm" data-slip="${r.id}">⬇ PDF</button> <button class="btn sm danger" data-del="${r.id}">🗑</button></td></tr>`}).join("")}</tbody></table>`:`<div class="empty">No baggage records found${all.length?" matching your filters":" yet — click “Add baggage record”"}.</div>`;
+      <td style="white-space:nowrap"><button class="btn sm" data-slip="${r.id}">⬇ PDF</button> <button class="btn sm danger" data-del="${r.id}">🗑</button></td></tr>`}
+  function rowJ(r){const c=lastComment(r),s=jState(r);return `<tr class="jrow-${s}">
+      <td>${r.thumb?`<img class="thumb" src="${r.thumb}" data-ph="${r.id}" alt="photo" title="Click to enlarge">`:`<div class="thumb nothumb" title="No photo">📷</div>`}</td>
+      <td><b style="font-family:ui-monospace,monospace">${esc(tIata(r)||r.tagNumber)}</b>${tIata(r)?`<div class="hint mono" style="font-size:10.5px">${esc(r.tagNumber)}</div>`:""}</td>
+      <td>${esc(locText(r))}</td>
+      <td style="white-space:nowrap"><b>${esc(jEnter(r))}</b><div class="crumb">🕒 recorded ${esc(recTime(r))}</div></td>
+      <td style="white-space:nowrap"><b>${esc(jDue(r))}</b><div>${jBadge(r)}</div></td>
+      <td><b>${esc(r.flightNumber)}</b><div class="crumb">${esc(r.flightDate)}</div></td>
+      <td><span class="chip"><i class="dot" style="background:${colorHex(r.color)}"></i>${esc(r.color)}</span></td>
+      <td>${esc(r.ahlCase)}</td>
+      <td class="rm"><div class="crumb" style="font-style:italic">${c.n?`“${esc(c.t)}”`:"No comments added yet"}</div><button class="btn sm" data-cm="${r.id}">💬 Manage comments (${c.n})</button></td>
+      <td><select class="st st-S${r.status}" data-sst="${r.id}">${J_STATUS.map(x=>`<option${x===r.status?" selected":""}>${x}</option>`).join("")}</select></td>
+      <td style="white-space:nowrap">${r.status==="Pending"?`<button class="btn sm ${s==="ok"?"":"pri"}" data-out="${r.id}" title="Re-confirm that the bag has been taken out of the JAAT room">✔ Take out</button> `:""}<button class="btn sm" data-slip="${r.id}">⬇ PDF</button> <button class="btn sm danger" data-del="${r.id}">🗑</button></td></tr>`}
+  function draw(){
+    const all=recs(),rs=filtered(),pi=pageInfo(rs.length,F.page);F.page=pi.p;const pr=rs.slice(pi.a,pi.b);
+    const dl=jDueList(),b=$("#sz-b",root);if(b)b.textContent=dl.length?"⚠ "+dl.length:"";
+    $("#jalert",root).innerHTML=J()&&dl.length?`<div class="jalert"><div><b>⚠ ${dl.length} bag${dl.length>1?"s":""} must be taken out of the JAAT room</b><span class="hint"> · policy: take out on day ${JAAT_OUT}, never keep beyond day ${JAAT_MAX}</span></div><div class="jal">${dl.slice(0,8).map(r=>`<span class="jal-i"><b class="mono">${esc(tIata(r)||r.tagNumber)}</b> ${jBadge(r)} <button class="btn sm danger" data-out="${r.id}">Re-confirm take out</button></span>`).join("")}${dl.length>8?`<a href="#" data-a="due">+${dl.length-8} more — show all</a>`:""}</div></div>`:"";
+    $(".tiles",root).innerHTML=J()
+      ?`<div class="tile"><b>${all.length}</b><span>Total JAAT bags</span></div><div class="tile"><b style="color:var(--ok)">${all.filter(r=>recDate(r)===todayStr()).length}</b><span>Entered today</span></div><div class="tile"><b style="color:var(--pri2)">${all.filter(r=>r.status==="Pending").length}</b><span>Pending (in JAAT room)</span></div><div class="tile"><b style="color:var(--bad)">${dl.length}</b><span>Due / overdue take-out</span></div><div class="tile"><b style="color:var(--ok)">${all.filter(r=>r.status==="Done").length}</b><span>Done (taken out)</span></div>`
+      :`<div class="tile"><b>${all.length}</b><span>Total recorded bags</span></div><div class="tile"><b style="color:var(--ok)">${all.filter(r=>recDate(r)===todayStr()).length}</b><span>Recorded today</span></div><div class="tile"><b style="color:var(--pri2)">${all.filter(r=>r.status==="Pending").length}</b><span>Pending bags</span></div><div class="tile"><b style="color:var(--bad)">${all.filter(r=>r.status==="Forwarded").length}</b><span>Forwarded bags</span></div>`;
+    const dd=$("#jdue",root);if(dd)dd.classList.toggle("pri",F.due);
+    {const dateOn=F.from||F.to,outside=dateOn?all.filter(r=>baseOk()(r)&&!dateOk(r)).length:0;
+      $("#cnt",root).innerHTML=`${rs.length?`${pi.a+1}–${pi.b}`:0} of ${rs.length} matching record(s) (${all.length} total) · page ${pi.p}/${pi.pages}`+(dateOn?` · 🕒 ${J()?"entered":"recorded"} ${esc(F.from||"…")} → ${esc(F.to||"…")}`:"")+(outside?` · <a href="#" data-a="alldates" style="font-weight:700">${outside} more outside these dates — show all</a>`:"")}
+    $(".pgw",root).innerHTML=pagerHTML(rs.length,F.page);
+    $(".tw",root).innerHTML=rs.length?(J()
+      ?`<table><thead><tr><th>Photo</th><th>Tag number</th><th>Found at</th><th>Enter date</th><th>Due date · day count</th><th>Flight / date</th><th>Bag color</th><th>AHL match / email</th><th>Latest comment / notes</th><th>Status</th><th>Actions</th></tr></thead><tbody>${pr.map(rowJ).join("")}</tbody></table>`
+      :`<table><thead><tr><th>Photo</th><th>Tag number</th><th>Found at</th><th>Recorded (date · time)</th><th>Flight / date</th><th>Bag color</th><th>AHL match / email</th><th>Latest comment / notes</th><th>Status</th><th>Actions</th></tr></thead><tbody>${pr.map(rowTBT).join("")}</tbody></table>`)
+      :`<div class="empty">No ${J()?"JAAT":"baggage"} records found${all.length?" matching your filters":` yet — click “${J()?"Add JAAT record":"Add baggage record"}”`}.</div>`;
+  }
+  /* ---- take-out confirmation (JAAT) ---- */
+  function confirmOut(id,after){
+    const r=DB.sorting.find(x=>x.id===id);if(!r)return;
+    modal(`<div class="mhead"><h3>✔ Re-confirm take out</h3><button class="btn sm x" data-close>✕</button></div><div class="note" style="margin-top:10px">Please confirm that this bag has been physically <b>taken out of the JAAT room</b>. The record will be set to <b>Done</b>.</div>
+      <p>Tag: <b>${esc(tIata(r)||r.tagNumber)}</b> (${esc(r.tagNumber)})<br>Flight: ${esc(r.flightNumber)} (${esc(r.flightDate)})<br>Entered: ${esc(jEnter(r))} · due ${esc(jDue(r))} · ${jBadge(r)}</p>
+      <div class="row" style="justify-content:flex-end"><button class="btn" data-close>Cancel</button><button class="btn pri" id="to-ok">Yes, bag has been taken out</button></div>`,(bg,close)=>{
+      $("#to-ok",bg).onclick=()=>{addHistory(id,`Taken out of JAAT room — re-confirmed on day ${jAge(r)} (entered ${jEnter(r)})`,{status:"Done",outDate:todayStr()});close();toast(`Bag ${tIata(r)||r.tagNumber} marked Done ✓`);after&&after()};
+    });
+  }
+  /* shown whenever someone starts adding a JAAT record while bags are already due */
+  function dueNotice(go){
+    modal(`<div class="mhead"><h3>⚠ Bags to take out of JAAT room</h3><button class="btn sm x" data-close>✕</button></div><div id="dn-b"></div>
+      <div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="dn-go">Continue to add record</button></div>`,(bg,close)=>{
+      const list=()=>{const dl=jDueList();$("#dn-b",bg).innerHTML=dl.length?`<div class="note" style="margin-top:10px">${dl.length} bag${dl.length>1?"s have":" has"} reached day ${JAAT_OUT} or more in the JAAT room and must be <b>taken out</b>. Press <b>Re-confirm take out</b> once each bag has been removed.</div>`+dl.map(r=>`<div class="erow"><b class="mono">${esc(tIata(r)||r.tagNumber)}</b><span>${esc(r.flightNumber)}</span>${jBadge(r)}<span class="eact" style="opacity:1"><button class="btn sm danger" data-out="${r.id}">Re-confirm take out</button></span></div>`).join(""):`<div class="note" style="margin-top:10px;background:#e6f5ec;border-color:#9bd3b0;color:#14663a">✔ All due bags have been taken out.</div>`};
+      list();
+      bg.addEventListener("click",e=>{const o=e.target.closest("[data-out]");if(o)confirmOut(o.dataset.out,list)});
+      $("#dn-go",bg).onclick=()=>{close();go()};
+    });
   }
   /* ---- add form ---- */
   function addForm(){
-    let photo=null;
-    modal(`<div class="mhead"><div><h3>🧳 Record baggage</h3><span class="hint">Bangkok Airport (Sorting Area / TBT) operational log entry</span></div><button class="btn sm x" data-close>✕</button></div>
+    let photo=null,ddTouched=false;
+    modal(`<div class="mhead"><div><h3>${J()?"🏢 Record JAAT bag":"🧳 Record baggage"}</h3><span class="hint">${J()?"Office / JAAT room log entry":"Bangkok Airport (Sorting Area / TBT) operational log entry"}</span></div><button class="btn sm x" data-close>✕</button></div>
     <div class="fg" style="margin-top:10px">
      <div class="full"><label>1. Tag number *</label><input id="s-tag" placeholder="10-digit e.g. 0738123221, or VN123221" style="font-family:ui-monospace,monospace" autocomplete="off"><div id="s-tagp" class="hint" style="margin-top:4px;min-height:16px"></div></div>
-     <div><label>2. Flight number *</label><input id="s-fl" placeholder="e.g. TG910 / NH806"></div><div><label>Flight date *</label><input id="s-dt" type="date" value="${todayStr()}"></div>
+     <div><label>2. Flight number * <span style="font-weight:400">(up to 5 for connecting flights)</span></label><div id="s-fls"><input id="s-fl" class="s-fl" placeholder="e.g. TG910 / NH806"></div><button type="button" class="btn sm" id="s-fadd" style="margin-top:6px">＋ Add connecting flight</button></div><div><label>Flight date *</label><input id="s-dt" type="date" value="${todayStr()}"></div>
+     ${J()?`<div><label>Enter date (into JAAT room) *</label><input id="s-ed" type="date" value="${todayStr()}"></div><div><label>Due date (take out) *</label><input id="s-dd" type="date" value="${addDays(todayStr(),JAAT_OUT-1)}"></div><div class="full"><div id="s-jw" class="hint"></div></div>`:""}
      <div class="full"><label>3. Baggage color *</label><div class="row" id="s-sw" style="margin-bottom:6px">${Object.entries(S_COLORS).map(([n,h])=>`<button type="button" class="swatch" data-col="${n}" title="${n}" style="background:${h}"></button>`).join("")}</div><input id="s-col" placeholder="Selected or custom color name"></div>
      <div class="full"><label>4. AHL case match number / contact email *</label><input id="s-ahl" placeholder="e.g. BKKTG10293 or officer@airport.com"></div>
-     <div class="full"><label>Baggage found location *</label><select id="s-loc"><option value="">Select location…</option>${S_LOCS.map(l=>`<option>${l}</option>`).join("")}</select><input id="s-loco" placeholder="Other location details (required)" style="display:none;margin-top:6px"></div>
+     <div class="full"><label>Baggage found location *</label><select id="s-loc"><option value="">Select location…</option>${S_LOCS.map(l=>`<option${J()&&l==="JAAT Room"?" selected":""}>${l}</option>`).join("")}</select><input id="s-loco" placeholder="Other location details (required)" style="display:none;margin-top:6px"></div>
      <div class="full"><label>Initial comment / location notes</label><textarea id="s-cm" rows="2" placeholder="Optional location notes (e.g. Belt 4 left behind, handle broken)…"></textarea></div>
      <div class="full"><label>5. Attach baggage photo (optional · max 5 MB)</label><div class="drop" id="s-drop"><input id="s-ph" type="file" accept="image/*" hidden><div id="s-up">📷 Tap to attach 1 photo of the baggage<br><small>JPG, PNG, WEBP</small></div><div id="s-pv" style="display:none"><img id="s-img" style="max-height:130px;border-radius:8px"><div class="row" style="justify-content:center;margin-top:6px"><span class="hint" id="s-sz"></span><button type="button" class="btn sm danger" id="s-rm">Remove photo</button></div></div></div></div>
     </div>
-    <div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="s-save">✔ Submit baggage record</button></div>`,(bg,close)=>{
+    <div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="s-save">✔ Submit ${J()?"JAAT":"baggage"} record</button></div>`,(bg,close)=>{
       $("#s-sw",bg).addEventListener("click",e=>{const b=e.target.closest("[data-col]");if(b){$("#s-col",bg).value=b.dataset.col;$$(".swatch",bg).forEach(x=>x.classList.toggle("on",x===b))}});
       $("#s-tag",bg).oninput=()=>{const v=$("#s-tag",bg).value.trim(),x=resolveTag(v),p=$("#s-tagp",bg);p.innerHTML=!v?"":x.air?`✔ <b>${esc(x.iata)}</b> · ${esc(x.air.n)} · barcode ${esc(x.tag)}`:/^\d{10}$/.test(x.tag)?"Airline code "+esc(x.tag.slice(1,4))+" not found — add it in ✈ Airline codes":""};
       $("#s-loc",bg).onchange=e=>{const o=e.target.value==="Other";$("#s-loco",bg).style.display=o?"":"none";if(o)$("#s-loco",bg).focus()};
+      $("#s-fadd",bg).onclick=()=>{const l=$$(".s-fl",bg);if(l.length>=5)return;const i=document.createElement("input");i.className="s-fl";i.placeholder="Connecting flight "+l.length+" e.g. TG910";i.style.marginTop="6px";$("#s-fls",bg).appendChild(i);i.focus();if(l.length+1>=5)$("#s-fadd",bg).style.display="none"};
       $("#s-up",bg).onclick=()=>$("#s-ph",bg).click();
       $("#s-ph",bg).onchange=e=>{
         const f=e.target.files[0];if(!f)return;if(f.size>5*1024*1024){toast("File exceeds 5 MB — attach a smaller image");e.target.value="";return}
         const rd=new FileReader();rd.onload=async ev=>{try{photo=await compressImage(ev.target.result);$("#s-img",bg).src=photo;$("#s-sz",bg).textContent=Math.round(photo.length*.75/1024)+" KB (optimised)";$("#s-up",bg).style.display="none";$("#s-pv",bg).style.display="block"}catch(x){toast("Could not read this image")}};rd.readAsDataURL(f);
       };
       $("#s-rm",bg).onclick=()=>{photo=null;$("#s-ph",bg).value="";$("#s-up",bg).style.display="";$("#s-pv",bg).style.display="none"};
+      if(J()){
+        const ed=$("#s-ed",bg),dd=$("#s-dd",bg),jw=$("#s-jw",bg);
+        const note=()=>{
+          if(!dnum(ed.value)&&dnum(ed.value)!==0){jw.innerHTML="";return}
+          const age=dnum(todayStr())-dnum(ed.value)+1,lim=addDays(ed.value,JAAT_MAX-1),out=addDays(ed.value,JAAT_OUT-1);let h=`Policy: take out on day ${JAAT_OUT} (<b>${out}</b>) · never keep beyond day ${JAAT_MAX} (<b>${lim}</b>).`;
+          if(dd.value&&dnum(dd.value)>dnum(ed.value)+JAAT_OUT-1)h+=` <span style="color:var(--bad)">⚠ Due date is later than day ${JAAT_OUT}.</span>`;
+          if(age>=JAAT_OUT)h+=`<div class="jb jb-${age>=JAAT_MAX?"over":"due"}" style="margin-top:4px;white-space:normal">⚠ This bag is already on day ${age} — it must be taken out of the JAAT room now.</div>`;
+          jw.innerHTML=h;
+        };
+        ed.onchange=()=>{if(!ddTouched&&ed.value)dd.value=addDays(ed.value,JAAT_OUT-1);note()};
+        dd.onchange=()=>{ddTouched=true;note()};note();
+      }
       $("#s-save",bg).onclick=async()=>{
-        const g=i=>$("#"+i,bg).value.trim(),tag=g("s-tag"),fl=g("s-fl"),dt=g("s-dt"),col=g("s-col"),ahl=g("s-ahl"),cm=g("s-cm");
+        const g=i=>$("#"+i,bg).value.trim(),tag=g("s-tag"),fls=$$(".s-fl",bg).map(i=>i.value.trim()).filter(Boolean).slice(0,5),fl=fls.join(" / "),dt=g("s-dt"),col=g("s-col"),ahl=g("s-ahl"),cm=g("s-cm");
         const loc=g("s-loc"),loco=g("s-loco");
         if(!tag||!fl||!dt||!col||!ahl||!loc){toast("Please fill in all required (*) fields");return}
         if(loc==="Other"&&!loco){toast("Please enter the other location details");$("#s-loco",bg).focus();return}
+        let ed="",dd="",age=0;
+        if(J()){
+          ed=g("s-ed");dd=g("s-dd");
+          if(!ed||!dd){toast("Please enter the enter date and the due date");return}
+          if(dnum(dd)<dnum(ed)){toast("Due date cannot be before the enter date");return}
+          if(dnum(dd)>dnum(ed)+JAAT_MAX-1){toast(`Due date cannot be later than day ${JAAT_MAX} (${addDays(ed,JAAT_MAX-1)})`);return}
+          age=dnum(todayStr())-dnum(ed)+1;
+        }
         const foundLoc=loc==="Other"?"Other: "+loco:loc,rt=resolveTag(tag);
-        const t=nowStr(),id="REC-"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
-        const rec={id,tagNumber:rt.tag,tagIata:rt.iata,flightNumber:fl,flightDate:dt,color:col,ahlCase:ahl,status:"Pending",createdAt:t,foundLoc,history:[{time:t,text:"Record created. Baggage found at: "+foundLoc+"."}]};
-        if(cm)rec.history.push({time:t,text:"Note: "+cm});
-        if(photo){try{rec.thumb=await makeThumb(photo);rec.hasPhoto=true;setPhoto(id,photo)}catch(e){}}
-        putItem("sorting",rec);close();toast(`Baggage tag #${tag} recorded ✓`);
+        const commit=async status=>{
+          const t=nowStr(),id="REC-"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+          const rec={id,tagNumber:rt.tag,tagIata:rt.iata,flightNumber:fl,flights:fls,flightDate:dt,color:col,ahlCase:ahl,status,createdAt:t,foundLoc,history:[{time:t,text:"Record created. Baggage found at: "+foundLoc+"."}]};
+          if(J()){rec.zone="jaat";rec.enterDate=ed;rec.dueDate=dd;rec.history.push({time:t,text:`Entered JAAT room ${ed} · due ${dd} (take out on day ${JAAT_OUT}, max ${JAAT_MAX} days).`});
+            if(status==="Done"){rec.outDate=todayStr();rec.history.push({time:t,text:`Taken out of JAAT room — re-confirmed when adding the record (day ${age}).`})}}
+          if(cm)rec.history.push({time:t,text:"Note: "+cm});
+          if(photo){try{rec.thumb=await makeThumb(photo);rec.hasPhoto=true;setPhoto(id,photo)}catch(e){}}
+          putItem("sorting",rec);close();toast(`Baggage tag #${tag} recorded ✓`);
+        };
+        if(J()&&age>=JAAT_OUT){
+          modal(`<div class="mhead"><h3>⚠ Take this bag out now</h3><button class="btn sm x" data-close>✕</button></div><div class="note" style="margin-top:10px">This bag entered the JAAT room on <b>${esc(ed)}</b> — it is already <b>day ${age}</b>${age>=JAAT_MAX?` (over the ${JAAT_MAX}-day limit)`:""}. Bags must be taken out on day ${JAAT_OUT}.</div>
+            <div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn" data-close>Back</button><button class="btn" id="o-p">Save as Pending (still in room)</button><button class="btn pri" id="o-d">✔ Re-confirm take out (save as Done)</button></div>`,(b2,c2)=>{
+            $("#o-d",b2).onclick=()=>{c2();commit("Done")};$("#o-p",b2).onclick=()=>{c2();commit("Pending")};
+          });
+          return;
+        }
+        commit("Pending");
       };
     });
   }
@@ -1395,21 +1515,36 @@ function mountSorting(root){
     const photo=r.hasPhoto?await getPhoto(id):null;
     pdfPreview(slipHTML(r,photo),"Baggage-Slip-"+r.tagNumber+".pdf",false);
   }
+  const resetF=()=>Object.assign(F,{q:"",flight:"",date:"",st:"",page:1,due:false},defD());
   root.addEventListener("input",e=>{const f=e.target.dataset.f;if(f){F[f]=e.target.value;F.page=1;draw()}});
   root.addEventListener("change",e=>{
     const f=e.target.dataset.f;if(f){if(F[f]!==e.target.value){F[f]=e.target.value;F.page=1;draw()}return}
-    if(e.target.dataset.sst){const r=DB.sorting.find(x=>x.id===e.target.dataset.sst),v=e.target.value;if(r&&r.status!==v){addHistory(r.id,`Status updated from [${r.status}] to [${v}]`,{status:v});toast("Status updated to "+v)}return}
+    if(e.target.dataset.sst){
+      const r=DB.sorting.find(x=>x.id===e.target.dataset.sst),v=e.target.value;
+      if(r&&r.status!==v){
+        if(zoneOf(r)==="jaat"){
+          if(v==="Done"){draw();confirmOut(r.id);return}
+          addHistory(r.id,`Status updated from [${r.status}] to [${v}] (bag back in JAAT room)`,{status:v,outDate:""});toast("Status updated to "+v);return;
+        }
+        addHistory(r.id,`Status updated from [${r.status}] to [${v}]`,{status:v});toast("Status updated to "+v)
+      }
+      return}
     if(e.target.dataset.a==="imp"){
       const file=e.target.files[0];if(!file)return;const inp=e.target;const rd=new FileReader();
       rd.onload=()=>{
         const rows=parseCSV(String(rd.result)).slice(1),t=nowStr();let n=0;
-        rows.forEach((c,i)=>{c=c.map(x=>x.trim());if(c.length>=5&&c[0]){putItem("sorting",{id:"REC-"+Date.now().toString(36)+i+Math.random().toString(36).slice(2,4),tagNumber:c[0],flightNumber:c[1]||"N/A",flightDate:c[2]||todayStr(),color:c[3]||"Unknown",ahlCase:c[4]||"N/A",status:"Pending",createdAt:t,history:[{time:t,text:"Imported via CSV bulk file."}]});n++}});
+        rows.forEach((c,i)=>{c=c.map(x=>x.trim());if(c.length>=5&&c[0]){
+          const rec={id:"REC-"+Date.now().toString(36)+i+Math.random().toString(36).slice(2,4),tagNumber:c[0],flightNumber:c[1]||"N/A",flightDate:c[2]||todayStr(),color:c[3]||"Unknown",ahlCase:c[4]||"N/A",status:"Pending",createdAt:t,history:[{time:t,text:"Imported via CSV bulk file."}]};
+          if(J()){const ed=/^\d{4}-\d\d-\d\d$/.test(c[5]||"")?c[5]:todayStr();rec.zone="jaat";rec.enterDate=ed;rec.dueDate=/^\d{4}-\d\d-\d\d$/.test(c[6]||"")?c[6]:addDays(ed,JAAT_OUT-1)}
+          putItem("sorting",rec);n++}});
         toast(n?`Imported ${n} baggage record(s) ✓`:"No valid records found in the CSV file");inp.value="";
       };rd.readAsText(file);
     }
   });
   root.addEventListener("click",e=>{
     const pg=e.target.closest("[data-pg]");if(pg){if(!pg.disabled){F.page=+pg.dataset.pg;draw();$(".tw",root).scrollIntoView({block:"start"})}return}
+    const zt=e.target.closest("[data-z]");if(zt){if(zt.dataset.z!==Z){Z=zt.dataset.z;DB.ui.sZone=Z;save();resetF();build()}return}
+    const ot=e.target.closest("[data-out]");if(ot)return confirmOut(ot.dataset.out);
     const ph=e.target.closest("[data-ph]");if(ph)return viewPhoto(ph.dataset.ph);
     const cm=e.target.closest("[data-cm]");if(cm)return comments(cm.dataset.cm);
     const sl=e.target.closest("[data-slip]");if(sl)return slip(sl.dataset.slip);
@@ -1417,18 +1552,19 @@ function mountSorting(root){
     if(dl){const r=DB.sorting.find(x=>x.id===dl.dataset.del);if(!r)return;
       modal(`<div class="mhead"><h3>🗑 Delete this record?</h3><button class="btn sm x" data-close>✕</button></div><div class="note" style="margin-top:10px">This permanently removes the record and its photo for everyone.</div><p>Tag: <b>${esc(r.tagNumber)}</b><br>Flight: ${esc(r.flightNumber)} (${esc(r.flightDate)})<br>AHL / email: ${esc(r.ahlCase)}</p><div class="row" style="justify-content:flex-end"><button class="btn" data-close>Cancel</button><button class="btn danger" id="s-del" style="border-color:var(--bad);color:var(--bad)">Yes, delete</button></div>`,(bg,close)=>{$("#s-del",bg).onclick=()=>{delItem("sorting",r.id);delPhoto(r.id);close();toast(`Record #${r.tagNumber} deleted`)}});return}
     const a=e.target.closest("[data-a]");if(!a)return;const k=a.dataset.a;
-    if(k==="add")addForm();
-    if(k==="clear"){Object.assign(F,{q:"",flight:"",date:"",st:"",from:todayStr(),to:todayStr(),page:1});syncInputs();draw()}
+    if(k==="add"){if(J()&&jDueList().length)dueNotice(addForm);else addForm()}
+    if(k==="clear"){resetF();syncInputs();draw()}
     if(k==="today"){F.from=F.to=todayStr();F.page=1;syncInputs();draw()}
     if(k==="alldates"){e.preventDefault();F.from=F.to="";F.page=1;syncInputs();draw()}
+    if(k==="due"){e.preventDefault();F.due=!F.due;if(F.due){F.from=F.to="";syncInputs()}F.page=1;draw()}
     if(k==="csv"){const rs=filtered();if(!rs.length){toast("No records available to export");return}
-      dlFile(`BKK_TBT_Baggage_Export_${todayStr()}.csv`,"\ufeff"+["Tag Number,Flight Number,Flight Date,Color,AHL Case / Email,Status,Photo Attached,Created At"].concat(rs.map(r=>[r.tagNumber,r.flightNumber,r.flightDate,r.color,r.ahlCase,r.status,r.hasPhoto?"Yes":"No",r.createdAt].map(csvQ).join(","))).join("\n")+"\n","text/csv;charset=utf-8")}
-    if(k==="tpl")dlFile("BKK_Baggage_Import_Template.csv","\ufeffTag Number,Flight Number,Flight Date,Color,AHL Case / Email\nBKK123456,TG910,2026-10-01,Black,BKKTG9901 / pax@test.com\n","text/csv;charset=utf-8");
-    if(k==="pdf"){const rs=filtered();if(!rs.length){toast("No records to print");return}pdfPreview(summaryHTML(rs),"Baggage-Summary-"+todayStr()+".pdf",true)}
+      dlFile(`BKK_${J()?"JAAT":"TBT"}_Baggage_Export_${todayStr()}.csv`,"﻿"+[J()?"Tag Number,Flight Number,Flight Date,Color,AHL Case / Email,Status,Photo Attached,Created At,Enter Date,Due Date,Taken Out Date":"Tag Number,Flight Number,Flight Date,Color,AHL Case / Email,Status,Photo Attached,Created At"].concat(rs.map(r=>[r.tagNumber,r.flightNumber,r.flightDate,r.color,r.ahlCase,r.status,r.hasPhoto?"Yes":"No",r.createdAt,...(J()?[jEnter(r),jDue(r),r.outDate||""]:[])].map(csvQ).join(","))).join("\n")+"\n","text/csv;charset=utf-8")}
+    if(k==="tpl")dlFile(J()?"BKK_JAAT_Import_Template.csv":"BKK_Baggage_Import_Template.csv",J()?"﻿Tag Number,Flight Number,Flight Date,Color,AHL Case / Email,Enter Date,Due Date\nBKK123456,TG910,2026-10-01,Black,BKKTG9901 / pax@test.com,2026-10-01,2026-10-05\n":"﻿Tag Number,Flight Number,Flight Date,Color,AHL Case / Email\nBKK123456,TG910,2026-10-01,Black,BKKTG9901 / pax@test.com\n","text/csv;charset=utf-8");
+    if(k==="pdf"){const rs=filtered();if(!rs.length){toast("No records to print");return}pdfPreview(summaryHTML(rs,Z),"Baggage-Summary-"+todayStr()+".pdf",true)}
     if(k==="legacy")importLegacySorting();
   });
-  syncInputs();draw();
-  return {refresh:draw,goto(p){F.q=p.q||"";F.from=F.to="";F.page=1;syncInputs();draw()}};
+  build();
+  return {refresh:draw,goto(p){if(p.z&&p.z!==Z){Z=p.z;DB.ui.sZone=Z;save()}resetF();F.q=p.q||"";F.from=F.to="";build()}};
 }
 
 
@@ -1450,7 +1586,7 @@ function sampleQR(){
 function mountEmailDir(root){
   const S={sel:null,q:"",edit:false,aq:"",aqFor:null};
   const aqh=t=>S.aq?hl(t,S.aq):esc(t);
-  root.innerHTML=`<div class="sec-head"><h2>${secH("emaildir")}</h2><span class="hint" id="ed-n"></span><div class="right"><button class="btn sm" data-a="editmode" id="ed-em">✏️ Edit mode</button><span class="hint">Copy separator</span><div class="seg" id="ed-sep"><button data-sep="; ">;</button><button data-sep=", ">,</button></div><button class="btn sm" data-a="imp">⬆ Import emails</button><button class="btn sm" data-a="exp">⬇ Export</button><button class="btn sm" data-a="bulkair">＋ Bulk add</button><button class="btn pri sm" data-a="addair">＋ Add airline</button></div></div>
+  root.innerHTML=`<div class="sec-head"><h2>${secH("emaildir")}</h2><span class="hint" id="ed-n"></span><div class="right"><button class="btn sm adm" data-a="editmode" id="ed-em">✏️ Edit mode</button><span class="hint">Copy separator</span><div class="seg" id="ed-sep"><button data-sep="; ">;</button><button data-sep=", ">,</button></div><button class="btn sm adm" data-a="imp">⬆ Import emails</button><button class="btn sm" data-a="exp">⬇ Export</button><button class="btn sm adm" data-a="bulkair">＋ Bulk add</button><button class="btn pri sm adm" data-a="addair">＋ Add airline</button></div></div>
   <div class="edwrap"><div class="edside"><input id="ed-q" type="search" autocomplete="off" placeholder="🔍 Find airline, code, email…"><div class="edlist"></div></div><div class="dirbody"></div></div>`;
   const sepNow=()=>DB.ui.sep||"; ";
   const air=id=>DB.emaildir.find(a=>a.id===id);
@@ -1458,13 +1594,13 @@ function mountEmailDir(root){
   const getS=(a,sid)=>a.subjects.find(s=>s.id===sid);
   const getL=(s,gid)=>gid?s.groups.find(g=>g.id===gid).emails:s.emails;
   function emailRows(list,sid,gid){
-    return list&&list.length?list.map(e=>`<div class="erow" data-eid="${e.id}"><span class="addr" data-a="copyone" data-v="${esc(e.addr)}" title="Click to copy">${aqh(e.addr)}</span>${e.remark?`<span class="cmt">— ${aqh(e.remark)}</span>`:""}<span class="eact"><button class="btn sm" data-a="editemail" data-s="${sid}" data-g="${gid||""}" data-e="${e.id}" title="Edit">✏️</button><button class="btn sm danger" data-a="delemail" data-s="${sid}" data-g="${gid||""}" data-e="${e.id}" title="Remove">✕</button></span></div>`).join(""):`<div class="crumb" style="padding:6px 2px">No email yet</div>`;
+    return list&&list.length?list.map(e=>`<div class="erow" data-eid="${e.id}"><span class="addr" data-a="copyone" data-v="${esc(e.addr)}" title="Click to copy">${aqh(e.addr)}</span>${e.remark?`<span class="cmt">— ${aqh(e.remark)}</span>`:""}<span class="eact"><button class="btn sm adm" data-a="editemail" data-s="${sid}" data-g="${gid||""}" data-e="${e.id}" title="Edit">✏️</button><button class="btn sm danger adm" data-a="delemail" data-s="${sid}" data-g="${gid||""}" data-e="${e.id}" title="Remove">✕</button></span></div>`).join(""):`<div class="crumb" style="padding:6px 2px">No email yet</div>`;
   }
   function subjHTML(s,full=s){
     const total=uniqAddr(listEmails(full)).length,og=g=>(full.groups||[]).find(x=>x.id===g.id)||g;
-    return `<div class="scardx" data-sid="${s.id}" data-grouped="${s.grouped?1:0}"><div class="subj-h"><div style="min-width:0"><span class="grab" draggable="true" data-dk="subj" data-sid="${s.id}" title="Drag to reorder this subject">⠿</span><b>${aqh(s.name)}</b>${s.grouped?'<span class="chip ty" style="margin-left:8px">by station</span>':""}${s.note?`<div class="crumb">${aqh(s.note)}</div>`:""}</div>
-      <div class="row"><button class="btn sm pri" data-a="copysubj" data-s="${s.id}" ${total?"":"disabled"}>📋 Copy all (${total})</button>${s.grouped?`<button class="btn sm" data-a="addgrp" data-s="${s.id}">＋ Station</button>`:`<button class="btn sm" data-a="addemail" data-s="${s.id}">＋ Email</button>`}<button class="btn sm" data-a="editsubj" data-s="${s.id}" title="Edit subject">✏️</button><button class="btn sm danger" data-a="delsubj" data-s="${s.id}" title="Delete subject">🗑</button></div></div>
-      ${s.grouped?((s.groups||[]).map(g=>`<div class="grp" data-gid="${g.id}" data-sid="${s.id}"><div class="grp-h"><span class="grab" draggable="true" data-dk="grp" data-sid="${s.id}" data-gid="${g.id}" title="Drag to reorder, or drop onto another station-grouped subject">⠿</span><b>📍 ${aqh(g.station)}</b><span class="crumb">${(og(g).emails||[]).length} email(s)</span><span class="row" style="margin-left:auto"><button class="btn sm" data-a="copygrp" data-s="${s.id}" data-g="${g.id}" ${(og(g).emails||[]).length?"":"disabled"}>📋 Copy group</button><button class="btn sm" data-a="addemail" data-s="${s.id}" data-g="${g.id}">＋ Email</button><button class="btn sm" data-a="editgrp" data-s="${s.id}" data-g="${g.id}">✏️</button><button class="btn sm danger" data-a="delgrp" data-s="${s.id}" data-g="${g.id}">🗑</button></span></div>${emailRows(g.emails,s.id,g.id)}</div>`).join("")||`<div class="crumb" style="padding:6px 2px">No station yet — click “＋ Station”</div>`):emailRows(s.emails,s.id,null)}</div>`;
+    return `<div class="scardx" data-sid="${s.id}" data-grouped="${s.grouped?1:0}"><div class="subj-h"><div style="min-width:0"><span class="grab adm" draggable="true" data-dk="subj" data-sid="${s.id}" title="Drag to reorder this subject">⠿</span><b>${aqh(s.name)}</b>${s.grouped?'<span class="chip ty" style="margin-left:8px">by station</span>':""}${s.note?`<div class="crumb">${aqh(s.note)}</div>`:""}</div>
+      <div class="row"><button class="btn sm pri" data-a="copysubj" data-s="${s.id}" ${total?"":"disabled"}>📋 Copy all (${total})</button>${s.grouped?`<button class="btn sm adm" data-a="addgrp" data-s="${s.id}">＋ Station</button>`:`<button class="btn sm adm" data-a="addemail" data-s="${s.id}">＋ Email</button>`}<button class="btn sm adm" data-a="editsubj" data-s="${s.id}" title="Edit subject">✏️</button><button class="btn sm danger adm" data-a="delsubj" data-s="${s.id}" title="Delete subject">🗑</button></div></div>
+      ${s.grouped?((s.groups||[]).map(g=>`<div class="grp" data-gid="${g.id}" data-sid="${s.id}"><div class="grp-h"><span class="grab adm" draggable="true" data-dk="grp" data-sid="${s.id}" data-gid="${g.id}" title="Drag to reorder, or drop onto another station-grouped subject">⠿</span><b>📍 ${aqh(g.station)}</b><span class="crumb">${(og(g).emails||[]).length} email(s)</span><span class="row" style="margin-left:auto"><button class="btn sm" data-a="copygrp" data-s="${s.id}" data-g="${g.id}" ${(og(g).emails||[]).length?"":"disabled"}>📋 Copy group</button><button class="btn sm adm" data-a="addemail" data-s="${s.id}" data-g="${g.id}">＋ Email</button><button class="btn sm adm" data-a="editgrp" data-s="${s.id}" data-g="${g.id}">✏️</button><button class="btn sm danger adm" data-a="delgrp" data-s="${s.id}" data-g="${g.id}">🗑</button></span></div>${emailRows(g.emails,s.id,g.id)}</div>`).join("")||`<div class="crumb" style="padding:6px 2px">No station yet — click “＋ Station”</div>`):emailRows(s.emails,s.id,null)}</div>`;
   }
   const cntOf=a=>a.subjects.reduce((n,s)=>n+uniqAddr(listEmails(s)).length,0);
   function matches(a,q){
@@ -1483,11 +1619,11 @@ function mountEmailDir(root){
   function drawBody(){
     $$("#ed-sep button",root).forEach(b=>b.classList.toggle("on",b.dataset.sep===sepNow()));
     const body=$(".dirbody",root),a=air(S.sel);
-    if(!DB.emaildir.length){body.innerHTML=`<div class="empty"><p>No airline in the directory yet.</p><div class="row" style="justify-content:center"><button class="btn pri" data-a="bulkair">＋ Bulk add airlines (paste a list)</button><button class="btn" data-a="addair">＋ Add one airline</button><button class="btn" data-a="fromtpl">Create from Email Templates</button><button class="btn" data-a="sample">Load example (QR)</button></div></div>`;return}
+    if(!DB.emaildir.length){body.innerHTML=`<div class="empty"><p>No airline in the directory yet.</p><div class="row" style="justify-content:center"><button class="btn pri adm" data-a="bulkair">＋ Bulk add airlines (paste a list)</button><button class="btn adm" data-a="addair">＋ Add one airline</button><button class="btn adm" data-a="fromtpl">Create from Email Templates</button><button class="btn adm" data-a="sample">Load example (QR)</button></div></div>`;return}
     if(!a){body.innerHTML=`<div class="empty">Select an airline from the list.</div>`;return}
     if(document.activeElement?.id==="ed-aq"&&S.aqFor===a.id&&$("#ed-subs",root)){drawSubs();return}   /* keep typing focus while data refreshes */
     if(S.aqFor!==a.id){S.aq="";S.aqFor=a.id}
-    body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}</h3><span class="crumb">${cntOf(a)} email(s) · ${a.subjects.length} subject(s) · drag ⠿ to reorder subjects / stations</span></div><span class="row"><button class="btn sm" data-a="pin" data-s="${a.id}">${a.fav?"★ Pinned":"☆ Pin"}</button><button class="btn sm" data-a="editair">✏️ Edit airline</button><button class="btn sm danger" data-a="delair">🗑 Delete</button><button class="btn sm pri" data-a="addsubj">＋ Add subject</button></span></div>${xlinks(a.code,"emaildir")}${a.subjects.length?`<div class="aq"><input id="ed-aq" type="search" autocomplete="off" placeholder="🔍 Search inside ${esc(a.code)} — subject, station, email, remark…" value="${esc(S.aq)}"><span class="crumb" id="ed-aqn"></span></div>`:""}<div id="ed-subs"></div>`;
+    body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}</h3><span class="crumb">${cntOf(a)} email(s) · ${a.subjects.length} subject(s) · drag ⠿ to reorder subjects / stations</span></div><span class="row"><button class="btn sm" data-a="pin" data-s="${a.id}">${a.fav?"★ Pinned":"☆ Pin"}</button><button class="btn sm adm" data-a="editair">✏️ Edit airline</button><button class="btn sm danger adm" data-a="delair">🗑 Delete</button><button class="btn sm pri adm" data-a="addsubj">＋ Add subject</button></span></div>${xlinks(a.code,"emaildir")}${a.subjects.length?`<div class="aq"><input id="ed-aq" type="search" autocomplete="off" placeholder="🔍 Search inside ${esc(a.code)} — subject, station, email, remark…" value="${esc(S.aq)}"><span class="crumb" id="ed-aqn"></span></div>`:""}<div id="ed-subs"></div>`;
     drawSubs();
   }
   function drawSubs(){
@@ -1823,7 +1959,7 @@ function widgetHTML(w,edit){
   else if(w.type==="links")b=(w.links||[]).map(l=>`<a class="btn sm wg-lk" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")||'<span class="crumb">No links</span>';
   else if(w.type==="stat"){const s=W_STATS[w.metric]||W_STATS.templates;b=`<div class="wg-stat"><b>${s[1]()}</b><span>${esc(s[0])}</span></div>`}
   else if(w.type==="countdown")b=`<div class="wg-cd" data-cd="${esc(w.target||"")}"><b>--</b><small>${esc(w.target?w.target.replace("T"," "):"No date set")}</small><input type="datetime-local" class="wg-dt" data-cdset="${w.id}" value="${esc(w.target||"")}" title="Change the date and time"></div>`;
-  const tools=`<span class="wg-tools"><button class="wgb${w.pin?" on":""}" data-h="wpin" data-w="${w.id}" title="${w.pin?"Shown on every page — click to unpin":"Show on every page (small icon)"}">📌</button><button class="wgb" data-h="wedit" data-w="${w.id}" title="Edit widget">✏️</button>${edit?`<button class="wgb dng" data-h="wdel" data-w="${w.id}" title="Remove widget">✕</button>`:""}</span>`;
+  const tools=`<span class="wg-tools"><button class="wgb${w.pin?" on":""}" data-h="wpin" data-w="${w.id}" title="${w.pin?"Shown on every page — click to unpin":"Show on every page (small icon)"}">📌</button><button class="wgb adm" data-h="wedit" data-w="${w.id}" title="Edit widget">✏️</button>${edit?`<button class="wgb dng adm" data-h="wdel" data-w="${w.id}" title="Remove widget">✕</button>`:""}</span>`;
   return `<div class="wg wg-${w.type}" data-wid="${w.id}"><div class="wg-h"><span>${T.i} ${esc(w.title||T.n)}</span>${tools}</div><div class="wg-b">${b}</div></div>`;
 }
 function tickWidgets(root){
@@ -1974,7 +2110,7 @@ function mountHome(root){
   /* ---------- cards ---------- */
   function cardHTML(c){
     const sz=H_SIZES[c.size]?c.size:"s";
-    const tools=S.edit?`<div class="hc-tools"><span class="grab" draggable="true" data-dk="hcard" data-hid="${c.id}" title="Drag to move">⠿</span><button class="btn sm" data-h="size" data-c="${c.id}" title="Change size">↔ ${H_SIZES[sz]}</button><button class="btn sm" data-h="edit" data-c="${c.id}" title="Edit">✏️</button><button class="btn sm danger" data-h="del" data-c="${c.id}" title="Delete">🗑</button></div>`:"";
+    const tools=S.edit?`<div class="hc-tools"><span class="grab adm" draggable="true" data-dk="hcard" data-hid="${c.id}" title="Drag to move">⠿</span><button class="btn sm" data-h="size" data-c="${c.id}" title="Change size">↔ ${H_SIZES[sz]}</button><button class="btn sm" data-h="edit" data-c="${c.id}" title="Edit">✏️</button><button class="btn sm danger" data-h="del" data-c="${c.id}" title="Delete">🗑</button></div>`:"";
     const img=c.hasImg?`<div class="hc-img" data-hi="${c.id}"></div>`:"";
     if(c.type==="hero")return `<div class="hcard hhero sz-${sz}" data-cid="${c.id}">${tools}<div class="hc-b"><h1>${esc(c.title)}</h1><p>${nl(c.desc)}</p></div></div>`;
     if(c.type==="kpi"){const k=(n,l)=>`<div class="kpi"><b>${n}</b><span>${l}</span></div>`;
@@ -2154,7 +2290,7 @@ async function downloadDocFile(f){
 }
 function mountDocuments(root){
   const S={sel:null,q:"",open:new Set()};
-  root.innerHTML=`<div class="sec-head"><h2>${secH("documents")}</h2><span class="hint" id="dc-n"></span><div class="right"><button class="btn pri sm" data-a="addairline">➕ Add airline</button></div></div>
+  root.innerHTML=`<div class="sec-head"><h2>${secH("documents")}</h2><span class="hint" id="dc-n"></span><div class="right"><button class="btn pri sm adm" data-a="addairline">➕ Add airline</button></div></div>
   <div class="edwrap"><div class="edside"><input id="dc-q" type="search" autocomplete="off" placeholder="🔍 Find airline or document…"><div class="edlist"></div></div><div class="dirbody"></div></div><input type="file" id="dc-f" multiple hidden>`;
   const air=id=>DB.emaildir.find(a=>a.id===id);
   const nl=t=>esc(t||"").replace(/\n/g,"<br>");
@@ -2163,16 +2299,16 @@ function mountDocuments(root){
   function mut(fn){const a=air(S.sel);if(!a)return;const d=cloneJ(docFor(a));fn(d);d.id=pSafe(a.code);d.code=a.code;putItem("docs",d)}
   const findItem=(d,id)=>d.items.find(x=>x.id===id);
   function chips(i,key){
-    return (i[key]||[]).map(f=>`<span class="fchip" data-a="open" data-d="${i.id}" data-k="${key}" data-f="${f.id}" title="${esc(f.name)} · ${fmtSize(f.size)}">${f.thumb?`<img src="${f.thumb}" alt="">`:fIcon(f)}<span>${esc(f.name)}</span><button class="fx" data-a="dl" data-d="${i.id}" data-k="${key}" data-f="${f.id}" title="Download">⬇</button><button class="fx" data-a="rmfile" data-d="${i.id}" data-k="${key}" data-f="${f.id}" title="Remove file">✕</button></span>`).join("");
+    return (i[key]||[]).map(f=>`<span class="fchip" data-a="open" data-d="${i.id}" data-k="${key}" data-f="${f.id}" title="${esc(f.name)} · ${fmtSize(f.size)}">${f.thumb?`<img src="${f.thumb}" alt="">`:fIcon(f)}<span>${esc(f.name)}</span><button class="fx" data-a="dl" data-d="${i.id}" data-k="${key}" data-f="${f.id}" title="Download">⬇</button><button class="fx adm" data-a="rmfile" data-d="${i.id}" data-k="${key}" data-f="${f.id}" title="Remove file">✕</button></span>`).join("");
   }
   function itemHTML(i){
     const open=S.open.has(i.id),exn=(i.exFiles||[]).length;
     return `<div class="dcard" data-did="${i.id}">
-      <div class="dc-h"><b>${esc(i.title)}</b><span class="dc-act"><button class="btn sm" data-a="attach" data-d="${i.id}" data-w="main" title="Attach files">📎 Attach</button><button class="btn sm" data-a="edit" data-d="${i.id}" title="Edit">✏️</button><button class="btn sm danger" data-a="del" data-d="${i.id}" title="Delete">🗑</button></span></div>
+      <div class="dc-h"><b>${esc(i.title)}</b><span class="dc-act"><button class="btn sm adm" data-a="attach" data-d="${i.id}" data-w="main" title="Attach files">📎 Attach</button><button class="btn sm adm" data-a="edit" data-d="${i.id}" title="Edit">✏️</button><button class="btn sm danger adm" data-a="del" data-d="${i.id}" title="Delete">🗑</button></span></div>
       ${i.note?`<div class="th-sub">${nl(i.note)}</div>`:""}
       <div class="dc-files">${chips(i,"files")||'<span class="crumb">No file attached yet — click 📎 Attach or drop files here</span>'}</div>
       <button class="dc-ex" data-a="toggle" data-d="${i.id}" aria-expanded="${open}">${open?"▾":"▸"} Example / guideline${exn?` · ${exn} file${exn>1?"s":""}`:(i.exNote?" · note":"")}</button>
-      <div class="dc-exb" data-ex="${i.id}" ${open?"":"hidden"}>${i.exNote?`<div class="th-sub" style="margin:0 0 6px">${nl(i.exNote)}</div>`:""}<div class="dc-files" style="margin-top:0">${chips(i,"exFiles")||'<span class="crumb">No example attached</span>'}</div><button class="btn sm" data-a="attach" data-d="${i.id}" data-w="ex">📎 Attach example</button></div>
+      <div class="dc-exb" data-ex="${i.id}" ${open?"":"hidden"}>${i.exNote?`<div class="th-sub" style="margin:0 0 6px">${nl(i.exNote)}</div>`:""}<div class="dc-files" style="margin-top:0">${chips(i,"exFiles")||'<span class="crumb">No example attached</span>'}</div><button class="btn sm adm" data-a="attach" data-d="${i.id}" data-w="ex">📎 Attach example</button></div>
     </div>`;
   }
   function drawList(){
@@ -2185,11 +2321,11 @@ function mountDocuments(root){
   }
   function drawBody(){
     const body=$(".dirbody",root),a=air(S.sel);
-    if(!DB.emaildir.length){body.innerHTML=`<div class="empty"><p>No airline yet.</p><button class="btn pri" data-a="addairline">➕ Add airline</button></div>`;return}
+    if(!DB.emaildir.length){body.innerHTML=`<div class="empty"><p>No airline yet.</p><button class="btn pri adm" data-a="addairline">➕ Add airline</button></div>`;return}
     if(!a){body.innerHTML=`<div class="empty">Select an airline from the list.</div>`;return}
     const d=docFor(a);
-    body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}</h3><span class="crumb">${d.items.length} document(s) · ${docFileCount(d)} file(s) · everything is editable</span></div><span class="row"><button class="btn sm pri" data-a="add" data-cat="flight">＋ Add document</button></span></div>
-    ${xlinks(a.code,"documents")}<div class="dcats">${D_CATS.map(([k,ic,nm])=>{const its=d.items.filter(i=>i.cat===k);return `<div class="dcat"><div class="dcat-h"><b>${ic} ${nm}</b><span class="crumb">${its.length}</span><button class="btn sm" data-a="add" data-cat="${k}" title="Add a document to ${nm}">＋</button></div>${its.map(itemHTML).join("")||'<div class="crumb">No document yet</div>'}</div>`}).join("")}</div>`;
+    body.innerHTML=`<div class="air-h"><div><h3 style="margin:0">${esc(airTitle(a))}</h3><span class="crumb">${d.items.length} document(s) · ${docFileCount(d)} file(s) · everything is editable</span></div><span class="row"><button class="btn sm pri adm" data-a="add" data-cat="flight">＋ Add document</button></span></div>
+    ${xlinks(a.code,"documents")}<div class="dcats">${D_CATS.map(([k,ic,nm])=>{const its=d.items.filter(i=>i.cat===k);return `<div class="dcat"><div class="dcat-h"><b>${ic} ${nm}</b><span class="crumb">${its.length}</span><button class="btn sm adm" data-a="add" data-cat="${k}" title="Add a document to ${nm}">＋</button></div>${its.map(itemHTML).join("")||'<div class="crumb">No document yet</div>'}</div>`}).join("")}</div>`;
   }
   function draw(){if(!air(S.sel)){const v=visible();S.sel=(v.find(a=>a.code===LASTAIR)||v[0]||DB.emaildir[0])?.id||null}drawList();drawBody()}
   function docForm(cat,it){
@@ -2345,7 +2481,7 @@ function buildIndex(){
   SECTIONS.forEach(s=>ix.push({sec:s.id,secName:s.short,title:s.name,sub:s.desc,crumb:"Section",text:(s.name+" "+s.desc+" "+s.kw).toLowerCase(),go:()=>go(s.id)}));
   DB.templates.forEach(t=>ix.push({sec:"email",secName:"Email Templates",title:dEn(t)+(dTh(t)?" · "+dTh(t):""),sub:(t.subject?"Subject: "+t.subject+" — ":"")+t.en.replace(/\s+/g," ").slice(0,110),crumb:`Email Templates › ${airLabel(t.airline)} › ${t.type}`,text:[t.airline,airLabel(t.airline),t.type,t.aud,t.titleEn,t.titleTh,dEn(t),dTh(t),t.subject,t.en,t.th,zhOf(t)].join(" ").toLowerCase(),tags:tagsHTML(t),go:()=>go("email",{tpl:t.id})}));
   ["phone","office"].forEach(k=>DB[k].forEach(r=>ix.push({sec:"contact",secName:"Contact History",title:`${r.ref||"(no case ref)"} — ${r.topic}`,sub:`${r.contact?r.contact+" · ":""}${r.status} · ${r.remark||""}`.slice(0,120),crumb:`Contact History › ${CFG[k].label} › ${fmt(r.ts)}`,text:[r.ref,r.contact,r.topic,r.rtype,r.remark,r.status,CFG[k].label,"contact history"].join(" ").toLowerCase(),go:()=>go("contact",{tab:k,q:r.ref||r.contact||""})})));
-  DB.sorting.filter(r=>!isMockRec(r)).forEach(r=>{const cm=(r.history||[]).filter(x=>/^(Comment|Note):/.test(x.text)).map(x=>x.text);ix.push({sec:"sorting",secName:"Sorting Bag Record",title:`${r.tagNumber} — ${r.flightNumber} (${r.flightDate})`,sub:`${r.color||""} · ${r.status} · AHL/Email: ${r.ahlCase||"—"}${cm.length?" · "+cm[cm.length-1]:""}`.slice(0,140),crumb:`Sorting Bag Record › Dashboard › ${r.createdAt||""}`,text:[r.tagNumber,r.flightNumber,r.flightDate,r.color,r.ahlCase,r.status,(r.history||[]).map(x=>x.text).join(" "),"sorting bag record tbt"].join(" ").toLowerCase(),go:()=>go("sorting",{q:r.tagNumber})})});
+  DB.sorting.filter(r=>!isMockRec(r)).forEach(r=>{const cm=(r.history||[]).filter(x=>/^(Comment|Note):/.test(x.text)).map(x=>x.text);ix.push({sec:"sorting",secName:"Sorting Bag Record",title:`${r.tagNumber} — ${r.flightNumber} (${r.flightDate})`,sub:`${r.color||""} · ${r.status} · AHL/Email: ${r.ahlCase||"—"}${cm.length?" · "+cm[cm.length-1]:""}`.slice(0,140),crumb:`Sorting Bag Record › Dashboard › ${r.createdAt||""}`,text:[r.tagNumber,r.flightNumber,r.flightDate,r.color,r.ahlCase,r.status,(r.history||[]).map(x=>x.text).join(" "),"sorting bag record tbt"+(r.zone==="jaat"?" office jaat room":"")].join(" ").toLowerCase(),go:()=>go("sorting",{q:r.tagNumber,z:zoneOf(r)})})});
   DB.emaildir.forEach(a=>{const at=airTitle(a),pd=policyFor(a).doc;
     pd.cards.forEach(c=>ix.push({sec:"policy",secName:"Airlines Policy",title:`${a.code} · ${c.title}`,sub:cardText(c).replace(/\s+/g," ").slice(0,130)||"(empty)",crumb:`Airlines Policy › ${at} › ${c.title}`,text:["airlines policy",at,c.title,cardText(c),pd.note].join(" ").toLowerCase(),go:()=>go("policy",{air:a.id,cid:c.id})}));
     if(pd.note)ix.push({sec:"policy",secName:"Airlines Policy",title:`${a.code} · mention`,sub:pd.note,crumb:`Airlines Policy › ${at}`,text:["airlines policy",at,pd.note].join(" ").toLowerCase(),go:()=>go("policy",{air:a.id})});
@@ -2765,6 +2901,195 @@ function openTool(){
     setTool("reduce");
   });
 }
+/* ============ ADMINISTRATOR MODE (v1.2.8) ============ */
+/* Edit / delete tools (everything except Contact History and Sorting baggage records) are hidden until an administrator logs in.
+   Up to 2 passwords + recovery answers are stored hashed in the synced "settings" collection (id "admin"). Auto log-out after 10 min without activity. */
+const ADM_IDLE=10*60*1000,ADM_SK="bfs-adm-sess",ADM_MAXPW=2;
+const ADM={on:false,last:0,fails:0,lock:0,_s:0};
+const isAdmin=()=>ADM.on;
+const sha256=(()=>{
+  const pr=[];for(let n=2;pr.length<64;n++)if(pr.every(p=>n%p))pr.push(n);
+  const fr=x=>Math.floor((x%1)*4294967296)>>>0;
+  const K=pr.map(p=>fr(Math.cbrt(p))),H0=pr.slice(0,8).map(p=>fr(Math.sqrt(p)));
+  const rr=(x,n)=>(x>>>n)|(x<<(32-n));
+  return s=>{
+    const b=new TextEncoder().encode(s),l=b.length,n=((l+9+63)>>6)<<6,m=new Uint8Array(n);m.set(b);m[l]=128;
+    const dv=new DataView(m.buffer);dv.setUint32(n-8,Math.floor(l*8/4294967296));dv.setUint32(n-4,(l*8)>>>0);
+    let h=H0.slice();const w=new Uint32Array(64);
+    for(let i=0;i<n;i+=64){
+      for(let t=0;t<16;t++)w[t]=dv.getUint32(i+t*4);
+      for(let t=16;t<64;t++){const a=w[t-15],c=w[t-2];w[t]=(w[t-16]+(rr(a,7)^rr(a,18)^(a>>>3))+w[t-7]+(rr(c,17)^rr(c,19)^(c>>>10)))|0}
+      let [a,b2,c,d,e,f,g,hh]=h;
+      for(let t=0;t<64;t++){
+        const t1=(hh+(rr(e,6)^rr(e,11)^rr(e,25))+((e&f)^(~e&g))+K[t]+w[t])|0,t2=((rr(a,2)^rr(a,13)^rr(a,22))+((a&b2)^(a&c)^(b2&c)))|0;
+        hh=g;g=f;f=e;e=(d+t1)|0;d=c;c=b2;b2=a;a=(t1+t2)|0}
+      h=[h[0]+a,h[1]+b2,h[2]+c,h[3]+d,h[4]+e,h[5]+f,h[6]+g,h[7]+hh].map(x=>x|0)}
+    return h.map(x=>(x>>>0).toString(16).padStart(8,"0")).join("")};
+})();
+const hpw=(salt,t)=>{let x=salt+"|"+t;for(let i=0;i<3000;i++)x=sha256(x+salt);return x};
+const rsalt=()=>{try{return Array.from(crypto.getRandomValues(new Uint8Array(12)),b=>b.toString(16).padStart(2,"0")).join("")}catch(e){return Math.random().toString(16).slice(2)+Date.now().toString(16)}};
+const ansN=s=>String(s||"").toLowerCase().replace(/[^a-z0-9฀-๿]/g,"");
+const admCfg=()=>{const c=(DB.settings||[]).find(x=>x.id==="admin");return c?{...c,pw:c.pw||[]}:{id:"admin",pw:[],q:null}};
+const admSave=c=>{DB.settings=DB.settings||[];putItem("settings",c)};
+const admMsg=()=>{const n=Date.now();return ADM.lock>n?`Too many wrong attempts — wait ${Math.ceil((ADM.lock-n)/1000)} s`:""};
+const admBad=()=>{if(++ADM.fails>=5){ADM.fails=0;ADM.lock=Date.now()+60000}};
+function admApply(){
+  document.body.classList.toggle("adm-on",ADM.on);
+  const p=$("#admPill");if(p)p.hidden=!ADM.on;
+  const t=$("#om-at"),s=$("#om-as"),i=$("#om-ai");
+  if(t){const has=admCfg().pw.length>0;t.textContent=ADM.on?"Administrator mode · ON":"Administrator";s.textContent=ADM.on?"Passwords, recovery questions, log out":has?"Log in to edit or delete content":"First time — set up password";i.textContent=ADM.on?"🔓":"🔐"}
+  admTick();
+}
+function admTouch(){
+  if(!ADM.on)return;const n=Date.now();ADM.last=n;
+  if(n-ADM._s>2000){ADM._s=n;try{sessionStorage.setItem(ADM_SK,JSON.stringify({last:n}))}catch(e){}}
+}
+function admTick(){
+  if(!ADM.on)return;
+  const left=ADM_IDLE-(Date.now()-ADM.last);
+  if(left<=0){admOff("Administrator mode logged out — no activity for 10 minutes");return}
+  const s=Math.ceil(left/1000),el=$("#admLeft");if(el)el.textContent=Math.floor(s/60)+":"+pad(s%60);
+}
+function admOn(){ADM.on=true;ADM.fails=0;ADM.last=Date.now();ADM._s=0;admTouch();admApply();toast("Administrator mode ON ✓")}
+function admOff(msg){
+  const was=ADM.on;ADM.on=false;try{sessionStorage.removeItem(ADM_SK)}catch(e){}
+  if(was){$$(".modalbg").forEach(m=>m.remove());admApply();render()}else admApply();
+  if(msg)toast(msg);
+}
+(function(){
+  try{const s=JSON.parse(sessionStorage.getItem(ADM_SK)||"null");if(s&&Date.now()-s.last<ADM_IDLE){ADM.on=true;ADM.last=s.last}}catch(e){}
+  const pill=document.createElement("div");pill.id="admPill";pill.hidden=true;
+  pill.innerHTML='<span>🔓 Admin mode</span><b id="admLeft">10:00</b><button type="button" class="btn sm" data-adm="panel">⚙</button><button type="button" class="btn sm" data-adm="out">Log out</button>';
+  document.body.appendChild(pill);
+  pill.addEventListener("click",e=>{const b=e.target.closest("[data-adm]");if(!b)return;if(b.dataset.adm==="out")admOff("Logged out of administrator mode");else openAdmin()});
+  ["pointerdown","keydown","touchstart","click"].forEach(ev=>document.addEventListener(ev,admTouch,{capture:true,passive:true}));
+  setInterval(admTick,1000);
+  /* hidden admin-only controls can never be triggered while logged out (also covers keyboard / stale handlers) */
+  document.addEventListener("click",e=>{
+    if(ADM.on)return;const a=e.target.closest?.(".adm");if(!a||a.id==="admPill")return;
+    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();openAdmin();
+  },true);
+  /* file drops onto Airlines Policy / Documents cards are edits too */
+  ["dragover","drop"].forEach(ev=>document.addEventListener(ev,e=>{
+    if(ADM.on||!e.target.closest?.(".pcard,.dcard"))return;
+    if(e.dataTransfer?.types?.includes("Files")){e.preventDefault();e.stopPropagation();if(ev==="drop")toast("Administrator login required")}
+  },true));
+  admApply();
+})();
+const admField=(id,label,type,extra)=>`<div class="full"><label>${label}</label><input id="${id}" type="${type||"text"}" autocomplete="off" ${extra||""}></div>`;
+const admQuestions=()=>`<div class="lbl">Recovery question <span class="hint" style="text-transform:none;font-weight:400">— answer at least 1 (used if all passwords are forgotten)</span></div>
+  <div class="fg">${admField("a-dob","Date of birth","date")}${admField("a-pet","Name of pet","text",'placeholder="e.g. Mochi"')}${admField("a-id4","Last 4 digits of ID card","text",'inputmode="numeric" maxlength="4" placeholder="1234"')}</div>`;
+function admReadQ(bg){
+  const dob=ansN($("#a-dob",bg).value),pet=ansN($("#a-pet",bg).value),id4=($("#a-id4",bg).value||"").replace(/\D/g,"");
+  if(id4&&id4.length!==4){toast("ID card: enter exactly the last 4 digits");return null}
+  if(!dob&&!pet&&!id4){toast("Answer at least 1 recovery question");return null}
+  const salt=rsalt(),q={salt};if(dob)q.dob=hpw(salt,dob);if(pet)q.pet=hpw(salt,pet);if(id4)q.id4=hpw(salt,id4);return q;
+}
+function admPwCheck(bg,cfg,skipId){
+  const a=$("#a-p1",bg).value,b=$("#a-p2",bg).value;
+  if(a.length<6){toast("Password must be at least 6 characters");return null}
+  if(a!==b){toast("The two passwords do not match");return null}
+  if(cfg.pw.some(p=>p.id!==skipId&&hpw(p.salt,a)===p.h)){toast("This password is already used — choose a different one");return null}
+  const salt=rsalt();return {salt,h:hpw(salt,a)};
+}
+function openAdmin(){
+  const cfg=admCfg();
+  if(!cfg.pw.length)return admSetup();
+  if(!ADM.on)return admLogin();
+  admPanel();
+}
+function admSetup(){
+  if(fdb&&!seen.settings){toast("Still syncing with the server — try again in a few seconds");return}
+  modal(`<div class="mhead"><div><h3>🔐 Set up administrator</h3><span class="hint">First time · saved encrypted and synced to every device</span></div><button class="btn sm x" data-close>✕</button></div>
+  <div class="note">Administrator mode unlocks editing and deleting in Email Templates, TELEX, Airlines Policy, Documents, Email Directory and Home. Contact History and Sorting baggage records stay open for everyone.</div>
+  <div class="fg">${admField("a-lb","Password owner / label (optional)","text",'placeholder="e.g. Supervisor A"')}${admField("a-p1","Create password * (min 6 characters)","password",'autocomplete="new-password"')}${admField("a-p2","Confirm password *","password",'autocomplete="new-password"')}</div>
+  ${admQuestions()}
+  <div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="a-ok">Save &amp; log in</button></div>`,(bg,close)=>{
+    $("#a-p1",bg).focus();
+    $("#a-ok",bg).onclick=()=>{
+      if(admCfg().pw.length){close();toast("An administrator password was just set on another device");return}
+      const pw=admPwCheck(bg,admCfg());if(!pw)return;const q=admReadQ(bg);if(!q)return;
+      admSave({id:"admin",pw:[{id:"p"+Date.now().toString(36),label:$("#a-lb",bg).value.trim()||"Password 1",...pw}],q});
+      close();admOn();
+    };
+  });
+}
+function admLogin(){
+  modal(`<div class="mhead"><div><h3>🔐 Administrator login</h3><span class="hint">Needed to edit or delete content</span></div><button class="btn sm x" data-close>✕</button></div>
+  <div class="fg" style="margin-top:8px">${admField("a-pw","Password","password",'autocomplete="current-password"')}</div><div id="a-err" class="hint" style="color:var(--bad);min-height:18px;margin-top:4px"></div>
+  <div class="row" style="justify-content:space-between;margin-top:10px"><button class="btn sm" id="a-fg">Forgot password?</button><span class="row"><button class="btn" data-close>Cancel</button><button class="btn pri" id="a-ok">Log in</button></span></div>`,(bg,close)=>{
+    const pw=$("#a-pw",bg),err=$("#a-err",bg);pw.focus();
+    const go=()=>{
+      const m=admMsg();if(m){err.textContent=m;return}
+      const cfg=admCfg(),v=pw.value;
+      if(cfg.pw.some(p=>hpw(p.salt,v)===p.h)){close();admOn();return}
+      admBad();err.textContent=admMsg()||"Wrong password";pw.select();
+    };
+    $("#a-ok",bg).onclick=go;pw.addEventListener("keydown",e=>{if(e.key==="Enter")go()});
+    $("#a-fg",bg).onclick=()=>{close();admForgot()};
+  });
+}
+function admForgot(){
+  const cfg=admCfg();
+  if(!cfg.q){toast("No recovery questions were saved for this administrator");return}
+  modal(`<div class="mhead"><div><h3>Forgot password</h3><span class="hint">Answer 1 of your recovery questions (any answers you give must be correct)</span></div><button class="btn sm x" data-close>✕</button></div>
+  <div class="fg" style="margin-top:8px">${cfg.q.dob?admField("a-dob","Date of birth","date"):""}${cfg.q.pet?admField("a-pet","Name of pet","text"):""}${cfg.q.id4?admField("a-id4","Last 4 digits of ID card","text",'inputmode="numeric" maxlength="4"'):""}</div>
+  <div id="a-err" class="hint" style="color:var(--bad);min-height:18px;margin-top:4px"></div>
+  <div class="row" style="justify-content:flex-end;margin-top:10px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="a-ok">Verify</button></div>`,(bg,close)=>{
+    $("#a-ok",bg).onclick=()=>{
+      const m=admMsg(),err=$("#a-err",bg);if(m){err.textContent=m;return}
+      const q=cfg.q,gv=id=>$("#"+id,bg)?.value||"",v={dob:ansN(gv("a-dob")),pet:ansN(gv("a-pet")),id4:gv("a-id4").replace(/\D/g,"")},ans=["dob","pet","id4"].filter(k=>q[k]&&v[k]);
+      if(!ans.length){err.textContent="Please answer at least one question";return}
+      if(ans.every(k=>hpw(q.salt,v[k])===q[k])){
+        close();
+        modal(`<div class="mhead"><div><h3>Set a new password</h3><span class="hint">This replaces all existing administrator passwords</span></div><button class="btn sm x" data-close>✕</button></div>
+        <div class="fg" style="margin-top:8px">${admField("a-p1","New password * (min 6 characters)","password",'autocomplete="new-password"')}${admField("a-p2","Confirm new password *","password",'autocomplete="new-password"')}</div>
+        <div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="a-ok">Save &amp; log in</button></div>`,(b2,c2)=>{
+          $("#a-p1",b2).focus();
+          $("#a-ok",b2).onclick=()=>{const pw=admPwCheck(b2,{pw:[]});if(!pw)return;const cur=admCfg();admSave({...cur,pw:[{id:"p"+Date.now().toString(36),label:"Password 1",...pw}]});c2();admOn()};
+        });
+      }else{admBad();err.textContent=admMsg()||"The answers do not match"}
+    };
+  });
+}
+function admPanel(){
+  modal(`<div class="mhead"><div><h3>🔓 Administrator mode</h3><span class="hint">Logged in · auto log-out after 10 minutes without activity</span></div><button class="btn sm x" data-close>✕</button></div>
+  <div class="lbl">Passwords <span class="hint" style="text-transform:none;font-weight:400" id="a-cnt"></span></div><div id="a-list"></div>
+  <div class="lbl">Recovery questions</div><div class="row"><span class="hint">Date of birth · Name of pet · Last 4 digits of ID card</span><button class="btn sm" id="a-q">Change answers</button></div>
+  <div class="row" style="justify-content:space-between;margin-top:16px"><button class="btn" data-close>Close</button><button class="btn danger" id="a-out">Log out now</button></div>`,(bg,close)=>{
+    const draw=()=>{
+      const cfg=admCfg();$("#a-cnt",bg).textContent=`(${cfg.pw.length} of ${ADM_MAXPW})`;
+      $("#a-list",bg).innerHTML=cfg.pw.map((p,i)=>`<div class="erow"><b>${esc(p.label||"Password "+(i+1))}</b><span class="eact" style="opacity:1"><button class="btn sm" data-ch="${p.id}">Change</button><button class="btn sm danger" data-rm="${p.id}" ${cfg.pw.length<2?'disabled title="At least one password is required"':""}>Delete</button></span></div>`).join("")
+        +(cfg.pw.length<ADM_MAXPW?`<div class="row" style="margin-top:8px"><button class="btn sm pri" data-add="1">＋ Add second password</button></div>`:"");
+    };
+    draw();
+    const pwDialog=(id)=>{
+      const cfg=admCfg(),cur=cfg.pw.find(p=>p.id===id);
+      modal(`<div class="mhead"><h3>${cur?"Change password":"Add password"}</h3><button class="btn sm x" data-close>✕</button></div>
+      <div class="fg" style="margin-top:8px">${admField("a-lb","Owner / label (optional)","text",`value="${esc(cur?.label||"")}"`)}${admField("a-p1","New password * (min 6 characters)","password",'autocomplete="new-password"')}${admField("a-p2","Confirm password *","password",'autocomplete="new-password"')}</div>
+      <div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="a-ok">Save</button></div>`,(b2,c2)=>{
+        $("#a-p1",b2).focus();
+        $("#a-ok",b2).onclick=()=>{
+          const c=admCfg(),pw=admPwCheck(b2,c,id);if(!pw)return;const lb=$("#a-lb",b2).value.trim();
+          if(id)admSave({...c,pw:c.pw.map(p=>p.id===id?{id,label:lb||p.label,...pw}:p)});
+          else{if(c.pw.length>=ADM_MAXPW){toast("Maximum 2 passwords");return}admSave({...c,pw:[...c.pw,{id:"p"+Date.now().toString(36),label:lb||"Password "+(c.pw.length+1),...pw}]})}
+          c2();draw();toast("Password saved ✓");
+        };
+      });
+    };
+    bg.addEventListener("click",e=>{
+      const ch=e.target.closest("[data-ch]"),rm=e.target.closest("[data-rm]"),ad=e.target.closest("[data-add]");
+      if(ch)pwDialog(ch.dataset.ch);
+      if(ad)pwDialog(null);
+      if(rm&&!rm.disabled){const c=admCfg();if(c.pw.length<2)return;if(confirm("Delete this administrator password?")){admSave({...c,pw:c.pw.filter(p=>p.id!==rm.dataset.rm)});draw();toast("Password deleted")}}
+    });
+    $("#a-q",bg).onclick=()=>modal(`<div class="mhead"><h3>Recovery questions</h3><button class="btn sm x" data-close>✕</button></div>${admQuestions()}
+      <div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="a-ok">Save answers</button></div>`,(b2,c2)=>{
+        $("#a-ok",b2).onclick=()=>{const q=admReadQ(b2);if(!q)return;admSave({...admCfg(),q});c2();toast("Recovery answers saved ✓")};
+      });
+    $("#a-out",bg).onclick=()=>{close();admOff("Logged out of administrator mode")};
+  });
+}
 (function(){
   const wrap=$("#toolFab"),menu=$("#optMenu"),gear=$("#gearBtn"),PK="bfs-tool-pos";
   if(DB.ui.lineLinks){delete DB.ui.lineLinks;save()}
@@ -2787,6 +3112,8 @@ function openTool(){
   bind($("#toolBtn"),()=>{closeMenu();openTool()});
   bind(gear,()=>menu.hidden?openMenu():closeMenu());
   menu.addEventListener("click",e=>{const i=e.target.closest("[data-om]");if(!i)return;closeMenu();
+    if(i.dataset.om==="admin"){openAdmin();return}
+    if(!ADM.on){openAdmin();return}
     if(i.dataset.om==="data")openData();
     else if(i.dataset.om==="rename")openRenameSections();
     else{VIEW.mode="home";render();mounted["home#0"]?.edit()}});
