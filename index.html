@@ -78,7 +78,7 @@ main{max-width:1500px;margin:14px auto 20px;padding:0 18px;position:relative;min
 .dragging{opacity:.4}.dz-before{box-shadow:0 -4px 0 0 var(--pri2)}.dz-after{box-shadow:0 4px 0 0 var(--pri2)}.dz-into{outline:3px dashed var(--pri2);outline-offset:-3px}
 #toolFab{display:flex;gap:10px;align-items:center;position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(72px + env(safe-area-inset-bottom,0px));z-index:60}
 .fabb{width:56px;height:56px;border-radius:50%;border:2px solid rgba(255,255,255,.7);background:linear-gradient(135deg,#0e6fc0,#07345e);box-shadow:0 4px 16px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;cursor:grab;touch-action:none;padding:0}.fabb:active{cursor:grabbing}
-#optMenu{position:absolute;width:260px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 36px rgba(0,0,0,.4);padding:6px}#optMenu[hidden]{display:none}
+#optMenu,#toolMenu{position:absolute;width:260px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 36px rgba(0,0,0,.4);padding:6px}#optMenu[hidden],#toolMenu[hidden]{display:none}
 .om-i{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:10px;border:none;background:transparent;border-radius:10px;cursor:pointer;color:var(--ink)}.om-i:hover{background:var(--soft)}.om-i>span{font-size:22px}.om-i b{display:block;font-size:14px}.om-i small{color:var(--mut);font-size:12px;line-height:1.25;display:block}
 .rt-drop{border:2px dashed var(--line);border-radius:12px;padding:18px;text-align:center;color:var(--mut);cursor:pointer}.rt-drop.over{border-color:var(--pri2);background:var(--soft);color:var(--ink)}
 .lvl{display:flex;flex-wrap:wrap;gap:6px}.lvl label{border:1px solid var(--line);border-radius:10px;padding:5px 12px;cursor:pointer;font-weight:600;font-size:13px;color:var(--ink);margin:0}.lvl input{display:none}.lvl label.on{background:var(--pri);color:#fff;border-color:var(--pri)}
@@ -141,7 +141,7 @@ main.view-in{animation:viewIn .32s cubic-bezier(.22,1,.36,1)}
 @keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}@keyframes modalOut{to{opacity:0;transform:translateY(10px) scale(.98)}}
 .modalbg{animation:bgIn .18s ease}.modalbg .modal{animation:modalIn .26s cubic-bezier(.2,.9,.3,1.05)}.modalbg.closing{animation:bgOut .17s ease forwards}.modalbg.closing .modal{animation:modalOut .17s ease forwards}
 @keyframes popIn{from{opacity:0;transform:translateY(-6px) scale(.98)}to{opacity:1;transform:none}}
-.gres.on,#tzPanel:not([hidden]),#optMenu:not([hidden]){animation:popIn .18s cubic-bezier(.2,.9,.3,1)}
+.gres.on,#tzPanel:not([hidden]),#optMenu:not([hidden]),#toolMenu:not([hidden]){animation:popIn .18s cubic-bezier(.2,.9,.3,1)}
 @keyframes toastIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}@keyframes toastOut{to{opacity:0;transform:translate(-50%,8px)}}
 .toast{animation:toastIn .25s cubic-bezier(.2,.9,.3,1)}.toast.out{animation:toastOut .2s ease forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -364,6 +364,24 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .bgc{display:flex;flex-wrap:wrap;gap:3px}.bgc .chip{margin:0}.fl-l{margin-bottom:3px}.fl-l small{color:var(--mut)}
 .bcode{background:var(--soft);border-radius:9px;padding:6px 10px;font-size:13px;margin-top:6px}
 
+/* v1.3.3 file tools */
+.tl-head{display:flex;gap:12px;align-items:center;margin-bottom:12px}.tl-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:23px;background:var(--soft);flex:none}
+.tl-drop{border:2px dashed var(--line);border-radius:14px;padding:16px;display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;background:var(--soft);cursor:pointer;text-align:center;color:var(--mut);transition:border-color .15s,background-color .15s}.tl-drop.over{border-color:var(--pri2);background:rgba(37,99,235,.12)}
+.tl-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}.tl-opts:empty,.tl-opts>div:empty{display:none}
+.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}.seg button{flex:1;padding:7px 8px;font-size:13px;font-weight:600;background:var(--card);color:var(--ink);border:none;border-right:1px solid var(--line);cursor:pointer}.seg button:last-child{border-right:none}.seg button.on{background:var(--pri);color:#fff}
+.modeg{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;margin-top:4px}.modeg button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:8px 10px;cursor:pointer;line-height:1.2}.modeg button span{font-size:18px}.modeg button b{font-size:13px}.modeg button small{font-size:11.5px;color:var(--mut)}.modeg button.on{border-color:var(--pri2);box-shadow:0 0 0 2px var(--pri2);background:var(--soft)}
+.tl-sum{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0 8px}
+.tl-pick{border:1px solid var(--line);border-radius:12px;padding:8px;margin-top:8px;max-height:230px;overflow:auto;background:var(--card)}.tl-pick[hidden]{display:none}.pk{display:flex;align-items:center;gap:10px;padding:5px 2px;border-bottom:1px dashed var(--line)}.pk:last-child{border:none}.pk-i{width:34px;height:34px;border-radius:7px;background:var(--soft);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}.pk-i img{width:100%;height:100%;object-fit:cover}
+.chk{display:inline-flex;gap:6px;align-items:center;font-size:13px;cursor:pointer;white-space:nowrap}.chk input{width:auto;min-height:0;margin:0}
+.fcard{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:8px 10px;margin-bottom:8px;position:relative;touch-action:pan-y}.fcard.shift{transition:transform .15s}.fcard.dragging{box-shadow:0 10px 26px rgba(0,0,0,.35);z-index:5;background:var(--soft);cursor:grabbing}
+.fth{width:48px;height:48px;border-radius:8px;object-fit:cover;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.fmain{flex:1;min-width:0}.fname{font-weight:700;overflow-wrap:anywhere;font-size:13.5px}.fmeta{font-size:12px;color:var(--mut);margin-top:1px}.fbar{height:5px;border-radius:3px;background:var(--line);margin-top:5px;overflow:hidden}.fbar i{display:block;height:100%;background:var(--ok)}
+.fact{display:flex;gap:4px;flex:none;flex-wrap:wrap;justify-content:flex-end}.fact .btn{padding:3px 9px;font-size:12px;min-height:0}
+.grab{cursor:grab;touch-action:none;user-select:none;font-size:20px;line-height:1;color:var(--mut);padding:8px 6px;flex:none;border-radius:8px}.grab:hover,.grab:focus-visible{background:var(--soft);color:var(--ink);outline:none}
+.fnum{width:24px;height:24px;border-radius:50%;background:var(--pri);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.tmp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}.tmpc{border:1px solid var(--line);border-radius:12px;padding:8px;background:var(--card)}.tmp-t{height:96px;border-radius:8px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:34px;overflow:hidden;margin-bottom:6px}.tmp-t img{width:100%;height:100%;object-fit:cover}
+.badge{display:inline-block;background:var(--soft);border-radius:8px;padding:0 7px;font-size:11px;font-weight:600}
+
 /* v1.3.1 */
 .bh{display:flex;align-items:center;justify-content:space-between;gap:8px}.bh .tg{min-height:0;padding:2px 10px;font-size:12px;text-transform:none;letter-spacing:0}.bsum{text-transform:none;letter-spacing:0;font-weight:600;color:var(--pri)}.bcol{display:none!important}
 .tw table.cmp{font-size:12.5px}.cmp th,.cmp td{padding:6px 7px}.cmp th{font-size:10.5px;letter-spacing:0;white-space:normal;line-height:1.2}
@@ -371,6 +389,22 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .cmp .acts{display:flex;flex-wrap:wrap;gap:3px;max-width:118px}.cmp .acts .btn,.cmp .cmb{padding:2px 7px;font-size:11.5px;min-height:0}.cmp .cmb{display:block;margin-top:3px}
 .cmp select.st{max-width:92px;font-size:11.5px}.cmp .cl2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-style:italic}.cmp td.ahl{max-width:120px;overflow-wrap:anywhere}
 .cmp .dl{white-space:nowrap}.cmp .dl small{color:var(--mut);display:inline-block;min-width:34px}
+
+/* v1.3.2 compact section bar, tag scanner, assignment widget */
+nav.bar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:6px;padding-top:5px;padding-bottom:5px}nav.bar::-webkit-scrollbar{display:none}
+nav.bar .btn{flex:none;white-space:nowrap;padding:5px 11px;font-size:13.5px;line-height:1.25}
+nav.bar .sp{flex:none;flex-wrap:nowrap;gap:6px;margin-left:auto;position:sticky;right:0;background:var(--bg);padding-left:8px}nav.bar .sp .hint{cursor:help;font-size:15px}
+.tagwrap{position:relative}.tagwrap input{padding-right:56px}.scanbtn{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:42px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--card);color:var(--pri);border-radius:9px;padding:0;cursor:pointer}.scanbtn:active{transform:translateY(-50%) scale(.93)}
+#scanOv{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.78);display:flex;align-items:center;justify-content:center;padding:12px}
+.sc-box{background:var(--card);color:var(--ink);border-radius:14px;padding:10px;width:min(460px,100%);box-shadow:0 12px 40px rgba(0,0,0,.5)}.sc-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.sc-v{position:relative;background:#000;border-radius:10px;overflow:hidden;aspect-ratio:4/3}.sc-v video{width:100%;height:100%;object-fit:cover}
+.sc-fr{position:absolute;left:8%;right:8%;top:32%;bottom:32%;border:2px solid #22c55e;border-radius:8px;box-shadow:0 0 0 9999px rgba(0,0,0,.35)}.sc-m{text-align:center;font-size:13px;margin:8px 0;min-height:18px}
+#asgPop{position:absolute;left:0;bottom:calc(100% + 8px);width:420px;max-width:calc(100vw - 24px);max-height:min(78vh,640px);overflow:auto;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 36px rgba(0,0,0,.4);padding:10px;animation:popIn .18s cubic-bezier(.2,.9,.3,1)}#asgPop[hidden]{display:none}
+.asg-tabs{display:flex;gap:6px;margin-bottom:8px}.asg-t{flex:1;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;padding:6px 8px;font-weight:600;font-size:12.5px;cursor:pointer}.asg-t.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.asg-img{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:zoom-in}.asg-img img{display:block;width:100%;max-height:46vh;object-fit:contain}
+.asg-empty{border:2px dashed var(--line);border-radius:12px;padding:24px 10px;text-align:center;cursor:pointer;color:var(--mut)}.asg-b{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.asg-capin{width:100%;margin-top:6px;font-weight:700}.asg-old{color:#b45309;font-size:12px;margin-top:4px}
+#asgView{position:fixed;inset:0;z-index:110;background:rgba(5,10,18,.95);display:flex;flex-direction:column}.av-h{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px;color:#fff}.av-h b{flex:1;min-width:120px}
+.av-s{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:6px}.av-s.fit{align-items:center}.av-s img{background:#fff;flex:none}.av-s.fit img{max-width:100%;max-height:100%;object-fit:contain}
 .st-SDone{background:#d9f2e3;color:#14663a}
 .szt{margin-top:2px}.szt .jcnt{background:#c0392b;color:#fff;border-radius:10px;padding:0 7px;font-size:11.5px;margin-left:4px}.szt .jcnt:empty{display:none}
 .jb{display:inline-block;border-radius:10px;padding:1px 9px;font-size:12px;font-weight:700;white-space:nowrap}
@@ -391,14 +425,16 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 </div></header>
 <nav class="bar" id="nav"></nav>
 <main id="main"></main>
-<div id="toolFab"><div id="optMenu" hidden><button class="om-i" data-om="admin"><span id="om-ai">🔐</span><div><b id="om-at">Administrator</b><small id="om-as">Log in to edit or delete content</small></div></button><button class="om-i adm" data-om="custom"><span>🛠</span><div><b>Customize home</b><small>Move, resize and edit home cards &amp; widgets</small></div></button><button class="om-i adm" data-om="data"><span>💾</span><div><b>Data &amp; backup</b><small>Export / import backup, reset templates</small></div></button><button class="om-i adm" data-om="rename"><span>🏷️</span><div><b>Rename sections</b><small>Change the names of the main sections</small></div></button></div><button id="gearBtn" class="fabb" title="Options" aria-label="Open options menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="toolBtn" class="fabb" title="Reduce file size (PDF / images)" aria-label="Open file size reducer"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M12 9v7m-3-3 3 3 3-3"/></svg></button></div>
+<div id="toolFab"><div id="optMenu" hidden><button class="om-i" data-om="admin"><span id="om-ai">🔐</span><div><b id="om-at">Administrator</b><small id="om-as">Log in to edit or delete content</small></div></button><button class="om-i adm" data-om="custom"><span>🛠</span><div><b>Customize home</b><small>Move, resize and edit home cards &amp; widgets</small></div></button><button class="om-i adm" data-om="data"><span>💾</span><div><b>Data &amp; backup</b><small>Export / import backup, reset templates</small></div></button><button class="om-i adm" data-om="rename"><span>🏷️</span><div><b>Rename sections</b><small>Change the names of the main sections</small></div></button></div><div id="toolMenu" hidden><button class="om-i" data-tm="reduce"><span>🗜</span><div><b>Reduce file size</b><small>Make PDF &amp; images smaller</small></div></button><button class="om-i" data-tm="convert"><span>🔄</span><div><b>Convert files</b><small>PNG ⇄ JPG ⇄ PDF · combine into one PDF</small></div></button><button class="om-i" data-tm="temp"><span>🗂</span><div><b>Temporary files</b><small id="tm-sub">Kept for 2 days · synced in the cloud</small></div></button></div><button id="gearBtn" class="fabb" title="Options" aria-label="Open options menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="toolBtn" class="fabb" title="File tools — reduce, convert, temporary files" aria-label="Open file tools menu"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M12 9v7m-3-3 3 3 3-3"/></svg></button></div>
 <footer class="pub">Published by Kongkit C.</footer>
 <footer class="ver"><button class="btn sm" id="verBtn">v<span id="verNum"></span> · Update history</button></footer>
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.3.1";
+const VERSION="1.3.3";
 const CHANGELOG=[
+ {v:"1.3.3",d:"2026-10-29",items:["Assignment widget is now shared through the cloud: the LL and Porter assignment photos are the same for everyone and update live.","File tools are now three separate options in the file-tools button (like the settings menu): 🗜 Reduce file size, 🔄 Convert files and 🗂 Temporary files — each with a redesigned screen with thumbnails, clearer controls and result cards.","Temporary files: attach photos and files, or press ☁ Keep on reduced / converted results. They are synced in the cloud and deleted automatically after 2 days. Kept files can be added back into the reducer or converter, or opened, downloaded and deleted.","File Converter: drag and drop the ⠿ handle to change the order of photos and files (touch and keyboard arrows work too). Combined PDFs and ZIPs follow that order."]},
+ {v:"1.3.2",d:"2026-10-29",items:["Section bar (Home · Email · … · Split view) is now one compact row: smaller buttons, the drag hint became a tooltip, and Split view stays visible on the right.","Record baggage: new barcode scan button next to the tag number — scan the barcode on the baggage tag with the camera (or from a photo); USB / Bluetooth scanners still type straight into the field.","New 📋 Assignment widget at the bottom-left of every page: keep the LL assignment and Porter assignment photos, open them full size with zoom, and add a title / date. Photos are saved on this device."]},
  {v:"1.3.1",d:"2026-10-28",items:["Baggage description form: each of the 3 parts (colour code, type of baggage, descriptive elements) has a Hide / Expand button (collapsed by default) and shows your selection while collapsed.","Baggage description: the code can be typed manually (e.g. BK 22 RH) — it fills the choices automatically; a code that is not on the IATA chart is kept as a manual note.","Sorting / JAAT tables are more compact: found-at merged under the tag number, enter / due dates stacked, shorter comment and action cells."]},
  {v:"1.3.0",d:"2026-10-28",items:["Sorting records: every record (Sorting Area / TBT and Office / JAAT) can now be edited with the ✏️ Edit button — tag, flights, bag description, AHL / email, location, JAAT dates and photo. Each edit is written to the history log.","Flights: every flight, including connecting flights, now has its own flight date (up to 5 flights per record).","Bag description now follows the IATA Baggage Identification Chart: ① colour code (BK, GN, RD …), ② type of baggage by chart number (e.g. 22 = upright design, soft material) chosen from pictures, ③ optional descriptive elements (R = rigid, H = retractable handles …).","Fixed: the pinned-widget icons no longer overlap the Admin mode timer (they move up while Admin mode is on)."]},
  {v:"1.2.9",d:"2026-10-27",items:["Office/JAAT: the entering day now counts as day 1, so a bag that enters on 23 Oct must be taken out on 27 Oct (day 5); the maximum stay is day 7. The due date defaults to day 5.","Sorting records: up to 5 flight numbers can be added (for connecting / transfer flights).","Administrator mode: only 1 recovery question has to be answered (date of birth, name of pet or last 4 digits of ID card). Any answers given must be correct."]},
@@ -1147,7 +1183,7 @@ async function initCloud(){
     firebase.initializeApp(FB_CFG);fdb=firebase.firestore();
     try{fdb.settings({experimentalAutoDetectLongPolling:true,merge:true})}catch(e){}
     try{await fdb.enablePersistence({synchronizeTabs:true})}catch(e){CLOUD.persist=false}
-    COLS.forEach(listen);
+    COLS.forEach(listen);asgListen();tmpListen();
     setTimeout(()=>{if(fdb&&!COLS.every(c=>seen[c])&&CLOUD.state==="connecting")setCloud("offline")},10000);
   }catch(e){fdb=null;setCloud("local","Firebase SDK could not be loaded (no internet or blocked). Working from this device only.")}
 }
@@ -1478,7 +1514,7 @@ function mountSorting(root){
     const grp=g=>BAG_TYPES.filter(t=>t[2]===g).map(t=>`<button type="button" class="bt" data-bt="${t[0]}" data-q="${esc((t[0]+" "+t[1]).toLowerCase())}" title="${esc(t[1])}">${BAG_IMG[t[0]]?`<img src="${BAG_IMG[t[0]]}" alt="">`:`<div class="ph">📦</div>`}<span class="n">${t[0]}</span><span class="l">${esc(t[1])}</span></button>`).join("");
     modal(`<div class="mhead"><div><h3>${EDIT?"✏️ Edit record":JZ?"🏢 Record JAAT bag":"🧳 Record baggage"}</h3><span class="hint">${EDIT?"Change any detail · every edit is written to the history log":JZ?"Office / JAAT room log entry":"Bangkok Airport (Sorting Area / TBT) operational log entry"}</span></div><button class="btn sm x" data-close>✕</button></div>
     <div class="fg" style="margin-top:10px">
-     <div class="full"><label>1. Tag number *</label><input id="s-tag" value="${esc(EDIT?rec.tagNumber:"")}" placeholder="10-digit e.g. 0738123221, or VN123221" style="font-family:ui-monospace,monospace" autocomplete="off"><div id="s-tagp" class="hint" style="margin-top:4px;min-height:16px"></div></div>
+     <div class="full"><label>1. Tag number *</label><div class="tagwrap"><input id="s-tag" value="${esc(EDIT?rec.tagNumber:"")}" placeholder="10-digit e.g. 0738123221, or VN123221" style="font-family:ui-monospace,monospace" autocomplete="off" inputmode="text"><button type="button" class="scanbtn" id="s-scan" title="Scan the barcode on the baggage tag">${SCAN_SVG}</button></div><div id="s-tagp" class="hint" style="margin-top:4px;min-height:16px"></div></div>
      <div class="full"><label>2. Flight number &amp; flight date * <span style="font-weight:400">(up to 5 flights — each connecting flight has its own date)</span></label><div id="s-fls"></div><button type="button" class="btn sm" id="s-fadd">＋ Add connecting flight</button></div>
      ${JZ?`<div><label>Enter date (into JAAT room) *</label><input id="s-ed" type="date" value="${EDIT?jEnter(rec):todayStr()}"></div><div><label>Due date (take out) *</label><input id="s-dd" type="date" value="${EDIT?jDue(rec):addDays(todayStr(),JAAT_OUT-1)}"></div><div class="full"><div id="s-jw" class="hint"></div></div>`:""}
      <div class="full"><label>3. Baggage description <span style="font-weight:400">· IATA Baggage Identification Chart</span></label>
@@ -1535,6 +1571,7 @@ function mountSorting(root){
       if(bagType){const sel=$(`[data-bt="${bagType}"]`,bg);sel&&sel.scrollIntoView({block:"nearest"})}
       $("#s-tag",bg).oninput=()=>{const v=$("#s-tag",bg).value.trim(),x=resolveTag(v),p=$("#s-tagp",bg);p.innerHTML=!v?"":x.air?`✔ <b>${esc(x.iata)}</b> · ${esc(x.air.n)} · barcode ${esc(x.tag)}`:/^\d{10}$/.test(x.tag)?"Airline code "+esc(x.tag.slice(1,4))+" not found — add it in ✈ Airline codes":""};
       $("#s-tag",bg).oninput();
+      $("#s-scan",bg).onclick=()=>scanBarcode(v=>{const i=$("#s-tag",bg);if(!i)return;i.value=v;i.oninput()});
       $("#s-loc",bg).onchange=e=>{const o=e.target.value==="Other";$("#s-loco",bg).style.display=o?"":"none";if(o)$("#s-loco",bg).focus()};
       const showPh=src=>{$("#s-img",bg).src=src;$("#s-up",bg).style.display="none";$("#s-pv",bg).style.display="block"};
       const noPh=()=>{$("#s-up",bg).style.display="";$("#s-pv",bg).style.display="none"};
@@ -2168,6 +2205,118 @@ function bindWidgetEvents(root){
     const c=e.target.closest("[data-ckclear]");if(c)updItems(c,c.dataset.ckclear,it=>it.filter(x=>!x.done));
   });
 }
+/* ---- barcode scanner (baggage tag) ---- */
+const SCAN_SVG='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path stroke-width="1.7" d="M7 8v8M10 8v8M13 8v8M16 8v8M18.5 8v8"/></svg>';
+let ZXP=null;
+const loadZX=()=>ZXP||(ZXP=new Promise((res,rej)=>{if(window.ZXing)return res(window.ZXing);const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js";s.onload=()=>res(window.ZXing);s.onerror=()=>{ZXP=null;rej(new Error("scanner library could not be loaded"))};document.head.appendChild(s)}));
+const normScan=t=>{t=String(t||"").trim().replace(/\s+/g,"");return/^\d+$/.test(t)?t:t.toUpperCase()};
+async function scanBarcode(done){
+  if(document.getElementById("scanOv"))return;
+  const ov=document.createElement("div");ov.id="scanOv";
+  ov.innerHTML=`<div class="sc-box"><div class="sc-h"><b>Scan the barcode on the baggage tag</b><button type="button" class="btn sm" data-sc="x">✕</button></div><div class="sc-v"><video playsinline muted autoplay></video><div class="sc-fr"></div></div><div class="sc-m" id="sc-m">Starting camera…</div><div class="row" style="justify-content:center;gap:8px"><label class="btn sm" style="cursor:pointer">📁 Take / choose a photo of the tag<input type="file" accept="image/*" capture="environment" hidden data-sc="f"></label><button type="button" class="btn sm" data-sc="t" hidden>🔦 Light</button></div></div>`;
+  document.body.appendChild(ov);
+  const vid=$("video",ov),msg=$("#sc-m",ov);let stream=null,stop=false,timer=0,reader=null,finished=false,det=null;
+  const cleanup=()=>{stop=true;clearInterval(timer);try{reader&&reader.reset()}catch(e){}if(stream)stream.getTracks().forEach(t=>t.stop());if(vid.srcObject)try{vid.srcObject.getTracks().forEach(t=>t.stop())}catch(e){}document.removeEventListener("keydown",esc1);ov.remove()};
+  const esc1=e=>{if(e.key==="Escape")cleanup()};document.addEventListener("keydown",esc1);
+  const ok=txt=>{if(finished)return;finished=true;const v=normScan(txt);if(navigator.vibrate)navigator.vibrate(60);cleanup();toast("Scanned: "+v);done(v)};
+  ov.addEventListener("click",e=>{if(e.target.closest('[data-sc="x"]')||e.target===ov){cleanup();return}
+    const t=e.target.closest('[data-sc="t"]');if(t&&stream){stream.getVideoTracks()[0].applyConstraints({advanced:[{torch:!t._on}]}).then(()=>{t._on=!t._on}).catch(()=>{})}});
+  const fmts=["itf","code_128","code_39","code_93","codabar","ean_13","ean_8","upc_a","upc_e","qr_code","data_matrix","pdf417"];
+  if("BarcodeDetector" in window){try{const sup=await BarcodeDetector.getSupportedFormats();det=new BarcodeDetector({formats:fmts.filter(f=>sup.includes(f))})}catch(e){det=null}}
+  $('[data-sc="f"]',ov).onchange=async e=>{const f=e.target.files[0];if(!f)return;msg.textContent="Reading the photo…";
+    try{let txt="";if(det){const bm=await createImageBitmap(f);const r=await det.detect(bm);if(r&&r[0])txt=r[0].rawValue}
+      else{const z=await loadZX(),rd=new z.BrowserMultiFormatReader(),u=URL.createObjectURL(f);try{txt=(await rd.decodeFromImageUrl(u)).getText()}finally{URL.revokeObjectURL(u)}}
+      if(txt)ok(txt);else msg.textContent="No barcode found in that photo — try again closer, in better light."}catch(x){msg.textContent="No barcode found in that photo — try again closer, in better light."}};
+  if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){msg.textContent="Live camera is not available here (it needs HTTPS and camera permission). Use the photo button, or type the tag number.";return}
+  try{
+    if(det){
+      stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"},width:{ideal:1920},height:{ideal:1080}},audio:false});
+      if(stop){stream.getTracks().forEach(t=>t.stop());return}
+      vid.srcObject=stream;await vid.play().catch(()=>{});msg.textContent="Point the camera at the barcode on the tag";
+      timer=setInterval(async()=>{if(vid.readyState<2||finished)return;try{const r=await det.detect(vid);if(r&&r[0])ok(r[0].rawValue)}catch(e){}},180);
+    }else{
+      msg.textContent="Loading scanner…";const z=await loadZX();if(stop)return;
+      const h=new Map();h.set(z.DecodeHintType.POSSIBLE_FORMATS,[z.BarcodeFormat.ITF,z.BarcodeFormat.CODE_128,z.BarcodeFormat.CODE_39,z.BarcodeFormat.EAN_13,z.BarcodeFormat.QR_CODE]);h.set(z.DecodeHintType.TRY_HARDER,true);
+      reader=new z.BrowserMultiFormatReader(h,150);
+      await reader.decodeFromConstraints({video:{facingMode:{ideal:"environment"}},audio:false},vid,res=>{if(res)ok(res.getText())});
+      stream=vid.srcObject;msg.textContent="Point the camera at the barcode on the tag";
+    }
+    const tr=stream&&stream.getVideoTracks&&stream.getVideoTracks()[0];if(tr&&tr.getCapabilities&&(tr.getCapabilities()||{}).torch)$('[data-sc="t"]',ov).hidden=false;
+  }catch(e){if(stop)return;msg.textContent=e&&e.name==="NotAllowedError"?"Camera permission was denied — allow the camera for this site, or use the photo button.":"Could not start the camera ("+((e&&e.message)||e)+"). Use the photo button, or type the tag number."}
+}
+/* ---- daily assignment widget: LL + Porter photos (saved on this device) ---- */
+const ASG_TABS=[["ll","LL assignment","📋"],["porter","Porter assignment","🧳"]];
+const AS={open:false,tab:"ll",data:{ll:null,porter:null}};let asgPop=null;
+const asgIDB=()=>new Promise((res,rej)=>{if(!window.indexedDB)return rej(new Error("no idb"));const q=indexedDB.open("bfs-assign",1);q.onupgradeneeded=()=>q.result.createObjectStore("kv");q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)});
+const asgGet=async k=>{try{const d=await asgIDB();return await new Promise((res,rej)=>{const r=d.transaction("kv").objectStore("kv").get(k);r.onsuccess=()=>res(r.result||null);r.onerror=()=>rej(r.error)})}catch(e){try{return JSON.parse(localStorage.getItem("bfs-asg-"+k)||"null")}catch(x){return null}}};
+const asgSet=async(k,v)=>{try{const d=await asgIDB();await new Promise((res,rej)=>{const tx=d.transaction("kv","readwrite");v?tx.objectStore("kv").put(v,k):tx.objectStore("kv").delete(k);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}catch(e){try{v?localStorage.setItem("bfs-asg-"+k,JSON.stringify(v)):localStorage.removeItem("bfs-asg-"+k)}catch(x){toast("Could not save the photo on this device (storage is full)")}}};
+async function asgCompress(file){
+  let bm;try{bm=await createImageBitmap(file,{imageOrientation:"from-image"})}catch(e){bm=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=URL.createObjectURL(file)})}
+  const w0=bm.width||bm.naturalWidth,h0=bm.height||bm.naturalHeight;let out="";
+  for(const[mx,q]of[[2000,.82],[1800,.74],[1600,.68],[1400,.6],[1200,.55],[1000,.5]]){   /* a cloud document must stay under 1 MB */
+    const k=Math.min(1,mx/Math.max(w0,h0)),c=document.createElement("canvas");c.width=Math.round(w0*k);c.height=Math.round(h0*k);const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(bm,0,0,c.width,c.height);
+    out=c.toDataURL("image/jpeg",q);if(out.length<=900000)break}
+  return out}
+const asgCloudSet=(t,d)=>{if(!fdb)return;const{cloud,...r}=d;fdb.collection("assignments").doc(t).set(r).catch(cloudErr)};
+const asgSave=async t=>{const d=AS.data[t];await asgSet(t,d);asgCloudSet(t,d)};
+const asgRemove=async t=>{AS.data[t]=null;await asgSet(t,null);if(fdb)fdb.collection("assignments").doc(t).delete().catch(cloudErr)};
+function asgListen(){
+  fdb.collection("assignments").onSnapshot(snap=>{
+    const got={};snap.docs.forEach(d=>{got[d.id]=d.data()});
+    ASG_TABS.forEach(([t])=>{
+      if(got[t]){AS.data[t]={...got[t],cloud:true};asgSet(t,AS.data[t])}
+      else if(!snap.metadata.fromCache&&AS.data[t]){
+        if(AS.data[t].cloud){AS.data[t]=null;asgSet(t,null)}   /* removed by someone else */
+        else asgCloudSet(t,AS.data[t])                          /* a photo kept only on this device -> share it */
+      }});
+    if(AS.open)asgPaint();renderDock();
+  },()=>{});
+}
+const asgCount=()=>ASG_TABS.filter(t=>AS.data[t[0]]).length;
+const asgChipHTML=()=>`<button class="wchip${AS.open?" on":""}" data-asg="chip" title="Daily assignment — LL &amp; Porter">📋 Assignment${asgCount()?` <small>${asgCount()}/2</small>`:""}</button>`;
+const asgSync=()=>{if(!asgPop)return;if(DS.open)AS.open=false;asgPop.hidden=!AS.open};
+function asgPaint(){
+  if(!asgPop)return;const t=AS.tab,d=AS.data[t],nm=(ASG_TABS.find(x=>x[0]===t)||[])[1]||"";
+  asgPop.innerHTML=`<div class="wdp-h"><b>📋 Daily assignment</b><button class="btn sm" data-asg="close" title="Close">✕</button></div><div class="asg-tabs">${ASG_TABS.map(x=>`<button class="asg-t${x[0]===t?" on":""}" data-asg-tab="${x[0]}">${x[2]} ${x[1]}${AS.data[x[0]]?" ●":""}</button>`).join("")}</div>`+
+  (d?`<div class="asg-img" data-asg="view" title="Tap to open full size"><img src="${d.img}" alt="${esc(nm)}"></div><input class="asg-capin" data-asg-cap value="${esc(d.cap||"")}" placeholder="Title / date e.g. 28 OCT 26" maxlength="60"><div class="hint" style="margin-top:3px">Photo added ${esc(d.at||"")}</div>${d.day&&d.day!==todayStr()?`<div class="asg-old">⚠ This photo was not added today — upload today's assignment.</div>`:""}<div class="asg-b"><button class="btn sm pri" data-asg="view">🔍 Full size</button><button class="btn sm" data-asg="up">📤 Replace photo</button><button class="btn sm danger" data-asg="del" title="Remove this photo">🗑</button></div>`
+   :`<div class="asg-empty" data-asg="up"><div style="font-size:32px">📷</div><b>Add the ${esc(nm)} photo</b><br><small>Choose from Gallery or take a photo</small></div>`)+
+  `<div class="hint" style="margin-top:8px">${fdb?"☁ Shared with everyone · synced in the cloud":"Saved on this device — will sync when the cloud connects"}</div><input type="file" accept="image/*" hidden id="asgFile">`;
+}
+function asgView(){
+  let ov=document.getElementById("asgView");if(ov)ov.remove();
+  const t=AS.tab,d=AS.data[t];if(!d)return;
+  let lv=0;const LV=[0,1,1.6,2.4,3.6];
+  ov=document.createElement("div");ov.id="asgView";
+  const draw=()=>{const dd=AS.data[AS.tab];ov.innerHTML=`<div class="av-h"><b>${esc((ASG_TABS.find(x=>x[0]===AS.tab)||[])[1]||"")}${dd&&dd.cap?" · "+esc(dd.cap):""}</b>${ASG_TABS.map(x=>`<button class="btn sm${x[0]===AS.tab?" pri":""}" data-av-tab="${x[0]}"${AS.data[x[0]]?"":" disabled"}>${x[2]} ${x[0]==="ll"?"LL":"Porter"}</button>`).join("")}<button class="btn sm" data-av="out">－</button><button class="btn sm" data-av="fit">Fit</button><button class="btn sm" data-av="in">＋</button><button class="btn sm" data-av="x">✕ Close</button></div><div class="av-s${lv===0?" fit":""}">${dd?`<img src="${dd.img}" alt="" style="${lv?`width:${LV[lv]*100}%;max-width:none;height:auto`:""}">`:""}</div>`};
+  draw();document.body.appendChild(ov);
+  const close=()=>{document.removeEventListener("keydown",kd);ov.remove()},kd=e=>{if(e.key==="Escape")close()};document.addEventListener("keydown",kd);
+  ov.addEventListener("click",e=>{
+    const a=e.target.closest("[data-av]"),tb=e.target.closest("[data-av-tab]");
+    if(tb){AS.tab=tb.dataset.avTab;lv=0;draw();return}
+    if(!a)return;const k=a.dataset.av;if(k==="x")return close();
+    if(k==="in")lv=Math.min(LV.length-1,lv+1);else if(k==="out")lv=Math.max(0,lv-1);else lv=0;draw()});
+  ov.addEventListener("dblclick",e=>{if(e.target.tagName==="IMG"){lv=lv?0:2;draw()}});
+}
+function asgInit(){
+  asgPop=$("#asgPop",dockEl);
+  dockChips.addEventListener("click",e=>{if(!e.target.closest('[data-asg="chip"]'))return;DS.open=null;AS.open=!AS.open;if(AS.open)asgPaint();renderDock()});
+  asgPop.addEventListener("click",e=>{
+    const tb=e.target.closest("[data-asg-tab]");if(tb){AS.tab=tb.dataset.asgTab;asgPaint();return}
+    const a=e.target.closest("[data-asg]");if(!a)return;const k=a.dataset.asg;
+    if(k==="close"){AS.open=false;renderDock()}
+    else if(k==="up")$("#asgFile",asgPop).click();
+    else if(k==="view")asgView();
+    else if(k==="del"){if(confirm("Remove this assignment photo for everyone?")){const t=AS.tab;asgRemove(t);asgPaint();renderDock()}}});
+  asgPop.addEventListener("change",async e=>{
+    if(e.target.matches("[data-asg-cap]")){const t=AS.tab;if(AS.data[t]){AS.data[t].cap=e.target.value.trim();asgSave(t)}return}
+    if(e.target.id==="asgFile"){const f=e.target.files[0];if(!f)return;const t=AS.tab;
+      try{const img=await asgCompress(f);const cap=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"2-digit"}).toUpperCase();
+        AS.data[t]={img,cap:AS.data[t]&&AS.data[t].cap&&AS.data[t].day===todayStr()?AS.data[t].cap:cap,day:todayStr(),at:nowStr(),ts:Date.now()};await asgSave(t);toast(fdb?"Assignment photo saved & shared ✓":"Saved on this device — it will be shared when the cloud connects");asgPaint();renderDock()}
+      catch(x){toast("Could not read that image")}}});
+  document.addEventListener("pointerdown",e=>{if(AS.open&&!e.target.closest("#wdock")&&!e.target.closest("#asgView")&&!e.target.closest(".modalbg")){AS.open=false;renderDock()}});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&AS.open&&!document.getElementById("asgView")){AS.open=false;renderDock()}});
+  Promise.all(ASG_TABS.map(t=>asgGet(t[0]).then(v=>{AS.data[t[0]]=v}))).then(()=>{if(AS.open)asgPaint();renderDock()});
+}
 /* ---- pinned widgets: small icons at the bottom-left of every page ---- */
 const pinnedWidgets=()=>DB.home.flatMap(c=>(c.widgets||[]).filter(w=>w.pin).map(w=>({c,w})));
 const DS={open:null};let dockEl,dockChips,dockPop;
@@ -2191,11 +2340,11 @@ function tickDock(){
 }
 function renderDock(){
   if(!dockEl)return;
-  const list=pinnedWidgets();dockEl.hidden=!list.length;
+  const list=pinnedWidgets();dockEl.hidden=false;
   if(DS.open&&DS.open!=="*"&&!list.some(x=>x.w.id===DS.open))DS.open=null;
   if(!list.length)DS.open=null;
-  const max=4;
-  dockChips.innerHTML=list.slice(0,max).map(x=>chipHTML(x.w)).join("")+(list.length>max?`<button class="wchip${DS.open==="*"?" on":""}" data-wchip="*">⋯ +${list.length-max}</button>`:"");
+  asgSync();const max=4;
+  dockChips.innerHTML=asgChipHTML()+list.slice(0,max).map(x=>chipHTML(x.w)).join("")+(list.length>max?`<button class="wchip${DS.open==="*"?" on":""}" data-wchip="*">⋯ +${list.length-max}</button>`:"");
   if(!DS.open){dockPop.hidden=true;tickDock();return}
   const a=document.activeElement;
   if(!dockPop.hidden&&dockPop.contains(a)&&a.value&&/\b(wg-add|ck-edit|note-edit)\b/.test(a.className)){tickDock();return}   /* do not wipe what is being typed */
@@ -2205,8 +2354,8 @@ function renderDock(){
 }
 function initDock(){
   dockEl=document.createElement("div");dockEl.id="wdock";dockEl.hidden=true;
-  dockEl.innerHTML='<div id="wdockPop" hidden></div><div id="wdockChips"></div>';document.body.appendChild(dockEl);
-  dockPop=$("#wdockPop",dockEl);dockChips=$("#wdockChips",dockEl);
+  dockEl.innerHTML='<div id="asgPop" hidden></div><div id="wdockPop" hidden></div><div id="wdockChips"></div>';document.body.appendChild(dockEl);
+  dockPop=$("#wdockPop",dockEl);dockChips=$("#wdockChips",dockEl);asgInit();
   dockChips.addEventListener("click",e=>{const b=e.target.closest("[data-wchip]");if(!b)return;DS.open=DS.open===b.dataset.wchip?null:b.dataset.wchip;renderDock()});
   dockPop.addEventListener("click",e=>{
     const t=e.target.closest("[data-h]");
@@ -2529,7 +2678,7 @@ function syncHistory(){const sig=VIEW.mode+"|"+VIEW.a+"|"+VIEW.b;if(sig===NAVSIG
 window.addEventListener("popstate",e=>{const s=e.state;if(!s||!s.mode)return;VIEW.mode=s.mode;VIEW.a=s.a;VIEW.b=s.b;NAVPOP=true;try{render()}finally{NAVPOP=false}});
 function renderNav(){
   $("#nav").innerHTML=`<button class="btn ${VIEW.mode==="home"?"on":""}" data-v="home">🏠 Home</button>`+SECTIONS.map(s=>`<button class="btn ${VIEW.mode==="single"&&VIEW.a===s.id?"on":""}" data-s="${s.id}" draggable="true">${s.icon} ${s.short}</button>`).join("")+
-  `<div class="sp"><span class="hint">↕ Drag a section button onto the page to split</span><button class="btn ${VIEW.mode==="split"?"on":""}" data-v="split" title="Show two sections side by side">⫿⫿ Split view</button>${VIEW.mode==="split"?`<select data-sel="a">${SECTIONS.map(s=>`<option value="${s.id}"${VIEW.a===s.id?" selected":""}>${s.short}</option>`).join("")}</select><span>＋</span><select data-sel="b">${SECTIONS.map(s=>`<option value="${s.id}"${VIEW.b===s.id?" selected":""}>${s.short}</option>`).join("")}</select>`:""}</div>`;
+  `<div class="sp"><span class="hint" title="Tip: drag a section button onto the page to split the view">↕</span><button class="btn ${VIEW.mode==="split"?"on":""}" data-v="split" title="Show two sections side by side (or drag a section button onto the page)">⫿⫿ Split view</button>${VIEW.mode==="split"?`<select data-sel="a">${SECTIONS.map(s=>`<option value="${s.id}"${VIEW.a===s.id?" selected":""}>${s.short}</option>`).join("")}</select><span>＋</span><select data-sel="b">${SECTIONS.map(s=>`<option value="${s.id}"${VIEW.b===s.id?" selected":""}>${s.short}</option>`).join("")}</select>`:""}</div>`;
 }
 const _rn=renderNav;renderNav=function(){_rn();const n=$("#nav"),b=$("#nav .btn.on");if(b&&n.scrollWidth>n.clientWidth)n.scrollLeft=b.offsetLeft-n.clientWidth/2+b.offsetWidth/2};
 function renderHomeKpi(){const k=$("#kpis");if(k)k.innerHTML=`<div class="kpi"><b>${DB.templates.length}</b><span>Email templates</span></div><div class="kpi"><b>${DB.phone.length}</b><span>Phone records</span></div><div class="kpi"><b>${DB.office.length}</b><span>Office records</span></div><div class="kpi"><b>${DB.sorting.length}</b><span>Sorting bags</span></div>`}
@@ -2818,212 +2967,330 @@ async function reducePdf(file,o,prog){
   const out=await outDoc.save({useObjectStreams:true});
   return{blob:new Blob([out],{type:"application/pdf"}),type:"application/pdf"};
 }
-const RT_HTML=`<div class="rt-drop" id="rt-drop" style="margin-top:10px"><div>📂 <b>Drop files here</b> or click to choose (PDF, PNG, JPEG, WebP, GIF, BMP…)</div><input id="rt-f" type="file" multiple hidden accept=".pdf,image/*"></div>
-  <div class="fg" style="margin-top:10px"><div><label>Compression level</label><div class="lvl" id="rt-lvl"><label data-l="light"><input type="radio" name="lv">Light · best quality</label><label data-l="balanced"><input type="radio" name="lv">Balanced</label><label data-l="strong"><input type="radio" name="lv">Strong · smallest</label></div></div>
-   <div><label>Image output format</label><select id="rt-fmt"><option value="smart">Smart — best format for each image (recommended)</option><option value="same">Same as original</option><option value="jpeg">Convert to JPEG (smallest)</option><option value="webp">Convert to WebP</option></select></div></div>
-  <div class="note" style="margin-top:10px">ℹ️ <b>PDF:</b> Light keeps the text and only re-packs the file; Balanced / Strong re-draw each page as an image, so <b>text can no longer be selected</b>. If a result is not smaller, the original is kept. <b>Images:</b> Smart turns photos / screenshots into JPEG and keeps PNG only when it has transparency.</div>
-  <div class="row" style="margin:10px 0;justify-content:space-between"><span id="rt-sum" class="hint"></span><span class="row"><button class="btn sm" id="rt-re">▶ Compress again</button><button class="btn sm pri" id="rt-zip">⬇ Download all (ZIP)</button><button class="btn sm danger" id="rt-clr">Clear</button></span></div>
-  <div class="tw" id="rt-list"></div>`;
-function openTool(){
-  const items=[];let busy=false;
+/* ============ FILE TOOLS v2: Reducer · Converter · Temporary files (each its own section) ============ */
+const TMP_TTL=48*36e5,TMP_CHUNK=900000,TMP_MAX=15*1048576;
+const TMP={items:[],ready:false,cache:{},watch:null,sweepN:0};
+const tmpLive=()=>TMP.items.filter(x=>x.expires>Date.now());
+const tmpLeft=ms=>{const m=Math.max(0,Math.round((ms-Date.now())/6e4));return m>=60?`${Math.floor(m/60)} h ${m%60} min left`:`${m} min left`};
+const tmpIcon=t=>/^image\//.test(t)?"🖼":/pdf/.test(t)?"📄":/zip/.test(t)?"🗜":"📎";
+const tmo=(p,ms)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error("timeout")),ms))]);
+function tmpUI(){const n=tmpLive().length,s=document.getElementById("tm-sub");if(s)s.textContent=n?`${n} file${n>1?"s":""} kept · deleted after 2 days`:"Kept for 2 days · synced in the cloud";if(TMP.watch)TMP.watch()}
+function tmpListen(){
+  fdb.collection("tmp_files").onSnapshot(snap=>{TMP.items=snap.docs.map(d=>({...d.data(),id:d.id})).sort((a,b)=>b.created-a.created);TMP.ready=true;tmpUI();tmpSweep()},()=>{});
+  setInterval(()=>{tmpUI();tmpSweep()},60000);
+}
+async function tmpSweep(){
+  if(!fdb)return;const now=Date.now();
+  try{
+    for(const m of TMP.items.filter(x=>x.expires<=now))await tmpDelete(m.id,true);
+    if(TMP.sweepN++%10===0){const q=await fdb.collection("tmp_chunks").where("exp","<",now).limit(200).get();if(!q.empty){const b=fdb.batch();q.docs.forEach(d=>b.delete(d.ref));await b.commit()}}
+  }catch(e){}
+}
+async function tmpDelete(id,quiet){
+  const m=TMP.items.find(x=>x.id===id),n=m?m.chunks:0;delete TMP.cache[id];
+  try{
+    await fdb.collection("tmp_files").doc(id).delete();
+    for(let i=0;i<n;i+=400){const b=fdb.batch();for(let j=i;j<Math.min(n,i+400);j++)b.delete(fdb.collection("tmp_chunks").doc(id+"_"+j));await b.commit()}
+  }catch(e){if(!quiet)toast("Could not delete (no connection?)")}
+}
+async function tmpThumb(blob){const u=URL.createObjectURL(blob);try{const im=await loadImg(u),w=im.naturalWidth,h=im.naturalHeight,k=Math.min(1,96/Math.max(w,h)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(w*k));c.height=Math.max(1,Math.round(h*k));const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);return c.toDataURL("image/jpeg",.6)}finally{URL.revokeObjectURL(u)}}
+async function tmpSave(blob,name,source){
+  if(!fdb){toast("The cloud is not connected — temporary files need an internet connection");return null}
+  if(blob.size>TMP_MAX){toast(`${name} is larger than ${fmtSize(TMP_MAX)} — too big to keep in the cloud`);return null}
+  const id=uid("t"),created=Date.now(),expires=created+TMP_TTL,u8=new Uint8Array(await blob.arrayBuffer()),n=Math.max(1,Math.ceil(u8.length/TMP_CHUNK));
+  try{
+    for(let i=0;i<n;i+=3){const b=fdb.batch();
+      for(let j=i;j<Math.min(n,i+3);j++)b.set(fdb.collection("tmp_chunks").doc(id+"_"+j),{fid:id,i:j,exp:expires,data:firebase.firestore.Blob.fromUint8Array(u8.subarray(j*TMP_CHUNK,(j+1)*TMP_CHUNK))});
+      await tmo(b.commit(),60000)}
+    let thumb="";if(/^image\//.test(blob.type)){try{thumb=await tmpThumb(blob)}catch(e){}}
+    await tmo(fdb.collection("tmp_files").doc(id).set({name,type:blob.type||"application/octet-stream",size:blob.size,source,created,expires,chunks:n,thumb}),60000);
+    TMP.cache[id]=blob;return id;
+  }catch(e){toast(`Could not keep ${name} (${e.message==="timeout"?"no connection":"save failed"})`);for(let j=0;j<n;j++)fdb.collection("tmp_chunks").doc(id+"_"+j).delete().catch(()=>{});return null}
+}
+async function tmpLoad(id){
+  if(TMP.cache[id])return TMP.cache[id];const m=TMP.items.find(x=>x.id===id);if(!m)throw new Error("That file is no longer available");
+  const docs=await Promise.all(Array.from({length:m.chunks},(_,i)=>fdb.collection("tmp_chunks").doc(id+"_"+i).get()));
+  const b=new Blob(docs.map(d=>{if(!d.exists)throw new Error("The file data is missing (it may have expired)");return d.data().data.toUint8Array()}),{type:m.type});
+  if(b.size<=8*1048576)TMP.cache[id]=b;return b;
+}
+async function tmpFile(id){const m=TMP.items.find(x=>x.id===id),b=await tmpLoad(id);return new File([b],m.name,{type:m.type})}
+async function tmpOpen(id){
+  const m=TMP.items.find(x=>x.id===id);if(!m)return;toast("Opening…");
+  try{const b=await tmpLoad(id);
+    if(/^image\//.test(m.type)){const u=URL.createObjectURL(b),ov=document.createElement("div");ov.id="asgView";
+      ov.innerHTML=`<div class="av-h"><b>${esc(m.name)}</b><button class="btn sm" data-av="d">⬇ Download</button><button class="btn sm" data-av="x">✕ Close</button></div><div class="av-s fit"><img src="${u}" alt=""></div>`;document.body.appendChild(ov);
+      const close=()=>{document.removeEventListener("keydown",kd);URL.revokeObjectURL(u);ov.remove()},kd=e=>{if(e.key==="Escape")close()};document.addEventListener("keydown",kd);
+      ov.addEventListener("click",e=>{const a=e.target.closest("[data-av]");if(!a)return;a.dataset.av==="x"?close():dlFile(m.name,b,m.type)})}
+    else if(/pdf/.test(m.type)){const u=URL.createObjectURL(b);if(!window.open(u,"_blank"))dlFile(m.name,b,m.type);setTimeout(()=>URL.revokeObjectURL(u),60000)}
+    else dlFile(m.name,b,m.type);
+  }catch(e){toast(e.message||"Could not open the file")}
+}
+const scrollParent=el=>{for(let p=el.parentElement;p;p=p.parentElement){const o=getComputedStyle(p).overflowY;if((o==="auto"||o==="scroll")&&p.scrollHeight>p.clientHeight)return p}return null};
+/* drag & drop re-ordering (mouse + touch): grab the ⠿ handle; ArrowUp / ArrowDown also work on the handle */
+function makeSortable(list,onMove){
+  list.addEventListener("pointerdown",e=>{
+    const h=e.target.closest(".grab");if(!h||e.button>0)return;const el=h.closest(".fcard");if(!el||el.parentElement!==list)return;
+    e.preventDefault();
+    const els=[...list.children].filter(x=>x.classList.contains("fcard")),from=els.indexOf(el),rects=els.map(x=>x.getBoundingClientRect()),H=rects[from].height+8,startY=e.clientY,sp=scrollParent(list),s0=sp?sp.scrollTop:0;
+    let to=from,lastY=startY,timer=0;
+    el.classList.add("dragging");els.forEach((x,i)=>{if(i!==from)x.classList.add("shift")});try{h.setPointerCapture(e.pointerId)}catch(x){}
+    const upd=()=>{
+      const dy=lastY-startY+(sp?sp.scrollTop-s0:0);el.style.transform=`translateY(${dy}px)`;
+      const c=rects[from].top+rects[from].height/2+dy;let t=from;
+      els.forEach((x,i)=>{const m=rects[i].top+rects[i].height/2;if(i<from&&c<m)t=Math.min(t,i);if(i>from&&c>m)t=Math.max(t,i)});to=t;
+      els.forEach((x,i)=>{if(i===from)return;let s=0;if(from<to&&i>from&&i<=to)s=-H;if(from>to&&i<from&&i>=to)s=H;x.style.transform=s?`translateY(${s}px)`:""});
+    };
+    timer=setInterval(()=>{if(!sp)return;const r=sp.getBoundingClientRect();if(lastY<r.top+50)sp.scrollTop-=12;else if(lastY>r.bottom-50)sp.scrollTop+=12;else return;upd()},30);
+    const mv=ev=>{lastY=ev.clientY;upd()};
+    const up=()=>{clearInterval(timer);h.removeEventListener("pointermove",mv);h.removeEventListener("pointerup",up);h.removeEventListener("pointercancel",up);els.forEach(x=>{x.classList.remove("dragging","shift");x.style.transform=""});if(to!==from)onMove(from,to)};
+    h.addEventListener("pointermove",mv);h.addEventListener("pointerup",up);h.addEventListener("pointercancel",up);
+  });
+  list.addEventListener("keydown",e=>{const h=e.target.closest(".grab");if(!h)return;const els=[...list.children].filter(x=>x.classList.contains("fcard")),i=els.indexOf(h.closest(".fcard"));
+    if(e.key==="ArrowUp"&&i>0){e.preventDefault();onMove(i,i-1,true)}else if(e.key==="ArrowDown"&&i<els.length-1){e.preventDefault();onMove(i,i+1,true)}});
+}
+const fthHTML=it=>{if(isImgFile(it.file)){if(!it.th)it.th=URL.createObjectURL(it.file);return `<img class="fth" src="${it.th}" alt="">`}return `<span class="fth">${isPdfFile(it.file)?"📄":"📎"}</span>`};
+const relTh=it=>{if(it.th){URL.revokeObjectURL(it.th);it.th=null}};
+const pickerHTML=()=>{const l=tmpLive();return l.length?l.map(m=>`<div class="pk"><span class="pk-i">${m.thumb?`<img src="${m.thumb}" alt="">`:tmpIcon(m.type)}</span><div class="fmain"><div class="fname">${esc(m.name)}</div><div class="fmeta">${fmtSize(m.size)} · ${esc(m.source||"")} · ${tmpLeft(m.expires)}</div></div><button class="btn sm" data-pk="${m.id}">＋ Add</button></div>`).join(""):`<div class="empty">No temporary files yet. Keep a file with ☁, or attach files in 🗂 Temporary files.</div>`};
+function bindPicker(bg,host,btn,onFiles){
+  const draw=()=>{host.innerHTML=`<div class="row" style="justify-content:space-between;margin-bottom:6px"><b>🗂 Add from temporary files</b><button class="btn sm" data-pk="x">✕</button></div>`+pickerHTML()};
+  btn.onclick=()=>{host.hidden=!host.hidden;if(!host.hidden)draw()};
+  host.addEventListener("click",async e=>{const b=e.target.closest("[data-pk]");if(!b)return;if(b.dataset.pk==="x"){host.hidden=true;return}
+    b.disabled=true;b.textContent="Loading…";try{onFiles([await tmpFile(b.dataset.pk)])}catch(x){toast(x.message||"Could not load the file")}b.disabled=false;b.textContent="＋ Add"});
+  const prev=TMP.watch;TMP.watch=()=>{if(!bg.isConnected){TMP.watch=prev&&prev!==TMP.watch?prev:null;return}if(!host.hidden)draw()};
+}
+const bindDrop=(drop,input,add)=>{drop.onclick=()=>input.click();input.onchange=()=>{add(input.files);input.value=""};
+  ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
+  ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
+  drop.addEventListener("drop",e=>add(e.dataTransfer.files))};
+const zipName=()=>{const used=new Set();return n=>{let m=n,k=1;while(used.has(m.toLowerCase()))m=n.replace(/(\.[^.]*)?$/,`-${k++}$1`);used.add(m.toLowerCase());return m}};
+const ensureZip=async()=>{if(!window.JSZip)await loadScript([await inflateLib(LIBZ.zip)])};
+const toolHead=(ic,t,sub)=>`<div class="tl-head"><div class="tl-ic">${ic}</div><div style="min-width:0"><h3 style="margin:0">${t}</h3><span class="hint">${sub}</span></div><button class="btn sm x" data-close style="margin-left:auto">✕</button></div>`;
+const keepBar=()=>`<div class="row" style="margin-top:8px;gap:10px;flex-wrap:wrap"><button class="btn sm" id="tp-open">🗂 Add from temporary files</button><label class="chk"><input type="checkbox" id="tp-auto"> Auto-keep results for 2 days (cloud)</label></div><div class="tl-pick" id="tp-pick" hidden></div>`;
+
+/* ---------- 🗜 FILE SIZE REDUCER ---------- */
+function openReduceTool(pre){
+  const items=[];let busy=false,kq=Promise.resolve();
   if(!DB.ui.toolLevel)DB.ui.toolLevel="balanced";if(DB.ui.toolFmtV!==2){DB.ui.toolFmt="smart";DB.ui.toolFmtV=2;save()}
-  modal(`<div class="mhead"><div style="min-width:0"><h3 id="tl-title">🗜 File Size Reducer</h3><span class="hint" id="tl-sub"></span></div><div style="position:relative;margin-left:auto"><button class="btn sm" id="tl-set" aria-haspopup="true" aria-expanded="false">⚙ Tools ▾</button><div id="tl-menu" hidden><button class="om-i" data-tool="reduce"><span>🗜</span><div><b>Reduce file size</b><small>Make PDF &amp; images smaller</small></div></button><button class="om-i" data-tool="convert"><span>🔄</span><div><b>Convert files</b><small>PNG ⇄ JPG ⇄ PDF, combine PDFs…</small></div></button></div></div><button class="btn sm x" data-close style="margin-left:8px">✕</button></div>
-  <div id="tool-body"></div>`,(bg,close)=>{
-    bg.firstChild.style.maxWidth="980px";
-    const host=$("#tool-body",bg);
-    function initReduce(){
+  modal(toolHead("🗜","File Size Reducer","Make PDF and image files smaller — many at once. Runs in your browser; nothing is uploaded unless you press ☁ Keep.")+
+  `<div class="tl-drop" id="rt-drop"><span style="font-size:28px">📂</span><div><b>Drop files here</b> or click to choose<br><span class="hint">PDF, PNG, JPEG, WebP, GIF, BMP…</span></div><input id="rt-f" type="file" multiple hidden accept=".pdf,image/*"></div>`+keepBar()+
+  `<div class="tl-opts"><div><label>Compression level</label><div class="seg" id="rt-lvl"><button data-l="light">Light</button><button data-l="balanced">Balanced</button><button data-l="strong">Strong</button></div><div class="hint" id="rt-lvh" style="margin-top:4px"></div></div>
+   <div><label>Image output format</label><select id="rt-fmt"><option value="smart">Smart — best format for each image (recommended)</option><option value="same">Same as original</option><option value="jpeg">Convert to JPEG (smallest)</option><option value="webp">Convert to WebP</option></select></div></div>
+   <div class="note">ℹ️ <b>PDF:</b> Light keeps the text and only re-packs the file; Balanced / Strong re-draw each page as an image, so <b>text can no longer be selected</b>. If a result is not smaller, the original is kept.</div>
+   <div class="tl-sum"><span id="rt-sum" class="hint"></span><span class="row"><button class="btn sm" id="rt-re">▶ Compress again</button><button class="btn sm" id="rt-keep">☁ Keep all (2 days)</button><button class="btn sm pri" id="rt-zip">⬇ Download all (ZIP)</button><button class="btn sm danger" id="rt-clr">Clear</button></span></div><div id="rt-list"></div>`,
+  (bg,close)=>{
+    bg.firstChild.style.maxWidth="980px";const $b=s=>$(s,bg);
     const opt=()=>({...RL[DB.ui.toolLevel],fmt:DB.ui.toolFmt});
-    const fmtB=fmtSize;
     function draw(){
-      if(!bg.isConnected||!$("#rt-list",bg))return;
-      $$("#rt-lvl label",bg).forEach(l=>l.classList.toggle("on",l.dataset.l===DB.ui.toolLevel));$("#rt-fmt",bg).value=DB.ui.toolFmt;
-      const done=items.filter(i=>i.st==="done"||i.st==="kept");
-      const o=done.reduce((n,i)=>n+i.orig,0),nw=done.reduce((n,i)=>n+(i.out?i.out.size:i.orig),0);
-      $("#rt-sum",bg).innerHTML=items.length?`<b>${items.length}</b> file(s) · ${done.length} finished`+(done.length?` · <span class="sav">saved ${fmtB(Math.max(0,o-nw))} (${o?Math.round((1-nw/o)*100):0}%)</span>`:""):"No files yet";
-      $("#rt-zip",bg).disabled=!done.length;$("#rt-re",bg).disabled=!items.length||busy;$("#rt-clr",bg).disabled=!items.length||busy;
-      $("#rt-list",bg).innerHTML=items.length?`<table class="rt-t"><thead><tr><th>File</th><th>Original</th><th>Result</th><th>Saved</th><th>Status</th><th></th></tr></thead><tbody>${items.map(i=>{
-        const res=i.out?fmtB(i.out.size):(i.st==="kept"?fmtB(i.orig):"—"),sv=i.out?Math.round((1-i.out.size/i.orig)*100)+"%":"—";
-        const stx={wait:"Waiting…",work:"Compressing… "+(i.note||""),done:"✔ Done",kept:"Original kept — "+(i.note||"already small"),err:"⚠ "+(i.note||"Failed")}[i.st];
-        return `<tr><td style="overflow-wrap:anywhere"><b>${esc(i.name)}</b></td><td>${fmtB(i.orig)}</td><td>${res}</td><td class="${i.out?"sav":""}">${sv}</td><td class="crumb">${esc(stx)}</td><td style="white-space:nowrap">${i.st==="done"||i.st==="kept"?`<button class="btn sm" data-dl="${i.id}" title="Download">⬇</button> `:""}<button class="btn sm danger" data-rm="${i.id}" title="Remove" ${i.st==="work"?"disabled":""}>✕</button></td></tr>`}).join("")}</tbody></table>`:`<div class="empty">Add files to start.</div>`;
+      if(!bg.isConnected||!$b("#rt-list"))return;
+      $$("#rt-lvl button",bg).forEach(b=>b.classList.toggle("on",b.dataset.l===DB.ui.toolLevel));$b("#rt-fmt").value=DB.ui.toolFmt;$b("#tp-auto").checked=!!DB.ui.toolAutoKeep;
+      $b("#rt-lvh").textContent={light:"Best quality · PDF text is kept (file is only re-packed)",balanced:"Good quality, much smaller files",strong:"Smallest files · lowest quality"}[DB.ui.toolLevel];
+      const done=items.filter(i=>i.st==="done"||i.st==="kept"),o=done.reduce((n,i)=>n+i.orig,0),nw=done.reduce((n,i)=>n+(i.out?i.out.size:i.orig),0);
+      $b("#rt-sum").innerHTML=items.length?`<b>${items.length}</b> file(s) · ${done.length} finished`+(done.length?` · <span class="sav">saved ${fmtSize(Math.max(0,o-nw))} (${o?Math.round((1-nw/o)*100):0}%)</span>`:""):"No files yet";
+      $b("#rt-zip").disabled=!done.length;$b("#rt-keep").disabled=!done.some(i=>i.out&&!i.kept);$b("#rt-re").disabled=!items.length||busy;$b("#rt-clr").disabled=!items.length||busy;
+      $b("#rt-list").innerHTML=items.length?items.map(i=>{
+        const pct=i.out?Math.round((1-i.out.size/i.orig)*100):0;
+        const stx={wait:"Waiting…",work:"Compressing… "+esc(i.note||""),done:`${fmtSize(i.orig)} → <b>${i.out?fmtSize(i.out.size):""}</b> · <span class="sav">saved ${pct}%</span>`,kept:"Original kept — "+esc(i.note||"already small"),err:"⚠ "+esc(i.note||"Failed")}[i.st];
+        const ok=i.st==="done"||i.st==="kept";
+        return `<div class="fcard" data-id="${i.id}">${fthHTML(i)}<div class="fmain"><div class="fname">${esc(i.name)}</div><div class="fmeta">${i.st==="done"?stx:`${fmtSize(i.orig)} · ${stx}`}</div>${i.out?`<div class="fbar"><i style="width:${Math.max(3,100-pct)}%"></i></div>`:""}</div>
+          <div class="fact">${ok?`<button class="btn sm" data-dl="${i.id}" title="Download">⬇</button>`:""}${i.out?(i.kept==="ok"?`<button class="btn sm" disabled>☁ Kept ✔</button>`:i.kept==="busy"?`<button class="btn sm" disabled>☁ …</button>`:`<button class="btn sm" data-keep="${i.id}" title="Keep in Temporary files for 2 days">☁ Keep</button>`):""}<button class="btn sm danger" data-rm="${i.id}" ${i.st==="work"?"disabled":""} title="Remove">✕</button></div></div>`}).join(""):`<div class="empty">Add files to start.</div>`;
     }
+    async function keep(it){if(it.kept||!it.out)return;it.kept="busy";draw();const id=await tmpSave(it.out.blob,it.out.name,"Reduced");it.kept=id?"ok":"";draw();if(id)toast("Kept for 2 days ☁")}
     async function pump(){
       if(busy)return;busy=true;draw();
       try{for(;;){
         const it=items.find(x=>x.st==="wait");if(!it)break;it.st="work";it.note="";draw();
         try{
           const o=opt(),r=isPdfFile(it.file)?await reducePdf(it.file,o,(p,n)=>{it.note=`page ${p}/${n}`;draw()}):await reduceImage(it.file,o);
-          if(r.blob.size<it.orig){it.out={blob:r.blob,size:r.blob.size,name:baseName(it.name)+"-compressed"+(EXT[r.type]||"")};it.st="done"}
+          if(r.blob.size<it.orig){it.out={blob:r.blob,size:r.blob.size,name:baseName(it.name)+"-compressed"+(EXT[r.type]||"")};it.st="done";if(DB.ui.toolAutoKeep&&fdb)kq=kq.then(()=>keep(it))}
           else{it.out=null;it.st="kept";it.note=/png/.test(it.file.type)&&o.fmt==="same"?"PNG is already compact — try “Convert to JPEG”":"already small"}
         }catch(e){it.st="err";it.note=e.message||"Failed"}
         draw();
       }}finally{busy=false;draw()}
     }
-    function add(files){
-      let n=0;[...files].forEach(f=>{
-        if(!isPdfFile(f)&&!isImgFile(f)){toast(`${f.name}: only PDF and image files are supported`);return}
-        items.push({id:uid("r"),file:f,name:f.name,orig:f.size,st:"wait",out:null,note:""});n++;
-      });
-      if(n){draw();pump()}
-    }
-    const drop=$("#rt-drop",bg),fi=$("#rt-f",bg);
-    drop.onclick=()=>fi.click();fi.onchange=()=>{add(fi.files);fi.value=""};
-    ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
-    ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
-    drop.addEventListener("drop",e=>add(e.dataTransfer.files));
-    $("#rt-lvl",bg).addEventListener("click",e=>{const l=e.target.closest("[data-l]");if(l){DB.ui.toolLevel=l.dataset.l;save();draw()}});
-    $("#rt-fmt",bg).onchange=e=>{DB.ui.toolFmt=e.target.value;save()};
-    $("#rt-re",bg).onclick=()=>{items.forEach(i=>{if(i.st!=="work"){i.st="wait";i.out=null;i.note=""}});pump()};
-    $("#rt-clr",bg).onclick=()=>{items.length=0;draw()};
-    $("#rt-list",bg).addEventListener("click",e=>{
-      const rm=e.target.closest("[data-rm]");if(rm){const i=items.findIndex(x=>x.id===rm.dataset.rm);if(i>=0&&items[i].st!=="work")items.splice(i,1);draw();return}
-      const dl=e.target.closest("[data-dl]");if(dl){const it=items.find(x=>x.id===dl.dataset.dl);if(it)it.out?dlFile(it.out.name,it.out.blob,it.out.blob.type):dlFile(it.name,it.file,it.file.type)}
-    });
-    $("#rt-zip",bg).onclick=async()=>{
-      const done=items.filter(i=>i.st==="done"||i.st==="kept"),used=new Set(),uniq=n=>{let m=n,k=1;while(used.has(m.toLowerCase())){m=n.replace(/(\.[^.]*)?$/,`-${k++}$1`)}used.add(m.toLowerCase());return m};
-      try{if(!window.JSZip)await loadScript([await inflateLib(LIBZ.zip)]);const z=new JSZip();done.forEach(i=>z.file(uniq(i.out?i.out.name:i.name),i.out?i.out.blob:i.file));dlFile(`Reduced-files-${todayStr()}.zip`,await z.generateAsync({type:"blob"}),"application/zip")}
-      catch(e){toast("ZIP engine unavailable — downloading files one by one");done.forEach((i,n)=>setTimeout(()=>i.out?dlFile(i.out.name,i.out.blob,i.out.blob.type):dlFile(i.name,i.file,i.file.type),n*400))}
-    };
-    draw();
-    }
-    /* ================= FILE CONVERTER ================= */
-    const CVT=[["pdf","Images → PDF (one PDF per image)"],["pdfall","Combine into ONE PDF (PDF + images)"],["png","Image → PNG"],["jpg","Image → JPEG"],["webp","Image → WebP"],["pdf2png","PDF → PNG images (every page)"],["pdf2jpg","PDF → JPEG images (every page)"]];
-    const QMAP={high:.92,medium:.8,low:.6};
-    const cvItems=[],cv={combined:null};let cbusy=false,cvNote="";
-    if(!DB.ui.cvTo)DB.ui.cvTo="pdf";if(!DB.ui.cvQ)DB.ui.cvQ="high";if(!DB.ui.cvPs)DB.ui.cvPs="fit";if(!DB.ui.cvDpi)DB.ui.cvDpi=150;
-    const ensureZip=async()=>{if(!window.JSZip)await loadScript([await inflateLib(LIBZ.zip)])};
-    async function imgToPdfImage(file){
-      const url=URL.createObjectURL(file);let img;
-      try{img=await loadImg(url)}catch(e){URL.revokeObjectURL(url);throw new Error("Cannot read this image")}URL.revokeObjectURL(url);
-      const w=img.naturalWidth||img.width,h=img.naturalHeight||img.height;
-      if(/png/.test(file.type)||/\.png$/i.test(file.name))return{kind:"png",bytes:new Uint8Array(await file.arrayBuffer()),w,h};
-      const c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,w,h);x.drawImage(img,0,0);
-      return{kind:"jpg",bytes:new Uint8Array(await (await canvasBlob(c,"image/jpeg",.92)).arrayBuffer()),w,h};
-    }
-    function placeImg(doc,emb,w,h,ps){
-      let pw,ph,dw,dh,x=0,y=0;
-      if(ps==="a4"){const land=w>h;pw=land?842:595;ph=land?595:842;const m=24,s=Math.min((pw-2*m)/w,(ph-2*m)/h);dw=w*s;dh=h*s;x=(pw-dw)/2;y=(ph-dh)/2}
-      else{let s=.75;if(Math.max(w,h)*s>1400)s=1400/Math.max(w,h);pw=dw=w*s;ph=dh=h*s}
-      doc.addPage([pw,ph]).drawImage(emb,{x,y,width:dw,height:dh});
-    }
-    async function combinePdf(files,ps,prog){
-      await pdfEngine();const out=await PDFLib.PDFDocument.create();let k=0;
-      for(const f of files){
-        prog(++k,files.length);
-        if(isPdfFile(f)){const src=await PDFLib.PDFDocument.load(new Uint8Array(await f.arrayBuffer()),{ignoreEncryption:true});(await out.copyPages(src,src.getPageIndices())).forEach(p=>out.addPage(p))}
-        else{const im=await imgToPdfImage(f),emb=im.kind==="png"?await out.embedPng(im.bytes):await out.embedJpg(im.bytes);placeImg(out,emb,im.w,im.h,ps)}
-      }
-      return new Blob([await out.save({useObjectStreams:true})],{type:"application/pdf"});
-    }
-    async function imgConvert(file,type,q){
-      const url=URL.createObjectURL(file);let img;
-      try{img=await loadImg(url)}catch(e){URL.revokeObjectURL(url);throw new Error("Cannot read this image")}URL.revokeObjectURL(url);
-      const c=document.createElement("canvas");c.width=img.naturalWidth||img.width;c.height=img.naturalHeight||img.height;const x=c.getContext("2d");
-      if(type==="image/jpeg"){x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height)}
-      x.drawImage(img,0,0);const b=await canvasBlob(c,type,q);
-      if(!b||b.type!==type)throw new Error("This browser cannot create "+type.replace("image/","").toUpperCase());return b;
-    }
-    async function pdfToImages(file,type,dpi,q,prog){
-      const pdfjs=await pdfEngine(),pdf=await pdfjs.getDocument({data:new Uint8Array(await file.arrayBuffer())}).promise,outs=[],base=baseName(file.name);
-      for(let i=1;i<=pdf.numPages;i++){
-        prog(i,pdf.numPages);const page=await pdf.getPage(i),v1=page.getViewport({scale:1});let sc=dpi/72;
-        if(v1.width*sc*v1.height*sc>25e6)sc=Math.sqrt(25e6/(v1.width*v1.height));
-        const vs=page.getViewport({scale:sc}),c=document.createElement("canvas");c.width=Math.round(vs.width);c.height=Math.round(vs.height);
-        const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);await page.render({canvasContext:x,viewport:vs}).promise;
-        const b=await canvasBlob(c,type,q);outs.push({blob:b,name:`${base}-p${i}${EXT[type]}`});c.width=c.height=0;page.cleanup();
-      }
-      try{pdf.destroy()}catch(e){}
-      return outs;
-    }
-    async function convertOne(it,to){
-      const f=it.file,base=baseName(f.name),q=QMAP[DB.ui.cvQ];
-      if(to==="png"||to==="jpg"||to==="webp"){if(!isImgFile(f))throw new Error("Not an image — use “PDF → images” for PDFs");const type={png:"image/png",jpg:"image/jpeg",webp:"image/webp"}[to];return[{blob:await imgConvert(f,type,q),name:base+EXT[type]}]}
-      if(to==="pdf"){if(!isImgFile(f))throw new Error("Not an image — use “Combine into ONE PDF” for PDFs");await pdfEngine();const d=await PDFLib.PDFDocument.create(),im=await imgToPdfImage(f),emb=im.kind==="png"?await d.embedPng(im.bytes):await d.embedJpg(im.bytes);placeImg(d,emb,im.w,im.h,DB.ui.cvPs);return[{blob:new Blob([await d.save({useObjectStreams:true})],{type:"application/pdf"}),name:base+".pdf"}]}
-      if(to==="pdf2png"||to==="pdf2jpg"){if(!isPdfFile(f))throw new Error("Not a PDF");return pdfToImages(f,to==="pdf2png"?"image/png":"image/jpeg",+DB.ui.cvDpi,q,(p,n)=>{it.note=`page ${p}/${n}`;drawC()})}
-      throw new Error("Unknown conversion");
-    }
-    const bdl=(o)=>dlFile(o.name,o.blob,o.blob.type);
+    function add(files){let n=0;[...files].forEach(f=>{if(!isPdfFile(f)&&!isImgFile(f)){toast(`${f.name}: only PDF and image files are supported`);return}items.push({id:uid("r"),file:f,name:f.name,orig:f.size,st:"wait",out:null,note:""});n++});if(n){draw();pump()}}
+    bindDrop($b("#rt-drop"),$b("#rt-f"),add);bindPicker(bg,$b("#tp-pick"),$b("#tp-open"),add);
+    $b("#tp-auto").onchange=e=>{DB.ui.toolAutoKeep=e.target.checked;save();if(e.target.checked&&!fdb)toast("The cloud is not connected — auto-keep will not work")};
+    $b("#rt-lvl").addEventListener("click",e=>{const l=e.target.closest("[data-l]");if(l){DB.ui.toolLevel=l.dataset.l;save();draw()}});
+    $b("#rt-fmt").onchange=e=>{DB.ui.toolFmt=e.target.value;save()};
+    $b("#rt-re").onclick=()=>{items.forEach(i=>{if(i.st!=="work"){i.st="wait";i.out=null;i.note="";i.kept=""}});pump()};
+    $b("#rt-clr").onclick=()=>{items.forEach(relTh);items.length=0;draw()};
+    $b("#rt-keep").onclick=()=>{items.filter(i=>i.out&&!i.kept).forEach(i=>{kq=kq.then(()=>keep(i))})};
+    $b("#rt-list").addEventListener("click",e=>{
+      const rm=e.target.closest("[data-rm]");if(rm){const i=items.findIndex(x=>x.id===rm.dataset.rm);if(i>=0&&items[i].st!=="work"){relTh(items[i]);items.splice(i,1)}draw();return}
+      const kp=e.target.closest("[data-keep]");if(kp){const it=items.find(x=>x.id===kp.dataset.keep);if(it)keep(it);return}
+      const dl=e.target.closest("[data-dl]");if(dl){const it=items.find(x=>x.id===dl.dataset.dl);if(it)it.out?dlFile(it.out.name,it.out.blob,it.out.blob.type):dlFile(it.name,it.file,it.file.type)}});
+    $b("#rt-zip").onclick=async()=>{
+      const done=items.filter(i=>i.st==="done"||i.st==="kept"),uq=zipName();
+      try{await ensureZip();const z=new JSZip();done.forEach(i=>z.file(uq(i.out?i.out.name:i.name),i.out?i.out.blob:i.file));dlFile(`Reduced-files-${todayStr()}.zip`,await z.generateAsync({type:"blob"}),"application/zip")}
+      catch(e){toast("ZIP engine unavailable — downloading files one by one");done.forEach((i,n)=>setTimeout(()=>i.out?dlFile(i.out.name,i.out.blob,i.out.blob.type):dlFile(i.name,i.file,i.file.type),n*400))}};
+    draw();if(pre&&pre.length)add(pre);
+  });
+}
+
+/* ---------- 🔄 FILE CONVERTER (drag & drop to re-order) ---------- */
+const CVT=[["pdfall","📑","Combine into ONE PDF","PDF + images, in your order"],["pdf","📄","Each image → PDF","one PDF per image"],["png","🖼","Image → PNG","lossless"],["jpg","🖼","Image → JPEG","smaller files"],["webp","🖼","Image → WebP","very small"],["pdf2png","🎞","PDF → PNG","every page"],["pdf2jpg","🎞","PDF → JPEG","every page"]];
+const QMAP={high:.92,medium:.8,low:.6};
+async function imgToPdfImage(file){
+  const url=URL.createObjectURL(file);let img;
+  try{img=await loadImg(url)}catch(e){URL.revokeObjectURL(url);throw new Error("Cannot read this image")}URL.revokeObjectURL(url);
+  const w=img.naturalWidth||img.width,h=img.naturalHeight||img.height;
+  if(/png/.test(file.type)||/\.png$/i.test(file.name))return{kind:"png",bytes:new Uint8Array(await file.arrayBuffer()),w,h};
+  const c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,w,h);x.drawImage(img,0,0);
+  return{kind:"jpg",bytes:new Uint8Array(await (await canvasBlob(c,"image/jpeg",.92)).arrayBuffer()),w,h};
+}
+function placeImg(doc,emb,w,h,ps){
+  let pw,ph,dw,dh,x=0,y=0;
+  if(ps==="a4"){const land=w>h;pw=land?842:595;ph=land?595:842;const m=24,s=Math.min((pw-2*m)/w,(ph-2*m)/h);dw=w*s;dh=h*s;x=(pw-dw)/2;y=(ph-dh)/2}
+  else{let s=.75;if(Math.max(w,h)*s>1400)s=1400/Math.max(w,h);pw=dw=w*s;ph=dh=h*s}
+  doc.addPage([pw,ph]).drawImage(emb,{x,y,width:dw,height:dh});
+}
+async function combinePdf(files,ps,prog){
+  await pdfEngine();const out=await PDFLib.PDFDocument.create();let k=0;
+  for(const f of files){
+    prog(++k,files.length);
+    if(isPdfFile(f)){const src=await PDFLib.PDFDocument.load(new Uint8Array(await f.arrayBuffer()),{ignoreEncryption:true});(await out.copyPages(src,src.getPageIndices())).forEach(p=>out.addPage(p))}
+    else{const im=await imgToPdfImage(f),emb=im.kind==="png"?await out.embedPng(im.bytes):await out.embedJpg(im.bytes);placeImg(out,emb,im.w,im.h,ps)}
+  }
+  return new Blob([await out.save({useObjectStreams:true})],{type:"application/pdf"});
+}
+async function imgConvert(file,type,q){
+  const url=URL.createObjectURL(file);let img;
+  try{img=await loadImg(url)}catch(e){URL.revokeObjectURL(url);throw new Error("Cannot read this image")}URL.revokeObjectURL(url);
+  const c=document.createElement("canvas");c.width=img.naturalWidth||img.width;c.height=img.naturalHeight||img.height;const x=c.getContext("2d");
+  if(type==="image/jpeg"){x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height)}
+  x.drawImage(img,0,0);const b=await canvasBlob(c,type,q);
+  if(!b||b.type!==type)throw new Error("This browser cannot create "+type.replace("image/","").toUpperCase());return b;
+}
+async function pdfToImages(file,type,dpi,q,prog){
+  const pdfjs=await pdfEngine(),pdf=await pdfjs.getDocument({data:new Uint8Array(await file.arrayBuffer())}).promise,outs=[],base=baseName(file.name);
+  for(let i=1;i<=pdf.numPages;i++){
+    prog(i,pdf.numPages);const page=await pdf.getPage(i),v1=page.getViewport({scale:1});let sc=dpi/72;
+    if(v1.width*sc*v1.height*sc>25e6)sc=Math.sqrt(25e6/(v1.width*v1.height));
+    const vs=page.getViewport({scale:sc}),c=document.createElement("canvas");c.width=Math.round(vs.width);c.height=Math.round(vs.height);
+    const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);await page.render({canvasContext:x,viewport:vs}).promise;
+    const b=await canvasBlob(c,type,q);outs.push({blob:b,name:`${base}-p${i}${EXT[type]}`});c.width=c.height=0;page.cleanup();
+  }
+  try{pdf.destroy()}catch(e){}
+  return outs;
+}
+async function convertOne(it,to,note){
+  const f=it.file,base=baseName(f.name),q=QMAP[DB.ui.cvQ];
+  if(to==="png"||to==="jpg"||to==="webp"){if(!isImgFile(f))throw new Error("Not an image — use “PDF → images” for PDFs");const type={png:"image/png",jpg:"image/jpeg",webp:"image/webp"}[to];return[{blob:await imgConvert(f,type,q),name:base+EXT[type]}]}
+  if(to==="pdf"){if(!isImgFile(f))throw new Error("Not an image — use “Combine into ONE PDF” for PDFs");await pdfEngine();const d=await PDFLib.PDFDocument.create(),im=await imgToPdfImage(f),emb=im.kind==="png"?await d.embedPng(im.bytes):await d.embedJpg(im.bytes);placeImg(d,emb,im.w,im.h,DB.ui.cvPs);return[{blob:new Blob([await d.save({useObjectStreams:true})],{type:"application/pdf"}),name:base+".pdf"}]}
+  if(to==="pdf2png"||to==="pdf2jpg"){if(!isPdfFile(f))throw new Error("Not a PDF");return pdfToImages(f,to==="pdf2png"?"image/png":"image/jpeg",+DB.ui.cvDpi,q,(p,n)=>note(`page ${p}/${n}`))}
+  throw new Error("Unknown conversion");
+}
+function openConvertTool(pre){
+  const cvItems=[],cv={combined:null,kept:""};let cbusy=false,cvNote="",kq=Promise.resolve();
+  if(!DB.ui.cvTo||!CVT.some(c=>c[0]===DB.ui.cvTo))DB.ui.cvTo="pdfall";if(!DB.ui.cvQ)DB.ui.cvQ="high";if(!DB.ui.cvPs)DB.ui.cvPs="fit";if(!DB.ui.cvDpi)DB.ui.cvDpi=150;
+  modal(toolHead("🔄","File Converter","Convert PNG, JPEG, WebP and PDF — or combine photos and PDFs into one PDF. Runs in your browser; nothing is uploaded unless you press ☁ Keep.")+
+  `<div class="tl-drop" id="cv-drop"><span style="font-size:28px">📂</span><div><b>Drop photos / files here</b> or click to choose<br><span class="hint">PDF, PNG, JPEG, WebP, GIF, BMP…</span></div><input id="cv-f" type="file" multiple hidden accept=".pdf,image/*"></div>`+keepBar()+
+  `<label style="margin-top:12px;display:block">Convert to</label><div class="modeg" id="cv-modes">${CVT.map(([v,i,l,s])=>`<button data-mode="${v}"><span>${i}</span><b>${l}</b><small>${s}</small></button>`).join("")}</div>
+   <div class="tl-opts"><div id="cv-o"></div></div><div class="note" id="cv-note"></div>
+   <div class="tl-sum"><span id="cv-sum" class="hint"></span><span class="row"><button class="btn sm pri" id="cv-go">▶ Convert</button><button class="btn sm" id="cv-keep">☁ Keep all (2 days)</button><button class="btn sm" id="cv-zip">⬇ Download all</button><button class="btn sm danger" id="cv-clr">Clear</button></span></div>
+   <div id="cv-list"></div><div id="cv-res" style="margin-top:10px"></div>`,
+  (bg,close)=>{
+    bg.firstChild.style.maxWidth="980px";const $b=s=>$(s,bg);
+    const rel=()=>{cv.combined=null;cv.kept=""};
+    const keepOut=async(o,id,setK)=>{setK("busy");drawC();const t=await tmpSave(o.blob,o.name,"Converted");setK(t?"ok":"");drawC();if(t)toast("Kept for 2 days ☁")};
+    const keepItem=it=>it.kept||!it.out?Promise.resolve():keepOut(it.out,it.id,v=>{it.kept=v});
+    const keepComb=()=>cv.combined&&!cv.kept?keepOut(cv.combined,"combined",v=>{cv.kept=v}):Promise.resolve();
     function drawC(){
-      if(!bg.isConnected||!$("#cv-list",bg))return;const to=DB.ui.cvTo,comb=to==="pdfall";
+      if(!bg.isConnected||!$b("#cv-list"))return;const to=DB.ui.cvTo,comb=to==="pdfall";
+      $$("#cv-modes button",bg).forEach(b=>b.classList.toggle("on",b.dataset.mode===to));$b("#tp-auto").checked=!!DB.ui.toolAutoKeep;
       const doneN=cvItems.filter(i=>i.st==="done").length+(cv.combined?1:0);
-      $("#cv-sum",bg).innerHTML=cvItems.length?`<b>${cvItems.length}</b> file(s)`+(doneN?` · ${doneN} result(s) ready`:""):"No files yet";
-      $("#cv-go",bg).disabled=!cvItems.length||cbusy;$("#cv-clr",bg).disabled=!cvItems.length||cbusy;$("#cv-zip",bg).disabled=!doneN;
-      $("#cv-list",bg).innerHTML=cvItems.length?`<table class="rt-t"><thead><tr><th>${comb?"#":""} File</th><th>Original</th><th>Result</th><th>Status</th><th></th></tr></thead><tbody>${cvItems.map((i,n)=>{
-        const stx={wait:"Ready",work:"Converting… "+(i.note||cvNote),done:"✔ Done"+(i.note?" — "+i.note:""),err:"⚠ "+(i.note||"Failed")}[i.st];
-        return `<tr><td style="overflow-wrap:anywhere">${comb?`<span class="crumb">${n+1}.</span> `:""}<b>${esc(i.name)}</b></td><td>${fmtSize(i.orig)}</td><td>${i.out?fmtSize(i.out.size):"—"}</td><td class="crumb">${esc(stx)}</td><td style="white-space:nowrap">${comb?`<button class="btn sm" data-cup="${i.id}" ${n?"":"disabled"} title="Move up">↑</button> <button class="btn sm" data-cdn="${i.id}" ${n<cvItems.length-1?"":"disabled"} title="Move down">↓</button> `:""}${i.out?`<button class="btn sm" data-cdl="${i.id}" title="Download">⬇</button> `:""}<button class="btn sm danger" data-crm="${i.id}" ${i.st==="work"?"disabled":""}>✕</button></td></tr>`}).join("")}</tbody></table>`:`<div class="empty">Add files to start.</div>`;
-      $("#cv-res",bg).innerHTML=cv.combined?`<div class="note" style="background:var(--soft);border-color:var(--line);color:var(--ink)">📄 <b>${esc(cv.combined.name)}</b> · ${fmtSize(cv.combined.size)} <button class="btn sm pri" data-cdl="combined" style="margin-left:8px">⬇ Download</button></div>`:"";
+      $b("#cv-sum").innerHTML=cvItems.length?`<b>${cvItems.length}</b> file(s)`+(doneN?` · ${doneN} result(s) ready`:"")+(cvItems.length>1?" · <span title=\"Drag the ⠿ handle to change the order\">↕ drag ⠿ to re-order</span>":""):"No files yet";
+      $b("#cv-go").disabled=!cvItems.length||cbusy;$b("#cv-clr").disabled=!cvItems.length||cbusy;$b("#cv-zip").disabled=!doneN;$b("#cv-keep").disabled=!(cvItems.some(i=>i.out&&!i.kept)||(cv.combined&&!cv.kept));
+      $b("#cv-list").innerHTML=cvItems.length?cvItems.map((i,n)=>{
+        const stx={wait:"Ready",work:"Converting… "+esc(i.note||cvNote),done:"✔ Done"+(i.note?" — "+esc(i.note):""),err:"⚠ "+esc(i.note||"Failed")}[i.st];
+        return `<div class="fcard" data-id="${i.id}"><span class="grab" tabindex="0" role="button" aria-label="Drag to re-order (or use the arrow keys)" title="Drag to change the order">⠿</span><span class="fnum">${n+1}</span>${fthHTML(i)}<div class="fmain"><div class="fname">${esc(i.name)}</div><div class="fmeta">${fmtSize(i.orig)}${i.out?` → <b>${fmtSize(i.out.size)}</b>`:""} · ${stx}</div></div>
+          <div class="fact">${i.out?`<button class="btn sm" data-cdl="${i.id}" title="Download">⬇</button>${i.kept==="ok"?`<button class="btn sm" disabled>☁ ✔</button>`:i.kept==="busy"?`<button class="btn sm" disabled>☁ …</button>`:`<button class="btn sm" data-ckeep="${i.id}" title="Keep in Temporary files for 2 days">☁ Keep</button>`}`:""}<button class="btn sm danger" data-crm="${i.id}" ${i.st==="work"?"disabled":""} title="Remove">✕</button></div></div>`}).join(""):`<div class="empty">Add photos or files to start.</div>`;
+      $b("#cv-res").innerHTML=cv.combined?`<div class="note" style="background:var(--soft);border-color:var(--line);color:var(--ink)">📄 <b>${esc(cv.combined.name)}</b> · ${fmtSize(cv.combined.size)} <button class="btn sm pri" data-cdl="combined" style="margin-left:8px">⬇ Download</button> ${cv.kept==="ok"?`<button class="btn sm" disabled>☁ Kept ✔</button>`:cv.kept==="busy"?`<button class="btn sm" disabled>☁ …</button>`:`<button class="btn sm" data-ckeep="combined">☁ Keep (2 days)</button>`}</div>`:"";
     }
     async function runConv(){
-      if(cbusy||!cvItems.length)return;cbusy=true;const to=DB.ui.cvTo;cv.combined=null;
+      if(cbusy||!cvItems.length)return;cbusy=true;const to=DB.ui.cvTo;rel();
       try{
         if(to==="pdfall"){
           cvItems.forEach(i=>{i.st="work";i.out=null;i.note=""});drawC();
-          try{const blob=await combinePdf(cvItems.map(i=>i.file),DB.ui.cvPs,(k,n)=>{cvNote=`file ${k}/${n}`;drawC()});cv.combined={blob,size:blob.size,name:`Combined-${todayStr()}.pdf`};cvItems.forEach(i=>i.st="done")}
+          try{const blob=await combinePdf(cvItems.map(i=>i.file),DB.ui.cvPs,(k,n)=>{cvNote=`file ${k}/${n}`;drawC()});cv.combined={blob,size:blob.size,name:`Combined-${todayStr()}.pdf`};cvItems.forEach(i=>i.st="done");if(DB.ui.toolAutoKeep&&fdb)kq=kq.then(keepComb)}
           catch(e){cvItems.forEach(i=>{i.st="err";i.note=e.message||"Failed"})}
         }else for(const it of cvItems){
-          it.st="work";it.out=null;it.note="";drawC();
+          it.st="work";it.out=null;it.kept="";it.note="";drawC();
           try{
-            const outs=await convertOne(it,to);
+            const outs=await convertOne(it,to,t=>{it.note=t;drawC()});
             if(outs.length>1){await ensureZip();const z=new JSZip();outs.forEach(o=>z.file(o.name,o.blob));const zb=await z.generateAsync({type:"blob"});it.out={blob:zb,size:zb.size,name:baseName(it.name)+"-pages.zip"};it.note=outs.length+" pages → ZIP"}
             else it.out={blob:outs[0].blob,size:outs[0].blob.size,name:outs[0].name};
-            it.st="done";if(outs.length<=1)it.note="";
+            it.st="done";if(outs.length<=1)it.note="";if(DB.ui.toolAutoKeep&&fdb)kq=kq.then(()=>keepItem(it));
           }catch(e){it.st="err";it.note=e.message||"Failed"}
           drawC();
         }
       }finally{cbusy=false;cvNote="";drawC()}
     }
-    function initConv(){
-      const to=DB.ui.cvTo;
-      host.innerHTML=`<div class="rt-drop" id="cv-drop" style="margin-top:10px"><div>📂 <b>Drop files here</b> or click to choose (PDF, PNG, JPEG, WebP, GIF, BMP…)</div><input id="cv-f" type="file" multiple hidden accept=".pdf,image/*"></div>
-      <div class="fg" style="margin-top:10px"><div><label>Convert to</label><select id="cv-to">${CVT.map(([v,l])=>`<option value="${v}"${v===to?" selected":""}>${l}</option>`).join("")}</select></div><div id="cv-o"></div></div>
-      <div class="note" id="cv-note" style="margin-top:10px"></div>
-      <div class="row" style="margin:10px 0;justify-content:space-between"><span id="cv-sum" class="hint"></span><span class="row"><button class="btn sm pri" id="cv-go">▶ Convert</button><button class="btn sm" id="cv-zip">⬇ Download all</button><button class="btn sm danger" id="cv-clr">Clear</button></span></div>
-      <div class="tw" id="cv-list"></div><div id="cv-res" style="margin-top:10px"></div>`;
-      const opts=()=>{
-        const t=DB.ui.cvTo,sel=(id,lab,list,cur)=>`<div><label>${lab}</label><select id="${id}">${list.map(([v,l])=>`<option value="${v}"${String(v)===String(cur)?" selected":""}>${l}</option>`).join("")}</select></div>`;
-        const Q=sel("cv-q","Quality",[["high","High (92%)"],["medium","Medium (80%)"],["low","Small file (60%)"]],DB.ui.cvQ),PS=sel("cv-ps","Page size",[["fit","Fit to each image"],["a4","A4 (image centred)"]],DB.ui.cvPs),DP=sel("cv-dpi","Resolution",[[100,"100 dpi (small)"],[150,"150 dpi"],[200,"200 dpi"],[300,"300 dpi (sharp)"]],DB.ui.cvDpi);
-        $("#cv-o",host).innerHTML=t==="jpg"||t==="webp"?Q:t==="pdf"||t==="pdfall"?PS:t==="pdf2png"?DP:t==="pdf2jpg"?DP+Q:"";
-        $("#cv-note",host).innerHTML={pdf:"ℹ️ Each image becomes its own PDF. PNG images keep their transparency; other formats are embedded as JPEG.",pdfall:"ℹ️ Files are combined <b>in the order shown below</b> (use ↑ ↓), then press <b>▶ Convert</b>. PDF pages keep their text.",png:"ℹ️ PNG is lossless — the file may become larger than a JPEG.",jpg:"ℹ️ Transparent areas become white.",webp:"ℹ️ WebP is small but not supported by every program.",pdf2png:"ℹ️ Every page becomes an image. Several pages are packed into one ZIP.",pdf2jpg:"ℹ️ Every page becomes a JPEG. Several pages are packed into one ZIP."}[t];
-        ["cv-q","cv-ps","cv-dpi"].forEach(id=>{const e=$("#"+id,host);if(e)e.onchange=()=>{DB.ui[{"cv-q":"cvQ","cv-ps":"cvPs","cv-dpi":"cvDpi"}[id]]=e.value;save();cvItems.forEach(i=>{i.st="wait";i.out=null;i.note=""});cv.combined=null;drawC();if(DB.ui.cvTo!=="pdfall")runConv()}});
-      };
-      opts();
-      const addC=files=>{[...files].forEach(f=>{if(!isPdfFile(f)&&!isImgFile(f)){toast(`${f.name}: only PDF and image files are supported`);return}cvItems.push({id:uid("c"),file:f,name:f.name,orig:f.size,st:"wait",out:null,note:""})});cv.combined=null;drawC();if(DB.ui.cvTo!=="pdfall")runConv()};
-      const drop=$("#cv-drop",host),fi=$("#cv-f",host);
-      drop.onclick=()=>fi.click();fi.onchange=()=>{addC(fi.files);fi.value=""};
-      ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
-      ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
-      drop.addEventListener("drop",e=>addC(e.dataTransfer.files));
-      $("#cv-to",host).onchange=e=>{DB.ui.cvTo=e.target.value;save();cvItems.forEach(i=>{i.st="wait";i.out=null;i.note=""});cv.combined=null;opts();drawC();if(DB.ui.cvTo!=="pdfall")runConv()};
-      $("#cv-go",host).onclick=()=>{cvItems.forEach(i=>{if(i.st!=="work"){i.st="wait";i.out=null;i.note=""}});runConv()};
-      $("#cv-clr",host).onclick=()=>{cvItems.length=0;cv.combined=null;drawC()};
-      $("#cv-list",host).addEventListener("click",e=>{
-        const rm=e.target.closest("[data-crm]");if(rm){const i=cvItems.findIndex(x=>x.id===rm.dataset.crm);if(i>=0&&cvItems[i].st!=="work")cvItems.splice(i,1);cv.combined=null;drawC();return}
-        const mv=e.target.closest("[data-cup],[data-cdn]");if(mv){const id=mv.dataset.cup||mv.dataset.cdn,i=cvItems.findIndex(x=>x.id===id),j=mv.dataset.cup?i-1:i+1;if(i>=0&&j>=0&&j<cvItems.length){[cvItems[i],cvItems[j]]=[cvItems[j],cvItems[i]];cv.combined=null;cvItems.forEach(x=>{if(x.st==="done"){x.st="wait";x.out=null}});drawC()}return}
-        const dl=e.target.closest("[data-cdl]");if(dl){const it=cvItems.find(x=>x.id===dl.dataset.cdl);if(it?.out)bdl(it.out)}
-      });
-      $("#cv-res",host).addEventListener("click",e=>{if(e.target.closest("[data-cdl]")&&cv.combined)bdl(cv.combined)});
-      $("#cv-zip",host).onclick=async()=>{
-        const outs=cvItems.filter(i=>i.out).map(i=>i.out);if(cv.combined)outs.push(cv.combined);if(!outs.length)return;
-        if(outs.length===1){bdl(outs[0]);return}
-        const used=new Set(),uniq=n=>{let m=n,k=1;while(used.has(m.toLowerCase()))m=n.replace(/(\.[^.]*)?$/,`-${k++}$1`);used.add(m.toLowerCase());return m};
-        try{await ensureZip();const z=new JSZip();outs.forEach(o=>z.file(uniq(o.name),o.blob));dlFile(`Converted-files-${todayStr()}.zip`,await z.generateAsync({type:"blob"}),"application/zip")}
-        catch(e){toast("ZIP engine unavailable — downloading files one by one");outs.forEach((o,n)=>setTimeout(()=>bdl(o),n*400))}
-      };
-      drawC();
-    }
-    /* ================= TOOL SWITCH (⚙ Tools) ================= */
-    const menu=$("#tl-menu",bg);
-    function setTool(t){
-      $("#tl-title",bg).textContent=t==="reduce"?"🗜 File Size Reducer":"🔄 File Converter";
-      $("#tl-sub",bg).textContent=t==="reduce"?"Reduce PDF and image files — many at once. Everything runs in your browser; nothing is uploaded.":"Convert between PNG, JPEG, WebP and PDF, or combine files into one PDF. Everything runs in your browser; nothing is uploaded.";
-      $$("[data-tool]",bg).forEach(b=>b.classList.toggle("cur",b.dataset.tool===t));
-      host.innerHTML=t==="reduce"?RT_HTML:"";t==="reduce"?initReduce():initConv();
-    }
-    $("#tl-set",bg).onclick=e=>{e.stopPropagation();menu.hidden=!menu.hidden;$("#tl-set",bg).setAttribute("aria-expanded",String(!menu.hidden))};
-    menu.addEventListener("click",e=>{const b=e.target.closest("[data-tool]");if(b){menu.hidden=true;setTool(b.dataset.tool)}});
-    bg.addEventListener("mousedown",e=>{if(!menu.hidden&&!e.target.closest("#tl-menu")&&!e.target.closest("#tl-set"))menu.hidden=true});
-    setTool("reduce");
+    const reset=()=>{cvItems.forEach(i=>{i.st="wait";i.out=null;i.note="";i.kept=""});rel()};
+    const optsUI=()=>{
+      const t=DB.ui.cvTo,sel=(id,lab,list,cur)=>`<div><label>${lab}</label><select id="${id}">${list.map(([v,l])=>`<option value="${v}"${String(v)===String(cur)?" selected":""}>${l}</option>`).join("")}</select></div>`;
+      const Q=sel("cv-q","Quality",[["high","High (92%)"],["medium","Medium (80%)"],["low","Small file (60%)"]],DB.ui.cvQ),PS=sel("cv-ps","Page size",[["fit","Fit to each image"],["a4","A4 (image centred)"]],DB.ui.cvPs),DP=sel("cv-dpi","Resolution",[[100,"100 dpi (small)"],[150,"150 dpi"],[200,"200 dpi"],[300,"300 dpi (sharp)"]],DB.ui.cvDpi);
+      $b("#cv-o").innerHTML=t==="jpg"||t==="webp"?Q:t==="pdf"||t==="pdfall"?PS:t==="pdf2png"?DP:t==="pdf2jpg"?DP+Q:"";
+      $b("#cv-note").innerHTML={pdfall:"ℹ️ Files are combined <b>in the order shown below</b> — drag the <b>⠿</b> handle to change the order, then press <b>▶ Convert</b>. PDF pages keep their text.",pdf:"ℹ️ Each image becomes its own PDF. PNG images keep their transparency; other formats are embedded as JPEG.",png:"ℹ️ PNG is lossless — the file may become larger than a JPEG.",jpg:"ℹ️ Transparent areas become white.",webp:"ℹ️ WebP is small but not supported by every program.",pdf2png:"ℹ️ Every page becomes an image. Several pages are packed into one ZIP.",pdf2jpg:"ℹ️ Every page becomes a JPEG. Several pages are packed into one ZIP."}[t];
+      ["cv-q","cv-ps","cv-dpi"].forEach(id=>{const e=$("#"+id,bg);if(e)e.onchange=()=>{DB.ui[{"cv-q":"cvQ","cv-ps":"cvPs","cv-dpi":"cvDpi"}[id]]=e.value;save();reset();drawC();if(DB.ui.cvTo!=="pdfall")runConv()}});
+    };
+    const addC=files=>{let n=0;[...files].forEach(f=>{if(!isPdfFile(f)&&!isImgFile(f)){toast(`${f.name}: only PDF and image files are supported`);return}cvItems.push({id:uid("c"),file:f,name:f.name,orig:f.size,st:"wait",out:null,note:""});n++});if(!n)return;rel();drawC();if(DB.ui.cvTo!=="pdfall")runConv()};
+    bindDrop($b("#cv-drop"),$b("#cv-f"),addC);bindPicker(bg,$b("#tp-pick"),$b("#tp-open"),addC);
+    $b("#tp-auto").onchange=e=>{DB.ui.toolAutoKeep=e.target.checked;save();if(e.target.checked&&!fdb)toast("The cloud is not connected — auto-keep will not work")};
+    $b("#cv-modes").addEventListener("click",e=>{const b=e.target.closest("[data-mode]");if(!b||b.dataset.mode===DB.ui.cvTo)return;DB.ui.cvTo=b.dataset.mode;save();reset();optsUI();drawC();if(DB.ui.cvTo!=="pdfall")runConv()});
+    $b("#cv-go").onclick=()=>{cvItems.forEach(i=>{if(i.st!=="work"){i.st="wait";i.out=null;i.note="";i.kept=""}});runConv()};
+    $b("#cv-clr").onclick=()=>{cvItems.forEach(relTh);cvItems.length=0;rel();drawC()};
+    $b("#cv-keep").onclick=()=>{cvItems.filter(i=>i.out&&!i.kept).forEach(i=>{kq=kq.then(()=>keepItem(i))});kq=kq.then(keepComb)};
+    makeSortable($b("#cv-list"),(from,to,kb)=>{if(cbusy)return;const [x]=cvItems.splice(from,1);cvItems.splice(to,0,x);if(DB.ui.cvTo==="pdfall"){cvItems.forEach(i=>{if(i.st==="done"){i.st="wait";i.out=null}});rel()}drawC();if(kb)setTimeout(()=>{const g=$$("#cv-list .grab",bg)[to];g&&g.focus()})});
+    $b("#cv-list").addEventListener("click",e=>{
+      const rm=e.target.closest("[data-crm]");if(rm){const i=cvItems.findIndex(x=>x.id===rm.dataset.crm);if(i>=0&&cvItems[i].st!=="work"){relTh(cvItems[i]);cvItems.splice(i,1)}rel();drawC();return}
+      const k=e.target.closest("[data-ckeep]");if(k){const it=cvItems.find(x=>x.id===k.dataset.ckeep);if(it)keepItem(it);return}
+      const dl=e.target.closest("[data-cdl]");if(dl){const it=cvItems.find(x=>x.id===dl.dataset.cdl);if(it&&it.out)dlFile(it.out.name,it.out.blob,it.out.blob.type)}});
+    $b("#cv-res").addEventListener("click",e=>{if(e.target.closest("[data-cdl]")&&cv.combined)dlFile(cv.combined.name,cv.combined.blob,cv.combined.blob.type);if(e.target.closest("[data-ckeep]"))keepComb()});
+    $b("#cv-zip").onclick=async()=>{
+      const outs=cvItems.filter(i=>i.out).map(i=>i.out);if(cv.combined)outs.push(cv.combined);if(!outs.length)return;
+      if(outs.length===1){dlFile(outs[0].name,outs[0].blob,outs[0].blob.type);return}
+      const uq=zipName();try{await ensureZip();const z=new JSZip();outs.forEach(o=>z.file(uq(o.name),o.blob));dlFile(`Converted-files-${todayStr()}.zip`,await z.generateAsync({type:"blob"}),"application/zip")}
+      catch(e){toast("ZIP engine unavailable — downloading files one by one");outs.forEach((o,n)=>setTimeout(()=>dlFile(o.name,o.blob,o.blob.type),n*400))}};
+    optsUI();drawC();if(pre&&pre.length)addC(pre);
   });
 }
+
+/* ---------- 🗂 TEMPORARY FILES (cloud, deleted after 2 days) ---------- */
+function openTempTool(){
+  const up=[];
+  modal(toolHead("🗂","Temporary files","Attach photos and files, or keep results from the other tools. They sync in the cloud and are <b>deleted automatically after 2 days</b>. Everyone who uses this app can see them.")+
+  `<div class="tl-drop" id="tp-drop"><span style="font-size:28px">📎</span><div><b>Drop photos / files here</b> or click to attach<br><span class="hint">Any file up to ${fmtSize(TMP_MAX)} · kept for 2 days</span></div><input id="tp-f" type="file" multiple hidden></div>
+   <div id="tp-up"></div><div class="tl-sum"><span class="hint" id="tp-sum"></span><span class="row"><button class="btn sm danger" id="tp-clr">🗑 Delete all</button></span></div><div class="tmp-grid" id="tp-grid"></div>`,
+  (bg,close)=>{
+    bg.firstChild.style.maxWidth="980px";const $b=s=>$(s,bg);
+    function draw(){
+      if(!bg.isConnected||!$b("#tp-grid"))return;const l=tmpLive(),tot=l.reduce((n,m)=>n+m.size,0);
+      $b("#tp-sum").innerHTML=!fdb?"⚠ The cloud is not connected — temporary files are not available right now.":l.length?`<b>${l.length}</b> file(s) · ${fmtSize(tot)} · synced in the cloud`:"No temporary files";
+      $b("#tp-clr").disabled=!l.length;
+      $b("#tp-up").innerHTML=up.map(u=>`<div class="fcard"><span class="fth">⏳</span><div class="fmain"><div class="fname">${esc(u.name)}</div><div class="fmeta">${esc(u.st)}</div></div></div>`).join("");
+      $b("#tp-grid").innerHTML=l.length?l.map(m=>`<div class="tmpc"><div class="tmp-t">${m.thumb?`<img src="${m.thumb}" alt="">`:`<span>${tmpIcon(m.type)}</span>`}</div><div class="fname">${esc(m.name)}</div><div class="fmeta">${fmtSize(m.size)} · <span class="badge">${esc(m.source||"")}</span></div><div class="fmeta" title="Deleted automatically">⏳ ${tmpLeft(m.expires)}</div>
+        <div class="fact" style="justify-content:flex-start;margin-top:6px"><button class="btn sm" data-tp="open" data-id="${m.id}" title="Open">👁</button><button class="btn sm" data-tp="dl" data-id="${m.id}" title="Download">⬇</button>${isPdfOrImg(m.type)?`<button class="btn sm" data-tp="reduce" data-id="${m.id}" title="Open in File Size Reducer">🗜</button><button class="btn sm" data-tp="convert" data-id="${m.id}" title="Open in File Converter">🔄</button>`:""}<button class="btn sm danger" data-tp="del" data-id="${m.id}" title="Delete now">🗑</button></div></div>`).join(""):`<div class="empty" style="grid-column:1/-1">Nothing here yet — attach files above, or press ☁ Keep in the reducer / converter.</div>`;
+    }
+    const isPdfOrImg=t=>/pdf|^image\//.test(t);
+    async function add(files){
+      for(const f of [...files]){const u={name:f.name,st:"Uploading…"};up.push(u);draw();const id=await tmpSave(f,f.name,"Attached");up.splice(up.indexOf(u),1);if(id)toast("Kept for 2 days ☁");draw()}}
+    bindDrop($b("#tp-drop"),$b("#tp-f"),add);
+    TMP.watch=()=>{if(!bg.isConnected){TMP.watch=null;return}draw()};
+    $b("#tp-clr").onclick=async()=>{if(!confirm("Delete ALL temporary files now? This cannot be undone."))return;for(const m of tmpLive())await tmpDelete(m.id)};
+    $b("#tp-grid").addEventListener("click",async e=>{
+      const b=e.target.closest("[data-tp]");if(!b)return;const k=b.dataset.tp,id=b.dataset.id;
+      if(k==="open")return tmpOpen(id);
+      if(k==="del"){await tmpDelete(id);return}
+      try{
+        if(k==="dl"){const m=TMP.items.find(x=>x.id===id);dlFile(m.name,await tmpLoad(id),m.type);return}
+        const f=await tmpFile(id);close();setTimeout(()=>k==="reduce"?openReduceTool([f]):openConvertTool([f]),250)
+      }catch(x){toast(x.message||"Could not load the file")}});
+    setInterval(()=>{if(bg.isConnected)draw()},60000);
+    draw();
+  });
+}
+
 /* ============ ADMINISTRATOR MODE (v1.2.8) ============ */
 /* Edit / delete tools (everything except Contact History and Sorting baggage records) are hidden until an administrator logs in.
    Up to 2 passwords + recovery answers are stored hashed in the synced "settings" collection (id "admin"). Auto log-out after 10 min without activity. */
@@ -3214,14 +3481,19 @@ function admPanel(){
   });
 }
 (function(){
-  const wrap=$("#toolFab"),menu=$("#optMenu"),gear=$("#gearBtn"),PK="bfs-tool-pos";
+  const wrap=$("#toolFab"),menu=$("#optMenu"),tmenu=$("#toolMenu"),gear=$("#gearBtn"),PK="bfs-tool-pos";
   if(DB.ui.lineLinks){delete DB.ui.lineLinks;save()}
   function clamp(){const r=wrap.getBoundingClientRect();if(wrap.style.left){wrap.style.left=Math.max(4,Math.min(innerWidth-r.width-4,r.left))+"px";wrap.style.top=Math.max(4,Math.min(innerHeight-r.height-4,r.top))+"px"}}
   try{const p=JSON.parse(localStorage.getItem(PK)||"null");if(p){wrap.style.left=p.l+"px";wrap.style.top=p.t+"px";wrap.style.right="auto";wrap.style.bottom="auto";clamp()}}catch(e){}
   let lw=innerWidth;addEventListener("resize",()=>{if(innerWidth!==lw){lw=innerWidth;closeMenu()}clamp()});
-  function closeMenu(){menu.hidden=true;gear.setAttribute("aria-expanded","false")}
+  function closeMenu(){menu.hidden=true;tmenu.hidden=true;gear.setAttribute("aria-expanded","false")}
+  function openTMenu(){
+    menu.hidden=true;tmenu.hidden=false;tmpUI();
+    const r=wrap.getBoundingClientRect(),below=r.top<innerHeight/2,right=r.left+r.width/2>innerWidth/2;
+    tmenu.style.top=below?"calc(100% + 10px)":"auto";tmenu.style.bottom=below?"auto":"calc(100% + 10px)";tmenu.style.right=right?"0":"auto";tmenu.style.left=right?"auto":"0";
+  }
   function openMenu(){
-    menu.hidden=false;gear.setAttribute("aria-expanded","true");
+    tmenu.hidden=true;menu.hidden=false;gear.setAttribute("aria-expanded","true");
     const r=wrap.getBoundingClientRect(),below=r.top<innerHeight/2,right=r.left+r.width/2>innerWidth/2;
     menu.style.top=below?"calc(100% + 10px)":"auto";menu.style.bottom=below?"auto":"calc(100% + 10px)";menu.style.right=right?"0":"auto";menu.style.left=right?"auto":"0";
   }
@@ -3232,7 +3504,8 @@ function admPanel(){
       if(st.moved){wrap.style.right="auto";wrap.style.bottom="auto";wrap.style.left=st.l+dx+"px";wrap.style.top=st.t+dy+"px";clamp()}});
     btn.addEventListener("pointerup",()=>{if(!st)return;if(st.moved){const r=wrap.getBoundingClientRect();try{localStorage.setItem(PK,JSON.stringify({l:r.left,t:r.top}))}catch(e){}}else onClick();st=null});
   }
-  bind($("#toolBtn"),()=>{closeMenu();openTool()});
+  bind($("#toolBtn"),()=>tmenu.hidden?openTMenu():closeMenu());
+  tmenu.addEventListener("click",e=>{const i=e.target.closest("[data-tm]");if(!i)return;closeMenu();({reduce:openReduceTool,convert:openConvertTool,temp:openTempTool})[i.dataset.tm]()});
   bind(gear,()=>menu.hidden?openMenu():closeMenu());
   menu.addEventListener("click",e=>{const i=e.target.closest("[data-om]");if(!i)return;closeMenu();
     if(i.dataset.om==="admin"){openAdmin();return}
@@ -3240,7 +3513,7 @@ function admPanel(){
     if(i.dataset.om==="data")openData();
     else if(i.dataset.om==="rename")openRenameSections();
     else{VIEW.mode="home";render();mounted["home#0"]?.edit()}});
-  document.addEventListener("pointerdown",e=>{if(!menu.hidden&&!e.target.closest("#toolFab"))closeMenu()});
+  document.addEventListener("pointerdown",e=>{if((!menu.hidden||!tmenu.hidden)&&!e.target.closest("#toolFab"))closeMenu()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});
 })();
 {const hd=$("header"),nv=$("#nav"),setHH=()=>{document.documentElement.style.setProperty("--hh",hd.offsetHeight+"px")};setHH();if(window.ResizeObserver)new ResizeObserver(setHH).observe(hd);addEventListener("scroll",()=>nv.classList.toggle("stuck",scrollY>60),{passive:true})}
