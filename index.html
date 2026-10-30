@@ -384,7 +384,12 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 
 /* v1.3.4 */
 .bulkbar{padding:8px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}.bb-t{display:flex;flex-wrap:wrap;gap:6px}.bb-b{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:5px 11px;font-weight:700;font-size:13px;cursor:pointer}.bb-b.on{background:var(--pri);color:#fff;border-color:var(--pri)}.bb-b.add{border-style:dashed;color:var(--pri2)}
-.jd[hidden],#s-jopt[hidden]{display:none}.rq{color:var(--bad)}.jb-none{background:var(--soft);color:var(--mut)}
+.jd[hidden],#s-jopt[hidden]{display:none}
+/* v1.3.5 Office/JAAT status colours */
+.st-JPending{background:#fff1b8;color:#7a5600}.st-JFollowed{background:#dcebfb;color:#0b4f8a}.st-JDone{background:#d9f2e3;color:#14663a}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .st-JPending{background:#3d3210;color:#f2cf5b}:root:not([data-theme="light"]) .st-JFollowed{background:#122b44;color:#8cc3f5}:root:not([data-theme="light"]) .st-JDone{background:#123422;color:#7bd6a0}}
+:root[data-theme="dark"] .st-JPending{background:#3d3210;color:#f2cf5b}:root[data-theme="dark"] .st-JFollowed{background:#122b44;color:#8cc3f5}:root[data-theme="dark"] .st-JDone{background:#123422;color:#7bd6a0}
+.rq{color:var(--bad)}.jb-none{background:var(--soft);color:var(--mut)}
 
 /* v1.3.1 */
 .bh{display:flex;align-items:center;justify-content:space-between;gap:8px}.bh .tg{min-height:0;padding:2px 10px;font-size:12px;text-transform:none;letter-spacing:0}.bsum{text-transform:none;letter-spacing:0;font-weight:600;color:var(--pri)}.bcol{display:none!important}
@@ -435,13 +440,14 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.3.4";
+const VERSION="1.3.5";
 const CHANGELOG=[
- {v:"1.3.4",d:"2026-10-29",items:["Fixed: Download PDF (Summary PDF and the record slip) failed with “Could not create the PDF”. The PDF engine is now built into the app, so it works without loading anything from the internet, and the error message now shows the reason.","Office / JAAT record: when the found location is NOT “JAAT Room”, the enter date and due date are no longer required — tick “Set JAAT room dates” only if you need them. Records without dates show “not in JAAT room” and are left out of the take-out alerts.","Record baggage: new bulk entry — add up to 5 bags in one go with ＋ Add bag (each bag has its own tag number, description, AHL and photo; flights, location, dates and note are shared)."]},
+ {v:"1.3.5",d:"2026-10-30",items:["Office / JAAT: status is now Pending (yellow) · Followed (blue) · Done (green).","Take-out alerts: bags that are not in the JAAT room never trigger a take-out notice, and Followed bags are only notified once their due date is reached.","Wording: “JAAT room dates” is now simply “due date”. In the record form the due-date tick box and the enter / due date fields moved below “Baggage found location”.","Sorting Area / TBT records are now deleted automatically 21 days after they were recorded (a warning shows in the last 7 days — export CSV first if you need a copy)."]},
+ {v:"1.3.4",d:"2026-10-29",items:["Fixed: Download PDF (Summary PDF and the record slip) failed with “Could not create the PDF”. The PDF engine is now built into the app, so it works without loading anything from the internet, and the error message now shows the reason.","Office / JAAT record: when the found location is NOT “JAAT Room”, the enter date and due date are no longer required — tick “Set due date” only if you need it. Records without a due date show “No due date” and are left out of the take-out alerts.","Record baggage: new bulk entry — add up to 5 bags in one go with ＋ Add bag (each bag has its own tag number, description, AHL and photo; flights, location, dates and note are shared)."]},
  {v:"1.3.3",d:"2026-10-29",items:["Assignment widget is now shared through the cloud: the LL and Porter assignment photos are the same for everyone and update live.","File tools are now three separate options in the file-tools button (like the settings menu): 🗜 Reduce file size, 🔄 Convert files and 🗂 Temporary files — each with a redesigned screen with thumbnails, clearer controls and result cards.","Temporary files: attach photos and files, or press ☁ Keep on reduced / converted results. They are synced in the cloud and deleted automatically after 2 days. Kept files can be added back into the reducer or converter, or opened, downloaded and deleted.","File Converter: drag and drop the ⠿ handle to change the order of photos and files (touch and keyboard arrows work too). Combined PDFs and ZIPs follow that order."]},
  {v:"1.3.2",d:"2026-10-29",items:["Section bar (Home · Email · … · Split view) is now one compact row: smaller buttons, the drag hint became a tooltip, and Split view stays visible on the right.","Record baggage: new barcode scan button next to the tag number — scan the barcode on the baggage tag with the camera (or from a photo); USB / Bluetooth scanners still type straight into the field.","New 📋 Assignment widget at the bottom-left of every page: keep the LL assignment and Porter assignment photos, open them full size with zoom, and add a title / date. Photos are saved on this device."]},
  {v:"1.3.1",d:"2026-10-28",items:["Baggage description form: each of the 3 parts (colour code, type of baggage, descriptive elements) has a Hide / Expand button (collapsed by default) and shows your selection while collapsed.","Baggage description: the code can be typed manually (e.g. BK 22 RH) — it fills the choices automatically; a code that is not on the IATA chart is kept as a manual note.","Sorting / JAAT tables are more compact: found-at merged under the tag number, enter / due dates stacked, shorter comment and action cells."]},
- {v:"1.3.0",d:"2026-10-28",items:["Sorting records: every record (Sorting Area / TBT and Office / JAAT) can now be edited with the ✏️ Edit button — tag, flights, bag description, AHL / email, location, JAAT dates and photo. Each edit is written to the history log.","Flights: every flight, including connecting flights, now has its own flight date (up to 5 flights per record).","Bag description now follows the IATA Baggage Identification Chart: ① colour code (BK, GN, RD …), ② type of baggage by chart number (e.g. 22 = upright design, soft material) chosen from pictures, ③ optional descriptive elements (R = rigid, H = retractable handles …).","Fixed: the pinned-widget icons no longer overlap the Admin mode timer (they move up while Admin mode is on)."]},
+ {v:"1.3.0",d:"2026-10-28",items:["Sorting records: every record (Sorting Area / TBT and Office / JAAT) can now be edited with the ✏️ Edit button — tag, flights, bag description, AHL / email, location, due date and photo. Each edit is written to the history log.","Flights: every flight, including connecting flights, now has its own flight date (up to 5 flights per record).","Bag description now follows the IATA Baggage Identification Chart: ① colour code (BK, GN, RD …), ② type of baggage by chart number (e.g. 22 = upright design, soft material) chosen from pictures, ③ optional descriptive elements (R = rigid, H = retractable handles …).","Fixed: the pinned-widget icons no longer overlap the Admin mode timer (they move up while Admin mode is on)."]},
  {v:"1.2.9",d:"2026-10-27",items:["Office/JAAT: the entering day now counts as day 1, so a bag that enters on 23 Oct must be taken out on 27 Oct (day 5); the maximum stay is day 7. The due date defaults to day 5.","Sorting records: up to 5 flight numbers can be added (for connecting / transfer flights).","Administrator mode: only 1 recovery question has to be answered (date of birth, name of pet or last 4 digits of ID card). Any answers given must be correct."]},
  {v:"1.2.8",d:"2026-10-27",items:["New hidden Administrator mode (⚙ gear button → 🔐 Administrator). Editing and deleting in Email Templates, TELEX, Airlines Policy, Documents, Email Directory and Home customisation (also Rename sections and Data & backup) is now hidden until an administrator logs in. Contact History and Sorting baggage records stay open for everyone.","Administrator passwords: up to 2, set up the first time and synced to every device; add, change or delete them inside Administrator mode. Forgot password: answer 3 recovery questions (date of birth, name of pet, last 4 digits of ID card). Stays logged in for the session and logs out automatically after 10 minutes without activity (a countdown pill is shown at the bottom left).","Sorting Bag Record is split into two sub-sections: 🧳 Sorting Area / TBT Record (unchanged) and 🏢 Office/JAAT Record. JAAT records have an Enter date and a Due date (day 5 from entering; a bag may stay at most 7 days). Bags that reached day 5 or more are flagged, and a notice with a Re-confirm take out button appears when adding a new record. JAAT status is Pending / Done."]},
  {v:"1.2.7",d:"2026-10-27",items:["Bug fix: airline 3-digit codes re-checked against the official IATA member list. Airlines that match IATA are marked ✔ IATA in ✈ Airline codes; wrong codes were corrected, missing airlines were added (e.g. Thai Airways TG 217, Thai Lion Air SL 310, Nok Air DD 596, Myanmar Airways International 8M 599) and airlines no longer on the IATA list were removed. Airlines not yet checked are marked (not verified)."]},
@@ -1229,7 +1235,7 @@ const legsTxt=r=>legsOf(r).map(l=>`${l.no} (${l.date})`).join(" → ");
 const legsHTML=r=>legsOf(r).map((l,i)=>`<div class="fl-l"><b>${esc(l.no)}</b>${i?' <small>↳ connecting</small>':""}<div class="crumb">${esc(l.date)}</div></div>`).join("");
 const nowStr=()=>fmt(new Date().toISOString());
 const S_STATUS=["Pending","Forwarded"];
-const J_STATUS=["Pending","Done"];
+const J_STATUS=["Pending","Followed","Done"];
 /* Office/JAAT room: a bag may stay max 7 days, but must be taken out on day 5 counted from the day it entered */
 const DAYMS=864e5,JAAT_OUT=5,JAAT_MAX=7;
 const dnum=s=>{const m=/^(\d{4})-(\d\d)-(\d\d)/.exec(s||"");return m?Date.UTC(+m[1],+m[2]-1,+m[3])/DAYMS:NaN};
@@ -1239,12 +1245,15 @@ const jEnter=r=>r.enterDate||String(r.createdAt||"").slice(0,10);
 const jDue=r=>r.dueDate||addDays(jEnter(r),JAAT_OUT-1);
 const jAge=r=>dnum(todayStr())-dnum(jEnter(r))+1; /* day number: entering day = day 1 (enter 23 Oct -> take out 27 Oct) */
 const jTrig=r=>Math.min(dnum(jDue(r)),dnum(jEnter(r))+JAAT_OUT-1);
-const jState=r=>r.status==="Done"?"done":r.noDates?"none":jAge(r)>=JAAT_MAX?"over":dnum(todayStr())>=jTrig(r)?"due":"ok";
-const jDueList=()=>DB.sorting.filter(r=>!isMockRec(r)&&zoneOf(r)==="jaat"&&r.status==="Pending"&&(jState(r)==="due"||jState(r)==="over")).sort((a,b)=>jAge(b)-jAge(a));
+/* a bag counts as "in the JAAT room" only when its found location is the JAAT Room (and it has a due date) */
+const inJaat=r=>!r.noDates&&(!r.foundLoc||r.foundLoc==="JAAT Room");
+const jState=r=>r.status==="Done"?"done":r.noDates?"none":!inJaat(r)?"out":jAge(r)>=JAAT_MAX?"over":dnum(todayStr())>=jTrig(r)?"due":"ok";
+const jDueList=()=>DB.sorting.filter(r=>!isMockRec(r)&&zoneOf(r)==="jaat"&&r.status!=="Done"&&(jState(r)==="due"||jState(r)==="over")).sort((a,b)=>jAge(b)-jAge(a));   /* Pending and Followed bags are only notified once their due date is reached; bags not in the JAAT room are never notified */
 function jBadge(r){
   const s=jState(r),a=jAge(r);
   if(s==="done")return `<span class="jb jb-done">✔ Taken out${r.outDate?" · "+esc(r.outDate):""}</span>`;
-  if(s==="none")return `<span class="jb jb-none">No JAAT room dates</span>`;
+  if(s==="none")return `<span class="jb jb-none">No due date</span>`;
+  if(s==="out")return `<span class="jb jb-none">Not in JAAT room · due ${esc(jDue(r))}</span>`;
   if(s==="over")return `<span class="jb jb-over">⛔ Day ${a} · over ${JAAT_MAX}-day limit</span>`;
   if(s==="due")return `<span class="jb jb-due">⚠ Day ${a} · take out now</span>`;
   const left=jTrig(r)-dnum(todayStr());return `<span class="jb jb-ok">Day ${a} · ${left} day${left===1?"":"s"} to take-out</span>`;
@@ -1471,7 +1480,7 @@ function mountSorting(root){
   const dateOk=r=>{const d=recDate(r);return(!F.from||d>=F.from)&&(!F.to||d<=F.to)};
   function baseOk(){
     const q=F.q.toLowerCase().trim(),fl=F.flight.toLowerCase().trim();
-    return r=>(!q||String(r.tagNumber).toLowerCase().includes(q)||tIata(r).toLowerCase().includes(q)||String(r.ahlCase).toLowerCase().includes(q)||String(r.foundLoc||"").toLowerCase().includes(q))&&(!fl||String(r.flightNumber).toLowerCase().includes(fl))&&(!F.date||legsOf(r).some(l=>l.date===F.date))&&(!F.st||r.status===F.st)&&(!F.due||(r.status==="Pending"&&(jState(r)==="due"||jState(r)==="over")));
+    return r=>(!q||String(r.tagNumber).toLowerCase().includes(q)||tIata(r).toLowerCase().includes(q)||String(r.ahlCase).toLowerCase().includes(q)||String(r.foundLoc||"").toLowerCase().includes(q))&&(!fl||String(r.flightNumber).toLowerCase().includes(fl))&&(!F.date||legsOf(r).some(l=>l.date===F.date))&&(!F.st||r.status===F.st)&&(!F.due||(r.status!=="Done"&&(jState(r)==="due"||jState(r)==="over")));
   }
   function filtered(){
     const l=recs().filter(r=>baseOk()(r)&&dateOk(r));
@@ -1480,7 +1489,7 @@ function mountSorting(root){
   }
   const syncInputs=()=>$$("[data-f]",root).forEach(i=>{if(i.dataset.f in F)i.value=F[i.dataset.f]});
   function build(){
-    root.innerHTML=`<div class="sec-head"><h2>${secH("sorting")}</h2><span class="hint">${J()?`Office / JAAT room · take out on day ${JAAT_OUT} · never beyond day ${JAAT_MAX}`:"BKK TBT sorting area"}</span><div class="right">
+    root.innerHTML=`<div class="sec-head"><h2>${secH("sorting")}</h2><span class="hint">${J()?`Office / JAAT room · take out on day ${JAAT_OUT} · never beyond day ${JAAT_MAX}`:"BKK TBT sorting area · records are deleted automatically after 21 days"}</span><div class="right">
      <button class="btn sm" onclick="openTagAir()">✈ Airline codes</button><button class="btn pri sm" data-a="add">${J()?"＋ Add JAAT record":"＋ Add baggage record"}</button><button class="btn sm" data-a="csv">⬇ Export CSV</button><button class="btn sm" data-a="pdf">📄 Summary PDF</button><button class="btn sm" data-a="tpl">Template</button>
      <label class="btn sm" style="margin:0">⬆ Import CSV<input type="file" accept=".csv" data-a="imp" hidden></label>${J()?"":`<button class="btn sm" data-a="legacy" title="One-time import from the previous standalone Sorting app">⬆ Import from old app</button>`}</div></div>
     <div class="tabs szt"><button class="btn${J()?"":" on"}" data-z="tbt">🧳 Sorting Area / TBT Record</button><button class="btn${J()?" on":""}" data-z="jaat">🏢 Office/JAAT Record <span class="jcnt" id="sz-b"></span></button></div>
@@ -1495,21 +1504,21 @@ function mountSorting(root){
   const tagTd=r=>`<td><b style="font-family:ui-monospace,monospace">${esc(tIata(r)||r.tagNumber)}</b>${tIata(r)?`<div class="hint mono" style="font-size:10.5px">${esc(r.tagNumber)}</div>`:""}<div class="crumb">📍 ${esc(locText(r))}</div></td>`;
   const cmTd=r=>{const c=lastComment(r);return `<td class="rm"><div class="crumb cl2" title="${c.n?esc(c.t):""}">${c.n?`“${esc(c.t)}”`:"No comments yet"}</div><button class="btn sm cmb" data-cm="${r.id}">💬 Comments (${c.n})</button></td>`};
   function rowTBT(r){return `<tr>${thumbTd(r)}${tagTd(r)}
-      <td class="dl"><b>${esc(recDate(r))}</b><div class="crumb">🕒 ${esc(recTime(r))}</div></td>
+      <td class="dl"><b>${esc(recDate(r))}</b><div class="crumb">🕒 ${esc(recTime(r))}</div>${retHint(r)}</td>
       <td>${legsHTML(r)}</td><td>${bagChip(r)}</td><td class="ahl">${esc(r.ahlCase)}</td>${cmTd(r)}
       <td><select class="st st-S${r.status}" data-sst="${r.id}">${S_STATUS.map(s=>`<option${s===r.status?" selected":""}>${s}</option>`).join("")}</select></td>
       <td><div class="acts"><button class="btn sm" data-edit="${r.id}" title="Edit this record">✏️ Edit</button><button class="btn sm" data-slip="${r.id}" title="Download PDF slip">⬇ PDF</button><button class="btn sm danger" data-del="${r.id}" title="Delete">🗑</button></div></td></tr>`}
   function rowJ(r){const s=jState(r);return `<tr class="jrow-${s}">${thumbTd(r)}${tagTd(r)}
-      <td class="dl">${r.noDates?`<div class="crumb">— not in JAAT room —</div>`:`<div><small>Enter</small><b>${esc(jEnter(r))}</b></div><div><small>Due</small><b>${esc(jDue(r))}</b></div><div>${jBadge(r)}</div>`}</td>
+      <td class="dl">${r.noDates?`<div class="crumb">— no due date —</div>`:`<div><small>Enter</small><b>${esc(jEnter(r))}</b></div><div><small>Due</small><b>${esc(jDue(r))}</b></div><div>${jBadge(r)}</div>`}</td>
       <td>${legsHTML(r)}</td><td>${bagChip(r)}</td><td class="ahl">${esc(r.ahlCase)}</td>${cmTd(r)}
-      <td><select class="st st-S${r.status}" data-sst="${r.id}">${J_STATUS.map(x=>`<option${x===r.status?" selected":""}>${x}</option>`).join("")}</select></td>
-      <td><div class="acts">${r.status==="Pending"&&!r.noDates?`<button class="btn sm ${s==="ok"?"":"pri"}" data-out="${r.id}" title="Re-confirm that the bag has been taken out of the JAAT room">✔ Take out</button>`:""}<button class="btn sm" data-edit="${r.id}" title="Edit this record">✏️ Edit</button><button class="btn sm" data-slip="${r.id}" title="Download PDF slip">⬇ PDF</button><button class="btn sm danger" data-del="${r.id}" title="Delete">🗑</button></div></td></tr>`}
+      <td><select class="st st-J${r.status}" data-sst="${r.id}">${J_STATUS.map(x=>`<option${x===r.status?" selected":""}>${x}</option>`).join("")}</select></td>
+      <td><div class="acts">${r.status!=="Done"&&inJaat(r)?`<button class="btn sm ${s==="ok"?"":"pri"}" data-out="${r.id}" title="Re-confirm that the bag has been taken out of the JAAT room">✔ Take out</button>`:""}<button class="btn sm" data-edit="${r.id}" title="Edit this record">✏️ Edit</button><button class="btn sm" data-slip="${r.id}" title="Download PDF slip">⬇ PDF</button><button class="btn sm danger" data-del="${r.id}" title="Delete">🗑</button></div></td></tr>`}
   function draw(){
     const all=recs(),rs=filtered(),pi=pageInfo(rs.length,F.page);F.page=pi.p;const pr=rs.slice(pi.a,pi.b);
     const dl=jDueList(),b=$("#sz-b",root);if(b)b.textContent=dl.length?"⚠ "+dl.length:"";
     $("#jalert",root).innerHTML=J()&&dl.length?`<div class="jalert"><div><b>⚠ ${dl.length} bag${dl.length>1?"s":""} must be taken out of the JAAT room</b><span class="hint"> · policy: take out on day ${JAAT_OUT}, never keep beyond day ${JAAT_MAX}</span></div><div class="jal">${dl.slice(0,8).map(r=>`<span class="jal-i"><b class="mono">${esc(tIata(r)||r.tagNumber)}</b> ${jBadge(r)} <button class="btn sm danger" data-out="${r.id}">Re-confirm take out</button></span>`).join("")}${dl.length>8?`<a href="#" data-a="due">+${dl.length-8} more — show all</a>`:""}</div></div>`:"";
     $(".tiles",root).innerHTML=J()
-      ?`<div class="tile"><b>${all.length}</b><span>Total JAAT bags</span></div><div class="tile"><b style="color:var(--ok)">${all.filter(r=>recDate(r)===todayStr()).length}</b><span>Entered today</span></div><div class="tile"><b style="color:var(--pri2)">${all.filter(r=>r.status==="Pending").length}</b><span>Pending (in JAAT room)</span></div><div class="tile"><b style="color:var(--bad)">${dl.length}</b><span>Due / overdue take-out</span></div><div class="tile"><b style="color:var(--ok)">${all.filter(r=>r.status==="Done").length}</b><span>Done (taken out)</span></div>`
+      ?`<div class="tile"><b>${all.length}</b><span>Total JAAT bags</span></div><div class="tile"><b style="color:var(--ok)">${all.filter(r=>recDate(r)===todayStr()).length}</b><span>Entered today</span></div><div class="tile"><b style="color:#b7791f">${all.filter(r=>r.status==="Pending").length}</b><span>Pending</span></div><div class="tile"><b style="color:var(--pri2)">${all.filter(r=>r.status==="Followed").length}</b><span>Followed</span></div><div class="tile"><b style="color:var(--bad)">${dl.length}</b><span>Due / overdue take-out</span></div><div class="tile"><b style="color:var(--ok)">${all.filter(r=>r.status==="Done").length}</b><span>Done (taken out)</span></div>`
       :`<div class="tile"><b>${all.length}</b><span>Total recorded bags</span></div><div class="tile"><b style="color:var(--ok)">${all.filter(r=>recDate(r)===todayStr()).length}</b><span>Recorded today</span></div><div class="tile"><b style="color:var(--pri2)">${all.filter(r=>r.status==="Pending").length}</b><span>Pending bags</span></div><div class="tile"><b style="color:var(--bad)">${all.filter(r=>r.status==="Forwarded").length}</b><span>Forwarded bags</span></div>`;
     const dd=$("#jdue",root);if(dd)dd.classList.toggle("pri",F.due);
     {const dateOn=F.from||F.to,outside=dateOn?all.filter(r=>baseOk()(r)&&!dateOk(r)).length:0;
@@ -1555,7 +1564,6 @@ function mountSorting(root){
     <div class="fg" style="margin-top:10px">
      ${!EDIT?`<div class="full bulkbar" id="s-bb"></div>`:""}<div class="full"><label>1. Tag number *</label><div class="tagwrap"><input id="s-tag" value="${esc(EDIT?rec.tagNumber:"")}" placeholder="10-digit e.g. 0738123221, or VN123221" style="font-family:ui-monospace,monospace" autocomplete="off" inputmode="text"><button type="button" class="scanbtn" id="s-scan" title="Scan the barcode on the baggage tag">${SCAN_SVG}</button></div><div id="s-tagp" class="hint" style="margin-top:4px;min-height:16px"></div></div>
      <div class="full"><label>2. Flight number &amp; flight date * <span style="font-weight:400">(up to 5 flights — each connecting flight has its own date)</span></label><div id="s-fls"></div><button type="button" class="btn sm" id="s-fadd">＋ Add connecting flight</button></div>
-     ${JZ?`<div class="full" id="s-jopt" hidden><label class="chk" style="white-space:normal"><input type="checkbox" id="s-jon"${EDIT&&!rec.noDates?" checked":""}> Set JAAT room dates (enter date / due date) — optional, because this bag is not in the JAAT room</label></div><div class="jd"><label>Enter date (into JAAT room) <span class="rq">*</span></label><input id="s-ed" type="date" value="${EDIT?jEnter(rec):todayStr()}"></div><div class="jd"><label>Due date (take out) <span class="rq">*</span></label><input id="s-dd" type="date" value="${EDIT?jDue(rec):addDays(todayStr(),JAAT_OUT-1)}"></div><div class="full jd"><div id="s-jw" class="hint"></div></div>`:""}
      <div class="full"><label>3. Baggage description <span style="font-weight:400">· IATA Baggage Identification Chart</span></label>
       <div class="lbl" style="margin-top:4px">✎ Type the code manually <span class="hint" style="text-transform:none">(optional · fills the choices below)</span></div>
       <input id="s-man" value="${esc(EDIT&&rec.manualCode||"")}" placeholder="e.g. BK 22 RH  ·  GN 22R H  ·  BK22" autocomplete="off" autocapitalize="characters" style="font-family:ui-monospace,monospace;text-transform:uppercase"><div class="hint" id="s-manh" style="margin-top:4px;min-height:16px"></div>
@@ -1570,6 +1578,7 @@ function mountSorting(root){
       <div class="bcode" id="s-code"></div></div>
      <div class="full"><label>4. AHL case match number / contact email *</label><input id="s-ahl" value="${esc(EDIT?rec.ahlCase:"")}" placeholder="e.g. BKKTG10293 or officer@airport.com"></div>
      <div class="full"><label>Baggage found location *</label><select id="s-loc"><option value="">Select location…</option>${S_LOCS.map(l=>`<option${l===locSel?" selected":""}>${l}</option>`).join("")}</select><input id="s-loco" value="${esc(locOther)}" placeholder="Other location details (required)" style="display:${locSel==="Other"?"":"none"};margin-top:6px"></div>
+     ${JZ?`<div class="full" id="s-jopt" hidden><label class="chk" style="white-space:normal"><input type="checkbox" id="s-jon"${EDIT&&!rec.noDates?" checked":""}> Set due date (optional) — this bag is not in the JAAT room</label></div><div class="jd"><label>Enter date (into JAAT room) <span class="rq">*</span></label><input id="s-ed" type="date" value="${EDIT?jEnter(rec):todayStr()}"></div><div class="jd"><label>Due date (take out) <span class="rq">*</span></label><input id="s-dd" type="date" value="${EDIT?jDue(rec):addDays(todayStr(),JAAT_OUT-1)}"></div><div class="full jd"><div id="s-jw" class="hint"></div></div>`:""}
      <div class="full"><label>${EDIT?"Add a note (optional)":"Initial comment / location notes"}</label><textarea id="s-cm" rows="2" placeholder="Optional notes (e.g. Belt 4 left behind, handle broken)…"></textarea></div>
      <div class="full"><label>5. Baggage photo (optional · max 5 MB)</label><div class="drop" id="s-drop"><input id="s-ph" type="file" accept="image/*" hidden><div id="s-up">📷 Tap to attach 1 photo of the baggage<br><small>JPG, PNG, WEBP</small></div><div id="s-pv" style="display:none"><img id="s-img" style="max-height:130px;border-radius:8px"><div class="row" style="justify-content:center;margin-top:6px"><span class="hint" id="s-sz"></span><button type="button" class="btn sm" id="s-rp">Replace photo</button><button type="button" class="btn sm danger" id="s-rm">Remove photo</button></div></div></div></div>
     </div>
@@ -1707,8 +1716,8 @@ function mountSorting(root){
           if(ahl!==o.ahlCase)ch.push(`AHL/email ${o.ahlCase||"—"} → ${ahl}`);
           if(foundLoc!==(o.foundLoc||""))ch.push(`location ${o.foundLoc||"—"} → ${foundLoc}`);
           if(JZ){
-            if(useD){if(o.noDates)ch.push(`JAAT dates set: enter ${ed} · due ${dd}`);else{if(ed!==jEnter(o))ch.push(`enter date ${jEnter(o)} → ${ed}`);if(dd!==jDue(o))ch.push(`due date ${jDue(o)} → ${dd}`)}}
-            else if(!o.noDates)ch.push("JAAT room dates removed");
+            if(useD){if(o.noDates)ch.push(`due date set: enter ${ed} · due ${dd}`);else{if(ed!==jEnter(o))ch.push(`enter date ${jEnter(o)} → ${ed}`);if(dd!==jDue(o))ch.push(`due date ${jDue(o)} → ${dd}`)}}
+            else if(!o.noDates)ch.push("due date removed");
           }
           const extra={tagNumber:rt.tag,tagIata:rt.iata,...lf,...bagF,ahlCase:ahl,foundLoc};
           if(JZ){if(useD){extra.enterDate=ed;extra.dueDate=dd;extra.noDates=false}else{extra.enterDate="";extra.dueDate="";extra.noDates=true}}
@@ -1729,7 +1738,7 @@ function mountSorting(root){
             if(JZ){r2.zone="jaat";
               if(useD){r2.enterDate=ed;r2.dueDate=dd;r2.history.push({time:t,text:`Entered JAAT room ${ed} · due ${dd} (take out on day ${JAAT_OUT}, max ${JAAT_MAX} days).`});
                 if(status==="Done"){r2.outDate=todayStr();r2.history.push({time:t,text:`Taken out of JAAT room — re-confirmed when adding the record (day ${age}).`})}}
-              else{r2.noDates=true;r2.history.push({time:t,text:"Not in the JAAT room — no enter / due dates set."})}}
+              else{r2.noDates=true;r2.history.push({time:t,text:"Not in the JAAT room — no due date set."})}}
             if(bags.length>1)r2.history.push({time:t,text:`Recorded in a bulk entry of ${bags.length} bags.`});
             if(cm)r2.history.push({time:t,text:"Note: "+cm});
             if(b.photo){try{r2.thumb=await makeThumb(b.photo);r2.hasPhoto=true;setPhoto(id,b.photo)}catch(e){}}
@@ -1778,8 +1787,11 @@ function mountSorting(root){
       const r=DB.sorting.find(x=>x.id===e.target.dataset.sst),v=e.target.value;
       if(r&&r.status!==v){
         if(zoneOf(r)==="jaat"){
-          if(v==="Done"){draw();confirmOut(r.id);return}
-          addHistory(r.id,`Status updated from [${r.status}] to [${v}] (bag back in JAAT room)`,{status:v,outDate:""});toast("Status updated to "+v);return;
+          if(v==="Done"){
+            if(inJaat(r)){draw();confirmOut(r.id);return}
+            addHistory(r.id,`Status updated from [${r.status}] to [Done]`,{status:"Done",outDate:todayStr()});toast("Status updated to Done");return;
+          }
+          addHistory(r.id,`Status updated from [${r.status}] to [${v}]`+(r.status==="Done"&&inJaat(r)?" (bag back in JAAT room)":""),{status:v,outDate:""});toast("Status updated to "+v);return;
         }
         addHistory(r.id,`Status updated from [${r.status}] to [${v}]`,{status:v});toast("Status updated to "+v)
       }
@@ -2302,6 +2314,21 @@ function bindWidgetEvents(root){
     const c=e.target.closest("[data-ckclear]");if(c)updItems(c,c.dataset.ckclear,it=>it.filter(x=>!x.done));
   });
 }
+/* ---- automatic clean-up: Sorting Area / TBT records are deleted 21 days after they were recorded ---- */
+const RET_TBT=21;
+const recAgeDays=r=>{const d=dnum(String(r.createdAt||"").slice(0,10));return isNaN(d)?NaN:dnum(todayStr())-d};
+const retHint=r=>{const a=recAgeDays(r);if(isNaN(a)||zoneOf(r)!=="tbt")return"";const left=RET_TBT-a;return left<=7?`<div class="crumb" title="Sorting Area records are deleted automatically ${RET_TBT} days after they were recorded" style="color:var(--bad)">🗑 deleted in ${Math.max(left,0)} day${left===1?"":"s"}</div>`:""};
+function sortingSweep(){
+  try{
+    const all=DB.sorting.filter(r=>!isMockRec(r));if(!all.length)return;
+    /* safety: if this device's clock is far ahead of the newest record, do nothing (a wrong date must never wipe the log) */
+    const newest=Math.max(...all.map(r=>dnum(String(r.createdAt||"").slice(0,10))).filter(x=>!isNaN(x)));
+    if(!isFinite(newest)||dnum(todayStr())-newest>45)return;
+    const old=all.filter(r=>zoneOf(r)==="tbt"&&recAgeDays(r)>=RET_TBT);
+    old.slice(0,50).forEach(r=>{delItem("sorting",r.id);delPhoto(r.id)});
+  }catch(e){console.warn("sorting clean-up",e)}
+}
+setTimeout(sortingSweep,8000);setInterval(sortingSweep,36e5);
 /* ---- barcode scanner (baggage tag) ---- */
 const SCAN_SVG='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path stroke-width="1.7" d="M7 8v8M10 8v8M13 8v8M16 8v8M18.5 8v8"/></svg>';
 let ZXP=null;
