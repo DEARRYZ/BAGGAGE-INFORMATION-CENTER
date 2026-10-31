@@ -385,6 +385,7 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 /* v1.3.4 */
 
 @media(max-width:700px){
+ #main .tw table.cmp td,#main .tw table.cmp .dl{white-space:normal}#main .tw .jb{white-space:normal;display:inline-block}
  .mfc:not(.mf-open)>div:not(:first-child):not(.mf-tg){display:none}
  .mfc>.mf-tg{grid-column:1/-1;justify-self:start;background:var(--soft);font-weight:600}
  .mfc .mf-n{color:var(--pri2)}
@@ -436,7 +437,7 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
  .chartbox{padding:9px}
  .modal{padding:14px 12px calc(14px + env(safe-area-inset-bottom,0px))}
  /* tables become cards */
- #main .tw{overflow:visible;background:transparent;box-shadow:none;border-radius:0}
+ #main .tw{overflow:visible;background:transparent;box-shadow:none;border-radius:0;border:0}
  #main .tw table{display:block;width:100%;border:0}#main .tw thead{display:none}#main .tw tbody{display:block}
  #main .tw tbody tr{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;background:var(--card)!important;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);margin:0 0 9px;padding:9px 11px}
  #main .tw td{display:block;padding:0;border:0;min-width:0;max-width:none!important;text-align:left;overflow-wrap:anywhere;font-size:13px;width:auto!important}
@@ -517,7 +518,7 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 /* ============ CONFIG ============ */
 const VERSION="1.4.0";
 const CHANGELOG=[
- {v:"1.4.0",d:"2026-10-31",items:["Mobile redesign (phones only — the desktop layout is unchanged): a bottom tab bar with Home + your three most-used sections + ☰ More; the More sheet lists every section, tools (assignment, file tools), settings and the update history, so the floating buttons are gone.","Mobile: smaller header, buttons and fields; tables of records are shown as compact cards; the sorting-record cards show photo · tag · status first, then details and action buttons.","Fixed: the filter bar of Contact History (search, dates, status, topic) was squashed to a thin line since v1.3.3 — a style name clash caused by the file tools. Also fixed the same clash for the Hide / Expand buttons and drag handles."]},
+ {v:"1.4.0",d:"2026-10-31",items:["Mobile redesign (phones only — the desktop layout is unchanged): a bottom tab bar with Home + your three most-used sections + ☰ More; the More sheet lists every section, tools (assignment, file tools), settings and the update history, so the floating buttons are gone.","Mobile: smaller header, buttons and fields; tables of records are shown as compact cards; the sorting-record cards show photo · tag · status first, then details and action buttons.","Records are deleted automatically: Office / JAAT 3 days after the status becomes Done (10 days after recording for Pending / Followed); Sorting Area 21 days after recording. A red “deleted in N days” note warns you first.","Fixed: the filter bar of Contact History (search, dates, status, topic) was squashed to a thin line since v1.3.3 — a style name clash caused by the file tools. Also fixed the same clash for the Hide / Expand buttons and drag handles."]},
  {v:"1.3.5",d:"2026-10-30",items:["Office / JAAT: status is now Pending (yellow) · Followed (blue) · Done (green).","Take-out alerts: bags that are not in the JAAT room never trigger a take-out notice, and Followed bags are only notified once their due date is reached.","Wording: “JAAT room dates” is now simply “due date”. In the record form the due-date tick box and the enter / due date fields moved below “Baggage found location”.","Sorting Area / TBT records are now deleted automatically 21 days after they were recorded (a warning shows in the last 7 days — export CSV first if you need a copy)."]},
  {v:"1.3.4",d:"2026-10-29",items:["Fixed: Download PDF (Summary PDF and the record slip) failed with “Could not create the PDF”. The PDF engine is now built into the app, so it works without loading anything from the internet, and the error message now shows the reason.","Office / JAAT record: when the found location is NOT “JAAT Room”, the enter date and due date are no longer required — tick “Set due date” only if you need it. Records without a due date show “No due date” and are left out of the take-out alerts.","Record baggage: new bulk entry — add up to 5 bags in one go with ＋ Add bag (each bag has its own tag number, description, AHL and photo; flights, location, dates and note are shared)."]},
  {v:"1.3.3",d:"2026-10-29",items:["Assignment widget is now shared through the cloud: the LL and Porter assignment photos are the same for everyone and update live.","File tools are now three separate options in the file-tools button (like the settings menu): 🗜 Reduce file size, 🔄 Convert files and 🗂 Temporary files — each with a redesigned screen with thumbnails, clearer controls and result cards.","Temporary files: attach photos and files, or press ☁ Keep on reduced / converted results. They are synced in the cloud and deleted automatically after 2 days. Kept files can be added back into the reducer or converter, or opened, downloaded and deleted.","File Converter: drag and drop the ⠿ handle to change the order of photos and files (touch and keyboard arrows work too). Combined PDFs and ZIPs follow that order."]},
@@ -1565,7 +1566,7 @@ function mountSorting(root){
   }
   const syncInputs=()=>$$("[data-f]",root).forEach(i=>{if(i.dataset.f in F)i.value=F[i.dataset.f]});
   function build(){
-    root.innerHTML=`<div class="sec-head"><h2>${secH("sorting")}</h2><span class="hint">${J()?`Office / JAAT room · take out on day ${JAAT_OUT} · never beyond day ${JAAT_MAX}`:"BKK TBT sorting area · records are deleted automatically after 21 days"}</span><div class="right">
+    root.innerHTML=`<div class="sec-head"><h2>${secH("sorting")}</h2><span class="hint">${J()?`Office / JAAT room · take out on day ${JAAT_OUT} · never beyond day ${JAAT_MAX} · deleted 3 days after Done, or 10 days after recording`:"BKK TBT sorting area · records are deleted automatically after 21 days"}</span><div class="right">
      <button class="btn sm" onclick="openTagAir()">✈ Airline codes</button><button class="btn pri sm" data-a="add">${J()?"＋ Add JAAT record":"＋ Add baggage record"}</button><button class="btn sm" data-a="csv">⬇ Export CSV</button><button class="btn sm" data-a="pdf">📄 Summary PDF</button><button class="btn sm" data-a="tpl">Template</button>
      <label class="btn sm" style="margin:0">⬆ Import CSV<input type="file" accept=".csv" data-a="imp" hidden></label>${J()?"":`<button class="btn sm" data-a="legacy" title="One-time import from the previous standalone Sorting app">⬆ Import from old app</button>`}</div></div>
     <div class="tabs szt"><button class="btn${J()?"":" on"}" data-z="tbt">🧳 Sorting Area / TBT Record</button><button class="btn${J()?" on":""}" data-z="jaat">🏢 Office/JAAT Record <span class="jcnt" id="sz-b"></span></button></div>
@@ -1577,10 +1578,10 @@ function mountSorting(root){
     syncInputs();draw();
   }
   const thumbTd=r=>`<td>${r.thumb?`<img class="thumb" src="${r.thumb}" data-ph="${r.id}" alt="photo" title="Click to enlarge">`:`<div class="thumb nothumb" title="No photo">📷</div>`}</td>`;
-  const tagTd=r=>`<td><b style="font-family:ui-monospace,monospace">${esc(tIata(r)||r.tagNumber)}</b>${tIata(r)?`<div class="hint mono" style="font-size:10.5px">${esc(r.tagNumber)}</div>`:""}<div class="crumb">📍 ${esc(locText(r))}</div></td>`;
+  const tagTd=r=>`<td><b style="font-family:ui-monospace,monospace">${esc(tIata(r)||r.tagNumber)}</b>${tIata(r)?`<div class="hint mono" style="font-size:10.5px">${esc(r.tagNumber)}</div>`:""}<div class="crumb">📍 ${esc(locText(r))}</div>${retHint(r)}</td>`;
   const cmTd=r=>{const c=lastComment(r);return `<td class="rm"><div class="crumb cl2" title="${c.n?esc(c.t):""}">${c.n?`“${esc(c.t)}”`:"No comments yet"}</div><button class="btn sm cmb" data-cm="${r.id}">💬 Comments (${c.n})</button></td>`};
   function rowTBT(r){return `<tr>${thumbTd(r)}${tagTd(r)}
-      <td class="dl"><b>${esc(recDate(r))}</b><div class="crumb">🕒 ${esc(recTime(r))}</div>${retHint(r)}</td>
+      <td class="dl"><b>${esc(recDate(r))}</b><div class="crumb">🕒 ${esc(recTime(r))}</div></td>
       <td>${legsHTML(r)}</td><td>${bagChip(r)}</td><td class="ahl">${esc(r.ahlCase)}</td>${cmTd(r)}
       <td><select class="st st-S${r.status}" data-sst="${r.id}">${S_STATUS.map(s=>`<option${s===r.status?" selected":""}>${s}</option>`).join("")}</select></td>
       <td><div class="acts"><button class="btn sm" data-edit="${r.id}" title="Edit this record">✏️ Edit</button><button class="btn sm" data-slip="${r.id}" title="Download PDF slip">⬇ PDF</button><button class="btn sm danger" data-del="${r.id}" title="Delete">🗑</button></div></td></tr>`}
@@ -2471,19 +2472,31 @@ function mLabel(){
 const _rnM=renderNav;renderNav=function(){_rnM();mnavRender()};
 MQ.addEventListener("change",()=>{if(MQ.matches){mnavRender();mLabel()}else msheetClose()});
 setTimeout(()=>{mnavRender();mLabel();mFilters()},0);
-/* ---- automatic clean-up: Sorting Area / TBT records are deleted 21 days after they were recorded ---- */
-const RET_TBT=21;
-const recAgeDays=r=>{const d=dnum(String(r.createdAt||"").slice(0,10));return isNaN(d)?NaN:dnum(todayStr())-d};
-const retHint=r=>{const a=recAgeDays(r);if(isNaN(a)||zoneOf(r)!=="tbt")return"";const left=RET_TBT-a;return left<=7?`<div class="crumb" title="Sorting Area records are deleted automatically ${RET_TBT} days after they were recorded" style="color:var(--bad)">🗑 deleted in ${Math.max(left,0)} day${left===1?"":"s"}</div>`:""};
+/* ---- automatic clean-up of old records ----
+   Sorting Area / TBT : 21 days after the record was made
+   Office / JAAT      : 3 days after the status became Done · 10 days after the record was made for any other status */
+const RET_TBT=21,RET_J_DONE=3,RET_J_OPEN=10;
+const dOf=s=>dnum(String(s||"").slice(0,10));
+const recAgeDays=r=>{const d=dOf(r.createdAt);return isNaN(d)?NaN:dnum(todayStr())-d};
+const doneDate=r=>{
+  if(/^\d{4}-\d\d-\d\d/.test(String(r.outDate||"")))return dOf(r.outDate);
+  const h=(r.history||[]).slice().reverse().find(x=>/Status updated|Taken out/i.test(x.text||""));
+  const d=h?dOf(h.time):NaN;return isNaN(d)?dOf(r.createdAt):d};
+const retLeft=r=>{   /* days left before the record is deleted (NaN = unknown, never deleted) */
+  let base,days;
+  if(zoneOf(r)==="jaat"){if(r.status==="Done"){base=doneDate(r);days=RET_J_DONE}else{base=dOf(r.createdAt);days=RET_J_OPEN}}
+  else{base=dOf(r.createdAt);days=RET_TBT}
+  return isNaN(base)?NaN:days-(dnum(todayStr())-base)};
+const retHint=r=>{const l=retLeft(r);if(isNaN(l))return"";const lim=zoneOf(r)==="jaat"?3:7;
+  return l<=lim?`<div class="crumb" title="Records are deleted automatically — export CSV first if you need a copy" style="color:var(--bad)">🗑 deleted in ${Math.max(l,0)} day${l===1?"":"s"}</div>`:""};
 function sortingSweep(){
   try{
     const all=DB.sorting.filter(r=>!isMockRec(r));if(!all.length)return;
     /* safety: if this device's clock is far ahead of the newest record, do nothing (a wrong date must never wipe the log) */
-    const newest=Math.max(...all.map(r=>dnum(String(r.createdAt||"").slice(0,10))).filter(x=>!isNaN(x)));
+    const newest=Math.max(...all.map(r=>dOf(r.createdAt)).filter(x=>!isNaN(x)));
     if(!isFinite(newest)||dnum(todayStr())-newest>45)return;
-    const old=all.filter(r=>zoneOf(r)==="tbt"&&recAgeDays(r)>=RET_TBT);
-    old.slice(0,50).forEach(r=>{delItem("sorting",r.id);delPhoto(r.id)});
-  }catch(e){console.warn("sorting clean-up",e)}
+    all.filter(r=>{const l=retLeft(r);return !isNaN(l)&&l<=0}).slice(0,50).forEach(r=>{delItem("sorting",r.id);delPhoto(r.id)});
+  }catch(e){console.warn("record clean-up",e)}
 }
 setTimeout(sortingSweep,8000);setInterval(sortingSweep,36e5);
 /* ---- barcode scanner (baggage tag) ---- */
