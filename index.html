@@ -368,21 +368,96 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .tl-head{display:flex;gap:12px;align-items:center;margin-bottom:12px}.tl-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:23px;background:var(--soft);flex:none}
 .tl-drop{border:2px dashed var(--line);border-radius:14px;padding:16px;display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;background:var(--soft);cursor:pointer;text-align:center;color:var(--mut);transition:border-color .15s,background-color .15s}.tl-drop.over{border-color:var(--pri2);background:rgba(37,99,235,.12)}
 .tl-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}.tl-opts:empty,.tl-opts>div:empty{display:none}
-.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}.seg button{flex:1;padding:7px 8px;font-size:13px;font-weight:600;background:var(--card);color:var(--ink);border:none;border-right:1px solid var(--line);cursor:pointer}.seg button:last-child{border-right:none}.seg button.on{background:var(--pri);color:#fff}
+.segc{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}.segc button{flex:1;padding:7px 8px;font-size:13px;font-weight:600;background:var(--card);color:var(--ink);border:none;border-right:1px solid var(--line);cursor:pointer}.segc button:last-child{border-right:none}.segc button.on{background:var(--pri);color:#fff}
 .modeg{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;margin-top:4px}.modeg button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:8px 10px;cursor:pointer;line-height:1.2}.modeg button span{font-size:18px}.modeg button b{font-size:13px}.modeg button small{font-size:11.5px;color:var(--mut)}.modeg button.on{border-color:var(--pri2);box-shadow:0 0 0 2px var(--pri2);background:var(--soft)}
 .tl-sum{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0 8px}
 .tl-pick{border:1px solid var(--line);border-radius:12px;padding:8px;margin-top:8px;max-height:230px;overflow:auto;background:var(--card)}.tl-pick[hidden]{display:none}.pk{display:flex;align-items:center;gap:10px;padding:5px 2px;border-bottom:1px dashed var(--line)}.pk:last-child{border:none}.pk-i{width:34px;height:34px;border-radius:7px;background:var(--soft);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}.pk-i img{width:100%;height:100%;object-fit:cover}
 .chk{display:inline-flex;gap:6px;align-items:center;font-size:13px;cursor:pointer;white-space:nowrap}.chk input{width:auto;min-height:0;margin:0}
-.fcard{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:8px 10px;margin-bottom:8px;position:relative;touch-action:pan-y}.fcard.shift{transition:transform .15s}.fcard.dragging{box-shadow:0 10px 26px rgba(0,0,0,.35);z-index:5;background:var(--soft);cursor:grabbing}
+.fcard{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:8px 10px;margin-bottom:8px;position:relative;touch-action:pan-y}.fcard.shift{transition:transform .15s}.fcard.dragging{opacity:1;box-shadow:0 10px 26px rgba(0,0,0,.35);z-index:5;background:var(--soft);cursor:grabbing}
 .fth{width:48px;height:48px;border-radius:8px;object-fit:cover;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
-.fmain{flex:1;min-width:0}.fname{font-weight:700;overflow-wrap:anywhere;font-size:13.5px}.fmeta{font-size:12px;color:var(--mut);margin-top:1px}.fbar{height:5px;border-radius:3px;background:var(--line);margin-top:5px;overflow:hidden}.fbar i{display:block;height:100%;background:var(--ok)}
+.fmain{flex:1;min-width:0}.fname{font-weight:700;overflow-wrap:anywhere;font-size:13.5px}.fmeta{font-size:12px;color:var(--mut);margin-top:1px}.fprog{height:5px;border-radius:3px;background:var(--line);margin-top:5px;overflow:hidden}.fprog i{display:block;height:100%;background:var(--ok)}
 .fact{display:flex;gap:4px;flex:none;flex-wrap:wrap;justify-content:flex-end}.fact .btn{padding:3px 9px;font-size:12px;min-height:0}
-.grab{cursor:grab;touch-action:none;user-select:none;font-size:20px;line-height:1;color:var(--mut);padding:8px 6px;flex:none;border-radius:8px}.grab:hover,.grab:focus-visible{background:var(--soft);color:var(--ink);outline:none}
+.dgrab{cursor:grab;touch-action:none;user-select:none;font-size:20px;line-height:1;color:var(--mut);padding:8px 6px;flex:none;border-radius:8px}.dgrab:hover,.dgrab:focus-visible{background:var(--soft);color:var(--ink);outline:none}
 .fnum{width:24px;height:24px;border-radius:50%;background:var(--pri);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
 .tmp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}.tmpc{border:1px solid var(--line);border-radius:12px;padding:8px;background:var(--card)}.tmp-t{height:96px;border-radius:8px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:34px;overflow:hidden;margin-bottom:6px}.tmp-t img{width:100%;height:100%;object-fit:cover}
 .badge{display:inline-block;background:var(--soft);border-radius:8px;padding:0 7px;font-size:11px;font-weight:600}
 
 /* v1.3.4 */
+
+@media(max-width:700px){
+ .mfc:not(.mf-open)>div:not(:first-child):not(.mf-tg){display:none}
+ .mfc>.mf-tg{grid-column:1/-1;justify-self:start;background:var(--soft);font-weight:600}
+ .mfc .mf-n{color:var(--pri2)}
+ .tabs .btn{flex:1 1 0!important;white-space:normal!important;text-align:center;line-height:1.15;padding:6px 8px}
+ .sec-head .meta,.sec-head .sub{font-size:11.5px}
+ .ms-g.g4 .ms-i{font-size:10.5px;padding:8px 2px}.ms-l{padding:6px 4px}.ms-l small{font-size:11px}
+ .ms-l>span{font-size:18px}
+}
+
+/* ===== v1.4.0 mobile experience (phones ≤ 700px) — desktop is unchanged ===== */
+#mnav,#msheet{display:none}
+@media(max-width:700px){
+ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px));font-size:14px}
+ header{position:static;padding:7px 10px}
+ .brand b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.vtag{display:none}
+ nav.bar,#toolFab,footer #verBtn{display:none!important}
+ main{margin:8px auto 8px;padding:0 9px}
+ footer{padding:6px 10px 10px;font-size:11px}
+ /* bottom tab bar */
+ #mnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(15,35,60,.12);padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px))}
+ #mnav button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;border:none;background:transparent;color:var(--mut);font-size:10.5px;font-weight:600;padding:3px 1px;border-radius:12px;min-height:0!important;box-shadow:none;transform:none}
+ #mnav button i{font-style:normal;font-size:20px;line-height:1;padding:3px 15px;border-radius:14px;transition:background-color .15s}
+ #mnav button span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ #mnav button.on{color:var(--pri)}#mnav button.on i{background:var(--soft)}
+ /* "More" sheet */
+ #msheet{display:flex;position:fixed;inset:0;z-index:95;background:rgba(5,12,20,.55);align-items:flex-end}#msheet[hidden]{display:none}
+ .ms-p{width:100%;max-height:84vh;overflow:auto;background:var(--card);color:var(--ink);border-radius:20px 20px 0 0;padding:8px 13px calc(14px + env(safe-area-inset-bottom,0px));animation:msUp .22s ease;overscroll-behavior:contain}
+ @keyframes msUp{from{transform:translateY(40px);opacity:0}}
+ .ms-h{width:42px;height:4px;border-radius:2px;background:var(--line);margin:2px auto 10px}
+ .ms-s{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:1px solid var(--line);background:var(--soft);color:var(--mut);border-radius:12px;padding:9px 12px;font-size:14px}
+ .ms-t{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin:14px 2px 6px}
+ .ms-g{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.ms-g.g4{grid-template-columns:repeat(4,1fr)}
+ .ms-i{display:flex;flex-direction:column;align-items:center;gap:3px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:13px;padding:9px 3px;font-size:11.5px;font-weight:600;text-align:center;line-height:1.15;min-height:0!important}.ms-i i{font-style:normal;font-size:21px}
+ .ms-i.on{border-color:var(--pri2);background:var(--soft)}
+ .ms-l{display:flex;gap:11px;align-items:center;width:100%;text-align:left;border:none;background:transparent;padding:8px 4px;border-radius:10px;color:var(--ink);min-height:0!important}.ms-l>span{font-size:20px;width:26px;text-align:center}.ms-l b{display:block;font-size:13.5px}.ms-l small{color:var(--mut);font-size:11.5px;line-height:1.2}
+ /* floating things sit above the tab bar */
+ #wdock{bottom:calc(64px + env(safe-area-inset-bottom,0px));left:8px}body.adm-on #wdock{bottom:calc(108px + env(safe-area-inset-bottom,0px))}
+ #admPill{bottom:calc(62px + env(safe-area-inset-bottom,0px));left:8px;font-size:12px}
+ .toast{bottom:calc(78px + env(safe-area-inset-bottom,0px))!important}
+ #asgPop{width:calc(100vw - 16px)}
+ /* compact controls */
+ .btn{min-height:34px!important;padding:4px 10px;font-size:13px;border-radius:9px}.btn.sm{min-height:30px!important;padding:3px 9px;font-size:12px}
+ input,select,textarea{min-height:36px!important;font-size:15px;padding:6px 10px}
+ .pane{padding:12px 11px;border-radius:14px}
+ .sec-head h2{font-size:18px}
+ .tiles{gap:7px}.tile{padding:8px 10px}.tile b{font-size:19px}.tile span{font-size:11.5px}
+ .tabs{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;scrollbar-width:none;margin:8px 0}.tabs::-webkit-scrollbar{display:none}.tabs .btn{flex:1 0 auto;white-space:nowrap}
+ .fbar small,.sfbar small{font-size:10px}.fbar,.sfbar{gap:6px;margin:6px 0}
+ .chartbox{padding:9px}
+ .modal{padding:14px 12px calc(14px + env(safe-area-inset-bottom,0px))}
+ /* tables become cards */
+ #main .tw{overflow:visible;background:transparent;box-shadow:none;border-radius:0}
+ #main .tw table{display:block;width:100%;border:0}#main .tw thead{display:none}#main .tw tbody{display:block}
+ #main .tw tbody tr{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;background:var(--card)!important;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);margin:0 0 9px;padding:9px 11px}
+ #main .tw td{display:block;padding:0;border:0;min-width:0;max-width:none!important;text-align:left;overflow-wrap:anywhere;font-size:13px;width:auto!important}
+ #main .tw td::before{content:attr(data-label);display:block;font-size:9.5px;font-weight:800;letter-spacing:.3px;text-transform:uppercase;color:var(--mut);margin-bottom:1px}
+ #main .tw td[data-label=""]::before{display:none}#main .tw td:empty{display:none}
+ #main .tw td:last-child{grid-column:1/-1}
+ #main .tw .empty{padding:18px 8px}
+ /* sorting records: photo · tag · status on top, details in two columns, buttons at the bottom */
+ #main .tw table.cmp tbody tr{grid-template-columns:44px 1fr 1fr 96px}
+ #main .tw table.cmp td:nth-child(1){grid-column:1;grid-row:1}
+ #main .tw table.cmp td:nth-child(2){grid-column:2/4;grid-row:1}
+ #main .tw table.cmp td:nth-child(8){grid-column:4;grid-row:1}
+ #main .tw table.cmp td:nth-child(3),#main .tw table.cmp td:nth-child(5){grid-column:1/3}
+ #main .tw table.cmp td:nth-child(4),#main .tw table.cmp td:nth-child(6){grid-column:3/5}
+ #main .tw table.cmp td:nth-child(7),#main .tw table.cmp td:nth-child(9){grid-column:1/-1}
+ #main .tw table.cmp td:nth-child(1)::before,#main .tw table.cmp td:nth-child(2)::before,#main .tw table.cmp td:nth-child(8)::before,#main .tw table.cmp td:nth-child(9)::before{display:none}
+ #main .tw table.cmp td:nth-child(8) select{width:100%;max-width:none}
+ #main .tw table.cmp .acts{max-width:none}
+ #main .tw table.cmp .bgc{max-width:none}
+ #main .tw table.cmp td.rm{max-width:none}
+}
 .bulkbar{padding:8px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}.bb-t{display:flex;flex-wrap:wrap;gap:6px}.bb-b{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:5px 11px;font-weight:700;font-size:13px;cursor:pointer}.bb-b.on{background:var(--pri);color:#fff;border-color:var(--pri)}.bb-b.add{border-style:dashed;color:var(--pri2)}
 .jd[hidden],#s-jopt[hidden]{display:none}
 /* v1.3.5 Office/JAAT status colours */
@@ -392,7 +467,7 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .rq{color:var(--bad)}.jb-none{background:var(--soft);color:var(--mut)}
 
 /* v1.3.1 */
-.bh{display:flex;align-items:center;justify-content:space-between;gap:8px}.bh .tg{min-height:0;padding:2px 10px;font-size:12px;text-transform:none;letter-spacing:0}.bsum{text-transform:none;letter-spacing:0;font-weight:600;color:var(--pri)}.bcol{display:none!important}
+.bh{display:flex;align-items:center;justify-content:space-between;gap:8px}.bh .tgl{min-height:0;padding:2px 10px;font-size:12px;text-transform:none;letter-spacing:0}.bsum{text-transform:none;letter-spacing:0;font-weight:600;color:var(--pri)}.bcol{display:none!important}
 .tw table.cmp{font-size:12.5px}.cmp th,.cmp td{padding:6px 7px}.cmp th{font-size:10.5px;letter-spacing:0;white-space:normal;line-height:1.2}
 .cmp td.rm{min-width:0;max-width:150px}.cmp .thumb{width:34px;height:34px}.cmp .bgc{max-width:170px}.cmp .bgc .chip{white-space:normal;font-size:11px;padding:0 7px;line-height:1.35}
 .cmp .acts{display:flex;flex-wrap:wrap;gap:3px;max-width:118px}.cmp .acts .btn,.cmp .cmb{padding:2px 7px;font-size:11.5px;min-height:0}.cmp .cmb{display:block;margin-top:3px}
@@ -440,8 +515,9 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.3.5";
+const VERSION="1.4.0";
 const CHANGELOG=[
+ {v:"1.4.0",d:"2026-10-31",items:["Mobile redesign (phones only — the desktop layout is unchanged): a bottom tab bar with Home + your three most-used sections + ☰ More; the More sheet lists every section, tools (assignment, file tools), settings and the update history, so the floating buttons are gone.","Mobile: smaller header, buttons and fields; tables of records are shown as compact cards; the sorting-record cards show photo · tag · status first, then details and action buttons.","Fixed: the filter bar of Contact History (search, dates, status, topic) was squashed to a thin line since v1.3.3 — a style name clash caused by the file tools. Also fixed the same clash for the Hide / Expand buttons and drag handles."]},
  {v:"1.3.5",d:"2026-10-30",items:["Office / JAAT: status is now Pending (yellow) · Followed (blue) · Done (green).","Take-out alerts: bags that are not in the JAAT room never trigger a take-out notice, and Followed bags are only notified once their due date is reached.","Wording: “JAAT room dates” is now simply “due date”. In the record form the due-date tick box and the enter / due date fields moved below “Baggage found location”.","Sorting Area / TBT records are now deleted automatically 21 days after they were recorded (a warning shows in the last 7 days — export CSV first if you need a copy)."]},
  {v:"1.3.4",d:"2026-10-29",items:["Fixed: Download PDF (Summary PDF and the record slip) failed with “Could not create the PDF”. The PDF engine is now built into the app, so it works without loading anything from the internet, and the error message now shows the reason.","Office / JAAT record: when the found location is NOT “JAAT Room”, the enter date and due date are no longer required — tick “Set due date” only if you need it. Records without a due date show “No due date” and are left out of the take-out alerts.","Record baggage: new bulk entry — add up to 5 bags in one go with ＋ Add bag (each bag has its own tag number, description, AHL and photo; flights, location, dates and note are shared)."]},
  {v:"1.3.3",d:"2026-10-29",items:["Assignment widget is now shared through the cloud: the LL and Porter assignment photos are the same for everyone and update live.","File tools are now three separate options in the file-tools button (like the settings menu): 🗜 Reduce file size, 🔄 Convert files and 🗂 Temporary files — each with a redesigned screen with thumbnails, clearer controls and result cards.","Temporary files: attach photos and files, or press ☁ Keep on reduced / converted results. They are synced in the cloud and deleted automatically after 2 days. Kept files can be added back into the reducer or converter, or opened, downloaded and deleted.","File Converter: drag and drop the ⠿ handle to change the order of photos and files (touch and keyboard arrows work too). Combined PDFs and ZIPs follow that order."]},
@@ -1037,7 +1113,7 @@ function mountLog(root,cfg){
   <div><small>Topic</small><select data-f="topic"><option value="">All</option>${cfg.topics.map(s=>`<option>${esc(s)}</option>`).join("")}</select></div><div><small>&nbsp;</small><button class="btn" data-act="clear">Clear</button></div></div>
   <div class="tiles"></div><div class="charts"></div><div class="row" style="justify-content:space-between;margin:6px 0"><span class="meta" id="cnt" style="margin:0"></span><span class="row">${perSel()}<button class="btn sm" data-act="rmk" id="rmkBtn"></button><button class="btn sm" data-act="csv">⬇ Export CSV</button></span></div><div class="tw"></div><div class="pgw"></div>`;
   const rmkLabel=()=>{$("#rmkBtn",root).textContent=DB.ui.rmkHide?"📝 Show remarks":"📝 Hide remarks"};rmkLabel();
-  const statsApply=()=>{const h=!!DB.ui.statsHide;$("#statsBtn",root).textContent=h?"📊 Show statistics":"📊 Hide statistics";$(".charts",root).style.display=h?"none":""};statsApply();
+  const statsApply=()=>{const h=statsHidden();$("#statsBtn",root).textContent=h?"📊 Show statistics":"📊 Hide statistics";$(".charts",root).style.display=h?"none":""};statsApply();
   const recs=()=>DB[cfg.key];
   function filtered(){
     const q=F.q.toLowerCase().trim();
@@ -1097,7 +1173,7 @@ function mountLog(root,cfg){
     const rk=e.target.closest(".rmk");if(rk){rk.classList.toggle("open");return}
     const a=e.target.closest("[data-act]");
     if(a&&a.dataset.act==="rmk"){DB.ui.rmkHide=!DB.ui.rmkHide;save();rmkLabel();draw();return}
-    if(a&&a.dataset.act==="stats"){DB.ui.statsHide=!DB.ui.statsHide;save();statsApply();return}
+    if(a&&a.dataset.act==="stats"){DB.ui.statsHide=!statsHidden();save();statsApply();return}
     if(a){const k=a.dataset.act;
       if(k==="add")form();
       if(k==="clear"){Object.keys(F).forEach(x=>F[x]="");F.page=1;$$("[data-f]",root).forEach(i=>i.value="");draw()}
@@ -1567,13 +1643,13 @@ function mountSorting(root){
      <div class="full"><label>3. Baggage description <span style="font-weight:400">· IATA Baggage Identification Chart</span></label>
       <div class="lbl" style="margin-top:4px">✎ Type the code manually <span class="hint" style="text-transform:none">(optional · fills the choices below)</span></div>
       <input id="s-man" value="${esc(EDIT&&rec.manualCode||"")}" placeholder="e.g. BK 22 RH  ·  GN 22R H  ·  BK22" autocomplete="off" autocapitalize="characters" style="font-family:ui-monospace,monospace;text-transform:uppercase"><div class="hint" id="s-manh" style="margin-top:4px;min-height:16px"></div>
-      <div class="lbl bh" style="margin-top:8px"><span>① Colour code ${needCol?"*":""}${!needCol&&EDIT&&rec.color?` <span class="hint" style="text-transform:none">(current: ${esc(rec.color)} — pick a code to replace)</span>`:""} <span class="bsum" id="s-sc"></span></span><button type="button" class="btn sm tg" data-tg="s-cw">Expand ▾</button></div>
+      <div class="lbl bh" style="margin-top:8px"><span>① Colour code ${needCol?"*":""}${!needCol&&EDIT&&rec.color?` <span class="hint" style="text-transform:none">(current: ${esc(rec.color)} — pick a code to replace)</span>`:""} <span class="bsum" id="s-sc"></span></span><button type="button" class="btn sm tgl" data-tg="s-cw">Expand ▾</button></div>
       <div class="cbw bcol" id="s-cw">${COLOR_CODES.map(c=>`<button type="button" class="cb" data-col="${c[0]}" title="${c[0]} = ${c[1]}"><i style="background:${c[2]}"></i><b>${c[0]}</b><small>${c[1]}</small></button>`).join("")}</div>
-      <div class="lbl bh"><span>② Type of baggage (number on chart) ${needType?"*":""} <span class="bsum" id="s-tsc"></span></span><button type="button" class="btn sm tg" data-tg="s-tw">Expand ▾</button></div>
+      <div class="lbl bh"><span>② Type of baggage (number on chart) ${needType?"*":""} <span class="bsum" id="s-tsc"></span></span><button type="button" class="btn sm tgl" data-tg="s-tw">Expand ▾</button></div>
       <div id="s-tw" class="bcol"><input id="s-bts" type="search" placeholder="Type a number or name, e.g. 22 or upright">
       <div class="hint" id="s-btsel" style="margin-top:4px"></div>
       <div class="btw" id="s-bw">${BAG_GROUPS.map((g,i)=>`<div class="btgh" data-g="${i}"><div class="lbl" style="margin-top:0">${g}</div><div class="btg">${grp(i)}</div></div>`).join("")}</div>
-      </div><div class="lbl bh"><span>③ Additional descriptive elements <span class="hint" style="text-transform:none">(optional · tap to select)</span> <span class="bsum" id="s-dsc"></span></span><button type="button" class="btn sm tg" data-tg="s-de">Expand ▾</button></div>
+      </div><div class="lbl bh"><span>③ Additional descriptive elements <span class="hint" style="text-transform:none">(optional · tap to select)</span> <span class="bsum" id="s-dsc"></span></span><button type="button" class="btn sm tgl" data-tg="s-de">Expand ▾</button></div>
       <div id="s-de" class="bcol">${["Material","Basic","External"].map(g=>`<div class="hint" style="margin:4px 0 2px">${g} elements</div><div class="dew">${DESC_ELS.filter(e=>e[2]===g).map(e=>`<button type="button" class="de" data-de="${e[0]}" title="${e[1]}"><b>${e[0]}</b>${e[1]}</button>`).join("")}</div>`).join("")}</div>
       <div class="bcode" id="s-code"></div></div>
      <div class="full"><label>4. AHL case match number / contact email *</label><input id="s-ahl" value="${esc(EDIT?rec.ahlCase:"")}" placeholder="e.g. BKKTG10293 or officer@airport.com"></div>
@@ -2314,6 +2390,87 @@ function bindWidgetEvents(root){
     const c=e.target.closest("[data-ckclear]");if(c)updItems(c,c.dataset.ckclear,it=>it.filter(x=>!x.done));
   });
 }
+/* ---- mobile: bottom tab bar + "More" sheet + table labels (phones only) ---- */
+const MQ=window.matchMedia("(max-width:700px)");
+const statsHidden=()=>DB.ui.statsHide===undefined?MQ.matches:!!DB.ui.statsHide;
+const MN_KEY="bfs-mnav-use";
+const mnUse=()=>{try{return JSON.parse(localStorage.getItem(MN_KEY)||"{}")}catch(e){return{}}};
+const mnTop=()=>{const u=mnUse(),seed={sorting:3,contact:2,email:1};return SECTIONS.map(s=>({s,n:(u[s.id]||0)||(seed[s.id]||0)*.01})).sort((a,b)=>b.n-a.n).slice(0,3).map(x=>x.s).sort((a,b)=>SECTIONS.indexOf(a)-SECTIONS.indexOf(b))};
+const MN_SHORT={email:"Email",policy:"Policy",contact:"Contacts",sorting:"Sorting",documents:"Docs",emaildir:"Directory"};
+const mnLabel=s=>{const o=SEC_ORIG.find(x=>x.id===s.id);return o&&o.short===s.short&&MN_SHORT[s.id]?MN_SHORT[s.id]:String(s.short).split(" ")[0].slice(0,9)};
+let mnavEl=null,msheetEl=null;
+function mnavBuild(){
+  if(mnavEl)return;
+  mnavEl=document.createElement("nav");mnavEl.id="mnav";mnavEl.setAttribute("aria-label","Main navigation");document.body.appendChild(mnavEl);
+  msheetEl=document.createElement("div");msheetEl.id="msheet";msheetEl.hidden=true;document.body.appendChild(msheetEl);
+  mnavEl.addEventListener("click",e=>{
+    const b=e.target.closest("[data-mn]");if(!b)return;const k=b.dataset.mn;
+    if(k==="more"){msheetOpen();return}
+    mnGo(k);
+  });
+  msheetEl.addEventListener("click",e=>{
+    if(e.target===msheetEl){msheetClose();return}
+    const g=e.target.closest("[data-ms]");if(!g)return;const k=g.dataset.ms;
+    if(k==="search"){msheetClose();window.scrollTo({top:0});setTimeout(()=>{const q=$("#gq");q&&q.focus()},120);return}
+    if(k==="asg"){msheetClose();const c=$('[data-asg="chip"]');c&&c.click();return}
+    if(k==="ver"){msheetClose();$("#verBtn").click();return}
+    if(k.startsWith("sec:")){msheetClose();mnGo(k.slice(4));return}
+    if(k.startsWith("om:")||k.startsWith("tm:")){msheetClose();const sel=k.startsWith("om:")?`#optMenu [data-om="${k.slice(3)}"]`:`#toolMenu [data-tm="${k.slice(3)}"]`,el=$(sel);if(el)setTimeout(()=>el.click(),180)}
+  });
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!msheetEl.hidden)msheetClose()});
+}
+function mnGo(id){
+  if(id==="home"){VIEW.mode="home";render();window.scrollTo({top:0});return}
+  const u=mnUse();u[id]=(u[id]||0)+1;try{localStorage.setItem(MN_KEY,JSON.stringify(u))}catch(e){}
+  VIEW.mode="single";VIEW.a=id;render();window.scrollTo({top:0});
+}
+function mnavRender(){
+  if(!MQ.matches)return;mnavBuild();
+  const cur=VIEW.mode==="single"?VIEW.a:VIEW.mode==="split"?VIEW.a:"",top=mnTop(),more=VIEW.mode==="single"&&!top.some(s=>s.id===VIEW.a)&&VIEW.a;
+  mnavEl.innerHTML=`<button data-mn="home" class="${VIEW.mode==="home"?"on":""}"><i>🏠</i><span>Home</span></button>`+
+    top.map(s=>`<button data-mn="${s.id}" class="${cur===s.id?"on":""}"><i>${esc(s.icon)}</i><span>${esc(mnLabel(s))}</span></button>`).join("")+
+    `<button data-mn="more" class="${more?"on":""}"><i>☰</i><span>More</span></button>`;
+}
+function msheetOpen(){
+  const cur=VIEW.mode==="single"?VIEW.a:"",admOn=document.body.classList.contains("adm-on");
+  const clone=(menu,pre)=>[...document.querySelectorAll(`${menu} .om-i`)].filter(b=>admOn||!b.classList.contains("adm")).map(b=>{const k=(b.dataset.om||b.dataset.tm);return `<button class="ms-l" data-ms="${pre}:${k}">${b.innerHTML}</button>`}).join("");
+  msheetEl.innerHTML=`<div class="ms-p"><div class="ms-h"></div>
+    <button class="ms-s" data-ms="search">🔍 <span>Search anything…</span></button>
+    <div class="ms-t">Sections</div><div class="ms-g"><button class="ms-i${VIEW.mode==="home"?" on":""}" data-ms="sec:home"><i>🏠</i>Home</button>${SECTIONS.map(s=>`<button class="ms-i${cur===s.id?" on":""}" data-ms="sec:${s.id}"><i>${esc(s.icon)}</i>${esc(s.short)}</button>`).join("")}</div>
+    <div class="ms-t">Tools</div><div class="ms-g g4"><button class="ms-i" data-ms="asg"><i>📋</i>Assignment</button><button class="ms-i" data-ms="tm:reduce"><i>🗜</i>Reduce size</button><button class="ms-i" data-ms="tm:convert"><i>🔄</i>Convert</button><button class="ms-i" data-ms="tm:temp"><i>🗂</i>Temp files</button></div>
+    <div class="ms-t">Settings</div>${clone("#optMenu","om")}
+    <button class="ms-l" data-ms="ver"><span>🆕</span><div><b>What’s new</b><small>v${VERSION} · update history</small></div></button></div>`;
+  msheetEl.hidden=false;
+}
+const msheetClose=()=>{if(msheetEl)msheetEl.hidden=true};
+/* filters: show the search box + a "More filters" button; the rest opens on demand */
+function mFilters(){
+  if(!MQ.matches)return;
+  document.querySelectorAll("#main .fbar,#main .sfbar").forEach(bar=>{
+    if(!bar.dataset.mf){
+      bar.dataset.mf="1";bar.classList.add("mfc");
+      const b=document.createElement("button");b.type="button";b.className="btn sm mf-tg";b.innerHTML='⚙ More filters <span class="mf-n"></span> <span class="mf-a">▾</span>';
+      bar.children[0].after(b);
+      b.addEventListener("click",()=>{const o=bar.classList.toggle("mf-open");b.querySelector(".mf-a").textContent=o?"▴":"▾"});
+    }
+    const n=[...bar.querySelectorAll("[data-f]")].filter((el,i)=>el!==bar.querySelector("[data-f]")&&el.value).length,sp=bar.querySelector(".mf-n");
+    if(sp)sp.textContent=n?`· ${n} active`:"";
+  });
+}
+document.addEventListener("input",()=>{if(MQ.matches)mFilters()});document.addEventListener("change",()=>{if(MQ.matches)mFilters()});
+/* label every table cell with its column title so a table can be shown as cards on a phone */
+function mLabel(){
+  if(!MQ.matches)return;
+  document.querySelectorAll("#main .tw table").forEach(t=>{
+    const hs=[...t.querySelectorAll("thead th")].map(h=>h.textContent.replace(/\s+/g," ").trim());
+    t.querySelectorAll("tbody tr").forEach(tr=>[...tr.children].forEach((td,i)=>{if(td.dataset.label===undefined){const h=hs[i]||"";td.dataset.label=/^(photo|actions?)$/i.test(h)?"":h}}));
+  });
+}
+{let t=0;const sched=()=>{if(!MQ.matches||t)return;t=requestAnimationFrame(()=>{t=0;mLabel();mFilters()})};
+ new MutationObserver(sched).observe(document.body,{childList:true,subtree:true});sched()}
+const _rnM=renderNav;renderNav=function(){_rnM();mnavRender()};
+MQ.addEventListener("change",()=>{if(MQ.matches){mnavRender();mLabel()}else msheetClose()});
+setTimeout(()=>{mnavRender();mLabel();mFilters()},0);
 /* ---- automatic clean-up: Sorting Area / TBT records are deleted 21 days after they were recorded ---- */
 const RET_TBT=21;
 const recAgeDays=r=>{const d=dnum(String(r.createdAt||"").slice(0,10));return isNaN(d)?NaN:dnum(todayStr())-d};
@@ -3154,7 +3311,7 @@ const scrollParent=el=>{for(let p=el.parentElement;p;p=p.parentElement){const o=
 /* drag & drop re-ordering (mouse + touch): grab the ⠿ handle; ArrowUp / ArrowDown also work on the handle */
 function makeSortable(list,onMove){
   list.addEventListener("pointerdown",e=>{
-    const h=e.target.closest(".grab");if(!h||e.button>0)return;const el=h.closest(".fcard");if(!el||el.parentElement!==list)return;
+    const h=e.target.closest(".dgrab");if(!h||e.button>0)return;const el=h.closest(".fcard");if(!el||el.parentElement!==list)return;
     e.preventDefault();
     const els=[...list.children].filter(x=>x.classList.contains("fcard")),from=els.indexOf(el),rects=els.map(x=>x.getBoundingClientRect()),H=rects[from].height+8,startY=e.clientY,sp=scrollParent(list),s0=sp?sp.scrollTop:0;
     let to=from,lastY=startY,timer=0;
@@ -3170,7 +3327,7 @@ function makeSortable(list,onMove){
     const up=()=>{clearInterval(timer);h.removeEventListener("pointermove",mv);h.removeEventListener("pointerup",up);h.removeEventListener("pointercancel",up);els.forEach(x=>{x.classList.remove("dragging","shift");x.style.transform=""});if(to!==from)onMove(from,to)};
     h.addEventListener("pointermove",mv);h.addEventListener("pointerup",up);h.addEventListener("pointercancel",up);
   });
-  list.addEventListener("keydown",e=>{const h=e.target.closest(".grab");if(!h)return;const els=[...list.children].filter(x=>x.classList.contains("fcard")),i=els.indexOf(h.closest(".fcard"));
+  list.addEventListener("keydown",e=>{const h=e.target.closest(".dgrab");if(!h)return;const els=[...list.children].filter(x=>x.classList.contains("fcard")),i=els.indexOf(h.closest(".fcard"));
     if(e.key==="ArrowUp"&&i>0){e.preventDefault();onMove(i,i-1,true)}else if(e.key==="ArrowDown"&&i<els.length-1){e.preventDefault();onMove(i,i+1,true)}});
 }
 const fthHTML=it=>{if(isImgFile(it.file)){if(!it.th)it.th=URL.createObjectURL(it.file);return `<img class="fth" src="${it.th}" alt="">`}return `<span class="fth">${isPdfFile(it.file)?"📄":"📎"}</span>`};
@@ -3198,7 +3355,7 @@ function openReduceTool(pre){
   if(!DB.ui.toolLevel)DB.ui.toolLevel="balanced";if(DB.ui.toolFmtV!==2){DB.ui.toolFmt="smart";DB.ui.toolFmtV=2;save()}
   modal(toolHead("🗜","File Size Reducer","Make PDF and image files smaller — many at once. Runs in your browser; nothing is uploaded unless you press ☁ Keep.")+
   `<div class="tl-drop" id="rt-drop"><span style="font-size:28px">📂</span><div><b>Drop files here</b> or click to choose<br><span class="hint">PDF, PNG, JPEG, WebP, GIF, BMP…</span></div><input id="rt-f" type="file" multiple hidden accept=".pdf,image/*"></div>`+keepBar()+
-  `<div class="tl-opts"><div><label>Compression level</label><div class="seg" id="rt-lvl"><button data-l="light">Light</button><button data-l="balanced">Balanced</button><button data-l="strong">Strong</button></div><div class="hint" id="rt-lvh" style="margin-top:4px"></div></div>
+  `<div class="tl-opts"><div><label>Compression level</label><div class="segc" id="rt-lvl"><button data-l="light">Light</button><button data-l="balanced">Balanced</button><button data-l="strong">Strong</button></div><div class="hint" id="rt-lvh" style="margin-top:4px"></div></div>
    <div><label>Image output format</label><select id="rt-fmt"><option value="smart">Smart — best format for each image (recommended)</option><option value="same">Same as original</option><option value="jpeg">Convert to JPEG (smallest)</option><option value="webp">Convert to WebP</option></select></div></div>
    <div class="note">ℹ️ <b>PDF:</b> Light keeps the text and only re-packs the file; Balanced / Strong re-draw each page as an image, so <b>text can no longer be selected</b>. If a result is not smaller, the original is kept.</div>
    <div class="tl-sum"><span id="rt-sum" class="hint"></span><span class="row"><button class="btn sm" id="rt-re">▶ Compress again</button><button class="btn sm" id="rt-keep">☁ Keep all (2 days)</button><button class="btn sm pri" id="rt-zip">⬇ Download all (ZIP)</button><button class="btn sm danger" id="rt-clr">Clear</button></span></div><div id="rt-list"></div>`,
@@ -3216,7 +3373,7 @@ function openReduceTool(pre){
         const pct=i.out?Math.round((1-i.out.size/i.orig)*100):0;
         const stx={wait:"Waiting…",work:"Compressing… "+esc(i.note||""),done:`${fmtSize(i.orig)} → <b>${i.out?fmtSize(i.out.size):""}</b> · <span class="sav">saved ${pct}%</span>`,kept:"Original kept — "+esc(i.note||"already small"),err:"⚠ "+esc(i.note||"Failed")}[i.st];
         const ok=i.st==="done"||i.st==="kept";
-        return `<div class="fcard" data-id="${i.id}">${fthHTML(i)}<div class="fmain"><div class="fname">${esc(i.name)}</div><div class="fmeta">${i.st==="done"?stx:`${fmtSize(i.orig)} · ${stx}`}</div>${i.out?`<div class="fbar"><i style="width:${Math.max(3,100-pct)}%"></i></div>`:""}</div>
+        return `<div class="fcard" data-id="${i.id}">${fthHTML(i)}<div class="fmain"><div class="fname">${esc(i.name)}</div><div class="fmeta">${i.st==="done"?stx:`${fmtSize(i.orig)} · ${stx}`}</div>${i.out?`<div class="fprog"><i style="width:${Math.max(3,100-pct)}%"></i></div>`:""}</div>
           <div class="fact">${ok?`<button class="btn sm" data-dl="${i.id}" title="Download">⬇</button>`:""}${i.out?(i.kept==="ok"?`<button class="btn sm" disabled>☁ Kept ✔</button>`:i.kept==="busy"?`<button class="btn sm" disabled>☁ …</button>`:`<button class="btn sm" data-keep="${i.id}" title="Keep in Temporary files for 2 days">☁ Keep</button>`):""}<button class="btn sm danger" data-rm="${i.id}" ${i.st==="work"?"disabled":""} title="Remove">✕</button></div></div>`}).join(""):`<div class="empty">Add files to start.</div>`;
     }
     async function keep(it){if(it.kept||!it.out)return;it.kept="busy";draw();const id=await tmpSave(it.out.blob,it.out.name,"Reduced");it.kept=id?"ok":"";draw();if(id)toast("Kept for 2 days ☁")}
@@ -3328,7 +3485,7 @@ function openConvertTool(pre){
       $b("#cv-go").disabled=!cvItems.length||cbusy;$b("#cv-clr").disabled=!cvItems.length||cbusy;$b("#cv-zip").disabled=!doneN;$b("#cv-keep").disabled=!(cvItems.some(i=>i.out&&!i.kept)||(cv.combined&&!cv.kept));
       $b("#cv-list").innerHTML=cvItems.length?cvItems.map((i,n)=>{
         const stx={wait:"Ready",work:"Converting… "+esc(i.note||cvNote),done:"✔ Done"+(i.note?" — "+esc(i.note):""),err:"⚠ "+esc(i.note||"Failed")}[i.st];
-        return `<div class="fcard" data-id="${i.id}"><span class="grab" tabindex="0" role="button" aria-label="Drag to re-order (or use the arrow keys)" title="Drag to change the order">⠿</span><span class="fnum">${n+1}</span>${fthHTML(i)}<div class="fmain"><div class="fname">${esc(i.name)}</div><div class="fmeta">${fmtSize(i.orig)}${i.out?` → <b>${fmtSize(i.out.size)}</b>`:""} · ${stx}</div></div>
+        return `<div class="fcard" data-id="${i.id}"><span class="dgrab" tabindex="0" role="button" aria-label="Drag to re-order (or use the arrow keys)" title="Drag to change the order">⠿</span><span class="fnum">${n+1}</span>${fthHTML(i)}<div class="fmain"><div class="fname">${esc(i.name)}</div><div class="fmeta">${fmtSize(i.orig)}${i.out?` → <b>${fmtSize(i.out.size)}</b>`:""} · ${stx}</div></div>
           <div class="fact">${i.out?`<button class="btn sm" data-cdl="${i.id}" title="Download">⬇</button>${i.kept==="ok"?`<button class="btn sm" disabled>☁ ✔</button>`:i.kept==="busy"?`<button class="btn sm" disabled>☁ …</button>`:`<button class="btn sm" data-ckeep="${i.id}" title="Keep in Temporary files for 2 days">☁ Keep</button>`}`:""}<button class="btn sm danger" data-crm="${i.id}" ${i.st==="work"?"disabled":""} title="Remove">✕</button></div></div>`}).join(""):`<div class="empty">Add photos or files to start.</div>`;
       $b("#cv-res").innerHTML=cv.combined?`<div class="note" style="background:var(--soft);border-color:var(--line);color:var(--ink)">📄 <b>${esc(cv.combined.name)}</b> · ${fmtSize(cv.combined.size)} <button class="btn sm pri" data-cdl="combined" style="margin-left:8px">⬇ Download</button> ${cv.kept==="ok"?`<button class="btn sm" disabled>☁ Kept ✔</button>`:cv.kept==="busy"?`<button class="btn sm" disabled>☁ …</button>`:`<button class="btn sm" data-ckeep="combined">☁ Keep (2 days)</button>`}</div>`:"";
     }
@@ -3366,7 +3523,7 @@ function openConvertTool(pre){
     $b("#cv-go").onclick=()=>{cvItems.forEach(i=>{if(i.st!=="work"){i.st="wait";i.out=null;i.note="";i.kept=""}});runConv()};
     $b("#cv-clr").onclick=()=>{cvItems.forEach(relTh);cvItems.length=0;rel();drawC()};
     $b("#cv-keep").onclick=()=>{cvItems.filter(i=>i.out&&!i.kept).forEach(i=>{kq=kq.then(()=>keepItem(i))});kq=kq.then(keepComb)};
-    makeSortable($b("#cv-list"),(from,to,kb)=>{if(cbusy)return;const [x]=cvItems.splice(from,1);cvItems.splice(to,0,x);if(DB.ui.cvTo==="pdfall"){cvItems.forEach(i=>{if(i.st==="done"){i.st="wait";i.out=null}});rel()}drawC();if(kb)setTimeout(()=>{const g=$$("#cv-list .grab",bg)[to];g&&g.focus()})});
+    makeSortable($b("#cv-list"),(from,to,kb)=>{if(cbusy)return;const [x]=cvItems.splice(from,1);cvItems.splice(to,0,x);if(DB.ui.cvTo==="pdfall"){cvItems.forEach(i=>{if(i.st==="done"){i.st="wait";i.out=null}});rel()}drawC();if(kb)setTimeout(()=>{const g=$$("#cv-list .dgrab",bg)[to];g&&g.focus()})});
     $b("#cv-list").addEventListener("click",e=>{
       const rm=e.target.closest("[data-crm]");if(rm){const i=cvItems.findIndex(x=>x.id===rm.dataset.crm);if(i>=0&&cvItems[i].st!=="work"){relTh(cvItems[i]);cvItems.splice(i,1)}rel();drawC();return}
       const k=e.target.closest("[data-ckeep]");if(k){const it=cvItems.find(x=>x.id===k.dataset.ckeep);if(it)keepItem(it);return}
