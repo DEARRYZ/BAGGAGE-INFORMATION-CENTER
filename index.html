@@ -384,6 +384,27 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 
 /* v1.3.4 */
 
+/* v1.6.0 bell · roadmap · hub tabs */
+.bell{position:relative;flex:none;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;min-height:0}.bell svg{width:19px;height:19px}
+.bell-n{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:9px;background:#e11d48;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid #0b4f8a;line-height:1}.bell-n[hidden]{display:none}
+.bell.ring svg{animation:bellRing .9s ease}@keyframes bellRing{0%,100%{transform:rotate(0)}15%{transform:rotate(18deg)}30%{transform:rotate(-16deg)}45%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}75%{transform:rotate(4deg)}}
+#bellPanel{position:fixed;top:62px;right:12px;width:min(390px,calc(100vw - 20px));max-height:72vh;overflow:auto;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.35);z-index:90;padding:8px;animation:popIn .18s ease}#bellPanel[hidden]{display:none}
+.bp-h{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:4px 6px 8px;border-bottom:1px solid var(--line)}
+.bp-i{display:flex;gap:10px;padding:9px 8px;border-radius:10px;cursor:pointer;border-bottom:1px dashed var(--line)}.bp-i:hover{background:var(--soft)}.bp-i.new{background:rgba(37,99,235,.09)}.bp-i .ic{font-size:20px;flex:none}.bp-i b{display:block;font-size:13.5px}.bp-i small{color:var(--mut)}
+.hn-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}.hn-h .right{margin-left:auto}
+.hn-c{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:9px;background:var(--card)}
+.hn-t{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px}.hn-act{margin-left:auto;display:flex;gap:4px}.hn-act .btn{min-height:0;padding:2px 8px}
+.hn-r{display:flex;align-items:center;gap:8px;padding:3px 0}.hn-l{width:74px;flex:none;font-size:11px;font-weight:700;text-transform:uppercase;color:var(--mut)}.hn-r code{font-family:ui-monospace,Menlo,monospace;background:var(--soft);padding:2px 8px;border-radius:7px;overflow-wrap:anywhere}.hn-r .btn{min-height:0;padding:1px 8px}
+.hn-nt{margin-top:6px;font-size:13px;color:var(--mut)}
+.hc-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}.hc-row.off{opacity:.55}.hc-mv{display:flex;gap:3px}.hc-ic{width:56px;text-align:center}.hc-lb{flex:1}
+.rm-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 8px}.rm-t{min-width:140px;text-align:center}
+.rm-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.rm-g>b{text-align:center;font-size:11px;color:var(--mut);padding:2px 0}
+.rm-d{min-height:78px;border:1px solid var(--line);border-radius:9px;padding:3px 4px;cursor:pointer;background:var(--card);display:flex;flex-direction:column;gap:2px;overflow:hidden}.rm-d.off{border:0;background:transparent;cursor:default}.rm-d.today{border-color:var(--pri2);box-shadow:inset 0 0 0 1px var(--pri2)}.rm-n{font-size:11px;font-weight:700;color:var(--mut)}
+.rm-c{display:block;font-size:10.5px;line-height:1.25;background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--ink);border-left:3px solid var(--c);border-radius:4px;padding:1px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rm-c.dn{text-decoration:line-through;opacity:.7}.rm-m{font-size:10px;color:var(--mut)}
+.rm-f{border:1px solid var(--pri2);border-radius:12px;padding:10px;margin-top:10px;background:var(--soft)}
+.rm-i{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:6px;background:var(--card)}.rm-i.dn b{text-decoration:line-through;opacity:.7}.rm-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;flex:none}
+@media(max-width:700px){.bell{order:2}#bellPanel{top:52px;right:8px}.rm-d{min-height:54px}.rm-c{font-size:9.5px}.hub .hub-tabs{overflow-x:auto;scrollbar-width:none}.hub .hub-tabs .btn{flex:1 0 auto}.hn-l{width:62px}}
+
 /* v1.5.0 Airline Hub */
 .hub .hubm .sec-head h2,.hub .hubm .sec-head>.hint{display:none}.hub .hubm .sec-head{margin:0 0 8px;justify-content:flex-end}.hub .hubm .sec-head:not(:has(.right button)){display:none}
 .hub .hubm .edwrap{display:block}.hub .hubm .edside{display:none}.hubm[hidden]{display:none}
@@ -525,17 +546,19 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
   <div class="gsearch"><label>ADVANCE SEARCH BAR</label><span class="ico">🔍</span><input id="gq" type="search" autocomplete="off" placeholder="Search any topic across all sections (e.g. 'contact history', 'DPR', 'QR', case number)…"><div class="gres" id="gres"></div></div>
   <button class="sync" id="syncBtn" title="Connection status">🔄 Connecting…</button><button id="themeBtn" class="themeSw" role="switch" aria-checked="false" aria-label="Switch light / dark mode" title="Light / Dark mode"><span class="ts-stars"></span><span class="ts-knob"><svg class="ts-sun" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="#f5a300"/><g stroke="#f5a300" stroke-width="2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></g></svg><svg class="ts-moon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="#7d93bf" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></span></button>
   <div id="clocks"><div class="clk1"><span>🇹🇭 <span class="lg">Thailand · </span>UTC+7</span> <span id="thDate"></span> <b id="thTime">--:--:--</b></div><div class="clk2"><button id="tzBtn" class="tzbtn" aria-haspopup="listbox" aria-expanded="false" title="Choose time zone">UTC+0 ▾</button> <b id="wTime">--:--:--</b> <span id="wDate"></span></div></div>
-</div></header>
+  <button id="bellBtn" class="bell" type="button" aria-label="Notices" aria-haspopup="true" title="Notices — airline policy changes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="bell-n" hidden></span></button>
+</div></header><div id="bellPanel" hidden></div>
 <nav class="bar" id="nav"></nav>
 <main id="main"></main>
-<div id="toolFab"><div id="optMenu" hidden><button class="om-i" data-om="admin"><span id="om-ai">🔐</span><div><b id="om-at">Administrator</b><small id="om-as">Log in to edit or delete content</small></div></button><button class="om-i adm" data-om="custom"><span>🛠</span><div><b>Customize home</b><small>Move, resize and edit home cards &amp; widgets</small></div></button><button class="om-i adm" data-om="data"><span>💾</span><div><b>Data &amp; backup</b><small>Export / import backup, reset templates</small></div></button><button class="om-i adm" data-om="rename"><span>🏷️</span><div><b>Rename sections</b><small>Change the names of the main sections</small></div></button></div><div id="toolMenu" hidden><button class="om-i" data-tm="reduce"><span>🗜</span><div><b>Reduce file size</b><small>Make PDF &amp; images smaller</small></div></button><button class="om-i" data-tm="convert"><span>🔄</span><div><b>Convert files</b><small>PNG ⇄ JPG ⇄ PDF · combine into one PDF</small></div></button><button class="om-i" data-tm="temp"><span>🗂</span><div><b>Temporary files</b><small id="tm-sub">Kept for 2 days · synced in the cloud</small></div></button></div><button id="gearBtn" class="fabb" title="Options" aria-label="Open options menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="toolBtn" class="fabb" title="File tools — reduce, convert, temporary files" aria-label="Open file tools menu"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M12 9v7m-3-3 3 3 3-3"/></svg></button></div>
+<div id="toolFab"><div id="optMenu" hidden><button class="om-i" data-om="admin"><span id="om-ai">🔐</span><div><b id="om-at">Administrator</b><small id="om-as">Log in to edit or delete content</small></div></button><button class="om-i adm" data-om="custom"><span>🛠</span><div><b>Customize home</b><small>Move, resize and edit home cards &amp; widgets</small></div></button><button class="om-i adm" data-om="data"><span>💾</span><div><b>Data &amp; backup</b><small>Export / import backup, reset templates</small></div></button><button class="om-i adm" data-om="rename"><span>🏷️</span><div><b>Rename sections</b><small>Change the names of the main sections</small></div></button><button class="om-i adm" data-om="roadmap"><span>🗓</span><div><b>Update roadmap</b><small>Calendar of planned updates (admin only)</small></div></button></div><div id="toolMenu" hidden><button class="om-i" data-tm="reduce"><span>🗜</span><div><b>Reduce file size</b><small>Make PDF &amp; images smaller</small></div></button><button class="om-i" data-tm="convert"><span>🔄</span><div><b>Convert files</b><small>PNG ⇄ JPG ⇄ PDF · combine into one PDF</small></div></button><button class="om-i" data-tm="temp"><span>🗂</span><div><b>Temporary files</b><small id="tm-sub">Kept for 2 days · synced in the cloud</small></div></button></div><button id="gearBtn" class="fabb" title="Options" aria-label="Open options menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="toolBtn" class="fabb" title="File tools — reduce, convert, temporary files" aria-label="Open file tools menu"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M12 9v7m-3-3 3 3 3-3"/></svg></button></div>
 <footer class="pub">Published by Kongkit C.</footer>
 <footer class="ver"><button class="btn sm" id="verBtn">v<span id="verNum"></span> · Update history</button></footer>
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.5.0";
+const VERSION="1.6.0";
 const CHANGELOG=[
+ {v:"1.6.0",d:"2026-11-07",items:["🔔 Bell icon (top right): shows a notice when the policy of any airline is changed — added, edited or removed cards and notes. Tap a notice to open that airline’s policy.","🗓 Update roadmap (Administrator mode only): a calendar for notes and plans of future updates, with status (Planned / In progress / Done / Dropped). Open it from the Update history window or the ⚙ menu.","Airline Hub: ⚙ Customize tabs (administrator) — rename, re-order, hide or add your own tabs, each a free list of subjects you can add, name, edit and delete for every airline.","New 🔐 Systems tab (Administrator mode only): note the system name, link, user ID and password of each airline system; passwords are masked with show / copy buttons."]},
  {v:"1.5.0",d:"2026-11-05",items:["New Airline Hub: Airlines Policy, Documents and Email Directory are merged into ONE section. Pick an airline once (or search by airline, e-mail address, policy or document text) and switch between the 📘 Policy · 🗂️ Documents · 📇 Emails tabs — each tab shows how many items the airline has.","Old links, search results and bookmarks still work: they open the matching Airline Hub tab. On the Home page the three cards are replaced by a single Airline Hub card.","Mobile: the airline picker is a compact button; the tabs stay visible while you scroll; the bottom bar now keeps your four most-used sections."]},
  {v:"1.4.2",d:"2026-11-04",items:["Sorting Bag Record (Sorting Area and Office / JAAT): new ☑ Select mode — tick several bags, then download all their photos in one ZIP, delete only the photos, or delete the records. “Select all” covers every record in the current filter."]},
  {v:"1.4.1",d:"2026-11-04",items:["Office / JAAT summary PDF: the Tag column now shows the airline code (e.g. VN123221) in larger type with the 10-digit tag number small underneath, and statuses use the same colours as the app (Pending yellow, Followed blue, Done green)."]},
@@ -620,7 +643,7 @@ let SV=0;
 function save(){SV++;try{localStorage.setItem(LS,JSON.stringify(DB))}catch(e){}}
 DB=load()||{};
 DB.templates=DB.templates||JSON.parse(JSON.stringify(SEED));
-DB.phone=DB.phone||[];DB.office=DB.office||[];DB.sorting=DB.sorting||[];DB.emaildir=DB.emaildir||[];DB.policy=DB.policy||[];DB.telex=DB.telex||JSON.parse(JSON.stringify(TELEX_SEED));DB.home=DB.home||JSON.parse(JSON.stringify(HOME_SEED));DB.docs=DB.docs||[];DB.settings=DB.settings||[];DB.ui=DB.ui||{lang:"en"};
+DB.phone=DB.phone||[];DB.office=DB.office||[];DB.sorting=DB.sorting||[];DB.emaildir=DB.emaildir||[];DB.policy=DB.policy||[];DB.telex=DB.telex||JSON.parse(JSON.stringify(TELEX_SEED));DB.home=DB.home||JSON.parse(JSON.stringify(HOME_SEED));DB.docs=DB.docs||[];DB.settings=DB.settings||[];DB.notices=DB.notices||[];DB.airdata=DB.airdata||[];DB.ui=DB.ui||{lang:"en"};
 applySectionNames();
 save();
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -1216,7 +1239,7 @@ function mountLog(root,cfg){
 }
 
 /* ============ DATA LAYER + FIREBASE SYNC ============ */
-const COLS=["templates","phone","office","sorting","emaildir","policy","telex","home","docs","settings"];
+const COLS=["templates","phone","office","sorting","emaildir","policy","telex","home","docs","settings","notices","airdata"];
 const FB_CFG={apiKey:"AIzaSyBl1SJ5VovqKTe7DkOExqs-385ubRSkNO0",authDomain:"baggage-service-information.firebaseapp.com",projectId:"baggage-service-information",storageBucket:"baggage-service-information.firebasestorage.app",messagingSenderId:"252352402486",appId:"1:252352402486:web:dacbb1b299363fe25cb497",measurementId:"G-7DF8RXQ33V"};
 const FB_VER="10.12.2";
 let fdb=null;const CLOUD={state:"connecting",msg:""},seen={},smeta={};
@@ -1225,7 +1248,7 @@ function normalize(){DB.templates.forEach(t=>{if(t.ord==null)t.ord=parseInt(Stri
 normalize();
 function cloudErr(e){CLOUD.err=e?.code||String(e);setCloud("error",CLOUD.err)}
 function putItem(col,o){o=clean(o);const i=DB[col].findIndex(x=>x.id===o.id);if(i>=0)DB[col][i]=o;else DB[col].push(o);save();refreshAll();if(fdb)fdb.collection(col).doc(o.id).set(o).catch(cloudErr)}
-function delItem(col,id){if(["templates","emaildir","policy","telex","home","docs","settings"].includes(col)&&!(typeof ADM!=="undefined"&&ADM.on)){toast("Administrator login required");return}DB[col]=DB[col].filter(x=>x.id!==id);save();refreshAll();if(fdb)fdb.collection(col).doc(id).delete().catch(cloudErr)}
+function delItem(col,id){if(["templates","emaildir","policy","telex","home","docs","settings","notices","airdata"].includes(col)&&!(typeof ADM!=="undefined"&&ADM.on)){toast("Administrator login required");return}DB[col]=DB[col].filter(x=>x.id!==id);save();refreshAll();if(fdb)fdb.collection(col).doc(id).delete().catch(cloudErr)}
 function batchOps(ops){if(!fdb)return;for(let i=0;i<ops.length;i+=400){const b=fdb.batch();ops.slice(i,i+400).forEach(o=>{const r=fdb.collection(o.col).doc(o.id);o.data?b.set(r,o.data):b.delete(r)});b.commit().catch(cloudErr)}}
 function replaceAll(d){const ops=[];COLS.forEach(c=>{const nw=(d[c]||[]).map(clean);DB[c].forEach(x=>{if(!nw.some(y=>y.id===x.id))ops.push({col:c,id:x.id})});nw.forEach(x=>ops.push({col:c,id:x.id,data:x}));DB[c]=nw});normalize();save();batchOps(ops);render()}
 function resetTemplates(){const sd=clean(SEED),ops=[];DB.templates.forEach(x=>{if(!sd.some(y=>y.id===x.id))ops.push({col:"templates",id:x.id})});sd.forEach(x=>ops.push({col:"templates",id:x.id,data:x}));DB.templates=sd;normalize();save();batchOps(ops);render()}
@@ -3113,56 +3136,164 @@ document.addEventListener("drop",e=>{const z=e.target.closest?.(".dzone");if(!z)
   if(dragRes){const it=dragRes;dragRes=null;hideZones();gres.classList.remove("on","gdrag");placeSection(z.dataset.slot,it.sec);VIEW.act=z.dataset.slot;it.go();return}
   const id=dragId||e.dataTransfer.getData("text/plain");hideZones();if(SECTIONS.some(s=>s.id===id))placeSection(z.dataset.slot,id)});
 
-/* ============ AIRLINE HUB: Policy + Documents + Email directory in one section ============ */
+/* ============ AIRLINE HUB: Policy + Documents + Email directory (+ your own tabs and the Systems notes) ============ */
 const HUBMAP={policy:"policy",documents:"docs",emaildir:"dir"};
-const HUB_TABS=[["policy","📘","Policy"],["docs","🗂️","Documents"],["dir","📇","Emails"]];
+const HUB_BUILTIN=[{id:"policy",icon:"📘",label:"Policy",kind:"policy"},{id:"docs",icon:"🗂️",label:"Documents",kind:"docs"},{id:"dir",icon:"📇",label:"Emails",kind:"dir"},{id:"sys",icon:"🔐",label:"Systems",kind:"sys",admin:true}];
 const lsGet=(k,d)=>{try{return localStorage.getItem(k)||d}catch(e){return d}},lsSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const hubCfg=()=>(DB.settings.find(x=>x.id==="hubcfg")||{}).tabs||[];
+function hubTabs(all){   /* effective, ordered tab list: built-ins + custom tabs, with the administrator's names / icons / hidden flags */
+  const out=[],seen=new Set();
+  hubCfg().forEach(t=>{const b=HUB_BUILTIN.find(x=>x.id===t.id);
+    if(b){out.push({...b,label:t.label||b.label,icon:t.icon||b.icon,hidden:!!t.hidden});seen.add(t.id)}
+    else if(t.custom){out.push({id:t.id,icon:t.icon||"📝",label:t.label||"Notes",kind:"note",custom:true,hidden:!!t.hidden});seen.add(t.id)}});
+  HUB_BUILTIN.forEach(b=>{if(!seen.has(b.id))out.push({...b,hidden:false})});
+  return all?out:out.filter(t=>!t.hidden&&(!t.admin||ADM.on));
+}
+const adFor=a=>DB.airdata.find(x=>x.id===pSafe(a.code))||{id:pSafe(a.code),code:a.code,tabs:{},systems:[]};
+function adMut(a,fn){const d=cloneJ(adFor(a));d.tabs=d.tabs||{};d.systems=d.systems||[];fn(d);d.id=pSafe(a.code);d.code=a.code;putItem("airdata",d)}
+async function hubCopy(t){try{await navigator.clipboard.writeText(t)}catch(e){const x=document.createElement("textarea");x.value=t;document.body.appendChild(x);x.select();try{document.execCommand("copy")}catch(z){}x.remove()}toast("Copied ✓")}
+const safeUrl=u=>/^https?:\/\//i.test(String(u||"").trim())?String(u).trim():"";
+function hubCustomize(done){
+  if(!ADM.on){toast("Administrator login required");return}
+  const rows=hubTabs(true).map(t=>({id:t.id,icon:t.icon,label:t.label,hidden:!!t.hidden,custom:!!t.custom}));
+  modal(`<div class="mhead"><div><h3>⚙ Customize tabs</h3><span class="hint">Rename, re-order, hide or add the tabs of the Airline Hub</span></div><button class="btn sm x" data-close>✕</button></div><div id="hc-list" style="margin-top:10px"></div>
+    <div class="row" style="margin-top:10px"><button class="btn sm" id="hc-add">＋ Add a tab</button><button class="btn sm" id="hc-rs">↺ Reset to default</button><span style="flex:1"></span><button class="btn" data-close>Cancel</button><button class="btn pri" id="hc-ok">✔ Save</button></div>
+    <p class="hint" style="margin-top:8px">Hiding a built-in tab keeps its data. A tab you add is a free list of subjects (name + details) for each airline. 🔐 Systems is only visible in Administrator mode.</p>`,(bg,close)=>{
+    const draw=()=>{$("#hc-list",bg).innerHTML=rows.map((r,i)=>`<div class="hc-row${r.hidden?" off":""}" data-i="${i}"><span class="hc-mv"><button class="btn sm" data-mv="-1" ${i?"":"disabled"}>↑</button><button class="btn sm" data-mv="1" ${i<rows.length-1?"":"disabled"}>↓</button></span><input class="hc-ic" value="${esc(r.icon)}" maxlength="4" aria-label="Icon"><input class="hc-lb" value="${esc(r.label)}" maxlength="30" aria-label="Tab name">${r.custom?`<button class="btn sm danger" data-del title="Delete this tab">🗑</button>`:`<button class="btn sm" data-vis>${r.hidden?"Show":"Hide"}</button>`}</div>`).join("")};
+    draw();
+    $("#hc-list",bg).addEventListener("input",e=>{const r=rows[+e.target.closest(".hc-row").dataset.i];if(e.target.classList.contains("hc-ic"))r.icon=e.target.value;else if(e.target.classList.contains("hc-lb"))r.label=e.target.value});
+    $("#hc-list",bg).addEventListener("click",e=>{
+      const row=e.target.closest(".hc-row");if(!row)return;const i=+row.dataset.i,mv=e.target.closest("[data-mv]");
+      if(mv){const j=i+ +mv.dataset.mv;if(j>=0&&j<rows.length){[rows[i],rows[j]]=[rows[j],rows[i]];draw()}return}
+      if(e.target.closest("[data-vis]")){rows[i].hidden=!rows[i].hidden;draw();return}
+      if(e.target.closest("[data-del]")){if(confirm(`Delete the tab “${rows[i].label}”? (Its notes stay stored but will no longer be shown.)`)){rows.splice(i,1);draw()}}
+    });
+    $("#hc-add",bg).onclick=()=>{rows.push({id:uid("t"),icon:"📝",label:"New tab",hidden:false,custom:true});draw();const l=$$(".hc-lb",bg);l[l.length-1].focus();l[l.length-1].select()};
+    $("#hc-rs",bg).onclick=()=>{if(confirm("Restore the default tabs? Tabs you added will be removed from the list.")){const d=HUB_BUILTIN.map(b=>({id:b.id,icon:b.icon,label:b.label,hidden:false,custom:false}));rows.length=0;d.forEach(x=>rows.push(x));draw()}};
+    $("#hc-ok",bg).onclick=()=>{
+      if(rows.some(r=>!r.label.trim())){toast("Every tab needs a name");return}
+      if(rows.every(r=>r.hidden)){toast("Keep at least one tab visible");return}
+      putItem("settings",{id:"hubcfg",tabs:rows.map(r=>({id:r.id,icon:r.icon.trim()||"📝",label:r.label.trim(),hidden:!!r.hidden,...(r.custom?{custom:true}:{})}))});
+      close();toast("Tabs saved ✓");done&&done();
+    };
+  });
+}
 function mountHub(root){
-  const S={sel:null,tab:lsGet("bfs-hub-tab","policy"),q:"",hay:{},hv:-1};
-  if(!HUB_TABS.some(t=>t[0]===S.tab))S.tab="policy";
-  root.innerHTML=`<div class="sec-head"><h2>${secH("hub")}</h2><span class="hint" id="hb-n"></span></div>
+  const S={sel:null,tab:lsGet("bfs-hub-tab","policy"),q:"",hay:{},hv:-1,reveal:new Set()};
+  root.innerHTML=`<div class="sec-head"><h2>${secH("hub")}</h2><span class="hint" id="hb-n"></span><div class="right"><button class="btn sm adm" id="hb-cfg" type="button" title="Add, rename, hide or re-order the tabs">⚙ Customize tabs</button></div></div>
     <div class="edwrap hub"><div class="edside"><input id="hb-q" type="search" autocomplete="off" placeholder="🔍 Find airline, code, email, policy, document…"><div class="edlist" id="hb-list"></div></div>
     <div class="hub-main"><div class="hub-bar"><button class="btn hub-pickbtn" id="hb-pick" type="button"></button><div class="hub-air" id="hb-air"></div><div class="hub-tabs" id="hb-tabs"></div></div>
-    <div class="hubm" data-t="policy"></div><div class="hubm" data-t="docs"></div><div class="hubm" data-t="dir"></div></div></div>`;
-  const wrap=$(".hub",root),qi=$("#hb-q",root),mods={policy:mountPolicy($('[data-t="policy"]',root)),docs:mountDocuments($('[data-t="docs"]',root)),dir:mountEmailDir($('[data-t="dir"]',root))};
+    <div id="hb-conts"><div class="hubm" data-t="policy"></div><div class="hubm" data-t="docs"></div><div class="hubm" data-t="dir"></div></div></div></div>`;
+  const wrap=$(".hub",root),qi=$("#hb-q",root),conts=$("#hb-conts",root);
+  const mods={policy:mountPolicy($('[data-t="policy"]',root)),docs:mountDocuments($('[data-t="docs"]',root)),dir:mountEmailDir($('[data-t="dir"]',root))};
   const air=id=>DB.emaildir.find(a=>a.id===id);
   const sorted=()=>DB.emaildir.slice().sort((x,y)=>(y.fav?1:0)-(x.fav?1:0)||String(x.code).localeCompare(String(y.code)));
-  const counts=a=>({policy:policyFor(a).doc.cards.length,docs:docFor(a).items.length,dir:uniqAddr((a.subjects||[]).flatMap(listEmails)).length});
-  const hay=a=>{if(S.hv!==SV){S.hay={};S.hv=SV}return S.hay[a.id]||(S.hay[a.id]=(()=>{const p=policyFor(a).doc,d=docFor(a);return [a.code,a.name,...(a.subjects||[]).flatMap(s=>[s.name,...listEmails(s).map(e=>e.addr+" "+(e.remark||""))]),p.note,...p.cards.map(c=>c.title+" "+cardText(c)),...d.items.map(i=>[i.title,i.note,i.exNote].join(" "))].join(" ").toLowerCase()})())};
+  const tabsNow=()=>hubTabs(false),tabOf=id=>hubTabs(true).find(t=>t.id===id);
+  const cont=id=>$(`[data-t="${id}"]`,conts)||(()=>{const d=document.createElement("div");d.className="hubm";d.dataset.t=id;conts.appendChild(d);return d})();
+  const items=(a,tid)=>((adFor(a).tabs||{})[tid])||[];
+  const counts=(a,t)=>t.kind==="policy"?policyFor(a).doc.cards.length:t.kind==="docs"?docFor(a).items.length:t.kind==="dir"?uniqAddr((a.subjects||[]).flatMap(listEmails)).length:t.kind==="sys"?(adFor(a).systems||[]).length:items(a,t.id).length;
+  const hay=a=>{if(S.hv!==SV){S.hay={};S.hv=SV}return S.hay[a.id]||(S.hay[a.id]=(()=>{const p=policyFor(a).doc,d=docFor(a),ad=adFor(a);return [a.code,a.name,...(a.subjects||[]).flatMap(s=>[s.name,...listEmails(s).map(e=>e.addr+" "+(e.remark||""))]),p.note,...p.cards.map(c=>c.title+" "+cardText(c)),...d.items.map(i=>[i.title,i.note,i.exNote].join(" ")),...Object.values(ad.tabs||{}).flat().map(i=>i.title+" "+i.text)].join(" ").toLowerCase()})())};
   const visible=()=>{const w=S.q.toLowerCase().split(/\s+/).filter(Boolean);return sorted().filter(a=>!w.length||w.every(x=>hay(a).includes(x)))};
   function ensureSel(){if(!air(S.sel)){const sv=lsGet("bfs-hub-air","");S.sel=air(sv)?sv:(sorted()[0]||{}).id||null}}
+  function ensureTab(){const ts=tabsNow();if(!ts.some(t=>t.id===S.tab))S.tab=(ts[0]||{}).id||"policy"}
   function select(id,quiet){
-    if(!air(id))return;S.sel=id;lsSet("bfs-hub-air",id);Object.values(mods).forEach(m=>m.goto({air:id}));
-    wrap.classList.remove("pick");if(!quiet){drawList();drawBar()}
+    if(!air(id))return;S.sel=id;S.reveal.clear();lsSet("bfs-hub-air",id);Object.values(mods).forEach(m=>m.goto({air:id}));
+    wrap.classList.remove("pick");if(!quiet){drawList();drawBar();drawDyn()}
   }
-  function setTab(t,quiet){if(!HUB_TABS.some(x=>x[0]===t))return;S.tab=t;lsSet("bfs-hub-tab",t);$$(".hubm",root).forEach(m=>m.hidden=m.dataset.t!==t);if(!quiet)drawBar()}
+  function setTab(t,quiet){
+    const def=tabOf(t);if(!def)return;
+    if(!tabsNow().some(x=>x.id===t)){toast("That tab is hidden — an administrator can show it in ⚙ Customize tabs");return}
+    S.tab=t;lsSet("bfs-hub-tab",t);S.reveal.clear();
+    $$(".hubm",conts).forEach(m=>m.hidden=m.dataset.t!==t);
+    const c=cont(t);c.hidden=false;if(!quiet){drawBar();drawDyn()}
+  }
   function drawList(){
-    const vs=visible(),pins=vs.filter(a=>a.fav),rest=vs.filter(a=>!a.fav);
-    const item=a=>{const c=counts(a),ic=(c.policy?"📘":"")+(c.docs?"🗂️":"")+(c.dir?"📇":"");return `<div class="ai ${a.id===S.sel?"on":""} ${ic?"":"zero"}" data-hs="${a.id}"><span class="aic">${esc(a.code)}</span><span class="ain">${esc(a.name)}</span><span class="cnt" title="Has: ${[c.policy?"policy":"",c.docs?"documents":"",c.dir?"emails":""].filter(Boolean).join(", ")||"nothing yet"}">${ic||"–"}</span></div>`};
+    const vs=visible(),pins=vs.filter(a=>a.fav),rest=vs.filter(a=>!a.fav),ts=hubTabs(false);
+    const item=a=>{const has=ts.filter(t=>counts(a,t)>0),ic=has.map(t=>t.icon).join("");return `<div class="ai ${a.id===S.sel?"on":""} ${ic?"":"zero"}" data-hs="${a.id}"><span class="aic">${esc(a.code)}</span><span class="ain">${esc(a.name)}</span><span class="cnt" title="Has: ${esc(has.map(t=>t.label).join(", ")||"nothing yet")}">${esc(ic)||"–"}</span></div>`};
     $("#hb-list",root).innerHTML=vs.length?(pins.length?`<div class="edh">★ Pinned</div>`+pins.map(item).join("")+(rest.length?`<div class="edh">All airlines (${rest.length})</div>`:""):"")+rest.map(item).join(""):`<div class="empty">${DB.emaildir.length?`No airline matches “${esc(S.q)}”`:"No airline yet — an administrator can add airlines in the 📇 Emails tab."}</div>`;
     $("#hb-n",root).textContent=`${DB.emaildir.length} airline(s)`+(S.q?` · ${vs.length} match`:"");
     $(".ai.on",root)?.scrollIntoView({block:"nearest"});
   }
   function drawBar(){
-    const a=air(S.sel),c=a?counts(a):{policy:0,docs:0,dir:0};
+    ensureTab();const a=air(S.sel),ts=tabsNow();
     $("#hb-air",root).innerHTML=a?`<b class="aic">${esc(a.code)}</b> <span>${esc(a.name)}</span>`:`<span class="hint">Select an airline</span>`;
     $("#hb-pick",root).innerHTML=a?`<span>✈ <b>${esc(a.code)}</b> · ${esc(a.name)}</span><span>▾</span>`:"<span>✈ Choose airline</span><span>▾</span>";
-    $("#hb-tabs",root).innerHTML=HUB_TABS.map(([k,i,l])=>`<button class="btn${S.tab===k?" on":""}" data-ht="${k}" type="button">${i} ${l}${a?` <small class="hb-c${c[k]?"":" z"}">${c[k]||"–"}</small>`:""}</button>`).join("");
+    $("#hb-tabs",root).innerHTML=ts.map(t=>{const n=a?counts(a,t):0;return `<button class="btn${S.tab===t.id?" on":""}" data-ht="${t.id}" type="button">${esc(t.icon)} ${esc(t.label)}${a?` <small class="hb-c${n?"":" z"}">${n||"–"}</small>`:""}</button>`}).join("");
+    $$(".hubm",conts).forEach(m=>m.hidden=m.dataset.t!==S.tab);
   }
+  /* ----- custom tabs (free subjects) and the Systems notes ----- */
+  const subjCard=(tid,it,i,n)=>`<div class="hn-c" data-iid="${it.id}"><div class="hn-t"><b>${esc(it.title)}</b><span class="hn-act adm"><button class="btn sm" data-nmv="-1" data-tid="${tid}" ${i?"":"disabled"} title="Move up">↑</button><button class="btn sm" data-nmv="1" data-tid="${tid}" ${i<n-1?"":"disabled"} title="Move down">↓</button><button class="btn sm" data-nedit="${tid}" title="Edit">✏️</button><button class="btn sm danger" data-ndel="${tid}" title="Delete">🗑</button></span></div><div class="hn-b">${nlHTML(it.text)||'<span class="hint">—</span>'}</div></div>`;
+  function drawDyn(){
+    const t=tabOf(S.tab);if(!t||(t.kind!=="note"&&t.kind!=="sys"))return;
+    const a=air(S.sel),host=cont(t.id);
+    if(!a){host.innerHTML=`<div class="empty">Select an airline first.</div>`;return}
+    if(t.kind==="note"){
+      const l=items(a,t.id);
+      host.innerHTML=`<div class="hn-h"><b>${esc(t.icon)} ${esc(t.label)} · ${esc(a.code)}</b><span class="hint">${l.length} subject(s)</span><span class="right"><button class="btn sm pri adm" data-nadd="${t.id}">＋ Add subject</button></span></div>`+
+        (l.length?l.map((it,i)=>subjCard(t.id,it,i,l.length)).join(""):`<div class="empty">No ${esc(t.label)} for ${esc(a.code)} yet.${ADM.on?" Press ＋ Add subject.":" An administrator can add subjects here."}</div>`);
+    }else{
+      const l=adFor(a).systems||[];
+      host.innerHTML=`<div class="hn-h"><b>${esc(t.icon)} ${esc(t.label)} · ${esc(a.code)}</b><span class="hint">${l.length} system(s)</span><span class="right"><button class="btn sm pri adm" data-sadd>＋ Add system</button></span></div>
+        <div class="note">🔒 Visible in Administrator mode only. Logins are stored as <b>plain text</b> in the shared cloud database — keep only shared / team logins here, never personal passwords.</div>`+
+        (l.length?l.map((s,i)=>{const sh=S.reveal.has(s.id),u=safeUrl(s.url);return `<div class="hn-c" data-iid="${s.id}"><div class="hn-t"><b>🖥 ${esc(s.name)}</b>${u?`<a class="hint" href="${esc(u)}" target="_blank" rel="noopener">↗ open</a>`:""}<span class="hn-act"><button class="btn sm" data-smv="-1" ${i?"":"disabled"} title="Move up">↑</button><button class="btn sm" data-smv="1" ${i<l.length-1?"":"disabled"} title="Move down">↓</button><button class="btn sm" data-sedit title="Edit">✏️</button><button class="btn sm danger" data-sdel title="Delete">🗑</button></span></div>
+          <div class="hn-r"><span class="hn-l">User ID</span><code>${esc(s.user)||"—"}</code>${s.user?`<button class="btn sm" data-scopy="user" title="Copy user ID">📋</button>`:""}</div>
+          <div class="hn-r"><span class="hn-l">Password</span><code>${s.pass?(sh?esc(s.pass):"••••••••"):"—"}</code>${s.pass?`<button class="btn sm" data-sshow title="${sh?"Hide":"Show"} password">${sh?"🙈":"👁"}</button><button class="btn sm" data-scopy="pass" title="Copy password">📋</button>`:""}</div>
+          ${s.note?`<div class="hn-nt">${nlHTML(s.note)}</div>`:""}</div>`}).join(""):`<div class="empty">No system saved for ${esc(a.code)} yet. Press ＋ Add system to note a user ID and password.</div>`);
+    }
+  }
+  function noteForm(tid,iid){
+    const a=air(S.sel);if(!a)return;const it=iid?items(a,tid).find(x=>x.id===iid):null;
+    modal(`<div class="mhead"><h3>${it?"Edit subject":"Add subject"} · ${esc(a.code)}</h3><button class="btn sm x" data-close>✕</button></div><div class="fg" style="margin-top:8px"><div class="full"><label>Subject name *</label><input id="n-t" value="${esc(it?it.title:"")}" maxlength="120"></div><div class="full"><label>Details</label><textarea id="n-x" rows="9">${esc(it?it.text:"")}</textarea></div></div><div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="n-s">✔ Save</button></div>`,(bg,close)=>{
+      $("#n-t",bg).focus();
+      $("#n-s",bg).onclick=()=>{const t=$("#n-t",bg).value.trim(),x=$("#n-x",bg).value;if(!t){toast("Please enter the subject name");return}
+        adMut(a,d=>{const l=(d.tabs[tid]=d.tabs[tid]||[]);if(it){const z=l.find(q=>q.id===iid);if(z){z.title=t;z.text=x}}else l.push({id:uid("n"),title:t,text:x})});close();toast("Saved ✓")};
+    });
+  }
+  function sysForm(iid){
+    const a=air(S.sel);if(!a)return;const it=iid?(adFor(a).systems||[]).find(x=>x.id===iid):null;
+    modal(`<div class="mhead"><h3>${it?"Edit system":"Add system"} · ${esc(a.code)}</h3><button class="btn sm x" data-close>✕</button></div><div class="fg" style="margin-top:8px">
+      <div class="full"><label>System name *</label><input id="s-n" value="${esc(it?it.name:"")}" placeholder="e.g. Amadeus, WorldTracer, Airline portal" maxlength="80"></div>
+      <div class="full"><label>Link (optional)</label><input id="s-u" value="${esc(it?it.url||"":"")}" placeholder="https://…"></div>
+      <div><label>User ID</label><input id="s-i" value="${esc(it?it.user||"":"")}" autocomplete="off"></div>
+      <div><label>Password</label><div class="tagwrap"><input id="s-p" type="password" value="${esc(it?it.pass||"":"")}" autocomplete="new-password"><button type="button" class="scanbtn" id="s-eye" title="Show / hide" style="font-size:16px">👁</button></div></div>
+      <div class="full"><label>Note (optional)</label><textarea id="s-x" rows="3">${esc(it?it.note||"":"")}</textarea></div></div>
+      <div class="note" style="margin-top:8px">Stored as plain text in the shared cloud database and shown in Administrator mode only.</div>
+      <div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn" data-close>Cancel</button><button class="btn pri" id="s-s">✔ Save</button></div>`,(bg,close)=>{
+      $("#s-n",bg).focus();$("#s-eye",bg).onclick=()=>{const p=$("#s-p",bg);p.type=p.type==="password"?"text":"password"};
+      $("#s-s",bg).onclick=()=>{const n=$("#s-n",bg).value.trim();if(!n){toast("Please enter the system name");return}
+        const rec={name:n,url:$("#s-u",bg).value.trim(),user:$("#s-i",bg).value.trim(),pass:$("#s-p",bg).value,note:$("#s-x",bg).value};
+        adMut(a,d=>{if(it){const z=d.systems.find(q=>q.id===iid);if(z)Object.assign(z,rec)}else d.systems.push({id:uid("y"),...rec})});close();toast("Saved ✓")};
+    });
+  }
+  const move=(l,id,dir)=>{const i=l.findIndex(x=>x.id===id),j=i+dir;if(i<0||j<0||j>=l.length)return;[l[i],l[j]]=[l[j],l[i]]};
   qi.addEventListener("input",()=>{S.q=qi.value.trim();drawList()});
-  qi.addEventListener("keydown",e=>{if(e.key==="Enter"){const v=visible()[0];if(v){select(v.id);if(innerWidth<=700)wrap.classList.remove("pick")}}});
+  qi.addEventListener("keydown",e=>{if(e.key==="Enter"){const v=visible()[0];if(v){select(v.id);wrap.classList.remove("pick")}}});
   root.addEventListener("click",e=>{
     const it=e.target.closest("[data-hs]");if(it){select(it.dataset.hs);return}
     const t=e.target.closest("[data-ht]");if(t){setTab(t.dataset.ht);return}
-    if(e.target.closest("#hb-pick")){wrap.classList.toggle("pick");if(wrap.classList.contains("pick"))setTimeout(()=>qi.focus(),50)}
+    if(e.target.closest("#hb-pick")){wrap.classList.toggle("pick");if(wrap.classList.contains("pick"))setTimeout(()=>qi.focus(),50);return}
+    if(e.target.closest("#hb-cfg")){hubCustomize(()=>{ensureTab();drawList();drawBar();drawDyn()});return}
+    const a=air(S.sel);if(!a)return;const card=e.target.closest("[data-iid]"),iid=card&&card.dataset.iid;
+    let b;
+    if(b=e.target.closest("[data-nadd]")){noteForm(b.dataset.nadd,null);return}
+    if(b=e.target.closest("[data-nedit]")){noteForm(b.dataset.nedit,iid);return}
+    if(b=e.target.closest("[data-ndel]")){const x=items(a,b.dataset.ndel).find(z=>z.id===iid);if(x&&confirm(`Delete the subject “${x.title}”?`))adMut(a,d=>{d.tabs[b.dataset.ndel]=(d.tabs[b.dataset.ndel]||[]).filter(z=>z.id!==iid)});return}
+    if(b=e.target.closest("[data-nmv]")){adMut(a,d=>move(d.tabs[b.dataset.tid]=d.tabs[b.dataset.tid]||[],iid,+b.dataset.nmv));return}
+    if(e.target.closest("[data-sadd]")){sysForm(null);return}
+    if(e.target.closest("[data-sedit]")){sysForm(iid);return}
+    if(e.target.closest("[data-sdel]")){const x=(adFor(a).systems||[]).find(z=>z.id===iid);if(x&&confirm(`Delete the system “${x.name}” and its saved login?`))adMut(a,d=>{d.systems=d.systems.filter(z=>z.id!==iid)});return}
+    if(e.target.closest("[data-sshow]")){S.reveal.has(iid)?S.reveal.delete(iid):S.reveal.add(iid);drawDyn();return}
+    if(b=e.target.closest("[data-scopy]")){const x=(adFor(a).systems||[]).find(z=>z.id===iid);if(x)hubCopy(b.dataset.scopy==="user"?x.user:x.pass);return}
+    if(b=e.target.closest("[data-smv]")){adMut(a,d=>move(d.systems,iid,+b.dataset.smv));return}
   });
-  ensureSel();select(S.sel,true);setTab(S.tab,true);drawList();drawBar();
+  ensureSel();ensureTab();select(S.sel,true);setTab(S.tab,true);drawList();drawBar();drawDyn();
   return{
-    refresh(){Object.values(mods).forEach(m=>m.refresh());S.hv=-1;ensureSel();drawList();drawBar()},
+    refresh(){Object.values(mods).forEach(m=>m.refresh());S.hv=-1;ensureSel();ensureTab();drawList();drawBar();drawDyn()},
+    redraw(){ensureTab();drawList();drawBar();drawDyn();setTab(S.tab,true)},
     goto(p){
       if(p.tab)setTab(p.tab,true);
       if(p.air&&air(p.air)){qi.value="";S.q="";select(p.air,true)}
-      drawList();drawBar();
+      drawList();drawBar();drawDyn();
       const m=mods[S.tab];if(m&&(p.cid||p.eid||p.sid||p.did))setTimeout(()=>m.goto(p),30);
     },
     setQuery(q){qi.value=q;S.q=q;drawList()}
@@ -3176,6 +3307,100 @@ const _renderHub=render;render=function(){
   if(VIEW.mode==="split"&&VIEW.a===VIEW.b)VIEW.b=(VSEC().find(s=>s.id!==VIEW.a)||{}).id;
   return _renderHub();
 };
+const _admHub=admApply;admApply=function(){_admHub();const h=apiFor("hub");if(h&&h.redraw)h.redraw()};   /* the 🔐 Systems tab appears / disappears with Administrator mode */
+
+/* ============ 🔔 NOTICES: airline policy changes ============ */
+const BELL_SEEN="bfs-bell-seen";let bellN=-1;
+const bellSeen=()=>{let v=lsGet(BELL_SEEN,"");if(!v){v=new Date().toISOString();lsSet(BELL_SEEN,v)}return v};
+const bellList=()=>{const lim=Date.now()-30*864e5;return DB.notices.filter(n=>n.type==="policy"&&new Date(n.ts).getTime()>=lim).sort((a,b)=>b.ts.localeCompare(a.ts)).slice(0,40)};
+function policyDiff(a,b){
+  const am=new Map((a.cards||[]).map(c=>[c.id,c])),bm=new Map((b.cards||[]).map(c=>[c.id,c])),d=[];let cid="";
+  (b.cards||[]).forEach(c=>{const o=am.get(c.id);if(!o){d.push(`Added “${c.title}”`);cid=cid||c.id}else if(JSON.stringify(o)!==JSON.stringify(c)){d.push(`Edited “${c.title}”`);cid=cid||c.id}});
+  (a.cards||[]).forEach(c=>{if(!bm.has(c.id))d.push(`Removed “${c.title}”`)});
+  if((a.note||"")!==(b.note||""))d.push("Mention / note updated");
+  if(!d.length&&(a.cards||[]).map(c=>c.id).join()!==(b.cards||[]).map(c=>c.id).join())d.push("Cards re-ordered");
+  return{d,cid};
+}
+function policyNotice(o){
+  const a=DB.emaildir.find(x=>pSafe(x.code)===o.id);if(!a)return;
+  const old=DB.policy.find(x=>x.id===o.id)||policyFor(a).doc,{d,cid}=policyDiff(old,o);if(!d.length)return;
+  const now=new Date().toISOString(),rec=DB.notices.filter(n=>n.type==="policy"&&n.airId===a.id).sort((x,y)=>y.ts.localeCompare(x.ts))[0];
+  if(rec&&Date.now()-new Date(rec.ts).getTime()<10*6e4){   /* several quick edits of the same airline become one notice */
+    putItem("notices",{...rec,ts:now,detail:[...new Set([...(rec.detail||[]),...d])],cid:rec.cid||cid});return}
+  putItem("notices",{id:"n"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),type:"policy",ts:now,airId:a.id,air:a.code,name:a.name,detail:d,cid});
+}
+const _putPol=putItem;putItem=function(col,o){if(col==="policy"){try{policyNotice(o)}catch(e){console.warn("notice",e)}}return _putPol(col,o)};
+function renderBell(){
+  const b=$("#bellBtn");if(!b)return;const seen=bellSeen(),l=bellList(),n=l.filter(x=>x.ts>seen).length,bd=$(".bell-n",b);
+  bd.hidden=!n;bd.textContent=n>9?"9+":n;b.title=n?`${n} new policy update${n>1?"s":""}`:"Notices — airline policy changes";
+  if(bellN>=0&&n>bellN){b.classList.remove("ring");void b.offsetWidth;b.classList.add("ring")}bellN=n;
+  if(!$("#bellPanel").hidden)bellPaint(seen);
+}
+function bellPaint(seen){
+  const l=bellList(),p=$("#bellPanel");
+  p.innerHTML=`<div class="bp-h"><b>🔔 Policy updates</b><span class="row" style="gap:6px"><button class="btn sm" data-bp="read">✓ Mark all read</button>${ADM.on&&l.length?`<button class="btn sm danger" data-bp="clear" title="Delete all notices">🗑</button>`:""}</span></div>`+
+    (l.length?l.map(n=>`<div class="bp-i${n.ts>seen?" new":""}" data-bn="${n.id}"><span class="ic">📘</span><div><b>${esc(n.air)} · ${esc(n.name)}</b><div>${esc((n.detail||[]).slice(0,4).join(" · "))}${(n.detail||[]).length>4?` · +${n.detail.length-4} more`:""}</div><small>${esc(fmt(n.ts))}</small></div></div>`).join(""):`<div class="empty" style="padding:18px 8px">No policy changes in the last 30 days.</div>`);
+}
+{const bb=$("#bellBtn"),bp=$("#bellPanel");
+ bb.addEventListener("click",e=>{e.stopPropagation();if(bp.hidden){const seen=bellSeen();bellPaint(seen);bp.hidden=false;lsSet(BELL_SEEN,new Date().toISOString());const bd=$(".bell-n",bb);bd.hidden=true;bellN=0}else bp.hidden=true});
+ bp.addEventListener("click",e=>{
+   const a=e.target.closest("[data-bp]");
+   if(a){if(a.dataset.bp==="read"){lsSet(BELL_SEEN,new Date().toISOString());bellPaint(bellSeen());renderBell()}
+     else if(a.dataset.bp==="clear"&&confirm("Delete all notices for everyone?")){DB.notices.slice().forEach(n=>delItem("notices",n.id));bp.hidden=true}return}
+   const it=e.target.closest("[data-bn]");if(it){const n=DB.notices.find(x=>x.id===it.dataset.bn);bp.hidden=true;if(n)go("policy",{air:n.airId,cid:n.cid||undefined})}
+ });
+ document.addEventListener("pointerdown",e=>{if(!bp.hidden&&!e.target.closest("#bellPanel")&&!e.target.closest("#bellBtn"))bp.hidden=true});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")bp.hidden=true});
+}
+const _raBell=refreshAll;refreshAll=function(){_raBell();renderBell()};
+setTimeout(renderBell,0);
+/* admins tidy up notices older than 30 days */
+setInterval(()=>{if(ADM.on){DB.notices.filter(n=>new Date(n.ts).getTime()<Date.now()-30*864e5).slice(0,20).forEach(n=>delItem("notices",n.id))}},6e5);
+
+/* ============ 🗓 UPDATE ROADMAP (administrator only) ============ */
+const RM_ST=[["plan","Planned","#2563eb"],["wip","In progress","#d97706"],["done","Done","#16a34a"],["drop","Dropped","#6b7280"]];
+const rmItems=()=>{const d=DB.settings.find(x=>x.id==="roadmap");return d&&Array.isArray(d.items)?d.items:[]};
+const rmSave=l=>putItem("settings",{id:"roadmap",items:l});
+function openRoadmap(){
+  if(!ADM.on){toast("Administrator login required");return}
+  let ym=new Date(todayStr()+"T00:00:00");ym.setDate(1);let filt="open",edit=null;
+  modal(`<div class="mhead"><div><h3>🗓 Update roadmap</h3><span class="hint">Notes and plans for future updates · Administrator mode only · saved in the cloud</span></div><button class="btn sm x" data-close>✕</button></div><div id="rm-body"></div>`,(bg,close)=>{
+    bg.firstChild.style.maxWidth="920px";const body=$("#rm-body",bg),stOf=s=>RM_ST.find(x=>x[0]===s)||RM_ST[0],pad2=n=>String(n).padStart(2,"0"),ymd=(y,m,d)=>`${y}-${pad2(m+1)}-${pad2(d)}`;
+    function draw(){
+      const y=ym.getFullYear(),m=ym.getMonth(),first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),all=rmItems(),td=todayStr();
+      const by={};all.forEach(i=>(by[i.date]=by[i.date]||[]).push(i));
+      let cells="";for(let i=0;i<first;i++)cells+=`<div class="rm-d off"></div>`;
+      for(let d=1;d<=dim;d++){const k=ymd(y,m,d),l=by[k]||[];cells+=`<div class="rm-d${k===td?" today":""}" data-day="${k}"><span class="rm-n">${d}</span>${l.slice(0,2).map(i=>`<span class="rm-c${i.status==="done"?" dn":""}" data-ri="${i.id}" style="--c:${stOf(i.status)[2]}" title="${esc(i.title)}">${esc(i.title)}</span>`).join("")}${l.length>2?`<span class="rm-m">+${l.length-2}</span>`:""}</div>`}
+      const list=all.filter(i=>filt==="all"||(filt==="open"?(i.status==="plan"||i.status==="wip"):i.status===filt)).sort((a,b)=>a.date.localeCompare(b.date));
+      const f=edit;
+      body.innerHTML=`<div class="rm-nav"><button class="btn sm" data-rm="prev">◀</button><b class="rm-t">${ym.toLocaleDateString("en-GB",{month:"long",year:"numeric"})}</b><button class="btn sm" data-rm="next">▶</button><button class="btn sm" data-rm="today">Today</button><span style="flex:1"></span><button class="btn sm pri" data-rm="add">＋ Add plan</button></div>
+        <div class="rm-g"><b>Sun</b><b>Mon</b><b>Tue</b><b>Wed</b><b>Thu</b><b>Fri</b><b>Sat</b>${cells}</div>
+        ${f?`<div class="rm-f"><div class="fg"><div><label>Date *</label><input id="rm-d" type="date" value="${esc(f.date)}"></div><div><label>Status</label><select id="rm-s">${RM_ST.map(s=>`<option value="${s[0]}"${f.status===s[0]?" selected":""}>${s[1]}</option>`).join("")}</select></div>
+          <div class="full"><label>What to update *</label><input id="rm-t" value="${esc(f.title)}" maxlength="140" placeholder="e.g. Add baggage tag search by photo"></div>
+          <div><label>Target version (optional)</label><input id="rm-v" value="${esc(f.ver||"")}" placeholder="e.g. v1.6.0" maxlength="20"></div>
+          <div class="full"><label>Notes</label><textarea id="rm-x" rows="3">${esc(f.note||"")}</textarea></div></div>
+          <div class="row" style="justify-content:flex-end;margin-top:8px">${f.id?`<button class="btn danger" id="rm-del">🗑 Delete</button>`:""}<span style="flex:1"></span><button class="btn" id="rm-cx">Cancel</button><button class="btn pri" id="rm-ok">✔ Save</button></div></div>`:""}
+        <div class="row" style="margin:12px 0 6px"><b>Plans</b><div class="segc" id="rm-ft" style="margin-left:6px">${[["open","Open"],["all","All"],["done","Done"]].map(([k,l])=>`<button data-rf="${k}" class="${filt===k?"on":""}">${l}</button>`).join("")}</div></div>
+        ${list.length?list.map(i=>{const st=stOf(i.status),late=(i.status==="plan"||i.status==="wip")&&i.date<td;return `<div class="rm-i${i.status==="done"?" dn":""}" data-ri="${i.id}"><span class="rm-dot" style="background:${st[2]}"></span><div style="flex:1;min-width:0"><b>${esc(i.title)}</b>${i.ver?` <span class="chip ty">${esc(i.ver)}</span>`:""}<div class="crumb">${esc(i.date)} · ${st[1]}${late?` · <span style="color:var(--bad)">⚠ overdue</span>`:""}</div>${i.note?`<div class="crumb">${esc(i.note).replace(/\n/g,"<br>")}</div>`:""}</div><button class="btn sm" data-re="${i.id}" title="Edit">✏️</button></div>`}).join(""):`<div class="empty">No plans here yet — press ＋ Add plan or tap a day on the calendar.</div>`}`;
+    }
+    body.addEventListener("click",e=>{
+      const r=e.target.closest("[data-rm]");
+      if(r){const k=r.dataset.rm;if(k==="prev")ym.setMonth(ym.getMonth()-1);else if(k==="next")ym.setMonth(ym.getMonth()+1);else if(k==="today"){ym=new Date(todayStr()+"T00:00:00");ym.setDate(1)}else if(k==="add")edit={id:"",date:todayStr(),title:"",ver:"",note:"",status:"plan"};draw();return}
+      const fl=e.target.closest("[data-rf]");if(fl){filt=fl.dataset.rf;draw();return}
+      const ed=e.target.closest("[data-ri],[data-re]");
+      if(ed){const id=ed.dataset.ri||ed.dataset.re,it=rmItems().find(x=>x.id===id);if(it){edit={...it};draw();body.scrollIntoView({block:"start"})}return}
+      const dy=e.target.closest("[data-day]");if(dy){edit={id:"",date:dy.dataset.day,title:"",ver:"",note:"",status:"plan"};draw();$("#rm-t",bg)&&$("#rm-t",bg).focus();return}
+      if(e.target.closest("#rm-cx")){edit=null;draw();return}
+      if(e.target.closest("#rm-del")){if(confirm("Delete this plan?")){rmSave(rmItems().filter(x=>x.id!==edit.id));edit=null;draw()}return}
+      if(e.target.closest("#rm-ok")){
+        const t=$("#rm-t",bg).value.trim(),d=$("#rm-d",bg).value;if(!t||!d){toast("Please enter the date and what to update");return}
+        const rec={id:edit.id||uid("r"),date:d,title:t,ver:$("#rm-v",bg).value.trim(),note:$("#rm-x",bg).value.trim(),status:$("#rm-s",bg).value},l=rmItems().filter(x=>x.id!==rec.id);l.push(rec);rmSave(l);
+        ym=new Date(d+"T00:00:00");ym.setDate(1);edit=null;draw();toast("Saved ✓");
+      }
+    });
+    draw();
+  });
+}
 /* ============ GLOBAL ADVANCE SEARCH ============ */
 function buildIndex(){
   const ix=[];
@@ -3311,7 +3536,7 @@ document.addEventListener("keydown",e=>{
 /* ============ VERSION / DATA / THEME ============ */
 if(matchMedia("(max-width:700px)").matches)$("#gq").placeholder="Search anything…";
 $("#verNum").textContent=VERSION;$("#vtag").textContent="v"+VERSION;
-$("#verBtn").onclick=()=>modal(`<div class="mhead"><h3>Update history</h3><button class="btn sm x" data-close>✕</button></div><p style="color:var(--mut);margin-top:0">Current version: <b>v${VERSION}</b></p>${CHANGELOG.map(c=>`<div><span class="vb">v${c.v}</span> <small>${c.d}</small><ul class="hist">${c.items.map(i=>`<li>${esc(i)}</li>`).join("")}</ul></div>`).join("")}`);
+$("#verBtn").onclick=()=>modal(`<div class="mhead"><h3>Update history</h3><button class="btn sm x" data-close>✕</button></div><p style="color:var(--mut);margin-top:0">Current version: <b>v${VERSION}</b></p>${ADM.on?'<div class="row" style="margin-bottom:8px"><button class="btn sm pri" id="rm-open">🗓 Update roadmap (admin)</button></div>':""}${CHANGELOG.map(c=>`<div><span class="vb">v${c.v}</span> <small>${c.d}</small><ul class="hist">${c.items.map(i=>`<li>${esc(i)}</li>`).join("")}</ul></div>`).join("")}`,(bg,close)=>{const b=$("#rm-open",bg);if(b)b.onclick=()=>{close();openRoadmap()}});
 window.openData=()=>modal(`<div class="mhead"><h3>Data &amp; backup</h3><button class="btn sm x" data-close>✕</button></div>
  <p style="color:var(--mut)">Data is stored in this browser. Export a backup regularly, or import one to move data to another computer.</p>
  <div class="row"><button class="btn pri" id="d-exp">⬇ Export backup (JSON)</button><label class="btn" style="margin:0">⬆ Import backup<input id="d-imp" type="file" accept=".json,application/json" hidden></label><button class="btn danger" id="d-reset">↺ Reset email templates to original</button></div>`,(bg,close)=>{
@@ -3942,6 +4167,7 @@ function admPanel(){
     if(!ADM.on){openAdmin();return}
     if(i.dataset.om==="data")openData();
     else if(i.dataset.om==="rename")openRenameSections();
+    else if(i.dataset.om==="roadmap")openRoadmap();
     else{VIEW.mode="home";render();mounted["home#0"]?.edit()}});
   document.addEventListener("pointerdown",e=>{if((!menu.hidden||!tmenu.hidden)&&!e.target.closest("#toolFab"))closeMenu()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});
