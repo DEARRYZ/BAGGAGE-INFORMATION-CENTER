@@ -385,6 +385,15 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 /* v1.3.4 */
 
 /* v1.6.0 bell · roadmap · hub tabs */
+/* v1.7.0 updates bell */
+#bellPanel{width:min(430px,calc(100vw - 20px))}
+.bp-sec{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:3px}.bp-chip{font-size:10.5px;font-weight:700;background:var(--pri);color:#fff;border-radius:9px;padding:1px 8px}.bp-chip.sub{background:var(--soft);color:var(--pri)}
+.bp-d{font-size:12px;color:var(--mut);line-height:1.3;overflow-wrap:anywhere}.bp-d s{color:#b91c1c}.bp-d span{color:#15803d}
+.bp-g{margin:8px 4px}.bp-s{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:4px}
+.cl-c{border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:8px 0;border-left-width:4px}.cl-c.add{border-left-color:#16a34a}.cl-c.del{border-left-color:#dc2626}.cl-c.edit{border-left-color:#d97706}
+.cl-t{margin-bottom:4px}.cl-f{margin:6px 0}.cl-f>b{font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--mut)}
+.cl-l{font-size:13px;padding:2px 6px;border-radius:6px;margin-top:2px;overflow-wrap:anywhere}.cl-l.add{background:rgba(22,163,74,.13)}.cl-l.del{background:rgba(220,38,38,.12)}.cl-l.sec{background:var(--soft);color:var(--mut)}.cl-l>span{font-weight:800;margin-right:4px}
+
 .bell{position:relative;flex:none;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;min-height:0}.bell svg{width:19px;height:19px}
 .bell-n{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:9px;background:#e11d48;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid #0b4f8a;line-height:1}.bell-n[hidden]{display:none}
 .bell.ring svg{animation:bellRing .9s ease}@keyframes bellRing{0%,100%{transform:rotate(0)}15%{transform:rotate(18deg)}30%{transform:rotate(-16deg)}45%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}75%{transform:rotate(4deg)}}
@@ -556,8 +565,9 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.6.0";
+const VERSION="1.7.0";
 const CHANGELOG=[
+ {v:"1.7.0",d:"2026-11-08",items:["🔐 Systems tab is now visible to every user (only administrators can add, edit or delete).","🔔 The bell now reports updates from every Airline Hub tab (Policy, Documents, Emails, Systems and your own tabs) and from Email Templates (templates and Telex). Each notice shows its section and sub-section name separately.","⚙ In the bell, tick exactly which sections / sub-sections should notify you (saved on your device).","📝 Tap a notice to open its change log: what was added or removed, and for edits the exact lines that changed (− old / + new). Passwords are never shown — only that they changed."]},
  {v:"1.6.0",d:"2026-11-07",items:["🔔 Bell icon (top right): shows a notice when the policy of any airline is changed — added, edited or removed cards and notes. Tap a notice to open that airline’s policy.","🗓 Update roadmap (Administrator mode only): a calendar for notes and plans of future updates, with status (Planned / In progress / Done / Dropped). Open it from the Update history window or the ⚙ menu.","Airline Hub: ⚙ Customize tabs (administrator) — rename, re-order, hide or add your own tabs, each a free list of subjects you can add, name, edit and delete for every airline.","New 🔐 Systems tab (Administrator mode only): note the system name, link, user ID and password of each airline system; passwords are masked with show / copy buttons."]},
  {v:"1.5.0",d:"2026-11-05",items:["New Airline Hub: Airlines Policy, Documents and Email Directory are merged into ONE section. Pick an airline once (or search by airline, e-mail address, policy or document text) and switch between the 📘 Policy · 🗂️ Documents · 📇 Emails tabs — each tab shows how many items the airline has.","Old links, search results and bookmarks still work: they open the matching Airline Hub tab. On the Home page the three cards are replaced by a single Airline Hub card.","Mobile: the airline picker is a compact button; the tabs stay visible while you scroll; the bottom bar now keeps your four most-used sections."]},
  {v:"1.4.2",d:"2026-11-04",items:["Sorting Bag Record (Sorting Area and Office / JAAT): new ☑ Select mode — tick several bags, then download all their photos in one ZIP, delete only the photos, or delete the records. “Select all” covers every record in the current filter."]},
@@ -3138,7 +3148,7 @@ document.addEventListener("drop",e=>{const z=e.target.closest?.(".dzone");if(!z)
 
 /* ============ AIRLINE HUB: Policy + Documents + Email directory (+ your own tabs and the Systems notes) ============ */
 const HUBMAP={policy:"policy",documents:"docs",emaildir:"dir"};
-const HUB_BUILTIN=[{id:"policy",icon:"📘",label:"Policy",kind:"policy"},{id:"docs",icon:"🗂️",label:"Documents",kind:"docs"},{id:"dir",icon:"📇",label:"Emails",kind:"dir"},{id:"sys",icon:"🔐",label:"Systems",kind:"sys",admin:true}];
+const HUB_BUILTIN=[{id:"policy",icon:"📘",label:"Policy",kind:"policy"},{id:"docs",icon:"🗂️",label:"Documents",kind:"docs"},{id:"dir",icon:"📇",label:"Emails",kind:"dir"},{id:"sys",icon:"🔐",label:"Systems",kind:"sys"}];
 const lsGet=(k,d)=>{try{return localStorage.getItem(k)||d}catch(e){return d}},lsSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
 const hubCfg=()=>(DB.settings.find(x=>x.id==="hubcfg")||{}).tabs||[];
 function hubTabs(all){   /* effective, ordered tab list: built-ins + custom tabs, with the administrator's names / icons / hidden flags */
@@ -3158,7 +3168,7 @@ function hubCustomize(done){
   const rows=hubTabs(true).map(t=>({id:t.id,icon:t.icon,label:t.label,hidden:!!t.hidden,custom:!!t.custom}));
   modal(`<div class="mhead"><div><h3>⚙ Customize tabs</h3><span class="hint">Rename, re-order, hide or add the tabs of the Airline Hub</span></div><button class="btn sm x" data-close>✕</button></div><div id="hc-list" style="margin-top:10px"></div>
     <div class="row" style="margin-top:10px"><button class="btn sm" id="hc-add">＋ Add a tab</button><button class="btn sm" id="hc-rs">↺ Reset to default</button><span style="flex:1"></span><button class="btn" data-close>Cancel</button><button class="btn pri" id="hc-ok">✔ Save</button></div>
-    <p class="hint" style="margin-top:8px">Hiding a built-in tab keeps its data. A tab you add is a free list of subjects (name + details) for each airline. 🔐 Systems is only visible in Administrator mode.</p>`,(bg,close)=>{
+    <p class="hint" style="margin-top:8px">Hiding a built-in tab keeps its data. A tab you add is a free list of subjects (name + details) for each airline. 🔐 Systems shows each airline’s system logins to everyone; only administrators can add or edit them.</p>`,(bg,close)=>{
     const draw=()=>{$("#hc-list",bg).innerHTML=rows.map((r,i)=>`<div class="hc-row${r.hidden?" off":""}" data-i="${i}"><span class="hc-mv"><button class="btn sm" data-mv="-1" ${i?"":"disabled"}>↑</button><button class="btn sm" data-mv="1" ${i<rows.length-1?"":"disabled"}>↓</button></span><input class="hc-ic" value="${esc(r.icon)}" maxlength="4" aria-label="Icon"><input class="hc-lb" value="${esc(r.label)}" maxlength="30" aria-label="Tab name">${r.custom?`<button class="btn sm danger" data-del title="Delete this tab">🗑</button>`:`<button class="btn sm" data-vis>${r.hidden?"Show":"Hide"}</button>`}</div>`).join("")};
     draw();
     $("#hc-list",bg).addEventListener("input",e=>{const r=rows[+e.target.closest(".hc-row").dataset.i];if(e.target.classList.contains("hc-ic"))r.icon=e.target.value;else if(e.target.classList.contains("hc-lb"))r.label=e.target.value});
@@ -3234,8 +3244,8 @@ function mountHub(root){
     }else{
       const l=adFor(a).systems||[];
       host.innerHTML=`<div class="hn-h"><b>${esc(t.icon)} ${esc(t.label)} · ${esc(a.code)}</b><span class="hint">${l.length} system(s)</span><span class="right"><button class="btn sm pri adm" data-sadd>＋ Add system</button></span></div>
-        <div class="note">🔒 Visible in Administrator mode only. Logins are stored as <b>plain text</b> in the shared cloud database — keep only shared / team logins here, never personal passwords.</div>`+
-        (l.length?l.map((s,i)=>{const sh=S.reveal.has(s.id),u=safeUrl(s.url);return `<div class="hn-c" data-iid="${s.id}"><div class="hn-t"><b>🖥 ${esc(s.name)}</b>${u?`<a class="hint" href="${esc(u)}" target="_blank" rel="noopener">↗ open</a>`:""}<span class="hn-act"><button class="btn sm" data-smv="-1" ${i?"":"disabled"} title="Move up">↑</button><button class="btn sm" data-smv="1" ${i<l.length-1?"":"disabled"} title="Move down">↓</button><button class="btn sm" data-sedit title="Edit">✏️</button><button class="btn sm danger" data-sdel title="Delete">🗑</button></span></div>
+        <div class="note">🔒 Logins are stored as <b>plain text</b> in the shared cloud database and every user of this app can see them — keep only shared / team logins here, never personal passwords. Only administrators can add, edit or delete.</div>`+
+        (l.length?l.map((s,i)=>{const sh=S.reveal.has(s.id),u=safeUrl(s.url);return `<div class="hn-c" data-iid="${s.id}"><div class="hn-t"><b>🖥 ${esc(s.name)}</b>${u?`<a class="hint" href="${esc(u)}" target="_blank" rel="noopener">↗ open</a>`:""}<span class="hn-act adm"><button class="btn sm" data-smv="-1" ${i?"":"disabled"} title="Move up">↑</button><button class="btn sm" data-smv="1" ${i<l.length-1?"":"disabled"} title="Move down">↓</button><button class="btn sm" data-sedit title="Edit">✏️</button><button class="btn sm danger" data-sdel title="Delete">🗑</button></span></div>
           <div class="hn-r"><span class="hn-l">User ID</span><code>${esc(s.user)||"—"}</code>${s.user?`<button class="btn sm" data-scopy="user" title="Copy user ID">📋</button>`:""}</div>
           <div class="hn-r"><span class="hn-l">Password</span><code>${s.pass?(sh?esc(s.pass):"••••••••"):"—"}</code>${s.pass?`<button class="btn sm" data-sshow title="${sh?"Hide":"Show"} password">${sh?"🙈":"👁"}</button><button class="btn sm" data-scopy="pass" title="Copy password">📋</button>`:""}</div>
           ${s.note?`<div class="hn-nt">${nlHTML(s.note)}</div>`:""}</div>`}).join(""):`<div class="empty">No system saved for ${esc(a.code)} yet. Press ＋ Add system to note a user ID and password.</div>`);
@@ -3309,52 +3319,127 @@ const _renderHub=render;render=function(){
 };
 const _admHub=admApply;admApply=function(){_admHub();const h=apiFor("hub");if(h&&h.redraw)h.redraw()};   /* the 🔐 Systems tab appears / disappears with Administrator mode */
 
-/* ============ 🔔 NOTICES: airline policy changes ============ */
-const BELL_SEEN="bfs-bell-seen";let bellN=-1;
+/* ============ 🔔 UPDATES: what changed in the Airline Hub and Email Templates, with a detailed change log ============ */
+const BELL_SEEN="bfs-bell-seen",BELL_PREF="bfs-bell-pref";let bellN=-1,bellMode="list";
 const bellSeen=()=>{let v=lsGet(BELL_SEEN,"");if(!v){v=new Date().toISOString();lsSet(BELL_SEEN,v)}return v};
-const bellList=()=>{const lim=Date.now()-30*864e5;return DB.notices.filter(n=>n.type==="policy"&&new Date(n.ts).getTime()>=lim).sort((a,b)=>b.ts.localeCompare(a.ts)).slice(0,40)};
-function policyDiff(a,b){
-  const am=new Map((a.cards||[]).map(c=>[c.id,c])),bm=new Map((b.cards||[]).map(c=>[c.id,c])),d=[];let cid="";
-  (b.cards||[]).forEach(c=>{const o=am.get(c.id);if(!o){d.push(`Added “${c.title}”`);cid=cid||c.id}else if(JSON.stringify(o)!==JSON.stringify(c)){d.push(`Edited “${c.title}”`);cid=cid||c.id}});
-  (a.cards||[]).forEach(c=>{if(!bm.has(c.id))d.push(`Removed “${c.title}”`)});
-  if((a.note||"")!==(b.note||""))d.push("Mention / note updated");
-  if(!d.length&&(a.cards||[]).map(c=>c.id).join()!==(b.cards||[]).map(c=>c.id).join())d.push("Cards re-ordered");
-  return{d,cid};
+const bellOff=()=>{try{return JSON.parse(lsGet(BELL_PREF,"{}")).off||[]}catch(e){return[]}};
+const bellOn=k=>!bellOff().includes(k);
+const grpName=g=>(SECTIONS.find(s=>s.id===(g==="email"?"email":"hub"))||{}).short||(g==="email"?"Email Templates":"Airline Hub");
+const noteKey=n=>n.sec||"hub:policy";
+const subName=k=>{if(k.startsWith("hub:")){const t=hubTabs(true).find(x=>x.id===k.slice(4));return t?`${t.icon} ${t.label}`:""}return k==="email:telex"?"📨 Telex":k==="email:templates"?"✉️ Email templates":""};
+const bellList=()=>{const lim=Date.now()-30*864e5;return DB.notices.filter(n=>(n.type==="change"||n.type==="policy")&&new Date(n.ts).getTime()>=lim&&bellOn(noteKey(n))).sort((a,b)=>b.ts.localeCompare(a.ts)).slice(0,40)};
+function bellSources(){return[{grp:grpName("hub"),items:hubTabs(true).map(t=>({key:"hub:"+t.id,label:`${t.icon} ${t.label}`}))},{grp:grpName("email"),items:[{key:"email:templates",label:"✉️ Email templates"},{key:"email:telex",label:"📨 Telex"}]}]}
+
+/* ---- turning a saved record into comparable "items" ---- */
+const txt=v=>String(v==null?"":v).replace(/\r/g,"").trim();
+const FD=(label,text,secret)=>({label,text:txt(text),secret:!!secret});
+const catName=k=>((D_CATS.find(c=>c[0]===k)||[])[2])||k||"";
+function mPolicy(doc){const m=new Map();
+  (doc.cards||[]).forEach(c=>{const f=[FD("Title",c.title||c.key)].concat(c.type==="comp"?[FD("AHL",c.ahl),FD("DPR",c.dpr),FD("Extra",c.extra),FD("Kit",c.kit),FD("Kit remark",c.kitRemark)]:[FD("Content",c.text)]);
+    if((c.files||[]).length)f.push(FD("Files",c.files.map(x=>x.name).join("\n")));m.set(c.id,{title:c.title||c.key||"Card",fields:f})});
+  m.set("__note",{title:"Mention / note",fields:[FD("Text",doc.note)]});return m}
+function mDocs(doc){const m=new Map();
+  (doc.items||[]).forEach(i=>{const f=[FD("Title",i.title),FD("Category",catName(i.cat)),FD("Note",i.note)];if(i.exNote!=null)f.push(FD("Example note",i.exNote));
+    Object.keys(i).forEach(k=>{if(Array.isArray(i[k])&&i[k].length&&i[k][0]&&i[k][0].name)f.push(FD(k==="files"?"Files":k+" files",i[k].map(x=>x.name).join("\n")))});m.set(i.id,{title:i.title||"Document",fields:f})});return m}
+function mDir(a){const m=new Map();m.set("__air",{title:`${a.code} · ${a.name}`,fields:[FD("Code",a.code),FD("Name",a.name)]});
+  (a.subjects||[]).forEach(s=>m.set(s.id,{title:s.name||"Subject",fields:[FD("Name",s.name),FD("Emails",listEmails(s).map(e=>e.addr+(e.remark?" — "+e.remark:"")).join("\n"))]}));return m}
+function mSys(ad){const m=new Map();(ad.systems||[]).forEach(s=>m.set(s.id,{title:s.name||"System",fields:[FD("System name",s.name),FD("Link",s.url),FD("User ID",s.user,true),FD("Password",s.pass,true),FD("Note",s.note)]}));return m}
+function mNote(ad,tid){const m=new Map();((ad.tabs||{})[tid]||[]).forEach(i=>m.set(i.id,{title:i.title||"Subject",fields:[FD("Subject",i.title),FD("Details",i.text)]}));return m}
+function mTelex(d){const m=new Map();m.set("__air",{title:`${d.code} · ${d.name}`,fields:[FD("Code",d.code),FD("Name",d.name),FD("Notes",d.notes)]});
+  (d.groups||[]).forEach(g=>m.set(g.id,{title:g.title||"Group",fields:[FD("Group title",g.title),FD("Addresses",(g.addrs||[]).map(a=>a.addr+(a.remark?" — "+a.remark:"")).join("\n"))]}));return m}
+function mTpl(t){const m=new Map();m.set("__t",{title:t.titleEn||t.titleTh||"Template",fields:[FD("Title (EN)",t.titleEn),FD("Title (TH)",t.titleTh),FD("Airline",t.airline),FD("Type",t.type),FD("Audience",t.aud),FD("Subject",t.subject),FD("English text",t.en),FD("Thai text",t.th)]});return m}
+/* ---- line-by-line comparison ---- */
+function lineDiff(a,b){
+  const A=txt(a).split("\n").map(s=>s.trim()).filter(Boolean),B=txt(b).split("\n").map(s=>s.trim()).filter(Boolean),n=A.length,m=B.length;
+  if(n*m>40000)return[...A.map(s=>["-",s]),...B.map(s=>["+",s])];
+  const dp=Array.from({length:n+1},()=>new Uint16Array(m+1));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)dp[i][j]=A[i]===B[j]?dp[i+1][j+1]+1:Math.max(dp[i+1][j],dp[i][j+1]);
+  const out=[];let i=0,j=0;while(i<n&&j<m){if(A[i]===B[j]){i++;j++}else if(dp[i+1][j]>=dp[i][j+1])out.push(["-",A[i++]]);else out.push(["+",B[j++]])}
+  while(i<n)out.push(["-",A[i++]]);while(j<m)out.push(["+",B[j++]]);return out}
+function diffModels(O,N){
+  const ch=[],clip=(s,n)=>s.length>n?s.slice(0,n)+"…":s,shown=it=>it.fields.filter(x=>x.text&&!x.secret).map(x=>({label:x.label,text:clip(x.text,1200)})),hid=it=>it.fields.filter(x=>x.text&&x.secret).map(x=>x.label);
+  N.forEach((ni,id)=>{const oi=O.get(id);
+    if(!oi){const f=shown(ni);if(id==="__note"&&!f.length)return;ch.push({k:"add",ref:id,item:ni.title,fields:f,hidden:hid(ni)});return}
+    const fs=[];ni.fields.forEach(nf=>{const of=oi.fields.find(x=>x.label===nf.label)||FD(nf.label,"");
+      if(of.text!==nf.text){if(nf.secret)fs.push({label:nf.label,secret:true});else fs.push({label:nf.label,lines:lineDiff(of.text,nf.text).slice(0,60).map(([t,s])=>[t,clip(s,400)])})}});
+    if(fs.length)ch.push({k:"edit",ref:id,item:ni.title,was:oi.title!==ni.title?oi.title:undefined,fields:fs})});
+  O.forEach((oi,id)=>{if(!N.has(id)){const f=shown(oi);if(id==="__note"&&!f.length)return;ch.push({k:"del",ref:id,item:oi.title,fields:f,hidden:hid(oi)})}});
+  return ch}
+function pushNotice(sec,a,changes,nav){
+  if(!changes.length)return;
+  const one=c=>c.k==="add"?`Added “${c.item}”`:c.k==="del"?`Removed “${c.item}”`:`Edited “${c.item}”${c.fields.length?" — "+c.fields.map(f=>f.label).slice(0,3).join(", "):""}`;
+  putItem("notices",{id:"n"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),type:"change",ts:new Date().toISOString(),sec,airId:a?a.id:"",air:a?a.code:"",name:a?a.name:"",summary:changes.slice(0,3).map(one).join(" · ")+(changes.length>3?` · +${changes.length-3} more`:""),changes:changes.slice(0,30),nav});
 }
-function policyNotice(o){
-  const a=DB.emaildir.find(x=>pSafe(x.code)===o.id);if(!a)return;
-  const old=DB.policy.find(x=>x.id===o.id)||policyFor(a).doc,{d,cid}=policyDiff(old,o);if(!d.length)return;
-  const now=new Date().toISOString(),rec=DB.notices.filter(n=>n.type==="policy"&&n.airId===a.id).sort((x,y)=>y.ts.localeCompare(x.ts))[0];
-  if(rec&&Date.now()-new Date(rec.ts).getTime()<10*6e4){   /* several quick edits of the same airline become one notice */
-    putItem("notices",{...rec,ts:now,detail:[...new Set([...(rec.detail||[]),...d])],cid:rec.cid||cid});return}
-  putItem("notices",{id:"n"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),type:"policy",ts:now,airId:a.id,air:a.code,name:a.name,detail:d,cid});
+function trackChange(col,id,o){
+  const airOf=()=>DB.emaildir.find(x=>pSafe(x.code)===id);
+  if(col==="policy"){const a=airOf();if(!a||!o)return;const old=DB.policy.find(x=>x.id===id)||policyFor(a).doc,ch=diffModels(mPolicy(old),mPolicy(o));pushNotice("hub:policy",a,ch,{sec:"policy",p:{air:a.id,cid:(ch[0]||{}).ref}});return}
+  if(col==="docs"){const a=airOf();if(!a||!o)return;const old=DB.docs.find(x=>x.id===id)||docFor(a),ch=diffModels(mDocs(old),mDocs(o));pushNotice("hub:docs",a,ch,{sec:"documents",p:{air:a.id,did:(ch[0]||{}).ref}});return}
+  if(col==="emaildir"){const old=DB.emaildir.find(x=>x.id===id);
+    if(!old&&o){pushNotice("hub:dir",o,[{k:"add",ref:"__air",item:`Airline ${o.code} · ${o.name}`,fields:[]}],{sec:"emaildir",p:{air:o.id}});return}
+    if(old&&!o){pushNotice("hub:dir",old,[{k:"del",ref:"__air",item:`Airline ${old.code} · ${old.name}`,fields:[]}],{sec:"emaildir",p:{}});return}
+    if(old&&o){const ch=diffModels(mDir(old),mDir(o));pushNotice("hub:dir",o,ch,{sec:"emaildir",p:{air:o.id,sid:(ch[0]||{}).ref}})}return}
+  if(col==="airdata"){const a=airOf(),old=DB.airdata.find(x=>x.id===id)||{tabs:{},systems:[]};if(!a||!o)return;
+    pushNotice("hub:sys",a,diffModels(mSys(old),mSys(o)),{sec:"hub",p:{air:a.id,tab:"sys"}});
+    new Set([...Object.keys(old.tabs||{}),...Object.keys(o.tabs||{})]).forEach(tid=>pushNotice("hub:"+tid,a,diffModels(mNote(old,tid),mNote(o,tid)),{sec:"hub",p:{air:a.id,tab:tid}}));return}
+  if(col==="telex"){const old=DB.telex.find(x=>x.id===id),ref=o||old;if(!ref)return;const ch=diffModels(old?mTelex(old):new Map(),o?mTelex(o):new Map());pushNotice("email:telex",{id:ref.id,code:ref.code,name:ref.name},ch,{sec:"email",p:{}});return}
+  if(col==="templates"){const old=DB.templates.find(x=>x.id===id),ref=o||old;if(!ref)return;const ch=diffModels(old?mTpl(old):new Map(),o?mTpl(o):new Map());pushNotice("email:templates",null,ch,{sec:"email",p:{}})}
 }
-const _putPol=putItem;putItem=function(col,o){if(col==="policy"){try{policyNotice(o)}catch(e){console.warn("notice",e)}}return _putPol(col,o)};
+const TRACK=new Set(["policy","docs","emaildir","airdata","telex","templates"]);
+const _putTrk=putItem;putItem=function(col,o){if(TRACK.has(col)){try{trackChange(col,o.id,o)}catch(e){console.warn("change log",e)}}return _putTrk(col,o)};
+const _delTrk=delItem;delItem=function(col,id){if(TRACK.has(col)&&ADM.on&&col!=="policy"&&col!=="docs"&&col!=="airdata"){try{trackChange(col,id,null)}catch(e){console.warn("change log",e)}}return _delTrk(col,id)};
+
+/* ---- the bell ---- */
 function renderBell(){
   const b=$("#bellBtn");if(!b)return;const seen=bellSeen(),l=bellList(),n=l.filter(x=>x.ts>seen).length,bd=$(".bell-n",b);
-  bd.hidden=!n;bd.textContent=n>9?"9+":n;b.title=n?`${n} new policy update${n>1?"s":""}`:"Notices — airline policy changes";
+  bd.hidden=!n;bd.textContent=n>9?"9+":n;b.title=n?`${n} new update${n>1?"s":""}`:"Updates — what changed";
   if(bellN>=0&&n>bellN){b.classList.remove("ring");void b.offsetWidth;b.classList.add("ring")}bellN=n;
-  if(!$("#bellPanel").hidden)bellPaint(seen);
+  if(!$("#bellPanel").hidden&&bellMode==="list")bellPaint(seen);
 }
+const snippet=n=>{const c=(n.changes||[])[0];if(!c)return"";
+  if(c.k==="edit"){const f=c.fields.find(x=>x.lines);if(f){const r=f.lines.find(l=>l[0]==="-"),a=f.lines.find(l=>l[0]==="+"),cut=s=>s.length>90?s.slice(0,90)+"…":s;return `${r?`<div class="bp-d"><s>− ${esc(cut(r[1]))}</s></div>`:""}${a?`<div class="bp-d"><span>+ ${esc(cut(a[1]))}</span></div>`:""}`}const s=c.fields.find(x=>x.secret);return s?`<div class="bp-d">🔒 ${esc(s.label)} changed</div>`:""}
+  const f=(c.fields||[])[0];return f?`<div class="bp-d"><span>+ ${esc(f.text.slice(0,90))}${f.text.length>90?"…":""}</span></div>`:""};
 function bellPaint(seen){
-  const l=bellList(),p=$("#bellPanel");
-  p.innerHTML=`<div class="bp-h"><b>🔔 Policy updates</b><span class="row" style="gap:6px"><button class="btn sm" data-bp="read">✓ Mark all read</button>${ADM.on&&l.length?`<button class="btn sm danger" data-bp="clear" title="Delete all notices">🗑</button>`:""}</span></div>`+
-    (l.length?l.map(n=>`<div class="bp-i${n.ts>seen?" new":""}" data-bn="${n.id}"><span class="ic">📘</span><div><b>${esc(n.air)} · ${esc(n.name)}</b><div>${esc((n.detail||[]).slice(0,4).join(" · "))}${(n.detail||[]).length>4?` · +${n.detail.length-4} more`:""}</div><small>${esc(fmt(n.ts))}</small></div></div>`).join(""):`<div class="empty" style="padding:18px 8px">No policy changes in the last 30 days.</div>`);
+  const p=$("#bellPanel");
+  if(bellMode==="set"){
+    const off=bellOff();
+    p.innerHTML=`<div class="bp-h"><b>⚙ Which updates should notify me?</b><button class="btn sm" data-bp="back">← Back</button></div><p class="hint" style="margin:6px 4px">Tick the sections and sub-sections you want to see. Saved on this device only.</p>`+
+      bellSources().map(g=>`<div class="bp-g"><b>${esc(g.grp)}</b><div class="bp-s">${g.items.map(i=>`<label class="chk"><input type="checkbox" data-bk="${i.key}"${off.includes(i.key)?"":" checked"}> ${esc(i.label)}</label>`).join("")}</div></div>`).join("")+
+      `<div class="row" style="margin:8px 4px 2px"><button class="btn sm" data-bp="all">☑ All</button><button class="btn sm" data-bp="none">☐ None</button></div>`;return}
+  const l=bellList();
+  p.innerHTML=`<div class="bp-h"><b>🔔 Updates</b><span class="row" style="gap:6px"><button class="btn sm" data-bp="set" title="Choose which sections notify you">⚙</button><button class="btn sm" data-bp="read">✓ Mark all read</button>${ADM.on&&DB.notices.length?`<button class="btn sm danger" data-bp="clear" title="Delete all notices for everyone">🗑</button>`:""}</span></div>`+
+    (l.length?l.map(n=>{const k=noteKey(n),g=n.grp||k.split(":")[0];return `<div class="bp-i${n.ts>seen?" new":""}" data-bn="${n.id}"><div style="min-width:0"><div class="bp-sec"><span class="bp-chip">${esc(grpName(k.startsWith("email")?"email":"hub"))}</span><span class="bp-chip sub">${esc(subName(k)||n.sub||"")}</span></div><b>${n.air?esc(n.air)+" · "+esc(n.name):"Email template"}</b><div>${esc(n.summary||(n.detail||[]).slice(0,3).join(" · "))}</div>${snippet(n)}<small>${esc(fmt(n.ts))} · tap to see the change log</small></div></div>`}).join(""):`<div class="empty" style="padding:18px 8px">No updates in the last 30 days${bellOff().length?" for the sections you selected":""}.</div>`);
+}
+function openChangeLog(id){
+  const n=DB.notices.find(x=>x.id===id);if(!n)return;const k=noteKey(n);
+  const fieldHTML=c=>c.k==="edit"?c.fields.map(f=>f.secret?`<div class="cl-f"><b>${esc(f.label)}</b><div class="cl-l sec">🔒 changed (value not shown)</div></div>`:`<div class="cl-f"><b>${esc(f.label)}</b>${f.lines.map(([t,s])=>`<div class="cl-l ${t==="+"?"add":"del"}"><span>${t==="+"?"+":"−"}</span> ${esc(s)}</div>`).join("")}</div>`).join(""):
+    (c.fields||[]).map(f=>`<div class="cl-f"><b>${esc(f.label)}</b><div class="cl-l ${c.k==="add"?"add":"del"}">${esc(f.text).replace(/\n/g,"<br>")}</div></div>`).join("")+((c.hidden||[]).length?`<div class="cl-f"><div class="cl-l sec">🔒 ${esc(c.hidden.join(" and "))} ${c.k==="add"?"saved":"were saved"} (not shown)</div></div>`:"");
+  const chs=(n.changes||[]).length?n.changes.map(c=>`<div class="cl-c ${c.k}"><div class="cl-t">${c.k==="add"?"➕ Added":c.k==="del"?"🗑 Removed":"✏️ Edited"} <b>“${esc(c.item)}”</b>${c.was?` <span class="hint">(was “${esc(c.was)}”)</span>`:""}</div>${fieldHTML(c)}</div>`).join(""):`<div class="cl-c"><div class="cl-l">${esc((n.detail||[]).join(" · "))||"No detail was recorded for this older notice."}</div></div>`;
+  modal(`<div class="mhead"><div><h3>📝 Change log</h3><div class="bp-sec"><span class="bp-chip">${esc(grpName(k.startsWith("email")?"email":"hub"))}</span><span class="bp-chip sub">${esc(subName(k)||n.sub||"")}</span></div></div><button class="btn sm x" data-close>✕</button></div>
+    <p style="margin:6px 0"><b>${n.air?esc(n.air)+" · "+esc(n.name):"Email template"}</b> <span class="hint">${esc(fmt(n.ts))}</span></p>${chs}
+    <div class="row" style="justify-content:flex-end;margin-top:10px"><button class="btn" data-close>Close</button><button class="btn pri" id="cl-go">Open it ↗</button></div>`,(bg,close)=>{
+    bg.firstChild.style.maxWidth="720px";
+    $("#cl-go",bg).onclick=()=>{close();const nv=n.nav||{sec:"policy",p:{air:n.airId,cid:n.cid}};go(nv.sec,Object.fromEntries(Object.entries(nv.p||{}).filter(([,v])=>v&&v!=="__air"&&v!=="__note"&&v!=="__t")))};
+  });
 }
 {const bb=$("#bellBtn"),bp=$("#bellPanel");
- bb.addEventListener("click",e=>{e.stopPropagation();if(bp.hidden){const seen=bellSeen();bellPaint(seen);bp.hidden=false;lsSet(BELL_SEEN,new Date().toISOString());const bd=$(".bell-n",bb);bd.hidden=true;bellN=0}else bp.hidden=true});
+ bb.addEventListener("click",e=>{e.stopPropagation();if(bp.hidden){bellMode="list";const seen=bellSeen();bellPaint(seen);bp.hidden=false;lsSet(BELL_SEEN,new Date().toISOString());$(".bell-n",bb).hidden=true;bellN=0}else bp.hidden=true});
  bp.addEventListener("click",e=>{
    const a=e.target.closest("[data-bp]");
-   if(a){if(a.dataset.bp==="read"){lsSet(BELL_SEEN,new Date().toISOString());bellPaint(bellSeen());renderBell()}
-     else if(a.dataset.bp==="clear"&&confirm("Delete all notices for everyone?")){DB.notices.slice().forEach(n=>delItem("notices",n.id));bp.hidden=true}return}
-   const it=e.target.closest("[data-bn]");if(it){const n=DB.notices.find(x=>x.id===it.dataset.bn);bp.hidden=true;if(n)go("policy",{air:n.airId,cid:n.cid||undefined})}
+   if(a){const k=a.dataset.bp;
+     if(k==="read"){lsSet(BELL_SEEN,new Date().toISOString());bellPaint(bellSeen());renderBell()}
+     else if(k==="set"){bellMode="set";bellPaint(bellSeen())}
+     else if(k==="back"){bellMode="list";bellPaint(bellSeen())}
+     else if(k==="all"||k==="none"){lsSet(BELL_PREF,JSON.stringify({off:k==="all"?[]:bellSources().flatMap(g=>g.items.map(i=>i.key))}));bellPaint(bellSeen());renderBell()}
+     else if(k==="clear"&&confirm("Delete all notices for everyone?")){DB.notices.slice().forEach(n=>delItem("notices",n.id));bp.hidden=true}
+     return}
+   const it=e.target.closest("[data-bn]");if(it){bp.hidden=true;openChangeLog(it.dataset.bn)}
  });
- document.addEventListener("pointerdown",e=>{if(!bp.hidden&&!e.target.closest("#bellPanel")&&!e.target.closest("#bellBtn"))bp.hidden=true});
+ bp.addEventListener("change",e=>{const c=e.target.closest("[data-bk]");if(!c)return;const off=new Set(bellOff());c.checked?off.delete(c.dataset.bk):off.add(c.dataset.bk);lsSet(BELL_PREF,JSON.stringify({off:[...off]}));renderBell()});
+ document.addEventListener("pointerdown",e=>{if(!bp.hidden&&!e.target.closest("#bellPanel")&&!e.target.closest("#bellBtn")&&!e.target.closest(".modalbg"))bp.hidden=true});
  document.addEventListener("keydown",e=>{if(e.key==="Escape")bp.hidden=true});
 }
 const _raBell=refreshAll;refreshAll=function(){_raBell();renderBell()};
 setTimeout(renderBell,0);
-/* admins tidy up notices older than 30 days */
 setInterval(()=>{if(ADM.on){DB.notices.filter(n=>new Date(n.ts).getTime()<Date.now()-30*864e5).slice(0,20).forEach(n=>delItem("notices",n.id))}},6e5);
 
 /* ============ 🗓 UPDATE ROADMAP (administrator only) ============ */
