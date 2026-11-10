@@ -386,6 +386,16 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 
 /* v1.6.0 bell · roadmap · hub tabs */
 /* v1.7.0 updates bell */
+/* v1.8.0 read status + briefings */
+.bp-tabs{display:flex;gap:6px;padding:8px 4px 4px}.bp-tabs button{flex:1;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:6px 8px;font-weight:700;font-size:13px;cursor:pointer;min-height:0}.bp-tabs button.on{background:var(--pri);color:#fff;border-color:var(--pri)}.bp-tabs i{font-style:normal;background:#e11d48;color:#fff;border-radius:9px;padding:0 6px;font-size:11px;margin-left:4px}
+.bp-fl{display:flex;gap:6px;align-items:center;padding:2px 4px 8px}.bp-fl .f{border:1px solid var(--line);background:transparent;border-radius:12px;padding:2px 11px;font-size:12px;cursor:pointer;min-height:0;color:var(--ink)}.bp-fl .f.on{background:var(--soft);border-color:var(--pri2);font-weight:700}
+.bp-i{align-items:flex-start;transition:opacity .15s}.bp-i.read{opacity:.7}.bp-i.new{border-left:3px solid var(--pri2)}.bp-dot{flex:none;width:11px;height:11px;border-radius:50%;background:#2563eb;margin-top:6px;box-shadow:0 0 0 3px rgba(37,99,235,.18)}.bp-i.read .bp-dot{background:transparent;border:2px solid var(--line);box-shadow:none}
+.bp-st{font-size:10.5px;font-weight:800;border-radius:8px;padding:1px 7px;background:var(--soft);color:var(--mut)}.bp-st.u{background:#2563eb;color:#fff}
+.bp-rs{flex:none;border:1px solid var(--line);background:var(--card);border-radius:8px;font-size:11px;padding:3px 8px;cursor:pointer;min-height:0;color:var(--mut);align-self:flex-start;white-space:nowrap}.bp-rs:hover{border-color:var(--pri2);color:var(--ink)}
+.bp-chip.br{background:#7c3aed}.bp-chip.imp{background:#dc2626}.bp-i.imp{border-left-color:#dc2626}
+.bp-bx{font-size:13.5px;white-space:pre-wrap;overflow-wrap:anywhere;margin:2px 0}.bp-bx.cl{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bp-f{display:flex;flex-direction:column;gap:8px;padding:8px 4px}.bp-f label{font-size:11px;font-weight:700;color:var(--mut);display:flex;flex-direction:column;gap:2px}
+
 #bellPanel{width:min(430px,calc(100vw - 20px))}
 .bp-sec{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:3px}.bp-chip{font-size:10.5px;font-weight:700;background:var(--pri);color:#fff;border-radius:9px;padding:1px 8px}.bp-chip.sub{background:var(--soft);color:var(--pri)}
 .bp-d{font-size:12px;color:var(--mut);line-height:1.3;overflow-wrap:anywhere}.bp-d s{color:#b91c1c}.bp-d span{color:#15803d}
@@ -565,8 +575,9 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.7.0";
+const VERSION="1.8.0";
 const CHANGELOG=[
+ {v:"1.8.0",d:"2026-11-10",items:["🔔 Every notice now has a status — ● Unread or Read. Opening a notice marks it read; ✓ Mark read / ↺ Unread on each item, and ✓ All read for the whole tab. The badge counts unread items only. (Status is kept per device.)","📣 New Briefings tab inside the bell: anyone can post a quick briefing for the team (title, text, ⚠ Important, optional name). Briefings have the same Unread / Read status, can be switched on or off in ⚙, and can be edited or deleted by their author or an administrator.","The test AI assistant was cancelled and removed."]},
  {v:"1.7.0",d:"2026-11-08",items:["🔐 Systems tab is now visible to every user (only administrators can add, edit or delete).","🔔 The bell now reports updates from every Airline Hub tab (Policy, Documents, Emails, Systems and your own tabs) and from Email Templates (templates and Telex). Each notice shows its section and sub-section name separately.","⚙ In the bell, tick exactly which sections / sub-sections should notify you (saved on your device).","📝 Tap a notice to open its change log: what was added or removed, and for edits the exact lines that changed (− old / + new). Passwords are never shown — only that they changed."]},
  {v:"1.6.0",d:"2026-11-07",items:["🔔 Bell icon (top right): shows a notice when the policy of any airline is changed — added, edited or removed cards and notes. Tap a notice to open that airline’s policy.","🗓 Update roadmap (Administrator mode only): a calendar for notes and plans of future updates, with status (Planned / In progress / Done / Dropped). Open it from the Update history window or the ⚙ menu.","Airline Hub: ⚙ Customize tabs (administrator) — rename, re-order, hide or add your own tabs, each a free list of subjects you can add, name, edit and delete for every airline.","New 🔐 Systems tab (Administrator mode only): note the system name, link, user ID and password of each airline system; passwords are masked with show / copy buttons."]},
  {v:"1.5.0",d:"2026-11-05",items:["New Airline Hub: Airlines Policy, Documents and Email Directory are merged into ONE section. Pick an airline once (or search by airline, e-mail address, policy or document text) and switch between the 📘 Policy · 🗂️ Documents · 📇 Emails tabs — each tab shows how many items the airline has.","Old links, search results and bookmarks still work: they open the matching Airline Hub tab. On the Home page the three cards are replaced by a single Airline Hub card.","Mobile: the airline picker is a compact button; the tabs stay visible while you scroll; the bottom bar now keeps your four most-used sections."]},
@@ -653,7 +664,7 @@ let SV=0;
 function save(){SV++;try{localStorage.setItem(LS,JSON.stringify(DB))}catch(e){}}
 DB=load()||{};
 DB.templates=DB.templates||JSON.parse(JSON.stringify(SEED));
-DB.phone=DB.phone||[];DB.office=DB.office||[];DB.sorting=DB.sorting||[];DB.emaildir=DB.emaildir||[];DB.policy=DB.policy||[];DB.telex=DB.telex||JSON.parse(JSON.stringify(TELEX_SEED));DB.home=DB.home||JSON.parse(JSON.stringify(HOME_SEED));DB.docs=DB.docs||[];DB.settings=DB.settings||[];DB.notices=DB.notices||[];DB.airdata=DB.airdata||[];DB.ui=DB.ui||{lang:"en"};
+DB.phone=DB.phone||[];DB.office=DB.office||[];DB.sorting=DB.sorting||[];DB.emaildir=DB.emaildir||[];DB.policy=DB.policy||[];DB.telex=DB.telex||JSON.parse(JSON.stringify(TELEX_SEED));DB.home=DB.home||JSON.parse(JSON.stringify(HOME_SEED));DB.docs=DB.docs||[];DB.settings=DB.settings||[];DB.notices=DB.notices||[];DB.airdata=DB.airdata||[];DB.briefings=DB.briefings||[];DB.ui=DB.ui||{lang:"en"};
 applySectionNames();
 save();
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -1249,7 +1260,7 @@ function mountLog(root,cfg){
 }
 
 /* ============ DATA LAYER + FIREBASE SYNC ============ */
-const COLS=["templates","phone","office","sorting","emaildir","policy","telex","home","docs","settings","notices","airdata"];
+const COLS=["templates","phone","office","sorting","emaildir","policy","telex","home","docs","settings","notices","airdata","briefings"];
 const FB_CFG={apiKey:"AIzaSyBl1SJ5VovqKTe7DkOExqs-385ubRSkNO0",authDomain:"baggage-service-information.firebaseapp.com",projectId:"baggage-service-information",storageBucket:"baggage-service-information.firebasestorage.app",messagingSenderId:"252352402486",appId:"1:252352402486:web:dacbb1b299363fe25cb497",measurementId:"G-7DF8RXQ33V"};
 const FB_VER="10.12.2";
 let fdb=null;const CLOUD={state:"connecting",msg:""},seen={},smeta={};
@@ -3320,15 +3331,14 @@ const _renderHub=render;render=function(){
 const _admHub=admApply;admApply=function(){_admHub();const h=apiFor("hub");if(h&&h.redraw)h.redraw()};   /* the 🔐 Systems tab appears / disappears with Administrator mode */
 
 /* ============ 🔔 UPDATES: what changed in the Airline Hub and Email Templates, with a detailed change log ============ */
-const BELL_SEEN="bfs-bell-seen",BELL_PREF="bfs-bell-pref";let bellN=-1,bellMode="list";
-const bellSeen=()=>{let v=lsGet(BELL_SEEN,"");if(!v){v=new Date().toISOString();lsSet(BELL_SEEN,v)}return v};
+const BELL_SEEN="bfs-bell-seen",BELL_PREF="bfs-bell-pref";
 const bellOff=()=>{try{return JSON.parse(lsGet(BELL_PREF,"{}")).off||[]}catch(e){return[]}};
 const bellOn=k=>!bellOff().includes(k);
 const grpName=g=>(SECTIONS.find(s=>s.id===(g==="email"?"email":"hub"))||{}).short||(g==="email"?"Email Templates":"Airline Hub");
 const noteKey=n=>n.sec||"hub:policy";
 const subName=k=>{if(k.startsWith("hub:")){const t=hubTabs(true).find(x=>x.id===k.slice(4));return t?`${t.icon} ${t.label}`:""}return k==="email:telex"?"📨 Telex":k==="email:templates"?"✉️ Email templates":""};
 const bellList=()=>{const lim=Date.now()-30*864e5;return DB.notices.filter(n=>(n.type==="change"||n.type==="policy")&&new Date(n.ts).getTime()>=lim&&bellOn(noteKey(n))).sort((a,b)=>b.ts.localeCompare(a.ts)).slice(0,40)};
-function bellSources(){return[{grp:grpName("hub"),items:hubTabs(true).map(t=>({key:"hub:"+t.id,label:`${t.icon} ${t.label}`}))},{grp:grpName("email"),items:[{key:"email:templates",label:"✉️ Email templates"},{key:"email:telex",label:"📨 Telex"}]}]}
+function bellSources(){return[{grp:grpName("hub"),items:hubTabs(true).map(t=>({key:"hub:"+t.id,label:`${t.icon} ${t.label}`}))},{grp:grpName("email"),items:[{key:"email:templates",label:"✉️ Email templates"},{key:"email:telex",label:"📨 Telex"}]},{grp:"Briefings",items:[{key:"brief",label:"📣 Quick briefings"}]}]}
 
 /* ---- turning a saved record into comparable "items" ---- */
 const txt=v=>String(v==null?"":v).replace(/\r/g,"").trim();
@@ -3388,26 +3398,54 @@ const TRACK=new Set(["policy","docs","emaildir","airdata","telex","templates"]);
 const _putTrk=putItem;putItem=function(col,o){if(TRACK.has(col)){try{trackChange(col,o.id,o)}catch(e){console.warn("change log",e)}}return _putTrk(col,o)};
 const _delTrk=delItem;delItem=function(col,id){if(TRACK.has(col)&&ADM.on&&col!=="policy"&&col!=="docs"&&col!=="airdata"){try{trackChange(col,id,null)}catch(e){console.warn("change log",e)}}return _delTrk(col,id)};
 
-/* ---- the bell ---- */
+/* ---- read / unread status (kept per device) ---- */
+const BELL_BASE="bfs-bell-base",BELL_READ="bfs-bell-read",BELL_UNREAD="bfs-bell-unread",BELL_FROM="bfs-bell-from";
+let bellN=-1,bellMode="list",bellTab="upd",bellFilter="all",briefEdit=null;const bellExp=new Set();
+const jget=k=>{try{return new Set(JSON.parse(lsGet(k,"[]")))}catch(e){return new Set()}},jset=(k,s)=>lsSet(k,JSON.stringify([...s].slice(-800)));
+const bellBase=()=>{let v=lsGet(BELL_BASE,"")||lsGet(BELL_SEEN,"");if(!v)v=new Date().toISOString();lsSet(BELL_BASE,v);return v};   /* anything older than this was already seen before read-status existed */
+const devId=()=>{let v=lsGet("bfs-dev","");if(!v){v="d"+Math.random().toString(36).slice(2,10);lsSet("bfs-dev",v)}return v};
+const isRead=n=>jget(BELL_UNREAD).has(n.id)?false:(jget(BELL_READ).has(n.id)||n.ts<=bellBase());
+function setRead(ids,val){const r=jget(BELL_READ),u=jget(BELL_UNREAD);[].concat(ids).forEach(id=>{if(val){u.delete(id);r.add(id)}else{r.delete(id);u.add(id)}});jset(BELL_READ,r);jset(BELL_UNREAD,u)}
+const briefList=()=>{const lim=Date.now()-14*864e5;return bellOn("brief")?DB.briefings.filter(b=>new Date(b.ts).getTime()>=lim).sort((a,b)=>b.ts.localeCompare(a.ts)).slice(0,40):[]};
+const bellCounts=()=>{const u=bellList().filter(n=>!isRead(n)).length,b=briefList().filter(n=>!isRead(n)).length;return{u,b,t:u+b}};
 function renderBell(){
-  const b=$("#bellBtn");if(!b)return;const seen=bellSeen(),l=bellList(),n=l.filter(x=>x.ts>seen).length,bd=$(".bell-n",b);
-  bd.hidden=!n;bd.textContent=n>9?"9+":n;b.title=n?`${n} new update${n>1?"s":""}`:"Updates — what changed";
-  if(bellN>=0&&n>bellN){b.classList.remove("ring");void b.offsetWidth;b.classList.add("ring")}bellN=n;
-  if(!$("#bellPanel").hidden&&bellMode==="list")bellPaint(seen);
+  const b=$("#bellBtn");if(!b)return;bellBase();const c=bellCounts(),bd=$(".bell-n",b);
+  bd.hidden=!c.t;bd.textContent=c.t>9?"9+":c.t;b.title=c.t?`${c.t} unread notice${c.t>1?"s":""}`:"Notices — updates & briefings";
+  if(bellN>=0&&c.t>bellN){b.classList.remove("ring");void b.offsetWidth;b.classList.add("ring")}bellN=c.t;
+  if(!$("#bellPanel").hidden&&bellMode==="list")bellPaint();
 }
 const snippet=n=>{const c=(n.changes||[])[0];if(!c)return"";
   if(c.k==="edit"){const f=c.fields.find(x=>x.lines);if(f){const r=f.lines.find(l=>l[0]==="-"),a=f.lines.find(l=>l[0]==="+"),cut=s=>s.length>90?s.slice(0,90)+"…":s;return `${r?`<div class="bp-d"><s>− ${esc(cut(r[1]))}</s></div>`:""}${a?`<div class="bp-d"><span>+ ${esc(cut(a[1]))}</span></div>`:""}`}const s=c.fields.find(x=>x.secret);return s?`<div class="bp-d">🔒 ${esc(s.label)} changed</div>`:""}
   const f=(c.fields||[])[0];return f?`<div class="bp-d"><span>+ ${esc(f.text.slice(0,90))}${f.text.length>90?"…":""}</span></div>`:""};
-function bellPaint(seen){
+const stChip=un=>`<span class="bp-st${un?" u":""}">${un?"● Unread":"Read"}</span>`;
+const rdBtn=(id,un)=>`<button class="bp-rs" data-brd="${id}" title="${un?"Mark as read":"Mark as unread"}">${un?"✓ Mark read":"↺ Unread"}</button>`;
+function bellPaint(){
   const p=$("#bellPanel");
   if(bellMode==="set"){
     const off=bellOff();
-    p.innerHTML=`<div class="bp-h"><b>⚙ Which updates should notify me?</b><button class="btn sm" data-bp="back">← Back</button></div><p class="hint" style="margin:6px 4px">Tick the sections and sub-sections you want to see. Saved on this device only.</p>`+
+    p.innerHTML=`<div class="bp-h"><b>⚙ Which notices should I get?</b><button class="btn sm" data-bp="back">← Back</button></div><p class="hint" style="margin:6px 4px">Tick the sections and sub-sections you want to see. Saved on this device only.</p>`+
       bellSources().map(g=>`<div class="bp-g"><b>${esc(g.grp)}</b><div class="bp-s">${g.items.map(i=>`<label class="chk"><input type="checkbox" data-bk="${i.key}"${off.includes(i.key)?"":" checked"}> ${esc(i.label)}</label>`).join("")}</div></div>`).join("")+
       `<div class="row" style="margin:8px 4px 2px"><button class="btn sm" data-bp="all">☑ All</button><button class="btn sm" data-bp="none">☐ None</button></div>`;return}
-  const l=bellList();
-  p.innerHTML=`<div class="bp-h"><b>🔔 Updates</b><span class="row" style="gap:6px"><button class="btn sm" data-bp="set" title="Choose which sections notify you">⚙</button><button class="btn sm" data-bp="read">✓ Mark all read</button>${ADM.on&&DB.notices.length?`<button class="btn sm danger" data-bp="clear" title="Delete all notices for everyone">🗑</button>`:""}</span></div>`+
-    (l.length?l.map(n=>{const k=noteKey(n),g=n.grp||k.split(":")[0];return `<div class="bp-i${n.ts>seen?" new":""}" data-bn="${n.id}"><div style="min-width:0"><div class="bp-sec"><span class="bp-chip">${esc(grpName(k.startsWith("email")?"email":"hub"))}</span><span class="bp-chip sub">${esc(subName(k)||n.sub||"")}</span></div><b>${n.air?esc(n.air)+" · "+esc(n.name):"Email template"}</b><div>${esc(n.summary||(n.detail||[]).slice(0,3).join(" · "))}</div>${snippet(n)}<small>${esc(fmt(n.ts))} · tap to see the change log</small></div></div>`}).join(""):`<div class="empty" style="padding:18px 8px">No updates in the last 30 days${bellOff().length?" for the sections you selected":""}.</div>`);
+  if(bellMode==="new"){
+    const e=briefEdit;
+    p.innerHTML=`<div class="bp-h"><b>${e?"✏️ Edit briefing":"📣 New quick briefing"}</b><button class="btn sm" data-bp="cancelb">← Back</button></div>
+      <div class="bp-f"><label>Title *<input id="bb-t" maxlength="100" value="${esc(e?e.title:"")}" placeholder="e.g. TG delayed 2 h — expect AHL cases"></label>
+      <label>Briefing<textarea id="bb-x" rows="5" placeholder="What does the team need to know?">${esc(e?e.text:"")}</textarea></label>
+      <label class="chk" style="flex-direction:row"><input type="checkbox" id="bb-i"${e&&e.pri==="imp"?" checked":""}> ⚠ Important</label>
+      <label>From (optional)<input id="bb-f" maxlength="40" value="${esc(e?e.from||"":lsGet(BELL_FROM,""))}" placeholder="your name / shift"></label>
+      <div class="row"><button class="btn pri" data-bp="saveb">✔ ${e?"Save changes":"Post briefing"}</button></div>
+      <p class="hint">Everyone using the app will see it as <b>Unread</b> until they open it.</p></div>`;setTimeout(()=>{const t=$("#bb-t");t&&t.focus()},30);return}
+  const ups=bellList(),brs=briefList(),cu=ups.filter(n=>!isRead(n)).length,cb=brs.filter(n=>!isRead(n)).length;
+  const list=bellTab==="upd"?ups:brs,shown=bellFilter==="unread"?list.filter(n=>!isRead(n)):list,adm=ADM.on;
+  let body="";
+  if(bellTab==="upd"){
+    body=shown.length?shown.map(n=>{const k=noteKey(n),un=!isRead(n);return `<div class="bp-i ${un?"new":"read"}" data-bn="${n.id}"><span class="bp-dot"></span><div style="min-width:0;flex:1"><div class="bp-sec"><span class="bp-chip">${esc(grpName(k.startsWith("email")?"email":"hub"))}</span><span class="bp-chip sub">${esc(subName(k)||n.sub||"")}</span>${stChip(un)}</div><b>${n.air?esc(n.air)+" · "+esc(n.name):"Email template"}</b><div>${esc(n.summary||(n.detail||[]).slice(0,3).join(" · "))}</div>${snippet(n)}<small>${esc(fmt(n.ts))} · tap to see the change log</small></div>${rdBtn(n.id,un)}</div>`}).join(""):`<div class="empty" style="padding:18px 8px">${bellFilter==="unread"?"No unread updates 🎉":"No updates in the last 30 days"+(bellOff().length?" for the sections you selected":"")+"."}</div>`;
+  }else{
+    body=shown.length?shown.map(b=>{const un=!isRead(b),open=bellExp.has(b.id),can=adm||b.dev===devId();return `<div class="bp-i br ${un?"new":"read"}${b.pri==="imp"?" imp":""}" data-bb="${b.id}"><span class="bp-dot"></span><div style="min-width:0;flex:1"><div class="bp-sec"><span class="bp-chip br">📣 Briefing</span>${b.pri==="imp"?`<span class="bp-chip imp">⚠ Important</span>`:""}${stChip(un)}</div><b>${esc(b.title)}</b>${b.text?`<div class="bp-bx${open?"":" cl"}">${esc(b.text)}</div>`:""}<small>${esc(b.from?b.from+" · ":"")}${esc(fmt(b.ts))}${b.text&&!open?" · tap to read more":""}</small>${can&&open?`<div class="row" style="margin-top:6px"><button class="btn sm" data-bbe="${b.id}">✏️ Edit</button><button class="btn sm danger" data-bbd="${b.id}">🗑 Delete</button></div>`:""}</div>${rdBtn(b.id,un)}</div>`}).join(""):`<div class="empty" style="padding:18px 8px">${bellFilter==="unread"?"No unread briefings 🎉":"No briefings yet — press ＋ New briefing to post a quick one for the team."}</div>`;
+  }
+  p.innerHTML=`<div class="bp-h"><b>🔔 Notices</b><span class="row" style="gap:6px"><button class="btn sm" data-bp="set" title="Choose which notices you get">⚙</button><button class="btn sm" data-bp="readall" title="Mark everything in this tab as read">✓ All read</button>${ADM.on&&bellTab==="upd"&&DB.notices.length?`<button class="btn sm danger" data-bp="clear" title="Delete all update notices for everyone">🗑</button>`:""}</span></div>
+    <div class="bp-tabs"><button data-bt="upd" class="${bellTab==="upd"?"on":""}">🔔 Updates${cu?` <i>${cu}</i>`:""}</button><button data-bt="brf" class="${bellTab==="brf"?"on":""}">📣 Briefings${cb?` <i>${cb}</i>`:""}</button></div>
+    <div class="bp-fl"><button class="f${bellFilter==="all"?" on":""}" data-bf="all">All</button><button class="f${bellFilter==="unread"?" on":""}" data-bf="unread">Unread</button>${bellTab==="brf"?`<span style="flex:1"></span><button class="btn sm pri" data-bp="newb">＋ New briefing</button>`:""}</div>`+body;
 }
 function openChangeLog(id){
   const n=DB.notices.find(x=>x.id===id);if(!n)return;const k=noteKey(n);
@@ -3422,17 +3460,30 @@ function openChangeLog(id){
   });
 }
 {const bb=$("#bellBtn"),bp=$("#bellPanel");
- bb.addEventListener("click",e=>{e.stopPropagation();if(bp.hidden){bellMode="list";const seen=bellSeen();bellPaint(seen);bp.hidden=false;lsSet(BELL_SEEN,new Date().toISOString());$(".bell-n",bb).hidden=true;bellN=0}else bp.hidden=true});
+ bb.addEventListener("click",e=>{e.stopPropagation();if(bp.hidden){bellMode="list";const c=bellCounts();if(!c.u&&c.b)bellTab="brf";bellPaint();bp.hidden=false}else bp.hidden=true});
  bp.addEventListener("click",e=>{
    const a=e.target.closest("[data-bp]");
    if(a){const k=a.dataset.bp;
-     if(k==="read"){lsSet(BELL_SEEN,new Date().toISOString());bellPaint(bellSeen());renderBell()}
-     else if(k==="set"){bellMode="set";bellPaint(bellSeen())}
-     else if(k==="back"){bellMode="list";bellPaint(bellSeen())}
-     else if(k==="all"||k==="none"){lsSet(BELL_PREF,JSON.stringify({off:k==="all"?[]:bellSources().flatMap(g=>g.items.map(i=>i.key))}));bellPaint(bellSeen());renderBell()}
-     else if(k==="clear"&&confirm("Delete all notices for everyone?")){DB.notices.slice().forEach(n=>delItem("notices",n.id));bp.hidden=true}
+     if(k==="readall"){setRead((bellTab==="upd"?bellList():briefList()).map(n=>n.id),true);bellPaint();renderBell()}
+     else if(k==="set"){bellMode="set";bellPaint()}
+     else if(k==="back"){bellMode="list";bellPaint()}
+     else if(k==="all"||k==="none"){lsSet(BELL_PREF,JSON.stringify({off:k==="all"?[]:bellSources().flatMap(g=>g.items.map(i=>i.key))}));bellPaint();renderBell()}
+     else if(k==="clear"&&confirm("Delete all update notices for everyone?")){DB.notices.slice().forEach(n=>delItem("notices",n.id));bp.hidden=true}
+     else if(k==="newb"){briefEdit=null;bellMode="new";bellPaint()}
+     else if(k==="cancelb"){bellMode="list";briefEdit=null;bellPaint()}
+     else if(k==="saveb"){
+       const t=$("#bb-t").value.trim(),x=$("#bb-x").value.trim(),from=$("#bb-f").value.trim();if(!t){toast("Please enter a title");return}
+       lsSet(BELL_FROM,from);const now=new Date().toISOString(),pri=$("#bb-i").checked?"imp":"";
+       const rec=briefEdit?{...briefEdit,title:t,text:x,pri,from,upd:now}:{id:"b"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),ts:now,title:t,text:x,pri,from,dev:devId()};
+       putItem("briefings",rec);setRead(rec.id,true);briefEdit=null;bellMode="list";bellTab="brf";bellPaint();renderBell();toast("Briefing posted ✓")}
      return}
-   const it=e.target.closest("[data-bn]");if(it){bp.hidden=true;openChangeLog(it.dataset.bn)}
+   const t=e.target.closest("[data-bt]");if(t){bellTab=t.dataset.bt;bellPaint();return}
+   const f=e.target.closest("[data-bf]");if(f){bellFilter=f.dataset.bf;bellPaint();return}
+   const rd=e.target.closest("[data-brd]");if(rd){const id=rd.dataset.brd,n=DB.notices.find(x=>x.id===id)||DB.briefings.find(x=>x.id===id);if(n){setRead(id,!isRead(n));bellPaint();renderBell()}return}
+   const be=e.target.closest("[data-bbe]");if(be){briefEdit=DB.briefings.find(x=>x.id===be.dataset.bbe)||null;bellMode="new";bellPaint();return}
+   const bd=e.target.closest("[data-bbd]");if(bd){if(confirm("Delete this briefing for everyone?")){delItem("briefings",bd.dataset.bbd);bellPaint();renderBell()}return}
+   const bi=e.target.closest("[data-bb]");if(bi){const id=bi.dataset.bb;bellExp.has(id)?bellExp.delete(id):bellExp.add(id);setRead(id,true);bellPaint();renderBell();return}
+   const it=e.target.closest("[data-bn]");if(it){const id=it.dataset.bn;setRead(id,true);bp.hidden=true;renderBell();openChangeLog(id)}
  });
  bp.addEventListener("change",e=>{const c=e.target.closest("[data-bk]");if(!c)return;const off=new Set(bellOff());c.checked?off.delete(c.dataset.bk):off.add(c.dataset.bk);lsSet(BELL_PREF,JSON.stringify({off:[...off]}));renderBell()});
  document.addEventListener("pointerdown",e=>{if(!bp.hidden&&!e.target.closest("#bellPanel")&&!e.target.closest("#bellBtn")&&!e.target.closest(".modalbg"))bp.hidden=true});
@@ -3440,7 +3491,7 @@ function openChangeLog(id){
 }
 const _raBell=refreshAll;refreshAll=function(){_raBell();renderBell()};
 setTimeout(renderBell,0);
-setInterval(()=>{if(ADM.on){DB.notices.filter(n=>new Date(n.ts).getTime()<Date.now()-30*864e5).slice(0,20).forEach(n=>delItem("notices",n.id))}},6e5);
+setInterval(()=>{if(ADM.on){const lim=Date.now()-30*864e5;DB.notices.filter(n=>new Date(n.ts).getTime()<lim).slice(0,20).forEach(n=>delItem("notices",n.id));DB.briefings.filter(n=>new Date(n.ts).getTime()<lim).slice(0,20).forEach(n=>delItem("briefings",n.id))}},6e5);
 
 /* ============ 🗓 UPDATE ROADMAP (administrator only) ============ */
 const RM_ST=[["plan","Planned","#2563eb"],["wip","In progress","#d97706"],["done","Done","#16a34a"],["drop","Dropped","#6b7280"]];
