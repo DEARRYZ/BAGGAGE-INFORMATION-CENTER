@@ -387,6 +387,14 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 /* v1.6.0 bell · roadmap · hub tabs */
 /* v1.7.0 updates bell */
 /* v1.8.0 read status + briefings */
+/* v1.9.0 paging sign */
+.fab-lock .fabb{cursor:pointer;touch-action:manipulation}
+.pg-wrap{display:grid;grid-template-columns:minmax(300px,390px) 1fr;gap:16px;margin-top:6px}.pg-form label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--mut);margin:8px 0 3px}.pg-form textarea,.pg-form input,.pg-form select{width:100%}
+.pg-pv{background:var(--soft);border-radius:14px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;align-self:start;position:sticky;top:8px}.pg-pvw{background:#fff;box-shadow:0 6px 22px rgba(0,0,0,.28);overflow:hidden;flex:none}.pg-pvn{display:flex;gap:10px;align-items:center}
+.pg-lgp{width:120px;height:56px;border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden;flex:none}.pg-lgp img{max-width:100%;max-height:100%;object-fit:contain}.pg-lgp.sm{width:64px;height:36px;border-style:solid}
+.pg-ed{border:1px solid var(--pri2);border-radius:12px;padding:10px;margin-bottom:8px;background:var(--card)}.pg-tp{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line)}
+@media(max-width:800px){.pg-wrap{grid-template-columns:1fr}.pg-pv{position:static}}
+
 /* v1.8.0 briefing reader: search, pin, reading view */
 #bellPanel{width:min(460px,calc(100vw - 20px));max-height:78vh}
 .bp-bt{display:flex;gap:6px;align-items:center}.bp-i.new .bp-bt b{font-weight:800}.bp-i.read .bp-bt b{font-weight:600}
@@ -581,14 +589,15 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 </div></header><div id="bellPanel" hidden></div>
 <nav class="bar" id="nav"></nav>
 <main id="main"></main>
-<div id="toolFab"><div id="optMenu" hidden><button class="om-i" data-om="admin"><span id="om-ai">🔐</span><div><b id="om-at">Administrator</b><small id="om-as">Log in to edit or delete content</small></div></button><button class="om-i adm" data-om="custom"><span>🛠</span><div><b>Customize home</b><small>Move, resize and edit home cards &amp; widgets</small></div></button><button class="om-i adm" data-om="data"><span>💾</span><div><b>Data &amp; backup</b><small>Export / import backup, reset templates</small></div></button><button class="om-i adm" data-om="rename"><span>🏷️</span><div><b>Rename sections</b><small>Change the names of the main sections</small></div></button><button class="om-i adm" data-om="roadmap"><span>🗓</span><div><b>Update roadmap</b><small>Calendar of planned updates (admin only)</small></div></button></div><div id="toolMenu" hidden><button class="om-i" data-tm="reduce"><span>🗜</span><div><b>Reduce file size</b><small>Make PDF &amp; images smaller</small></div></button><button class="om-i" data-tm="convert"><span>🔄</span><div><b>Convert files</b><small>PNG ⇄ JPG ⇄ PDF · combine into one PDF</small></div></button><button class="om-i" data-tm="temp"><span>🗂</span><div><b>Temporary files</b><small id="tm-sub">Kept for 2 days · synced in the cloud</small></div></button></div><button id="gearBtn" class="fabb" title="Options" aria-label="Open options menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="toolBtn" class="fabb" title="File tools — reduce, convert, temporary files" aria-label="Open file tools menu"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M12 9v7m-3-3 3 3 3-3"/></svg></button></div>
+<div id="toolFab"><div id="optMenu" hidden><button class="om-i" data-om="admin"><span id="om-ai">🔐</span><div><b id="om-at">Administrator</b><small id="om-as">Log in to edit or delete content</small></div></button><button class="om-i adm" data-om="custom"><span>🛠</span><div><b>Customize home</b><small>Move, resize and edit home cards &amp; widgets</small></div></button><button class="om-i adm" data-om="data"><span>💾</span><div><b>Data &amp; backup</b><small>Export / import backup, reset templates</small></div></button><button class="om-i adm" data-om="rename"><span>🏷️</span><div><b>Rename sections</b><small>Change the names of the main sections</small></div></button><button class="om-i adm" data-om="roadmap"><span>🗓</span><div><b>Update roadmap</b><small>Calendar of planned updates (admin only)</small></div></button><button class="om-i" data-om="lock"><span>🔒</span><div><b>Icons are locked in place</b><small>Tap to allow moving the tools / settings icons</small></div></button></div><div id="toolMenu" hidden><button class="om-i" data-tm="reduce"><span>🗜</span><div><b>Reduce file size</b><small>Make PDF &amp; images smaller</small></div></button><button class="om-i" data-tm="convert"><span>🔄</span><div><b>Convert files</b><small>PNG ⇄ JPG ⇄ PDF · combine into one PDF</small></div></button><button class="om-i" data-tm="paging"><span>🪧</span><div><b>Paging sign</b><small>A4 landscape sign for delayed-bag passengers</small></div></button><button class="om-i" data-tm="temp"><span>🗂</span><div><b>Temporary files</b><small id="tm-sub">Kept for 2 days · synced in the cloud</small></div></button></div><button id="gearBtn" class="fabb" title="Options" aria-label="Open options menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="toolBtn" class="fabb" title="File tools — reduce, convert, temporary files" aria-label="Open file tools menu"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M12 9v7m-3-3 3 3 3-3"/></svg></button></div>
 <footer class="pub">Published by Kongkit C.</footer>
 <footer class="ver"><button class="btn sm" id="verBtn">v<span id="verNum"></span> · Update history</button></footer>
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.8.0";
+const VERSION="1.9.0";
 const CHANGELOG=[
+ {v:"1.9.0",d:"2026-11-12",items:["🪧 New tool: Paging sign (🛠 tools menu). Makes an A4 landscape sign for passengers of a delayed bag — airline logo, “BAGGAGE DELAY”, flight and date, passenger names (one or several per sheet) and the service-desk contact text. Everything is sized to the page automatically; download a PDF, print, or keep it in Temporary files.","Administrators can set up airline templates (logo, heading, contact text, service-desk details) from ⚙ Manage airline templates; anyone can also use it manually and upload a logo.","The floating Tools and Settings icons are now locked in place so they cannot be moved by accident; unlock them from the ⚙ menu (🔒) if you want to move them."]},
  {v:"1.8.0",d:"2026-11-10",items:["🔔 Every notice now has a status — ● Unread or Read. Opening a notice marks it read; ✓ Mark read / ↺ Unread on each item, and ✓ All read for the whole tab. The badge counts unread items only. (Status is kept per device.)","📣 New Briefings tab inside the bell: anyone can post a quick briefing for the team (title, text, ⚠ Important, optional name). Briefings have the same Unread / Read status, can be switched on or off in ⚙, and can be edited or deleted by their author or an administrator. Briefings open in a roomy reading view (‹ › to move between them), have a 🔍 search that looks through every stored briefing, and can be 📌 pinned to the top (pinned ones never expire).","The test AI assistant was cancelled and removed."]},
  {v:"1.7.0",d:"2026-11-08",items:["🔐 Systems tab is now visible to every user (only administrators can add, edit or delete).","🔔 The bell now reports updates from every Airline Hub tab (Policy, Documents, Emails, Systems and your own tabs) and from Email Templates (templates and Telex). Each notice shows its section and sub-section name separately.","⚙ In the bell, tick exactly which sections / sub-sections should notify you (saved on your device).","📝 Tap a notice to open its change log: what was added or removed, and for edits the exact lines that changed (− old / + new). Passwords are never shown — only that they changed."]},
  {v:"1.6.0",d:"2026-11-07",items:["🔔 Bell icon (top right): shows a notice when the policy of any airline is changed — added, edited or removed cards and notes. Tap a notice to open that airline’s policy.","🗓 Update roadmap (Administrator mode only): a calendar for notes and plans of future updates, with status (Planned / In progress / Done / Dropped). Open it from the Update history window or the ⚙ menu.","Airline Hub: ⚙ Customize tabs (administrator) — rename, re-order, hide or add your own tabs, each a free list of subjects you can add, name, edit and delete for every airline.","New 🔐 Systems tab (Administrator mode only): note the system name, link, user ID and password of each airline system; passwords are masked with show / copy buttons."]},
@@ -2561,11 +2570,11 @@ function mnavRender(){
 }
 function msheetOpen(){
   const cur=VIEW.mode==="single"?VIEW.a:"",admOn=document.body.classList.contains("adm-on");
-  const clone=(menu,pre)=>[...document.querySelectorAll(`${menu} .om-i`)].filter(b=>admOn||!b.classList.contains("adm")).map(b=>{const k=(b.dataset.om||b.dataset.tm);return `<button class="ms-l" data-ms="${pre}:${k}">${b.innerHTML}</button>`}).join("");
+  const clone=(menu,pre)=>[...document.querySelectorAll(`${menu} .om-i`)].filter(b=>(admOn||!b.classList.contains("adm"))&&b.dataset.om!=="lock").map(b=>{const k=(b.dataset.om||b.dataset.tm);return `<button class="ms-l" data-ms="${pre}:${k}">${b.innerHTML}</button>`}).join("");
   msheetEl.innerHTML=`<div class="ms-p"><div class="ms-h"></div>
     <button class="ms-s" data-ms="search">🔍 <span>Search anything…</span></button>
     <div class="ms-t">Sections</div><div class="ms-g"><button class="ms-i${VIEW.mode==="home"?" on":""}" data-ms="sec:home"><i>🏠</i>Home</button>${VSEC().map(s=>`<button class="ms-i${cur===s.id?" on":""}" data-ms="sec:${s.id}"><i>${esc(s.icon)}</i>${esc(s.short)}</button>`).join("")}</div>
-    <div class="ms-t">Tools</div><div class="ms-g g4"><button class="ms-i" data-ms="asg"><i>📋</i>Assignment</button><button class="ms-i" data-ms="tm:reduce"><i>🗜</i>Reduce size</button><button class="ms-i" data-ms="tm:convert"><i>🔄</i>Convert</button><button class="ms-i" data-ms="tm:temp"><i>🗂</i>Temp files</button></div>
+    <div class="ms-t">Tools</div><div class="ms-g"><button class="ms-i" data-ms="asg"><i>📋</i>Assignment</button><button class="ms-i" data-ms="tm:reduce"><i>🗜</i>Reduce size</button><button class="ms-i" data-ms="tm:convert"><i>🔄</i>Convert</button><button class="ms-i" data-ms="tm:paging"><i>🪧</i>Paging sign</button><button class="ms-i" data-ms="tm:temp"><i>🗂</i>Temp files</button></div>
     <div class="ms-t">Settings</div>${clone("#optMenu","om")}
     <button class="ms-l" data-ms="ver"><span>🆕</span><div><b>What’s new</b><small>v${VERSION} · update history</small></div></button></div>`;
   msheetEl.hidden=false;
@@ -3540,6 +3549,164 @@ const _raBell=refreshAll;refreshAll=function(){_raBell();renderBell()};
 setTimeout(renderBell,0);
 setInterval(()=>{if(ADM.on){const lim=Date.now()-30*864e5;DB.notices.filter(n=>new Date(n.ts).getTime()<lim).slice(0,20).forEach(n=>delItem("notices",n.id));DB.briefings.filter(n=>!n.pin&&new Date(n.ts).getTime()<lim).slice(0,20).forEach(n=>delItem("briefings",n.id))}},6e5);
 
+/* ============ 🪧 PAGING SIGN: A4 landscape sign for delayed bags ============ */
+const PG_FONT='Arial,"Liberation Sans",Helvetica,"Noto Sans Thai","Leelawadee UI",Tahoma,sans-serif';
+const PG_CSS=`.pg-sheet{box-sizing:border-box;width:1123px;height:794px;padding:34px 56px;background:#fff;color:#000;display:flex;flex-direction:column;align-items:center;font-family:${PG_FONT};overflow:hidden;text-align:center;page-break-after:always;break-after:page}
+.pg-sheet:last-child{page-break-after:auto;break-after:auto}.pg-logo{flex:0 0 auto;display:flex;align-items:center;justify-content:center;min-height:24px}.pg-logo img{display:block;object-fit:contain}.pg-lt{font-weight:800;white-space:nowrap;text-transform:uppercase}
+.pg-head{flex:0 0 auto;margin-top:12px}.pg-h1,.pg-h2{font-weight:700;text-transform:uppercase;white-space:nowrap;line-height:1.5}.pg-u{text-decoration:underline}
+.pg-names{flex:1 1 auto;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}.pg-nl{display:flex;flex-direction:column;align-items:center;gap:.28em;font-weight:700;line-height:1.15;text-transform:uppercase}.pg-nl div{white-space:nowrap}
+.pg-contact{flex:0 0 auto;width:100%;line-height:1.28;white-space:pre-line}.pg-desk{margin-top:.5em;font-weight:700;white-space:pre-line}`;
+const PGT_KEY="bfs-pg-last";
+const pgTemplates=()=>DB.settings.filter(x=>x.kind==="pagingtpl").sort((a,b)=>String(a.code).localeCompare(String(b.code)));
+const monthAbbr=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+const pgDate=d=>{const m=String(d||"").match(/^(\d{4})-(\d\d)-(\d\d)/);return m?`${m[3]}${monthAbbr[+m[2]-1]}`:""};
+function pgSheets(text,per){
+  const clean=s=>s.split("\n").map(x=>x.trim()).filter(Boolean);let out=[];
+  if(per==="blank")out=String(text).replace(/\r/g,"").split(/\n\s*\n/).map(clean).filter(a=>a.length);
+  else{const l=clean(String(text).replace(/\r/g,"")),n=+per||1;for(let i=0;i<l.length;i+=n)out.push(l.slice(i,i+n))}
+  return out.length?out:[[]];
+}
+function pgSheetEl(names,c){
+  const d=document.createElement("div");d.className="pg-sheet";
+  d.innerHTML=`<div class="pg-logo">${c.logo?`<img src="${c.logo}" alt="">`:`<div class="pg-lt">${esc(c.airName||"")}</div>`}</div>
+    <div class="pg-head"><div class="pg-h1${c.under?" pg-u":""}">${esc(c.heading)}</div><div class="pg-h2${c.under?" pg-u":""}">${esc(c.flight)}</div></div>
+    <div class="pg-names"><div class="pg-nl">${(names.length?names:["PASSENGER NAME"]).map(n=>`<div>${esc(n)}</div>`).join("")}</div></div>
+    <div class="pg-contact">${esc(c.contact)}${c.desk?`<div class="pg-desk">${esc(c.desk)}</div>`:""}</div>`;
+  return d;
+}
+/* everything is sized to the page: logo, heading, names (as large as fits) and the contact text */
+function pgFitLine(el,maxW,hi,lo){if(!el)return lo;let a=lo,b=hi;el.style.whiteSpace="nowrap";while(b-a>.5){const m=(a+b)/2;el.style.fontSize=m+"px";if(el.scrollWidth<=maxW)a=m;else b=m}el.style.fontSize=a+"px";return a}
+function pgFitBlock(el,maxW,maxH,hi,lo){let a=lo,b=hi;el.style.maxWidth=maxW+"px";while(b-a>.5){const m=(a+b)/2;el.style.fontSize=m+"px";if(el.scrollHeight<=maxH&&el.scrollWidth<=maxW+1)a=m;else b=m}el.style.fontSize=a+"px";return a}
+function pgFit(sh){
+  const W=1123,H=794,q=s=>sh.querySelector(s),logo=q(".pg-logo img"),lt=q(".pg-lt");
+  if(logo){logo.style.maxHeight=Math.round(H*.2)+"px";logo.style.maxWidth=Math.round(W*.5)+"px"}
+  if(lt)pgFitLine(lt,W*.8,84,24);
+  const f1=pgFitLine(q(".pg-h1"),W*.9,44,18),f2=pgFitLine(q(".pg-h2"),W*.9,44,18),hs=Math.min(f1,f2);q(".pg-h1").style.fontSize=hs+"px";q(".pg-h2").style.fontSize=hs+"px";
+  const ct=q(".pg-contact"),dk=q(".pg-desk");ct.style.fontSize="30px";
+  const fs=pgFitBlock(ct,W-112,H*.3,58,16);if(dk)dk.style.fontSize=Math.max(14,fs*.66)+"px";
+  if(dk){let g=0;while(ct.scrollHeight>H*.32&&fs-g>14){g+=1;ct.style.fontSize=(fs-g)+"px";dk.style.fontSize=Math.max(14,(fs-g)*.66)+"px"}}
+  const nm=q(".pg-names"),nl=q(".pg-nl"),maxH=nm.clientHeight,maxW=W-112;let a=24,b=150;nl.style.fontSize="24px";
+  while(b-a>.5){const m=(a+b)/2;nl.style.fontSize=m+"px";if(nl.scrollWidth<=maxW&&nl.scrollHeight<=maxH)a=m;else b=m}
+  nl.style.fontSize=a+"px";if(nl.scrollWidth>maxW)nl.querySelectorAll("div").forEach(x=>x.style.whiteSpace="normal");
+  return sh;
+}
+async function pgLogoData(file){
+  const u=URL.createObjectURL(file);try{const im=await loadImg(u);let k=Math.min(1,800/im.naturalWidth,400/im.naturalHeight),out="";
+    const png=/png|webp|gif|svg/i.test(file.type);
+    for(let i=0;i<5;i++){const c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.naturalWidth*k));c.height=Math.max(1,Math.round(im.naturalHeight*k));const x=c.getContext("2d");if(!png){x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height)}x.drawImage(im,0,0,c.width,c.height);out=c.toDataURL(png?"image/png":"image/jpeg",.9);if(out.length<=380000)break;k*=.75}
+    return out}finally{URL.revokeObjectURL(u)}
+}
+async function pgPdf(sheets,c){
+  const h2i=await h2iEngine();await pdfLibOnly();await (document.fonts?document.fonts.ready:Promise.resolve());
+  const doc=await PDFLib.PDFDocument.create(),host=document.createElement("div");host.style.cssText="position:fixed;left:0;top:0;width:1123px;height:794px;z-index:-1;pointer-events:none;background:#fff";
+  const st=document.createElement("style");st.textContent=PG_CSS;host.appendChild(st);document.body.appendChild(host);
+  try{
+    for(const names of sheets){
+      host.querySelectorAll(".pg-sheet").forEach(x=>x.remove());const el=pgSheetEl(names,c);host.appendChild(el);await new Promise(r=>requestAnimationFrame(r));pgFit(el);
+      const opts={pixelRatio:2,backgroundColor:"#ffffff",skipFonts:true,width:1123,height:794,cacheBust:false};
+      if(/^((?!chrome|android).)*safari/i.test(navigator.userAgent)){try{await h2i.toCanvas(el,opts)}catch(e){}}
+      const cv=await h2i.toCanvas(el,opts),jb=await canvasBlob(cv,"image/jpeg",.93),img=await doc.embedJpg(new Uint8Array(await jb.arrayBuffer()));
+      doc.addPage([842,595]).drawImage(img,{x:0,y:0,width:842,height:595});cv.width=cv.height=0;
+    }
+  }finally{host.remove()}
+  return new Blob([await doc.save({useObjectStreams:true})],{type:"application/pdf"});
+}
+function pgPrint(sheets,c){
+  const host=document.createElement("div");host.style.cssText="position:fixed;left:-9999px;top:0;width:1123px;height:794px";const st=document.createElement("style");st.textContent=PG_CSS;host.appendChild(st);document.body.appendChild(host);
+  const els=sheets.map(n=>{const e=pgSheetEl(n,c);host.appendChild(e);return e});els.forEach(pgFit);
+  const html=`<!doctype html><html><head><meta charset="utf-8"><title>Paging sign</title><style>@page{size:A4 landscape;margin:0}html,body{margin:0;padding:0;background:#fff}${PG_CSS}</style></head><body>${els.map(e=>e.outerHTML).join("")}</body></html>`;host.remove();
+  const f=document.createElement("iframe");f.style.cssText="position:fixed;right:0;bottom:0;width:0;height:0;border:0";document.body.appendChild(f);
+  f.onload=()=>{setTimeout(()=>{try{f.contentWindow.focus();f.contentWindow.print()}catch(e){toast("Printing is not available — use Download PDF")}setTimeout(()=>f.remove(),60000)},300)};
+  f.srcdoc=html;
+}
+function openPagingTool(){
+  const last=(()=>{try{return JSON.parse(lsGet(PGT_KEY,"{}"))}catch(e){return{}}})();
+  const defaults={heading:"BAGGAGE DELAY",contact:"**Please contact Staff**\n**at Airlines Baggage Service Counter**",desk:"",under:true};
+  modal(toolHead("🪧","Paging sign","Print an A4 landscape sign for passengers of a delayed bag. Text and names are sized to the page automatically.")+
+  `<div class="pg-wrap"><div class="pg-form">
+    <label>Airline template</label><select id="pg-tpl"></select>
+    <div class="row adm" style="margin:6px 0"><button class="btn sm" id="pg-mg" type="button">⚙ Manage airline templates</button></div>
+    <div id="pg-mgp" hidden></div>
+    <label>Airline logo</label><div class="row" style="gap:8px;align-items:center"><div class="pg-lgp" id="pg-lgp"></div><input id="pg-lf" type="file" accept="image/*" hidden><button class="btn sm" id="pg-lb" type="button">📷 Upload logo</button><button class="btn sm" id="pg-lx" type="button">✕</button></div>
+    <label>Heading</label><input id="pg-h" maxlength="60">
+    <div class="fg" style="margin-top:2px"><div><label>Flight no.</label><input id="pg-fn" maxlength="10" placeholder="e.g. QR830" autocomplete="off"></div><div><label>Flight date</label><input id="pg-fd" type="date"></div></div>
+    <label>Flight line <span class="hint">(printed under the heading — editable)</span></label><input id="pg-fl" maxlength="60" placeholder="QR830 ON 13NOV">
+    <label>Passenger names <span class="hint">(one per line · a blank line starts a new sheet)</span></label><textarea id="pg-nm" rows="6" placeholder="CARBERRY ROBERT&#10;FERREIRA BRAGA ISABELY&#10;&#10;SALISBURY EMMA KATHERINE"></textarea>
+    <label>Names per sheet</label><select id="pg-per"><option value="blank">As typed (blank line = new sheet)</option><option value="1">1 name per sheet</option><option value="2">2 names per sheet</option><option value="3">3 names per sheet</option><option value="4">4 names per sheet</option></select>
+    <label>Contact information for the passenger</label><textarea id="pg-ct" rows="3"></textarea>
+    <label>Service desk details <span class="hint">(optional — counter, phone…)</span></label><textarea id="pg-dk" rows="2" placeholder="e.g. Counter B12 · Tel 02-000-0000"></textarea>
+    <label class="chk" style="margin-top:6px"><input type="checkbox" id="pg-un"> Underline the heading and flight line</label>
+   </div>
+   <div class="pg-pv"><div class="pg-pvn"><button class="btn sm" id="pg-pr" type="button">‹</button><b id="pg-pc">1 / 1</b><button class="btn sm" id="pg-nx" type="button">›</button></div><div class="pg-pvw" id="pg-pvw"></div><div class="hint" id="pg-pi"></div>
+    <div class="row" style="justify-content:center;margin-top:4px"><button class="btn pri" id="pg-dl" type="button">⬇ Download PDF</button><button class="btn" id="pg-pt" type="button">🖨 Print</button><button class="btn" id="pg-kp" type="button" title="Keep the PDF in Temporary files for 2 days">☁ Keep</button></div></div></div>`,
+  (bg,close)=>{
+    bg.firstChild.style.maxWidth="1060px";const $b=s=>$(s,bg);
+    if(!document.getElementById("pgcss")){const s=document.createElement("style");s.id="pgcss";s.textContent=PG_CSS;document.head.appendChild(s)}
+    let logo="",airName="",idx=0,tmr=0,editing=null;
+    const cfg=()=>({logo,airName,heading:$b("#pg-h").value.trim()||"BAGGAGE DELAY",under:$b("#pg-un").checked,flight:$b("#pg-fl").value.trim(),contact:$b("#pg-ct").value.trim(),desk:$b("#pg-dk").value.trim()});
+    const sheets=()=>pgSheets($b("#pg-nm").value,$b("#pg-per").value);
+    function drawLogoPrev(){$b("#pg-lgp").innerHTML=logo?`<img src="${logo}" alt="">`:`<span class="hint">no logo</span>`}
+    function preview(){
+      const s=sheets();idx=Math.min(idx,s.length-1);const w=$b("#pg-pvw"),avail=Math.max(260,(w.parentElement.clientWidth||520)-24),k=Math.min(1,avail/1123);
+      w.style.width=Math.round(1123*k)+"px";w.style.height=Math.round(794*k)+"px";w.innerHTML="";
+      const holder=document.createElement("div");holder.style.cssText=`width:1123px;height:794px;transform:scale(${k});transform-origin:top left`;const el=pgSheetEl(s[idx],cfg());holder.appendChild(el);w.appendChild(holder);pgFit(el);
+      $b("#pg-pc").textContent=`${idx+1} / ${s.length}`;$b("#pg-pr").disabled=idx===0;$b("#pg-nx").disabled=idx>=s.length-1;$b("#pg-pi").textContent=`${s.length} sheet${s.length>1?"s":""} · A4 landscape`;
+      try{lsSet(PGT_KEY,JSON.stringify({tpl:$b("#pg-tpl").value,per:$b("#pg-per").value}))}catch(e){}
+    }
+    const later=()=>{clearTimeout(tmr);tmr=setTimeout(preview,140)};
+    function fillTpls(sel){const l=pgTemplates();$b("#pg-tpl").innerHTML=`<option value="">— Manual (no template) —</option>`+l.map(t=>`<option value="${t.id}">${esc(t.code)} · ${esc(t.name)}</option>`).join("");if(sel&&l.some(t=>t.id===sel))$b("#pg-tpl").value=sel}
+    function applyTpl(){const t=pgTemplates().find(x=>x.id===$b("#pg-tpl").value);
+      if(t){logo=t.logo||"";airName=t.name||t.code;$b("#pg-h").value=t.heading||defaults.heading;$b("#pg-ct").value=t.contact||defaults.contact;$b("#pg-dk").value=t.desk||"";$b("#pg-un").checked=t.under!==false;if(!$b("#pg-fn").value)$b("#pg-fn").value=t.code}
+      else{airName="";$b("#pg-h").value=$b("#pg-h").value||defaults.heading}
+      drawLogoPrev();flightLine();preview()}
+    function flightLine(){const f=$b("#pg-fn").value.trim().toUpperCase(),d=pgDate($b("#pg-fd").value);$b("#pg-fl").value=f&&d?`${f} ON ${d}`:f||d}
+    $b("#pg-h").value=defaults.heading;$b("#pg-ct").value=defaults.contact;$b("#pg-un").checked=true;$b("#pg-fd").value=todayStr();$b("#pg-per").value=last.per||"blank";
+    fillTpls(last.tpl);if($b("#pg-tpl").value)applyTpl();else{drawLogoPrev();flightLine();preview()}
+    $b("#pg-tpl").onchange=()=>{applyTpl()};
+    ["#pg-h","#pg-fl","#pg-nm","#pg-ct","#pg-dk"].forEach(s=>$b(s).addEventListener("input",later));$b("#pg-per").onchange=()=>{idx=0;preview()};$b("#pg-un").onchange=preview;
+    $b("#pg-fn").addEventListener("input",()=>{flightLine();later()});$b("#pg-fd").addEventListener("input",()=>{flightLine();later()});
+    $b("#pg-pr").onclick=()=>{idx=Math.max(0,idx-1);preview()};$b("#pg-nx").onclick=()=>{idx++;preview()};
+    $b("#pg-lb").onclick=()=>$b("#pg-lf").click();$b("#pg-lx").onclick=()=>{logo="";drawLogoPrev();preview()};
+    $b("#pg-lf").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{logo=await pgLogoData(f);drawLogoPrev();preview()}catch(x){toast("Could not read that image")}e.target.value=""};
+    const out=async(mode)=>{
+      const s=sheets();if(s.length===1&&!s[0].length){toast("Please type at least one passenger name");return}
+      const c=cfg();
+      if(mode==="print"){pgPrint(s,c);return}
+      try{toast("Creating PDF…");const blob=await pgPdf(s,c),nm=`Paging-${(c.flight||"sign").replace(/[^A-Za-z0-9]+/g,"-")}.pdf`;
+        if(mode==="keep"){const id=await tmpSave(blob,nm,"Paging sign");if(id)toast("Kept for 2 days ☁")}else dlFile(nm,blob,"application/pdf")}
+      catch(e){console.error(e);toast("Could not create the PDF ("+(e.message||"error")+") — try Print")}
+    };
+    $b("#pg-dl").onclick=()=>out("pdf");$b("#pg-pt").onclick=()=>out("print");$b("#pg-kp").onclick=()=>out("keep");
+    /* ---- administrator: airline templates ---- */
+    function mgDraw(){
+      const l=pgTemplates(),p=$b("#pg-mgp");
+      if(editing){const t=editing;p.innerHTML=`<div class="pg-ed"><b>${t.id?"Edit":"New"} airline template</b><div class="fg"><div><label>Airline code *</label><input id="pe-c" maxlength="4" value="${esc(t.code||"")}" placeholder="QR"></div><div><label>Airline name</label><input id="pe-n" value="${esc(t.name||"")}" placeholder="Qatar Airways"></div></div>
+        <label>Logo</label><div class="row" style="gap:8px;align-items:center"><div class="pg-lgp">${t.logo?`<img src="${t.logo}" alt="">`:`<span class="hint">none</span>`}</div><input id="pe-lf" type="file" accept="image/*" hidden><button class="btn sm" id="pe-lb" type="button">📷 Upload</button><button class="btn sm" id="pe-lx" type="button">✕</button></div>
+        <label>Heading</label><input id="pe-h" value="${esc(t.heading||defaults.heading)}"><label>Contact text</label><textarea id="pe-ct" rows="3">${esc(t.contact||defaults.contact)}</textarea><label>Service desk details</label><textarea id="pe-dk" rows="2">${esc(t.desk||"")}</textarea>
+        <label class="chk"><input type="checkbox" id="pe-un"${t.under!==false?" checked":""}> Underline heading and flight line</label>
+        <div class="row" style="justify-content:flex-end;margin-top:8px"><button class="btn" id="pe-x" type="button">Cancel</button><button class="btn pri" id="pe-ok" type="button">✔ Save template</button></div></div>`;return}
+      p.innerHTML=`<div class="pg-ed">${l.length?l.map(t=>`<div class="pg-tp"><div class="pg-lgp sm">${t.logo?`<img src="${t.logo}" alt="">`:""}</div><div style="flex:1;min-width:0"><b>${esc(t.code)}</b> · ${esc(t.name)}</div><button class="btn sm" data-pe="${t.id}">✏️</button><button class="btn sm danger" data-pd="${t.id}">🗑</button></div>`).join(""):`<div class="hint">No airline template yet.</div>`}<div class="row" style="margin-top:6px"><button class="btn sm pri" id="pe-new" type="button">＋ Add airline template</button><button class="btn sm" id="pe-cl" type="button">Close</button></div></div>`;
+    }
+    $b("#pg-mg").onclick=()=>{if(!ADM.on){toast("Administrator login required");return}const p=$b("#pg-mgp");p.hidden=!p.hidden;editing=null;if(!p.hidden)mgDraw()};
+    $b("#pg-mgp").addEventListener("click",async e=>{
+      const p=$b("#pg-mgp");
+      if(e.target.closest("#pe-cl")){p.hidden=true;return}
+      if(e.target.closest("#pe-new")){editing={code:"",name:"",logo:"",heading:defaults.heading,contact:defaults.contact,desk:"",under:true};mgDraw();return}
+      const ed=e.target.closest("[data-pe]");if(ed){editing={...pgTemplates().find(x=>x.id===ed.dataset.pe)};mgDraw();return}
+      const dl=e.target.closest("[data-pd]");if(dl){const t=pgTemplates().find(x=>x.id===dl.dataset.pd);if(t&&confirm(`Delete the template “${t.code} · ${t.name}”?`)){delItem("settings",t.id);setTimeout(()=>{fillTpls();mgDraw()},50)}return}
+      if(e.target.closest("#pe-lb")){$b("#pe-lf").click();return}
+      if(e.target.closest("#pe-lx")){editing.logo="";const keep={c:$b("#pe-c").value,n:$b("#pe-n").value,h:$b("#pe-h").value,ct:$b("#pe-ct").value,dk:$b("#pe-dk").value,un:$b("#pe-un").checked};Object.assign(editing,{code:keep.c,name:keep.n,heading:keep.h,contact:keep.ct,desk:keep.dk,under:keep.un});mgDraw();return}
+      if(e.target.closest("#pe-x")){editing=null;mgDraw();return}
+      if(e.target.closest("#pe-ok")){
+        const code=$b("#pe-c").value.trim().toUpperCase();if(!code){toast("Please enter the airline code");return}
+        const rec={id:editing.id||uid("pt_"),kind:"pagingtpl",code,name:$b("#pe-n").value.trim(),logo:editing.logo||"",heading:$b("#pe-h").value.trim()||defaults.heading,contact:$b("#pe-ct").value,desk:$b("#pe-dk").value.trim(),under:$b("#pe-un").checked};
+        putItem("settings",rec);editing=null;setTimeout(()=>{fillTpls($b("#pg-tpl").value);mgDraw();toast("Template saved ✓")},50)}
+    });
+    $b("#pg-mgp").addEventListener("change",async e=>{if(e.target.id!=="pe-lf")return;const f=e.target.files[0];if(!f)return;
+      const keep={code:$b("#pe-c").value,name:$b("#pe-n").value,heading:$b("#pe-h").value,contact:$b("#pe-ct").value,desk:$b("#pe-dk").value,under:$b("#pe-un").checked};
+      try{editing.logo=await pgLogoData(f);Object.assign(editing,keep);mgDraw()}catch(x){toast("Could not read that image")}});
+  });
+}
 /* ============ 🗓 UPDATE ROADMAP (administrator only) ============ */
 const RM_ST=[["plan","Planned","#2563eb"],["wip","In progress","#d97706"],["done","Done","#16a34a"],["drop","Dropped","#6b7280"]];
 const rmItems=()=>{const d=DB.settings.find(x=>x.id==="roadmap");return d&&Array.isArray(d.items)?d.items:[]};
@@ -4319,7 +4486,9 @@ function admPanel(){
   });
 }
 (function(){
-  const wrap=$("#toolFab"),menu=$("#optMenu"),tmenu=$("#toolMenu"),gear=$("#gearBtn"),PK="bfs-tool-pos";
+  const wrap=$("#toolFab"),menu=$("#optMenu"),tmenu=$("#toolMenu"),gear=$("#gearBtn"),PK="bfs-tool-pos",LK="bfs-tool-lock";
+  const locked=()=>lsGet(LK,"1")==="1";
+  function lockUI(){const l=locked(),b=$('#optMenu [data-om="lock"]');if(b){b.querySelector("span").textContent=l?"🔒":"🔓";b.querySelector("b").textContent=l?"Icons are locked in place":"Icons can be moved";b.querySelector("small").textContent=l?"Tap to allow moving the tools / settings icons":"Tap to lock them in place"}wrap.classList.toggle("fab-lock",l)}
   if(DB.ui.lineLinks){delete DB.ui.lineLinks;save()}
   function clamp(){const r=wrap.getBoundingClientRect();if(wrap.style.left){wrap.style.left=Math.max(4,Math.min(innerWidth-r.width-4,r.left))+"px";wrap.style.top=Math.max(4,Math.min(innerHeight-r.height-4,r.top))+"px"}}
   try{const p=JSON.parse(localStorage.getItem(PK)||"null");if(p){wrap.style.left=p.l+"px";wrap.style.top=p.t+"px";wrap.style.right="auto";wrap.style.bottom="auto";clamp()}}catch(e){}
@@ -4338,14 +4507,15 @@ function admPanel(){
   function bind(btn,onClick){
     let st=null;
     btn.addEventListener("pointerdown",e=>{const r=wrap.getBoundingClientRect();st={x:e.clientX,y:e.clientY,l:r.left,t:r.top,moved:false};btn.setPointerCapture(e.pointerId)});
-    btn.addEventListener("pointermove",e=>{if(!st)return;const dx=e.clientX-st.x,dy=e.clientY-st.y;if(!st.moved&&Math.hypot(dx,dy)>6){st.moved=true;closeMenu()}
+    btn.addEventListener("pointermove",e=>{if(!st)return;const dx=e.clientX-st.x,dy=e.clientY-st.y;if(locked()){if(Math.hypot(dx,dy)>14)st.moved=true;return}if(!st.moved&&Math.hypot(dx,dy)>6){st.moved=true;closeMenu()}
       if(st.moved){wrap.style.right="auto";wrap.style.bottom="auto";wrap.style.left=st.l+dx+"px";wrap.style.top=st.t+dy+"px";clamp()}});
-    btn.addEventListener("pointerup",()=>{if(!st)return;if(st.moved){const r=wrap.getBoundingClientRect();try{localStorage.setItem(PK,JSON.stringify({l:r.left,t:r.top}))}catch(e){}}else onClick();st=null});
+    btn.addEventListener("pointerup",()=>{if(!st)return;if(st.moved){if(!locked()){const r=wrap.getBoundingClientRect();try{localStorage.setItem(PK,JSON.stringify({l:r.left,t:r.top}))}catch(e){}}}else onClick();st=null});
   }
   bind($("#toolBtn"),()=>tmenu.hidden?openTMenu():closeMenu());
-  tmenu.addEventListener("click",e=>{const i=e.target.closest("[data-tm]");if(!i)return;closeMenu();({reduce:openReduceTool,convert:openConvertTool,temp:openTempTool})[i.dataset.tm]()});
-  bind(gear,()=>menu.hidden?openMenu():closeMenu());
+  tmenu.addEventListener("click",e=>{const i=e.target.closest("[data-tm]");if(!i)return;closeMenu();({reduce:openReduceTool,convert:openConvertTool,paging:openPagingTool,temp:openTempTool})[i.dataset.tm]()});
+  bind(gear,()=>menu.hidden?openMenu():closeMenu());lockUI();
   menu.addEventListener("click",e=>{const i=e.target.closest("[data-om]");if(!i)return;closeMenu();
+    if(i.dataset.om==="lock"){lsSet(LK,locked()?"0":"1");lockUI();toast(locked()?"Icons locked 🔒":"You can now drag the icons 🔓");return}
     if(i.dataset.om==="admin"){openAdmin();return}
     if(!ADM.on){openAdmin();return}
     if(i.dataset.om==="data")openData();
