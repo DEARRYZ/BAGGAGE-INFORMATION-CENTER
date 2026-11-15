@@ -388,6 +388,47 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 /* v1.7.0 updates bell */
 /* v1.8.0 read status + briefings */
 /* v1.9.0 paging sign */
+
+/* v1.10.0 assistant — HUD */
+#aiBtn{position:fixed;right:22px;bottom:150px;z-index:84;width:54px;height:54px;border-radius:50%;border:0;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-size:24px;box-shadow:0 8px 26px rgba(37,99,235,.5),0 0 0 4px rgba(124,58,237,.15);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;min-height:0;transition:transform .15s}#aiBtn:hover{transform:scale(1.08)}#aiBtn.hid{display:none!important}
+#aiPanel{position:fixed;right:16px;bottom:16px;width:430px;height:min(700px,calc(100vh - 32px));z-index:86;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:20px;box-shadow:0 22px 60px rgba(8,20,40,.45);display:flex;flex-direction:column;overflow:hidden;animation:popIn .2s ease;transition:width .2s}#aiPanel.wide{width:min(640px,calc(100vw - 32px))}#aiPanel[hidden]{display:none}
+.ai-h{display:flex;align-items:center;gap:10px;padding:11px 12px;background:linear-gradient(135deg,#6d28d9,#2563eb);color:#fff}.ai-av{flex:none;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px}.ai-ht{min-width:0;display:flex;flex-direction:column;line-height:1.15}.ai-ht b{font-size:15px}.ai-ht small{font-size:11px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ai-hb{margin-left:auto;display:flex;gap:4px}.ai-hb button{background:rgba(255,255,255,.16);border:0;color:#fff;border-radius:9px;width:30px;height:30px;cursor:pointer;min-height:0;padding:0;font-size:14px}.ai-hb button:hover{background:rgba(255,255,255,.3)}
+.ai-mode{flex:none;font-size:10.5px;font-weight:700;background:rgba(255,255,255,.2);border-radius:9px;padding:2px 8px;white-space:nowrap}.ai-mode.on{background:#22c55e;color:#052e12}
+.ai-msgs{flex:1;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:10px;background:linear-gradient(180deg,var(--soft),transparent 120px);scroll-behavior:smooth}
+.ai-m{max-width:94%;padding:9px 12px;border-radius:16px;font-size:14.5px;line-height:1.5;overflow-wrap:anywhere;position:relative;animation:aiIn .22s ease}@keyframes aiIn{from{opacity:0;transform:translateY(6px)}}
+.ai-m.user{align-self:flex-end;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border-bottom-right-radius:5px}
+.ai-m.bot{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:5px;box-shadow:0 1px 4px rgba(15,35,60,.07);padding-right:28px}
+.ai-m.bot p{margin:0 0 6px}.ai-m.bot p:last-child{margin:0}.ai-m.bot ul,.ai-m.bot ol{margin:4px 0 6px;padding-left:20px}.ai-m.bot li{margin:2px 0}.ai-m.bot h5{margin:6px 0 3px;font-size:13px;text-transform:uppercase;letter-spacing:.3px;color:var(--mut)}.ai-m.bot code{background:var(--soft);border-radius:5px;padding:0 5px;font-size:13px}
+.ai-m.cards{align-self:stretch;max-width:100%;background:transparent;padding:0;display:flex;flex-direction:column;gap:8px}
+.ai-m.welcome{width:100%;max-width:100%;padding:12px}.ai-wt{display:flex;gap:10px;align-items:center;margin-bottom:8px}.ai-wt .ai-av{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff}.ai-wt b{display:block;font-size:15.5px}.ai-wt small{color:var(--mut)}
+.ai-tl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--mut);margin:4px 0 6px}.ai-try{display:flex;flex-direction:column;gap:6px}.ai-try button{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:11px;padding:7px 10px;cursor:pointer;min-height:0}.ai-try button:hover{border-color:var(--pri2);background:var(--soft)}.ai-try code{flex:none;background:var(--pri);color:#fff;border-radius:7px;padding:2px 8px;font-size:12.5px;font-weight:700}.ai-try span{font-size:12.5px;color:var(--mut)}
+.ai-cp{position:absolute;right:4px;top:4px;background:transparent;border:0;opacity:.35;cursor:pointer;font-size:12px;min-height:0;padding:2px 4px}.ai-m.bot:hover .ai-cp{opacity:1}
+.dots i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--pri2);margin:0 2px;animation:aiDot 1s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}@keyframes aiDot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}.ai-m.think small{color:var(--mut);margin-left:4px}
+.ai-chips{display:flex;gap:6px;padding:2px 10px 8px;overflow-x:auto;scrollbar-width:none}.ai-chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:15px;padding:5px 11px;font-size:12.5px;cursor:pointer;min-height:0;font-weight:600}.ai-chip:hover{border-color:var(--pri2);background:var(--soft)}
+.ai-in{display:flex;gap:8px;padding:8px 10px 4px;border-top:1px solid var(--line);align-items:flex-end}.ai-in textarea{flex:1;resize:none;border-radius:16px;padding:9px 13px;font-size:14.5px;min-height:40px;max-height:120px;line-height:1.4}.ai-in button{width:42px;height:42px;border-radius:50%;border:0;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;cursor:pointer;min-height:0;font-size:16px;flex:none}.ai-in button:disabled{opacity:.45}
+.ai-ft{font-size:10.5px;color:var(--mut);text-align:center;padding:0 10px 8px}
+.ai-list{display:flex;flex-direction:column;gap:6px}.ai-it{text-align:left;border:1px solid var(--line);border-left:4px solid var(--pri2);background:var(--card);color:var(--ink);border-radius:11px;padding:8px 11px;cursor:pointer;min-height:0;display:flex;flex-direction:column;gap:1px}.ai-it b{font-size:14px}.ai-it small{color:var(--mut)}.ai-it:hover{background:var(--soft)}.ai-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.ai-draft{border:1px solid var(--pri2);border-radius:14px;padding:11px;background:var(--card);box-shadow:0 2px 10px rgba(37,99,235,.12)}.ai-dt{font-weight:800;margin-bottom:8px}.ai-dg{display:grid;grid-template-columns:1fr 1fr;gap:7px}.ai-dg label{font-size:10.5px;font-weight:800;color:var(--mut);display:flex;flex-direction:column;gap:2px;text-transform:uppercase;letter-spacing:.3px}.ai-dg .full{grid-column:1/-1}.ai-dg input,.ai-dg select,.ai-dg textarea{font-size:13.5px;min-height:36px!important;padding:5px 9px;font-weight:400;color:var(--ink);text-transform:none;letter-spacing:0}
+.ai-set{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}.ai-set label{display:flex;flex-direction:column;gap:3px;font-size:12px;font-weight:700;color:var(--mut)}.ai-set .chk{flex-direction:row}
+.pa{border:1px solid var(--line);border-left:5px solid var(--pc,#2563eb);border-radius:14px;background:var(--card);overflow:hidden;box-shadow:0 2px 10px rgba(15,35,60,.09);animation:aiIn .25s ease}
+.pa-h{display:flex;gap:10px;align-items:center;padding:9px 12px;background:color-mix(in srgb,var(--pc) 11%,transparent)}.pa-air{background:var(--pc);color:#fff;font-weight:800;border-radius:9px;padding:4px 9px;font-size:14px;letter-spacing:.4px}.pa-t{min-width:0}.pa-t b{display:block;font-size:15px;line-height:1.25}.pa-t small{color:var(--mut);font-size:12px}
+.pa-l{list-style:none;margin:0;padding:8px 12px 6px;display:flex;flex-direction:column;gap:8px}.pa-l li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45}
+.pa-l li.st b{flex:none;width:23px;height:23px;border-radius:50%;background:var(--pc);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.pa-l li.kv{padding-bottom:6px;border-bottom:1px dashed var(--line)}.pa-l li.kv:last-child{border:0;padding-bottom:0}.pa-l li.kv em{flex:none;width:34%;max-width:140px;font-style:normal;font-weight:800;font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.3px;padding-top:3px}.pa-l li.kv span{flex:1}
+.pa-l li>i{flex:none;width:7px;height:7px;border-radius:50%;background:var(--pc);margin-top:8px}
+.pa-nil{background:var(--soft);color:var(--mut);border-radius:6px;padding:0 7px;font-size:12px;font-weight:800}
+.pa-n{margin:2px 12px 8px;padding:7px 10px;background:rgba(217,119,6,.13);border-radius:9px;font-size:13px}.pa-f{padding:2px 12px 10px;display:flex;gap:6px;flex-wrap:wrap}
+.pa.miss{padding:10px 12px;border-left-color:#d97706;font-size:14px}
+.pa-l.ov li{display:block}.pa-ob{width:100%;text-align:left;border:1px solid var(--line);border-left:4px solid var(--pc);background:var(--card);color:var(--ink);border-radius:10px;padding:6px 10px;cursor:pointer;min-height:0;display:flex;flex-direction:column}.pa-ob b{font-size:13.5px}.pa-ob small{color:var(--mut);font-size:12px}.pa-ob:hover{background:var(--soft)}
+@media(max-width:700px){#aiBtn{right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));width:48px;height:48px;font-size:22px}#aiPanel,#aiPanel.wide{inset:0;width:auto;height:auto;border-radius:0;z-index:96}.ai-in textarea{font-size:16px}.ai-ft{display:none}.ai-hb [data-ai=wide]{display:none}.ai-msgs{padding:12px 10px}.ai-m{max-width:96%}.pa-l li.kv em{width:38%}}
+/* v1.9.1 temporary files: select, bulk actions, preview */
+.tmp-sel{position:absolute;top:10px;left:10px;z-index:2;background:rgba(255,255,255,.92);border-radius:7px;padding:3px 4px;line-height:0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25)}.tmp-sel input{width:18px;height:18px;min-height:0!important;margin:0;accent-color:var(--pri2)}
+.tmpc{position:relative;transition:box-shadow .12s,border-color .12s}.tmpc.sel{border-color:var(--pri2);box-shadow:0 0 0 2px var(--pri2)}.tmp-t{cursor:zoom-in}.tmp-nm{cursor:pointer}.tmp-nm:hover{text-decoration:underline}
+.tp-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:6;background:var(--card);border:1px solid var(--pri2);border-radius:12px;padding:7px 10px;margin:8px 0;box-shadow:var(--shadow)}.tp-bar[hidden]{display:none}
+#tmpView{position:fixed;inset:0;z-index:112;background:rgba(5,10,18,.96);display:flex;flex-direction:column}.tv-body{flex:1;min-height:0}.tv-frame{flex:1;width:100%;height:100%;min-height:60vh;border:0;background:#fff;border-radius:6px}
+.tv-pre{flex:1;margin:0;padding:14px;overflow:auto;background:#0f172a;color:#e2e8f0;font:13px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere;border-radius:8px;width:100%}.tv-nop{color:#e2e8f0;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;margin:auto;padding:30px}
+
 .fab-lock .fabb{cursor:pointer;touch-action:manipulation}
 .pg-wrap{display:grid;grid-template-columns:minmax(300px,390px) 1fr;gap:16px;margin-top:6px}.pg-form label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--mut);margin:8px 0 3px}.pg-form textarea,.pg-form input,.pg-form select{width:100%}
 .pg-pv{background:var(--soft);border-radius:14px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;align-self:start;position:sticky;top:8px}.pg-pvw{background:#fff;box-shadow:0 6px 22px rgba(0,0,0,.28);overflow:hidden;flex:none}.pg-pvn{display:flex;gap:10px;align-items:center}
@@ -595,8 +636,11 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.9.0";
+const VERSION="1.10.1";
 const CHANGELOG=[
+ {v:"1.10.1",d:"2026-11-14",items:["✨ Assistant now uses Gemini 3.8 Flash by default (Gemini 2.x models no longer work, so old settings move to 3.8 automatically). If the model name is not found for your key, the assistant picks the newest Flash model your key can use and remembers it; ↻ Load available models in ⚙ shows the exact list."]},
+ {v:"1.10.0",d:"2026-11-14",items:["✨ Assistant (test feature, Administrator mode only) powered by Google Gemini: a chat button (or Alt+A) that helps you find things — files in Temporary files / Documents / Policy attachments, templates, airline policy, e-mails, bags, records — and prepares a phone / office record for you to check and Save.","Type short and get a straight answer: “tg ahl”, “qr dpr kit”, “compare tg qr ohd”. It remembers the airline you asked about last and uses the airline open in the Airline Hub.","Add your Gemini API key in the assistant’s ⚙ settings (kept only in your browser). Without a key it runs in basic mode with the same short commands."]},
+ {v:"1.9.1",d:"2026-11-14",items:["🗂 Temporary files: tick several files (or ☑ Select all) and ⬇ Download them together as one ZIP, or 🗑 delete them in one go.","Click a file (picture, name or 👁) to preview it right inside the app — images, PDFs, text / CSV, audio and video — with ‹ › to move to the next file, plus download and delete buttons."]},
  {v:"1.9.0",d:"2026-11-12",items:["🪧 New tool: Paging sign (🛠 tools menu). Makes an A4 landscape sign for passengers of a delayed bag — airline logo, “BAGGAGE DELAY”, flight and date, passenger names (one or several per sheet) and the service-desk contact text. Everything is sized to the page automatically; download a PDF, print, or keep it in Temporary files.","Administrators can set up airline templates (logo, heading, contact text, service-desk details) from ⚙ Manage airline templates; anyone can also use it manually and upload a logo.","The floating Tools and Settings icons are now locked in place so they cannot be moved by accident; unlock them from the ⚙ menu (🔒) if you want to move them."]},
  {v:"1.8.0",d:"2026-11-10",items:["🔔 Every notice now has a status — ● Unread or Read. Opening a notice marks it read; ✓ Mark read / ↺ Unread on each item, and ✓ All read for the whole tab. The badge counts unread items only. (Status is kept per device.)","📣 New Briefings tab inside the bell: anyone can post a quick briefing for the team (title, text, ⚠ Important, optional name). Briefings have the same Unread / Read status, can be switched on or off in ⚙, and can be edited or deleted by their author or an administrator. Briefings open in a roomy reading view (‹ › to move between them), have a 🔍 search that looks through every stored briefing, and can be 📌 pinned to the top (pinned ones never expire).","The test AI assistant was cancelled and removed."]},
  {v:"1.7.0",d:"2026-11-08",items:["🔐 Systems tab is now visible to every user (only administrators can add, edit or delete).","🔔 The bell now reports updates from every Airline Hub tab (Policy, Documents, Emails, Systems and your own tabs) and from Email Templates (templates and Telex). Each notice shows its section and sub-section name separately.","⚙ In the bell, tick exactly which sections / sub-sections should notify you (saved on your device).","📝 Tap a notice to open its change log: what was added or removed, and for edits the exact lines that changed (− old / + new). Passwords are never shown — only that they changed."]},
@@ -3707,6 +3751,317 @@ function openPagingTool(){
       try{editing.logo=await pgLogoData(f);Object.assign(editing,keep);mgDraw()}catch(x){toast("Could not read that image")}});
   });
 }
+/* ============ ✨ ASSISTANT — administrator only · Google Gemini (test feature) ============ */
+const AI_CFG="bfs-ai-cfg",GEM_BASE="https://generativelanguage.googleapis.com/v1beta";
+const AI_DEFAULT="gemini-3.8-flash";
+const AI_MODELS=[["gemini-3.8-flash","Gemini 3.8 Flash — recommended"],["gemini-flash-latest","Gemini Flash (latest alias)"]];
+const aiCfg=()=>{let c;try{c={on:true,key:"",model:AI_DEFAULT,...JSON.parse(lsGet(AI_CFG,"{}"))}}catch(e){c={on:true,key:"",model:AI_DEFAULT}}if(/^gemini-2\./.test(c.model))c.model=AI_DEFAULT;return c};   /* 2.x models no longer work -> use the current default */
+const aiSave=o=>lsSet(AI_CFG,JSON.stringify({...aiCfg(),...o}));
+const aiUsesAI=()=>{const c=aiCfg();return c.on&&!!c.key};
+const AIS={api:[],busy:false,view:"chat",drafts:{},hits:[],last:null};
+const aiStr=s=>String(s==null?"":s);
+const cardPlain=c=>(c.type==="comp"?[["AHL",c.ahl],["DPR",c.dpr],["Extra",c.extra],["Kit",c.kit],["Kit remark",c.kitRemark]].filter(x=>txt(x[1])).map(x=>x[0]+": "+txt(x[1]).replace(/\n+/g," / ")).join(" | "):txt(c.text).replace(/\n+/g," / "));
+function findAir(q){const s=String(q||"").trim().toLowerCase();if(!s)return null;return DB.emaildir.find(a=>String(a.code).toLowerCase()===s)||DB.emaildir.find(a=>String(a.name).toLowerCase()===s)||DB.emaildir.find(a=>s.length>=3&&String(a.name).toLowerCase().includes(s))||DB.emaildir.find(a=>String(a.code).length>=2&&new RegExp("\\b"+String(a.code).toLowerCase()+"\\b").test(s))||null}
+const words=q=>String(q||"").toLowerCase().split(/[\s,;]+/).filter(w=>w.length>1);
+function pickTopic(list,t){const s=String(t||"").toLowerCase(),ex=list.find(x=>x.toLowerCase()===s);if(ex)return ex;
+  for(const[r,n]of[[/follow|case file|file/,"Case file follow up"],[/offload/,"Request Baggage Offload"],[/complain|complaint|ร้องเรียน/,"Complain"],[/report/,"Report Creation"],[/collect|pick/,"Baggage Collection"]]){if(r.test(s)){const f=list.find(x=>x===n);if(f)return f}}
+  return list[list.length-1]}
+const aiOpen=(sec,p)=>{go(sec,p||{});if(innerWidth<=700)aiClose()};
+const fileNamesOf=o=>{const out=[];Object.keys(o||{}).forEach(k=>{if(Array.isArray(o[k])&&o[k].length&&o[k][0]&&o[k][0].name)o[k].forEach(f=>out.push(f.name))});return out};
+function aiCtx(){const sec=VIEW.mode==="home"?"home":VIEW.a,a=DB.emaildir.find(x=>x.id===lsGet("bfs-hub-air",""));return{sec,air:sec==="hub"&&a?a:null}}
+/* ---- policy quick answers: “tg ahl”, “qr dpr kit”, “compare tg qr ohd” ---- */
+const POL_COL={ahl:"#2563eb",dpr:"#dc2626",ohd:"#16a34a",rush:"#d97706",comp:"#7c3aed",walkie:"#0d9488",tracing:"#0891b2",sign:"#64748b",docs:"#4f46e5"};
+const POL_STOP=new Set(["to","in","is","at","on","by","do","go","no","an","as","of","or","so","if","it","me","my","we","us","he","be","am","ok","hi"]);
+const POL_TOPICS=[
+ {k:"ahl",name:"AHL (delayed)",re:/\b(ahl|delay(ed)?|late|ล่าช้า|ตกค้าง)\b/i},{k:"dpr",name:"DPR (damaged)",re:/\b(dpr|damag(e|ed)|broken|torn|ชำรุด|เสียหาย)\b/i},
+ {k:"ohd",name:"OHD (on-hand)",re:/\b(ohd|on-?hand|unclaimed|abandoned)\b/i},{k:"rush",name:"Rush bag",re:/\b(rush|forward(ing)?|onward|ส่งต่อ)\b/i},
+ {k:"comp",name:"Compensation",re:/\b(comp(ensation)?|claim|repair|replace(ment)?|ชดเชย|ซ่อม)\b/i},{k:"comp",sub:"kit",name:"Toiletries kit",re:/\b(kit|toiletr(y|ies)|amenit(y|ies)|ชุดของใช้)\b/i},
+ {k:"walkie",name:"Walkie talkie",re:/\b(walkie|radio|channel|วิทยุ)\b/i},{k:"tracing",name:"Tracing system",re:/\b(trac(e|ing)|world ?tracer|ระบบ)\b/i},
+ {k:"sign",name:"Signage",re:/\b(sign(age)?|ป้าย)\b/i},{k:"docs",name:"Documents",re:/\b(pir|bif|ppq|receipt|rush tag|financial form|forms?)\b/i}];
+function polParse(q){
+  const l=q.toLowerCase(),toks=q.split(/[\s,;/&+]+/).filter(Boolean);
+  const airs=DB.emaildir.filter(a=>{const code=String(a.code).toLowerCase(),first=String(a.name).toLowerCase().split(/[\s(]+/)[0];return toks.some(t=>t.toLowerCase()===code&&!POL_STOP.has(code))||(first.length>=4&&l.includes(first))});
+  const keys=[];POL_TOPICS.forEach(t=>{if(t.re.test(q)&&!keys.some(k=>k.k===t.k&&(k.sub||"")===(t.sub||"")))keys.push(t)});
+  return{airs,keys,mail:/\b(e-?mails?|mail|อีเมล)\b/i.test(q),docs:/\b(documents?|docs?|เอกสาร)\b/i.test(q)&&!keys.length}}
+function polLines(c){
+  const kvRe=/^(.{1,34}?)\s*:\s*(.+)$/,out=[];
+  const push=(label,val)=>String(val||"").split("\n").map(s=>s.trim()).filter(Boolean).forEach((s,i)=>{const kv=s.match(kvRe);if(kv&&!/^https?$/i.test(kv[1]))out.push({kv:true,k:kv[1].trim(),v:kv[2].trim()});else out.push({kv:true,k:i?"":label,v:s})});
+  if(c.type==="comp"){push("AHL compensation",c.ahl);push("DPR compensation",c.dpr);push("Repair / replacement",c.extra);push("Toiletries kit",[c.kit,c.kitRemark].filter(x=>txt(x)).join(" — "));return out}
+  return txt(c.text).split("\n").map(s=>s.trim()).filter(Boolean).map(s=>{const m=s.match(/^([A-Za-z0-9])[.)]\s*(.+)$/);if(m)return{step:m[1].toUpperCase(),v:m[2]};const kv=s.match(kvRe);if(kv&&!/^https?$/i.test(kv[1])&&!/https?:/.test(kv[1]))return{kv:true,k:kv[1].trim(),v:kv[2].trim()};return{v:s}})}
+const polFmt=v=>esc(v).replace(/\b(NIL|N\/A|NONE|NO)\b/g,'<span class="pa-nil">$1</span>').replace(/\b(NOT|MUST|NEVER|ONLY|WITHIN \d+ (?:DAYS?|HOURS?))\b/gi,"<b>$1</b>").replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+function polCardHTML(a,c,note){
+  const col=POL_COL[c.key]||"#64748b",ls=polLines(c);
+  const body=ls.length?ls.map(x=>x.step?`<li class="st"><b>${esc(x.step)}</b><span>${polFmt(x.v)}</span></li>`:x.kv?`<li class="kv"><em>${esc(x.k)}</em><span>${polFmt(x.v)}</span></li>`:`<li><i></i><span>${polFmt(x.v)}</span></li>`).join(""):`<li class="nilrow"><span class="pa-nil">No details recorded</span></li>`;
+  return `<div class="pa" style="--pc:${col}"><div class="pa-h"><span class="pa-air">${esc(a.code)}</span><div class="pa-t"><b>${esc(c.title)}</b><small>${esc(a.name)} · Policy</small></div></div><ul class="pa-l">${body}</ul>${note?`<div class="pa-n">⚠ ${esc(note)}</div>`:""}<div class="pa-f"><button class="btn sm" data-aiopen="pol:${a.id}:${c.id}">Open in Policy ↗</button></div></div>`}
+function polOverview(a,doc){
+  return `<div class="pa" style="--pc:#2563eb"><div class="pa-h"><span class="pa-air">${esc(a.code)}</span><div class="pa-t"><b>${esc(a.name)}</b><small>Policy overview · tap a topic</small></div></div><ul class="pa-l ov">${doc.cards.map(c=>{const f=polLines(c)[0],pv=f?(f.k?f.k+": ":"")+f.v:"";return `<li><button class="pa-ob" data-aichip="${esc(a.code)} ${esc(c.key||c.title)}" style="--pc:${POL_COL[c.key]||"#64748b"}"><b>${esc(c.title)}</b><small>${esc(pv.slice(0,80))}${pv.length>80?"…":""}</small></button></li>`}).join("")||`<li class="nilrow"><span class="pa-nil">No policy recorded yet</span></li>`}</ul>${doc.note?`<div class="pa-n">⚠ ${esc(doc.note)}</div>`:""}</div>`}
+function policyAnswer(airs,keys,rawTopic){
+  AIS.last={air:(airs[0]||{}).id};const text=[],ui=[];
+  if(!airs.length){const cs=DB.emaildir.filter(a=>policyFor(a).doc.cards.length).slice(0,14);return{text:"Which airline? Say the airline code, e.g. “TG "+(keys[0]?keys[0].k:"ahl")+"”.",ui:`<div class="ai-row">${cs.map(a=>`<button class="ai-chip" data-aichip="${esc(a.code)} ${esc((keys[0]||{k:"policy"}).k)}">${esc(a.code)}</button>`).join("")}</div>`}}
+  airs.forEach(a=>{
+    const doc=policyFor(a).doc;let cards=[];
+    if(keys.length)cards=doc.cards.filter(c=>keys.some(k=>c.key===k.k));
+    if(!cards.length&&rawTopic){const w=words(rawTopic);cards=doc.cards.filter(c=>w.some(x=>(c.title+" "+cardText(c)).toLowerCase().includes(x))).slice(0,3)}
+    if(!keys.length&&!rawTopic){ui.push(polOverview(a,doc));text.push(`[${a.code} · ${a.name}] Policy topics: `+(doc.cards.map(c=>c.title).join("; ")||"none")+(doc.note?`\nMention: ${doc.note}`:""));return}
+    if(!cards.length){text.push(`[${a.code}] No card found for “${keys.map(k=>k.name).join(", ")||rawTopic}”. Available: ${doc.cards.map(c=>c.title).join("; ")||"none"}.`);ui.push(`<div class="pa miss"><b>${esc(a.code)}</b> — no ${esc(keys.map(k=>k.name).join(" / ")||rawTopic)} rule recorded. <button class="btn sm" data-aiopen="air:${a.id}:policy">Open policy ↗</button></div>`);return}
+    cards.forEach((c,i)=>{ui.push(polCardHTML(a,c,i===0?doc.note:""));text.push(`[${a.code} · ${a.name} | ${c.title}]\n`+polLines(c).map(x=>x.step?`${x.step}. ${x.v}`:x.kv?`${x.k?x.k+": ":""}${x.v}`:`- ${x.v}`).join("\n")+(i===0&&doc.note?`\nMention: ${doc.note}`:""))})});
+  const last=airs[0],nx=last?POL_TOPICS.filter(t=>!t.sub&&!keys.some(k=>k.k===t.k)).slice(0,5):[];
+  if(last&&keys.length)ui.push(`<div class="ai-row">${nx.map(t=>`<button class="ai-chip" data-aichip="${esc(last.code)} ${t.k}">${esc(t.name)}</button>`).join("")}<button class="ai-chip" data-aichip="emails for ${esc(last.code)}">📇 Emails</button></div>`);
+  return{text:text.join("\n\n"),ui:ui.join("")}}
+/* ---- tools (used by Gemini and by basic mode). Each returns {text for the model, ui cards for the chat} ---- */
+const AI_TOOLS={
+  search_templates({query,airline,type,audience}){
+    const w=words(query),al=String(airline||"").toLowerCase();
+    const list=DB.templates.map(t=>{const hay=[t.titleEn,t.titleTh,t.airline,t.type,t.aud,t.subject,t.en,t.th].join(" ").toLowerCase(),title=[t.titleEn,t.titleTh,t.subject].join(" ").toLowerCase();
+      let sc=0,all=true;w.forEach(x=>{if(hay.includes(x))sc+=1+(title.includes(x)?2:0);else all=false});
+      if(al&&!String(t.airline).toLowerCase().includes(al)&&String(t.airline)!=="ALL AIRLINES")sc-=50;
+      if(type&&String(t.type).toLowerCase()!==String(type).toLowerCase())sc-=50;if(audience&&!String(t.aud).toLowerCase().includes(String(audience).toLowerCase()))sc-=50;
+      return{t,sc:all||!w.length?sc:sc-5}}).filter(x=>x.sc>0).sort((a,b)=>b.sc-a.sc).slice(0,8);
+    if(!list.length)return{text:"No template matches. Try fewer or different words."};
+    return{text:list.map(({t})=>`id=${t.id} | ${t.titleEn||t.titleTh} | airline: ${t.airline} | type: ${t.type} | audience: ${t.aud} | subject: ${t.subject||"-"}`).join("\n"),
+      ui:`<div class="ai-list">${list.map(({t})=>`<button class="ai-it" data-aiopen="tpl:${t.id}"><b>${esc(t.titleEn||t.titleTh)}</b><small>${esc(airLabel(t.airline))} · ${esc(t.type)} · ${esc(t.aud)}</small></button>`).join("")}</div>`}},
+  get_template({id}){const t=DB.templates.find(x=>x.id===id);if(!t)return{text:"Template not found."};return{text:`Template ${t.titleEn} | airline ${t.airline} | type ${t.type} | audience ${t.aud}\nSUBJECT: ${t.subject||"-"}\nENGLISH:\n${txt(t.en).slice(0,3500)}\nTHAI:\n${txt(t.th).slice(0,1500)}`}},
+  create_record_draft(a){
+    const log=a.log==="office"?"office":"phone",c=log==="office"?{topics:OFFICE_TOPICS,st:OFFICE_ST}:{topics:PHONE_TOPICS,st:PHONE_ST},id=uid("dr");
+    const d={log,contact:aiStr(a.contact),topic:pickTopic(c.topics,a.topic),ref:aiStr(a.ref),remark:aiStr(a.remark),status:c.st.includes(a.status)?a.status:c.st[0],rtype:RTYPES.includes(a.rtype)?a.rtype:""};
+    AIS.drafts[id]=d;return{text:"A draft card is now shown to the user. The record is NOT saved until the user presses “Save record”. Do not say it was saved.",ui:draftHTML(id,d)}},
+  search_records({log,query,status}){
+    const w=words(query),res=[];
+    ["phone","office"].forEach(k=>{if(log&&log!=="both"&&log!==k)return;DB[k].forEach(r=>{const hay=[r.contact,r.topic,r.ref,r.remark,r.status,r.rtype].join(" ").toLowerCase();if((!status||r.status===status)&&w.every(x=>hay.includes(x)))res.push({k,r})})});
+    res.sort((a,b)=>String(b.r.ts).localeCompare(String(a.r.ts)));const top=res.slice(0,8);if(!top.length)return{text:"No matching contact-history record."};
+    return{text:`${res.length} match(es), newest first:\n`+top.map(({k,r})=>`[${k}] ${fmt(r.ts)} | ${r.contact||"-"} | ${r.topic} | ref ${r.ref||"-"} | ${r.status} | ${txt(r.remark).slice(0,120)}`).join("\n"),
+      ui:`<div class="ai-list">${top.map(({k,r})=>`<button class="ai-it" data-aiopen="rec:${k}:${esc(r.ref||r.contact||"")}"><b>${esc(r.ref||r.contact||"(no ref)")} · ${esc(r.topic)}</b><small>${k==="phone"?"Phone":"Office"} · ${esc(r.status)} · ${esc(fmt(r.ts))}</small></button>`).join("")}</div>`}},
+  airline_info({airline,topics}){
+    const a=findAir(airline);if(!a)return{text:`No airline “${airline}” in the directory. Known codes: ${DB.emaildir.map(x=>x.code).join(", ")||"none"}.`};
+    const t=topics&&topics.length?topics:["policy","emails","documents","notes"];let out=`${a.code} · ${a.name}\n`;
+    if(t.includes("policy")){const p=policyFor(a).doc;out+="POLICY CARDS:\n"+(p.cards.map(c=>`- ${c.title}: ${cardPlain(c).slice(0,450)}`).join("\n")||"(none)")+(p.note?`\nMention: ${p.note}`:"")+"\n"}
+    if(t.includes("emails"))out+="EMAILS:\n"+((a.subjects||[]).map(s=>`- ${s.name}: ${listEmails(s).map(e=>e.addr+(e.remark?` (${e.remark})`:"")).join("; ")||"—"}`).join("\n")||"(none)")+"\n";
+    if(t.includes("documents"))out+="DOCUMENTS:\n"+(docFor(a).items.map(i=>`- ${i.title} [${catName(i.cat)}]${i.note?": "+i.note:""}${fileNamesOf(i).length?" 📎 "+fileNamesOf(i).join(", "):""}`).join("\n")||"(none)")+"\n";
+    if(t.includes("notes")){const ad=adFor(a);Object.entries(ad.tabs||{}).forEach(([tid,l])=>{const tb=hubTabs(true).find(x=>x.id===tid);if(tb&&l.length)out+=`${tb.label.toUpperCase()}:\n`+l.map(i=>`- ${i.title}: ${txt(i.text).replace(/\n+/g," / ").slice(0,300)}`).join("\n")+"\n"})}
+    return{text:out.slice(0,6000),ui:`<div class="ai-list"><button class="ai-it" data-aiopen="air:${a.id}:policy"><b>${esc(a.code)} · ${esc(a.name)}</b><small>Open in Airline Hub</small></button><div class="ai-row"><button class="btn sm" data-aiopen="air:${a.id}:policy">📘 Policy</button><button class="btn sm" data-aiopen="air:${a.id}:dir">📇 Emails</button><button class="btn sm" data-aiopen="air:${a.id}:docs">🗂️ Documents</button></div></div>`}},
+  policy_lookup:({airlines,topic})=>{
+    let airs=(Array.isArray(airlines)?airlines:[airlines]).filter(Boolean).map(findAir).filter(Boolean);
+    if(!airs.length){const c=aiCtx().air||(AIS.last&&DB.emaildir.find(x=>x.id===AIS.last.air));if(c)airs=[c]}
+    const keys=[];POL_TOPICS.forEach(t=>{if(t.re.test(topic||"")&&!keys.some(k=>k.k===t.k&&(k.sub||"")===(t.sub||"")))keys.push(t)});
+    return policyAnswer(airs,keys,keys.length?"":String(topic||"").replace(/\b(policy|rule|rules)\b/ig,"").trim())},
+  find_files({query}){
+    const w=words(query),res=[];
+    tmpLive().forEach(m=>{const hay=[m.name,m.source,m.type].join(" ").toLowerCase();if(w.every(x=>hay.includes(x)))res.push({title:m.name,sub:`🗂 Temporary files · ${fmtSize(m.size)} · ${tmpLeft(m.expires)}`,act:`tmp:${m.id}`})});
+    DB.emaildir.forEach(a=>{
+      docFor(a).items.forEach(i=>{const names=fileNamesOf(i),hay=[i.title,i.note,catName(i.cat),...names,a.code,a.name].join(" ").toLowerCase();if(w.every(x=>hay.includes(x)))res.push({title:i.title+(names.length?" — "+names.slice(0,2).join(", "):""),sub:`📇 ${a.code} · Documents › ${catName(i.cat)}${names.length?" · 📎 "+names.length+" file(s)":""}`,act:`doc:${a.id}:${i.id}`})});
+      policyFor(a).doc.cards.forEach(c=>{const names=(c.files||[]).map(f=>f.name);if(!names.length)return;const hay=[c.title,...names,a.code,a.name].join(" ").toLowerCase();if(w.every(x=>hay.includes(x)))res.push({title:c.title+" — "+names.slice(0,2).join(", "),sub:`📘 ${a.code} · Policy attachment`,act:`pol:${a.id}:${c.id}`})})});
+    if(!res.length)return{text:"No file found in Temporary files, Airline Documents or Policy attachments."};
+    const top=res.slice(0,12);return{text:`${res.length} match(es):\n`+top.map(r=>`${r.title} | ${r.sub.replace(/[🗂📇📘📎]/g,"").trim()}`).join("\n"),ui:`<div class="ai-list">${top.map(r=>`<button class="ai-it" data-aiopen="${r.act}"><b>${esc(r.title)}</b><small>${esc(r.sub)}</small></button>`).join("")}</div>`}},
+  search_app({query}){
+    const w=words(query);if(!w.length)return{text:"Give some keywords."};
+    const hits=getIndex().filter(i=>w.every(x=>i.text.includes(x))).map(i=>({i,sc:w.reduce((n,x)=>n+(String(i.title).toLowerCase().includes(x)?3:0)+(String(i.sub||"").toLowerCase().includes(x)?1:0),0)})).sort((a,b)=>b.sc-a.sc).slice(0,10);
+    if(!hits.length)return{text:"Nothing found in the app."};
+    AIS.hits=hits.map(h=>h.i.go);
+    return{text:hits.map(({i})=>`${i.title} | ${i.crumb||i.secName} | ${txt(i.sub).slice(0,80)}`).join("\n"),ui:`<div class="ai-list">${hits.map(({i},n)=>`<button class="ai-it" data-aigo="${n}"><b>${esc(i.title)}</b><small>${esc(i.crumb||i.secName||"")}${i.sub?" · "+esc(String(i.sub).slice(0,60)):""}</small></button>`).join("")}</div>`}},
+  find_baggage({query}){
+    const w=words(query),res=DB.sorting.filter(r=>!isMockRec(r)).filter(r=>{const hay=[r.tagNumber,r.tagIata,r.ahlCase,r.flightNumber,r.foundLoc,r.color].join(" ").toLowerCase();return w.length&&w.every(x=>hay.includes(x))}).slice(0,8);
+    if(!res.length)return{text:"No baggage record matches."};
+    return{text:res.map(r=>`${tIata(r)||r.tagNumber} (${r.tagNumber}) | ${zoneOf(r)==="jaat"?"Office/JAAT":"Sorting Area"} | status ${r.status} | flights ${legsTxt(r)} | AHL ${r.ahlCase||"-"} | bag ${bagTxt(r)||"-"} | found at ${r.foundLoc||"-"}${zoneOf(r)==="jaat"&&!r.noDates?` | due ${jDue(r)}`:""}`).join("\n"),
+      ui:`<div class="ai-list">${res.map(r=>`<button class="ai-it" data-aiopen="bag:${r.id}"><b>${esc(tIata(r)||r.tagNumber)}</b><small>${zoneOf(r)==="jaat"?"Office/JAAT":"Sorting Area"} · ${esc(r.status)} · ${esc(legsTxt(r))}</small></button>`).join("")}</div>`}},
+  jaat_due_list(){const l=jDueList();return l.length?{text:l.map(r=>`${tIata(r)||r.tagNumber} | day ${jAge(r)} | status ${r.status} | AHL ${r.ahlCase||"-"} | due ${jDue(r)}`).join("\n"),ui:`<div class="ai-list">${l.slice(0,8).map(r=>`<button class="ai-it" data-aiopen="bag:${r.id}"><b>${esc(tIata(r)||r.tagNumber)}</b><small>Day ${jAge(r)} · ${esc(r.status)} · due ${esc(jDue(r))}</small></button>`).join("")}</div>`}:{text:"No bag is due for take-out from the JAAT room right now."}},
+  open_section({section,tab,airline,query}){
+    const sec={home:"home",email:"email",templates:"email",hub:"hub",airline:"hub",contact:"contact",phone:"contact",sorting:"sorting"}[String(section).toLowerCase()];if(!sec)return{text:"Unknown section. Use home, email, hub, contact or sorting."};
+    if(sec==="home"){VIEW.mode="home";render();return{text:"Opened Home."}}
+    const p={};if(sec==="hub"){const a=findAir(airline);if(a)p.air=a.id;if(tab)p.tab=tab}if(sec==="contact"){p.tab=tab==="office"?"office":"phone";if(query)p.q=query}
+    go(sec,p);if(innerWidth<=700)aiClose();return{text:`Opened ${sec}.`}}
+};
+const AI_TOOLDEFS=[
+ {name:"policy_lookup",description:"Look up the exact policy card(s) of one or more airlines for a topic (AHL delayed, DPR damaged, OHD on-hand, rush bag, compensation, toiletries kit, walkie talkie, tracing system, signage, documents/PIR). Use this first for ANY airline policy question, even when the user typed only two words like “tg ahl”. The user sees the formatted card.",input_schema:{type:"object",properties:{airlines:{type:"array",items:{type:"string"},description:"airline codes or names; leave empty to use the airline currently open"},topic:{type:"string",description:"ahl, dpr, ohd, rush, compensation, kit, walkie, tracing, signage, documents — or the user’s own words; empty for an overview"}},required:["topic"]}},
+ {name:"find_files",description:"Locate FILES by name / keywords: Temporary files, airline Documents (with their attachments) and Policy attachments. The user sees clickable results that open the file or the place where it lives.",input_schema:{type:"object",properties:{query:{type:"string"}},required:["query"]}},
+ {name:"search_app",description:"General search across the whole app (templates, airlines, policy cards, documents, e-mails…) — the same index as the Advance Search Bar. Use it to locate anything not covered by a more specific tool.",input_schema:{type:"object",properties:{query:{type:"string"}},required:["query"]}},
+ {name:"search_templates",description:"Search the e-mail templates library (English/Thai) by keywords. The user sees clickable cards.",input_schema:{type:"object",properties:{query:{type:"string"},airline:{type:"string"},type:{type:"string",description:"AHL, DPR, OHD or Switch etc."},audience:{type:"string"}},required:["query"]}},
+ {name:"get_template",description:"Read the full text of one template by id, to answer questions about it or to draft an e-mail from it.",input_schema:{type:"object",properties:{id:{type:"string"}},required:["id"]}},
+ {name:"create_record_draft",description:"Prepare a NEW contact-history record (phone pick-up or office 1st floor) and show it as an editable draft. It is only saved when the user presses Save.",input_schema:{type:"object",properties:{log:{type:"string",enum:["phone","office"]},contact:{type:"string",description:"phone number / department (phone log)"},topic:{type:"string",description:"phone topics: "+PHONE_TOPICS.join(" | ")+" ; office topics: "+OFFICE_TOPICS.join(" | ")},ref:{type:"string",description:"case reference / tag number"},remark:{type:"string"},status:{type:"string"},rtype:{type:"string",description:"office log only: AHL, DPR, OHD or Switch"}},required:["log","topic"]}},
+ {name:"search_records",description:"Search existing contact-history records (phone and office).",input_schema:{type:"object",properties:{log:{type:"string",enum:["phone","office","both"]},query:{type:"string"},status:{type:"string"}},required:["query"]}},
+ {name:"airline_info",description:"Get one airline's policy cards, e-mail addresses, documents and notes from the Airline Hub. System logins are never available.",input_schema:{type:"object",properties:{airline:{type:"string",description:"IATA code or airline name"},topics:{type:"array",items:{type:"string",enum:["policy","emails","documents","notes"]}}},required:["airline"]}},
+ {name:"find_baggage",description:"Find baggage records (Sorting Area and Office/JAAT) by tag number, airline code, AHL case or flight.",input_schema:{type:"object",properties:{query:{type:"string"}},required:["query"]}},
+ {name:"jaat_due_list",description:"List bags in the JAAT room that are due or overdue for take-out.",input_schema:{type:"object",properties:{}}},
+ {name:"open_section",description:"Navigate the app to a section.",input_schema:{type:"object",properties:{section:{type:"string",enum:["home","email","hub","contact","sorting"]},tab:{type:"string",description:"hub: policy | docs | dir ; contact: phone | office"},airline:{type:"string"},query:{type:"string"}},required:["section"]}}
+];
+const gemSchema=s=>{const o={type:String(s.type||"string").toUpperCase()};if(s.description)o.description=s.description;if(s.enum)o.enum=s.enum;if(s.items)o.items=gemSchema(s.items);if(s.properties){o.properties={};for(const k in s.properties)o.properties[k]=gemSchema(s.properties[k]);if(s.required)o.required=s.required}return o};
+const gemTools=()=>[{functionDeclarations:AI_TOOLDEFS.map(d=>({name:d.name,description:d.description,...(d.input_schema.properties&&Object.keys(d.input_schema.properties).length?{parameters:gemSchema(d.input_schema)}:{})}))}];
+async function runTool(name,input){try{const f=AI_TOOLS[name];if(!f)return{text:"Unknown tool."};const r=await f(input||{});return{text:String(r.text||"").slice(0,6000),ui:r.ui}}catch(e){return{text:"Tool error: "+e.message}}}
+/* ---- draft record card ---- */
+function draftHTML(id,d){
+  const o=d.log==="office",topics=o?OFFICE_TOPICS:PHONE_TOPICS,st=o?OFFICE_ST:PHONE_ST;
+  return `<div class="ai-draft" data-dr="${id}"><div class="ai-dt">${o?"🏢 New Office 1st floor record":"📞 New Phone Pick-up record"} — please check</div><div class="ai-dg">
+    ${o?"":`<label>Contact no. / dept *<input data-df="contact" value="${esc(d.contact)}"></label>`}
+    <label>Topic<select data-df="topic">${topics.map(t=>`<option${t===d.topic?" selected":""}>${esc(t)}</option>`).join("")}</select></label>
+    ${o?`<label>Type of report<select data-df="rtype"><option value="">— None —</option>${RTYPES.map(t=>`<option${t===d.rtype?" selected":""}>${t}</option>`).join("")}</select></label>`:""}
+    <label>Case ref / tag<input data-df="ref" value="${esc(d.ref)}"></label><label class="full">Remark<textarea data-df="remark" rows="2">${esc(d.remark)}</textarea></label>
+    <label>Status<select data-df="status">${st.map(s=>`<option${s===d.status?" selected":""}>${s}</option>`).join("")}</select></label></div>
+    <div class="ai-row"><button class="btn sm pri" data-dr-save>✔ Save record</button><button class="btn sm" data-dr-x>✕ Discard</button></div></div>`}
+function draftSave(card){
+  const d=AIS.drafts[card.dataset.dr];if(!d)return;const g=k=>{const e=card.querySelector(`[data-df="${k}"]`);return e?e.value.trim():""},o=d.log==="office";
+  if(!o&&!g("contact")){toast("Contact number / department is required");return}
+  const now=new Date().toISOString(),n={id:uid("c"),ts:now,topic:g("topic"),ref:g("ref"),remark:g("remark"),status:g("status"),upd:now};
+  if(!o)n.contact=g("contact");else n.rtype=g("rtype");
+  putItem(d.log,n);delete AIS.drafts[card.dataset.dr];
+  card.innerHTML=`<div class="ai-dt">✅ Saved to ${o?"Office 1st floor":"Phone Pick-up"}</div><div class="hint">${esc(n.topic)}${n.ref?" · "+esc(n.ref):""}${n.contact?" · "+esc(n.contact):""}</div><div class="ai-row"><button class="btn sm" data-aiopen="rec:${d.log}:${esc(n.ref||n.contact||"")}">Open Contact History ↗</button></div>`;toast("Record saved ✓")}
+/* ---- basic mode (no key): understands simple commands ---- */
+const BASIC_HELP=`Basic mode understands short commands. Try:\n• “tg ahl” · “qr dpr kit” · “compare tg qr ohd”\n• “find file delay form” · “where is the PIR form”\n• “new phone record +66 81 234 5678 case file follow up BKKTG12345”\n• “template delivery address” · “emails for QR”\n• “find bag 0738123221” · “bags due today”\nAdd your Gemini key in ⚙ to chat freely in Thai or English.`;
+function basicHandle(text){
+  const q=text.trim(),l=q.toLowerCase(),out=[],add=(t,ui)=>out.push({text:t,ui});
+  const phone=(q.match(/\+?\d[\d\s-]{7,}\d/)||[])[0],ref=(q.match(/\b[A-Za-z]{5}\d{5}\b|\b\d{10}\b|\b[A-Za-z]{2}\d{6}\b/)||[])[0];
+  if(/(new|add|create|make|เพิ่ม|สร้าง|บันทึก).*(phone|call|record|โทร|เบอร์|บันทึก)|^(phone|call) record/.test(l)){
+    const office=/office|ออฟฟิศ/.test(l),rest=q.replace(phone||"","").replace(ref||"","").replace(/(new|add|create|make|phone|call|record|office|pick-?up|ให้|บันทึก|เพิ่ม|สร้าง|เบอร์|โทร)/ig," ").replace(/\s+/g," ").trim();
+    const r=AI_TOOLS.create_record_draft({log:office?"office":"phone",contact:phone||"",topic:q,ref:ref||"",remark:rest});add("Here is a draft — check it and press Save.",r.ui);return out}
+  if(/(due|overdue|take.?out).*(bag|jaat)|bags? due|ครบกำหนด/.test(l)){const r=AI_TOOLS.jaat_due_list();add(r.text.startsWith("No bag")?r.text:"Bags due for take-out:",r.ui);return out}
+  if(/^(open|go to|goto|show|เปิด|ไปที่)\b/.test(l)){const m=[["contact","contact"],["history","contact"],["template","email"],["email","email"],["hub","hub"],["airline","hub"],["sorting","sorting"],["bag","sorting"],["home","home"]].find(x=>l.includes(x[0]));if(m){AI_TOOLS.open_section({section:m[1]});add("Opening "+m[1]+"…");return out}}
+  if(ref&&/(bag|tag|find|where|กระเป๋า|แท็ก|หา)/.test(l)||/^(find|search|หา)\s+(bag|tag|กระเป๋า)/.test(l)){const r=AI_TOOLS.find_baggage({query:ref||q.replace(/^(find|search|หา)\s+(bag|tag|กระเป๋า)/i,"")});add(r.text.startsWith("No")?r.text:"Baggage found:",r.ui);return out}
+  if(/(record|history|case).*(search|find|หา)|(search|find|หา).*(record|phone|call)/.test(l)){const r=AI_TOOLS.search_records({log:"both",query:q.replace(/(search|find|record|records|phone|call|history|หา)/ig," ")});add(r.text.startsWith("No")?r.text:"Matching records:",r.ui);return out}
+  if(/\b(files?|pdf|docx?|xlsx?|attachment|attached|ไฟล์)\b|where is|locate/.test(l)){const r=AI_TOOLS.find_files({query:q.replace(/\b(find|search|file|files|locate|where|is|the|for|my|a|an|please|ไฟล์|หา)\b/ig," ")});add(r.text.startsWith("No")?r.text:"Files found:",r.ui);return out}
+  if(!/(template|เทมเพลต)/.test(l)){
+    const pq=polParse(q);let airs=pq.airs;
+    if(!airs.length&&pq.keys.length){const last=AIS.last&&DB.emaildir.find(x=>x.id===AIS.last.air),ca=aiCtx().air;airs=ca?[ca]:last?[last]:[]}
+    if(airs.length&&pq.mail){const r=AI_TOOLS.airline_info({airline:airs[0].code,topics:["emails"]});add(r.text.length>900?r.text.slice(0,900)+"…":r.text,r.ui);return out}
+    if(!pq.mail&&!pq.docs&&(pq.airs.length||pq.keys.length)){const r=policyAnswer(airs,pq.keys,"");add(airs.length?(pq.keys.length?"":"Here is the policy overview — tap a topic."):"Which airline do you mean?",r.ui);return out}
+    const a=pq.airs[0];if(a&&pq.docs){const r=AI_TOOLS.airline_info({airline:a.code,topics:["documents"]});add(r.text.length>900?r.text.slice(0,900)+"…":r.text,r.ui);return out}
+  }
+  if(/(template|เทมเพลต|ตัวอย่าง|reply|email for|mail for)/.test(l)||words(q).length<=5){const r=AI_TOOLS.search_templates({query:q.replace(/(find|search|template|templates|for|หา|เทมเพลต)/ig," ")});if(!r.text.startsWith("No")){add("These templates look relevant:",r.ui);return out}}
+  {const r=AI_TOOLS.search_app({query:q});if(!r.text.startsWith("Nothing")&&!r.text.startsWith("Give")){add("I found these in the app:",r.ui);return out}}
+  add(BASIC_HELP);return out}
+/* ---- chat UI ---- */
+function aiFmt(t){
+  const inline=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/`([^`]+)`/g,"<code>$1</code>");
+  let html="",list=null;const close=()=>{if(list){html+=`</${list}>`;list=null}};
+  String(t).replace(/\r/g,"").split("\n").forEach(raw=>{const l=raw.trim();let m;
+    if(!l){close();return}
+    if(m=l.match(/^[-•*]\s+(.*)$/)){if(list!=="ul"){close();html+="<ul>";list="ul"}html+=`<li>${inline(m[1])}</li>`}
+    else if(m=l.match(/^(\d+)[.)]\s+(.*)$/)){if(list!=="ol"){close();html+="<ol>";list="ol"}html+=`<li>${inline(m[2])}</li>`}
+    else if(m=l.match(/^#{1,4}\s+(.*)$/)){close();html+=`<h5>${inline(m[1])}</h5>`}
+    else{close();html+=`<p>${inline(l)}</p>`}});
+  close();return html}
+let aiBtn,aiPanel;
+const aiMsgs=()=>$("#ai-msgs");
+function aiAdd(role,html,raw){const d=document.createElement("div");d.className="ai-m "+role;d.innerHTML=html+(role==="bot"&&raw?`<button class="ai-cp" data-aicopy title="Copy">📋</button>`:"");if(raw)d.dataset.raw=raw;aiMsgs().appendChild(d);aiMsgs().scrollTop=aiMsgs().scrollHeight;return d}
+const aiBot=t=>aiAdd("bot",aiFmt(t),t),aiCards=h=>aiAdd("cards",h);
+function aiSystem(){
+  const c=aiCtx(),types=[...new Set(DB.templates.map(t=>t.type))].join(", "),auds=[...new Set(DB.templates.map(t=>t.aud))].join(", ");
+  return `You are the built-in assistant of the "BFS Baggage Service Information Center", a web app used by baggage service / ground-handling staff at Bangkok-Suvarnabhumi Airport (BKK). You are talking to the administrator. Help them find things and work faster.
+Today is ${todayStr()}. The user is currently on: ${c.sec}${c.air?` (Airline Hub, airline ${c.air.code} · ${c.air.name})`:""}.
+App sections: Email Templates (e-mail/TELEX templates), Airline Hub (policy, documents, e-mail directory, custom notes per airline), Contact History (phone pick-up log and office 1st-floor log), Sorting Bag Record (Sorting Area and Office/JAAT bag records), tools (file size reducer, converter, paging sign, temporary files).
+Rules:
+- Always use the tools to look things up. Never invent templates, policy, e-mail addresses, file names, tag numbers or records. If a tool finds nothing, say so.
+- To locate a FILE call find_files; for anything else you cannot place, call search_app. The app shows clickable result cards, so summarise in one line instead of repeating the list.
+- To create a record call create_record_draft — it only shows a draft; the user must press Save. Never claim it was saved. Ask only if something essential is missing (phone log: the contact number).
+- Template types: ${types||"-"}. Audiences: ${auds||"-"}. Phone topics: ${PHONE_TOPICS.join("; ")}. Office topics: ${OFFICE_TOPICS.join("; ")}.
+- You can draft e-mails: read a template with get_template and fill it in, keep its structure, use [brackets] for missing details.
+- POLICY QUICK ANSWERS: users type very short messages such as "tg ahl", "qr dpr", "ek rush", "sq kit", "3k walkie", "compare tg qr ahl", "can 5j deliver INAD?" or just "ahl" (meaning the airline currently open, or the one discussed last). Call policy_lookup IMMEDIATELY (airlines + topic) — do not ask questions unless the airline is truly unknown. The app already shows the formatted policy card, so your text must be ONE short, direct line with the answer (e.g. "TG AHL: hand over the PIR + passenger letter; no delivery for INAD.") plus at most one caution. For comparisons give one line per airline. Never restate the whole card, never add greetings or closing offers. If no card exists, say so in one line.
+- For a specific question about a rule, read the policy_lookup result and answer that exact point in one or two sentences, quoting the step letter (e.g. "step B").
+- You have no access to system logins or passwords; if asked, say they are in Airline Hub › Systems and must be read there.
+- Reply in the user's language (Thai or English). Be brief and practical.`}
+function aiChips(){
+  const c=aiCtx(),a=c.air,pc=DB.emaildir.filter(x=>policyFor(x).doc.cards.length).map(x=>x.code),A=pc[0]||"TG",B=pc[1]||"QR";
+  const L={home:[`${A} ahl`,"find file …","New phone record","Bags due today"],email:["Template delivery address","Template for damaged bag",`${A} ahl`],hub:a?[`${a.code} ahl`,`${a.code} dpr`,`${a.code} compensation`,`find file ${a.code}`]:[`${A} ahl`,`${B} kit`,`compare ${A} ${B} ahl`],contact:["New phone record","New office record","Find record",`${A} ahl`],sorting:["Find bag 0738123221","Bags due today",`${A} ahl`]}[c.sec]||[`${A} ahl`,"New phone record"];
+  $("#ai-chips").innerHTML=L.map(x=>`<button class="ai-chip" data-aichip="${esc(x)}">${esc(x)}</button>`).join("");
+  const s=$("#ai-sub");if(s){const nm={home:"Home",email:"Email Templates",hub:"Airline Hub",contact:"Contact History",sorting:"Sorting Bag Record"}[c.sec]||c.sec;s.textContent=`On ${nm}${a?" · "+a.code:""}`}}
+function aiMode(){const c=aiCfg(),m=$("#ai-mode");m.textContent=aiUsesAI()?"Gemini · "+c.model.replace("gemini-","").replace("-latest"," latest"):"Basic mode";m.className="ai-mode"+(aiUsesAI()?" on":"")}
+function aiWelcome(){
+  aiMsgs().innerHTML="";const pc=DB.emaildir.filter(x=>policyFor(x).doc.cards.length).map(x=>x.code),A=pc[0]||"TG",B=pc[1]||"QR";
+  aiAdd("bot welcome",`<div class="ai-wt"><span class="ai-av">✨</span><div><b>Hi! What are you looking for?</b><small>${aiUsesAI()?"Gemini AI — ask in Thai or English":"Basic mode — short commands (add your Gemini key in ⚙ to chat freely)"}</small></div></div>
+    <div class="ai-try"><div class="ai-tl">Type it short — I answer straight:</div>
+    <button data-aichip="${A} ahl"><code>${A} ahl</code><span>delayed-bag rule of ${A}</span></button>
+    <button data-aichip="find file delay"><code>find file delay</code><span>locate a file anywhere in the app</span></button>
+    <button data-aichip="compare ${A} ${B} ohd"><code>compare ${A} ${B} ohd</code><span>two airlines side by side</span></button>
+    <button data-aichip="new phone record"><code>new phone record</code><span>I fill the form, you press Save</span></button>
+    <button data-aichip="template delivery"><code>template delivery</code><span>find &amp; open an e-mail template</span></button></div>`);
+  aiChips()}
+function aiSettings(){
+  AIS.view="set";const c=aiCfg(),known=AI_MODELS.some(m=>m[0]===c.model);
+  aiMsgs().innerHTML=`<div class="ai-set"><b>⚙ Assistant settings</b>
+   <label class="chk"><input type="checkbox" id="ai-on"${c.on?" checked":""}> Use Gemini AI when a key is saved</label>
+   <label>Google Gemini API key<input type="password" id="ai-key" value="${esc(c.key)}" placeholder="paste your key here" autocomplete="off"></label>
+   <label>Model<select id="ai-model">${AI_MODELS.map(m=>`<option value="${m[0]}"${m[0]===c.model?" selected":""}>${m[1]}</option>`).join("")}${known?"":`<option value="${esc(c.model)}" selected>${esc(c.model)}</option>`}</select></label>
+   <label>…or type a model name<input id="ai-mc" placeholder="e.g. gemini-3.8-flash" autocomplete="off"></label>
+   <div class="ai-row"><button class="btn sm" id="ai-ld">↻ Load available models</button><button class="btn sm" id="ai-test">Test connection</button></div>
+   <div class="ai-row"><button class="btn sm pri" id="ai-sv">✔ Save</button><button class="btn sm danger" id="ai-rm">Remove key</button><button class="btn sm" id="ai-bk">← Back</button></div><div id="ai-tr" class="hint"></div>
+   <div class="note">The key is kept <b>only in this browser</b> (never in the app’s cloud or in the page file). In AI mode your question and the app data the assistant looks up (templates, policies, e-mail addresses, records, file names) are sent to Google. System logins / passwords are never sent. In Google AI Studio / Cloud, restrict the key (website restriction + spending cap) because anyone who gets it can use your quota.</div></div>`;
+  $("#ai-chips").innerHTML=""}
+const aiKeyHdr=()=>({"content-type":"application/json","x-goog-api-key":aiCfg().key});
+async function gemCall(contents,useTools){
+  const c=aiCfg(),body={systemInstruction:{parts:[{text:aiSystem()}]},contents,generationConfig:{maxOutputTokens:2048}};if(useTools)body.tools=gemTools();
+  const run=async model=>fetch(`${GEM_BASE}/models/${encodeURIComponent(model)}:generateContent`,{method:"POST",headers:aiKeyHdr(),body:JSON.stringify(body)});
+  let r=await run(c.model);
+  if(r.status===404){const m=await aiAutoModel();if(m&&m!==c.model){r=await run(m);if(r.ok)aiBot(`ℹ Model “${c.model}” was not found for your key, so I switched to **${m}** (saved).`)}}
+  if(!r.ok){let m="";try{m=(await r.json()).error.message}catch(e){}throw new Error(`${r.status}${m?" — "+m:""}`)}
+  return r.json()}
+/* when the chosen model is unknown, pick the newest Flash model that this key can use */
+async function aiAutoModel(){
+  try{const r=await fetch(`${GEM_BASE}/models?pageSize=200`,{headers:{"x-goog-api-key":aiCfg().key}});if(!r.ok)return null;const j=await r.json();
+    const ok=(j.models||[]).filter(m=>/generateContent/.test((m.supportedGenerationMethods||[]).join())).map(m=>m.name.replace("models/","")).filter(n=>/^gemini-[\d.]+-flash(-\d+)?$/.test(n)||n==="gemini-flash-latest");
+    const ver=n=>{const m=n.match(/^gemini-([\d.]+)-flash/);return m?parseFloat(m[1]):0};
+    ok.sort((a,b)=>ver(b)-ver(a)||a.length-b.length);const best=ok[0];if(best){aiSave({model:best});aiMode()}return best||null}catch(e){return null}}
+const aiTrimHist=()=>{while(AIS.api.length>24){AIS.api.shift();while(AIS.api.length&&!(AIS.api[0].role==="user"&&AIS.api[0].parts&&AIS.api[0].parts[0]&&AIS.api[0].parts[0].text))AIS.api.shift()}};
+async function aiAsk(text){
+  AIS.api.push({role:"user",parts:[{text}]});aiTrimHist();
+  for(let i=0;i<6;i++){
+    const resp=await gemCall(AIS.api,true),cand=(resp.candidates||[])[0];
+    if(!cand||!cand.content||!(cand.content.parts||[]).length){const why=(resp.promptFeedback||{}).blockReason||(cand||{}).finishReason||"no answer";aiBot("⚠ The model returned no answer ("+why+"). Try rephrasing.");return}
+    AIS.api.push(cand.content);const parts=cand.content.parts,tx=parts.filter(p=>p.text&&!p.thought).map(p=>p.text).join("").trim(),calls=parts.filter(p=>p.functionCall);
+    if(tx)aiBot(tx);if(!calls.length)return;
+    const outs=[];for(const p of calls){const r=await runTool(p.functionCall.name,p.functionCall.args);outs.push({functionResponse:{...(p.functionCall.id?{id:p.functionCall.id}:{}),name:p.functionCall.name,response:{result:r.text||"done"}}});if(r.ui)aiCards(r.ui)}
+    AIS.api.push({role:"user",parts:outs});
+  }
+  aiBot("I stopped after several steps — please ask again more specifically.")}
+async function aiSend(text){
+  text=text.trim();if(!text||AIS.busy)return;
+  if(!ADM.on){aiBot("The assistant is available in Administrator mode only.");return}
+  AIS.view="chat";aiAdd("user",esc(text).replace(/\n/g,"<br>"));AIS.busy=true;const th=aiAdd("bot think","<span class='dots'><i></i><i></i><i></i></span> <small>thinking…</small>");$("#ai-send").disabled=true;
+  try{if(aiUsesAI())await aiAsk(text);else basicHandle(text).forEach(o=>{aiBot(o.text);if(o.ui)aiCards(o.ui)})}
+  catch(e){aiBot("⚠ AI error: "+e.message+"\nCheck the key / model in ⚙ — or switch AI off to use basic mode.")}
+  th.remove();AIS.busy=false;$("#ai-send").disabled=false;aiMsgs().scrollTop=aiMsgs().scrollHeight}
+function aiOpenPanel(){if(!ADM.on)return;aiPanel.hidden=false;aiBtn.classList.add("hid");if(!aiMsgs().children.length)aiWelcome();else if(AIS.view==="chat")aiChips();aiMode();setTimeout(()=>$("#ai-in").focus(),60)}
+function aiClose(){aiPanel.hidden=true;aiBtn.classList.remove("hid")}
+function aiGate(){const on=!!ADM.on;if(aiBtn)aiBtn.style.display=on?"":"none";if(!on&&aiPanel&&!aiPanel.hidden){aiClose();AIS.api=[];AIS.drafts={};AIS.view="chat";aiMsgs().innerHTML=""}}
+function aiInit(){
+  aiBtn=document.createElement("button");aiBtn.id="aiBtn";aiBtn.type="button";aiBtn.title="Assistant — administrator (Alt+A)";aiBtn.setAttribute("aria-label","Open the assistant");aiBtn.innerHTML="✨";document.body.appendChild(aiBtn);
+  aiPanel=document.createElement("div");aiPanel.id="aiPanel";aiPanel.hidden=true;aiPanel.setAttribute("role","dialog");aiPanel.setAttribute("aria-label","Assistant");
+  aiPanel.innerHTML=`<div class="ai-h"><span class="ai-av">✨</span><div class="ai-ht"><b>Assistant</b><small id="ai-sub"></small></div><span class="ai-mode" id="ai-mode"></span><span class="ai-hb"><button data-ai="wide" title="Wider / narrower">⤢</button><button data-ai="new" title="New chat">🗑</button><button data-ai="set" title="Settings">⚙</button><button data-ai="x" title="Close">✕</button></span></div>
+   <div class="ai-msgs" id="ai-msgs"></div><div class="ai-chips" id="ai-chips"></div>
+   <form class="ai-in" id="ai-form"><textarea id="ai-in" rows="1" placeholder="Type short — e.g. “tg ahl”, “find file delay”, “new phone record …”" aria-label="Message"></textarea><button type="submit" id="ai-send" title="Send">➤</button></form><div class="ai-ft">Enter to send · Shift+Enter new line · Alt+A to open / close · Test feature</div>`;
+  document.body.appendChild(aiPanel);
+  aiBtn.onclick=aiOpenPanel;
+  aiPanel.addEventListener("click",async e=>{
+    const a=e.target.closest("[data-ai]");if(a){const k=a.dataset.ai;if(k==="x")aiClose();else if(k==="wide")aiPanel.classList.toggle("wide");else if(k==="new"){AIS.api=[];AIS.drafts={};AIS.view="chat";aiWelcome();aiMode()}else if(k==="set")aiSettings();return}
+    const ch=e.target.closest("[data-aichip]");if(ch){aiSend(ch.dataset.aichip);return}
+    const go_=e.target.closest("[data-aigo]");if(go_){const f=AIS.hits[+go_.dataset.aigo];if(f){f();if(innerWidth<=700)aiClose()}return}
+    const op=e.target.closest("[data-aiopen]");if(op){const[k,x,y]=op.dataset.aiopen.split(":");
+      if(k==="tpl")aiOpen("email",{tpl:x});else if(k==="pol")aiOpen("policy",{air:x,cid:y});else if(k==="air")aiOpen("hub",{air:x,tab:y});else if(k==="rec")aiOpen("contact",{tab:x,q:y});
+      else if(k==="doc")aiOpen("documents",{air:x,did:y});else if(k==="tmp")tmpPreview(x);
+      else if(k==="bag"){const r=DB.sorting.find(z=>z.id===x);aiOpen("sorting",{});if(r)setTimeout(()=>{const q=document.querySelector("#main [data-f=q]");if(q){q.value=r.tagNumber;q.dispatchEvent(new Event("input",{bubbles:true}))}},500)}
+      return}
+    const cp=e.target.closest("[data-aicopy]");if(cp){hubCopy(cp.parentElement.dataset.raw||"");return}
+    const ds=e.target.closest("[data-dr-save]");if(ds){draftSave(ds.closest("[data-dr]"));return}
+    const dx=e.target.closest("[data-dr-x]");if(dx){const c=dx.closest("[data-dr]");delete AIS.drafts[c.dataset.dr];c.innerHTML=`<div class="hint">Draft discarded.</div>`;return}
+    const id=e.target.id;
+    if(id==="ai-bk"){AIS.view="chat";aiWelcome();aiMode();return}
+    if(id==="ai-sv"||id==="ai-test"){const mc=$("#ai-mc").value.trim();aiSave({on:$("#ai-on").checked,key:$("#ai-key").value.trim(),model:mc||$("#ai-model").value});aiMode();const t=$("#ai-tr");
+      if(id==="ai-sv"){t.textContent="Saved ✓";return}
+      if(!aiCfg().key){t.textContent="Enter the API key first.";return}
+      t.textContent="Testing…";try{const call=m=>fetch(`${GEM_BASE}/models/${encodeURIComponent(m)}:generateContent`,{method:"POST",headers:aiKeyHdr(),body:JSON.stringify({contents:[{role:"user",parts:[{text:"Reply with the single word OK."}]}],generationConfig:{maxOutputTokens:40}})});
+        let r=await call(aiCfg().model);if(r.status===404){const m=await aiAutoModel();if(m){r=await call(m);$("#ai-model").innerHTML=`<option selected>${esc(m)}</option>`}}
+        const j=await r.json();if(!r.ok)throw new Error(`${r.status} — ${(j.error||{}).message||"error"}`);t.textContent="✅ Connected — "+aiCfg().model+" replied: "+(((j.candidates||[{}])[0].content||{parts:[{}]}).parts[0].text||"").trim().slice(0,30)}catch(x){t.textContent="❌ "+x.message}return}
+    if(id==="ai-ld"){const t=$("#ai-tr");const k=$("#ai-key").value.trim();if(!k){t.textContent="Enter the API key first.";return}t.textContent="Loading models…";
+      try{const r=await fetch(`${GEM_BASE}/models?pageSize=200`,{headers:{"x-goog-api-key":k}}),j=await r.json();if(!r.ok)throw new Error(`${r.status} — ${(j.error||{}).message||"error"}`);
+        const l=(j.models||[]).filter(m=>/generateContent/.test((m.supportedGenerationMethods||[]).join())&&/gemini/.test(m.name)).map(m=>m.name.replace("models/",""));const sel=$("#ai-model"),cur=sel.value;
+        sel.innerHTML=[...new Set([...AI_MODELS.map(m=>m[0]),...l])].map(n=>`<option value="${esc(n)}"${n===cur?" selected":""}>${esc((AI_MODELS.find(m=>m[0]===n)||[0,n])[1])}</option>`).join("");t.textContent=`✅ ${l.length} models available for this key`}catch(x){t.textContent="❌ "+x.message}return}
+    if(id==="ai-rm"){aiSave({key:""});$("#ai-key").value="";aiMode();$("#ai-tr").textContent="Key removed — basic mode.";return}
+  });
+  const f=$("#ai-form"),ta=$("#ai-in");
+  f.addEventListener("submit",e=>{e.preventDefault();const v=ta.value;ta.value="";ta.style.height="";aiSend(v)});
+  ta.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();f.requestSubmit()}});
+  ta.addEventListener("input",()=>{ta.style.height="auto";ta.style.height=Math.min(ta.scrollHeight,120)+"px"});
+  document.addEventListener("keydown",e=>{if(e.altKey&&e.key.toLowerCase()==="a"&&ADM.on){e.preventDefault();aiPanel.hidden?aiOpenPanel():aiClose()}else if(e.key==="Escape"&&!aiPanel.hidden&&!document.querySelector(".modalbg,#tmpView"))aiClose()});
+  const _rnAi=render;render=function(){const r=_rnAi.apply(this,arguments);if(aiPanel&&!aiPanel.hidden&&AIS.view==="chat")aiChips();return r};
+  aiGate()}
+setTimeout(aiInit,0);
+const _admAi=admApply;admApply=function(){_admAi();aiGate()};
 /* ============ 🗓 UPDATE ROADMAP (administrator only) ============ */
 const RM_ST=[["plan","Planned","#2563eb"],["wip","In progress","#d97706"],["done","Done","#16a34a"],["drop","Dropped","#6b7280"]];
 const rmItems=()=>{const d=DB.settings.find(x=>x.id==="roadmap");return d&&Array.isArray(d.items)?d.items:[]};
@@ -4019,17 +4374,35 @@ async function tmpLoad(id){
   if(b.size<=8*1048576)TMP.cache[id]=b;return b;
 }
 async function tmpFile(id){const m=TMP.items.find(x=>x.id===id),b=await tmpLoad(id);return new File([b],m.name,{type:m.type})}
-async function tmpOpen(id){
-  const m=TMP.items.find(x=>x.id===id);if(!m)return;toast("Opening…");
-  try{const b=await tmpLoad(id);
-    if(/^image\//.test(m.type)){const u=URL.createObjectURL(b),ov=document.createElement("div");ov.id="asgView";
-      ov.innerHTML=`<div class="av-h"><b>${esc(m.name)}</b><button class="btn sm" data-av="d">⬇ Download</button><button class="btn sm" data-av="x">✕ Close</button></div><div class="av-s fit"><img src="${u}" alt=""></div>`;document.body.appendChild(ov);
-      const close=()=>{document.removeEventListener("keydown",kd);URL.revokeObjectURL(u);ov.remove()},kd=e=>{if(e.key==="Escape")close()};document.addEventListener("keydown",kd);
-      ov.addEventListener("click",e=>{const a=e.target.closest("[data-av]");if(!a)return;a.dataset.av==="x"?close():dlFile(m.name,b,m.type)})}
-    else if(/pdf/.test(m.type)){const u=URL.createObjectURL(b);if(!window.open(u,"_blank"))dlFile(m.name,b,m.type);setTimeout(()=>URL.revokeObjectURL(u),60000)}
-    else dlFile(m.name,b,m.type);
-  }catch(e){toast(e.message||"Could not open the file")}
+/* preview of a temporary file — images, PDFs, text, audio / video — with ‹ › to move between files */
+async function tmpPreview(id){
+  document.getElementById("tmpView")?.remove();
+  const ov=document.createElement("div");ov.id="tmpView";document.body.appendChild(ov);let cur=id,url=null;
+  const close=()=>{document.removeEventListener("keydown",kd);if(url)URL.revokeObjectURL(url);ov.remove()},kd=e=>{if(e.key==="Escape")close();else if(e.key==="ArrowLeft")step(-1);else if(e.key==="ArrowRight")step(1)};
+  document.addEventListener("keydown",kd);
+  async function show(){
+    const l=tmpLive(),i=l.findIndex(x=>x.id===cur),m=l[i];if(!m){close();return}
+    if(url){URL.revokeObjectURL(url);url=null}
+    ov.innerHTML=`<div class="av-h"><b>${esc(m.name)}</b><span class="hint" style="color:#cbd5e1">${i+1} / ${l.length} · ${fmtSize(m.size)} · ${esc(tmpLeft(m.expires))}</span><button class="btn sm" data-tv="-1" ${i?"":"disabled"}>‹</button><button class="btn sm" data-tv="1" ${i<l.length-1?"":"disabled"}>›</button><button class="btn sm" data-tv="dl">⬇ Download</button><button class="btn sm danger" data-tv="del">🗑</button><button class="btn sm" data-tv="x">✕ Close</button></div><div class="av-s fit tv-body"><div class="tv-nop">Loading…</div></div>`;
+    const body=ov.querySelector(".tv-body");
+    try{
+      const b=await tmpLoad(cur);if(cur!==m.id)return;const t=m.type||"",n=m.name.toLowerCase();
+      if(/^image\//.test(t)){url=URL.createObjectURL(b);body.innerHTML=`<img src="${url}" alt="">`}
+      else if(/pdf/.test(t)||n.endsWith(".pdf")){url=URL.createObjectURL(new Blob([b],{type:"application/pdf"}));body.className="av-s tv-body";body.innerHTML=`<iframe class="tv-frame" src="${url}" title="${esc(m.name)}"></iframe>`}
+      else if(/^(video|audio)\//.test(t)){url=URL.createObjectURL(b);body.innerHTML=/^video/.test(t)?`<video src="${url}" controls style="max-width:100%;max-height:100%"></video>`:`<audio src="${url}" controls></audio>`}
+      else if(/^text\/|^application\/(json|xml)$|\+xml$|csv/.test(t)||/\.(txt|csv|json|md|log|xml|html?|tsv)$/.test(n)){const tx=await b.text();body.className="av-s tv-body";body.innerHTML=`<pre class="tv-pre">${esc(tx.slice(0,40000))}${tx.length>40000?"\n… (the preview shows the first 40,000 characters)":""}</pre>`}
+      else body.innerHTML=`<div class="tv-nop"><div style="font-size:52px">${tmpIcon(t)}</div><b>${esc(m.name)}</b><div>${esc(t||"unknown type")} · ${fmtSize(m.size)}</div><div class="hint">No preview for this file type — download it to open.</div></div>`;
+    }catch(e){body.innerHTML=`<div class="tv-nop">⚠ ${esc(e.message||"Could not load the file")}</div>`}
+  }
+  function step(d){const l=tmpLive(),i=l.findIndex(x=>x.id===cur)+d;if(i>=0&&i<l.length){cur=l[i].id;show()}}
+  ov.addEventListener("click",async e=>{const b=e.target.closest("[data-tv]");if(!b)return;const k=b.dataset.tv;
+    if(k==="x")close();
+    else if(k==="dl"){const m=tmpLive().find(x=>x.id===cur);try{dlFile(m.name,await tmpLoad(cur),m.type)}catch(x){toast("Could not download the file")}}
+    else if(k==="del"){const l=tmpLive(),i=l.findIndex(x=>x.id===cur),m=l[i];if(m&&confirm(`Delete “${m.name}” now?`)){await tmpDelete(cur);const nl=tmpLive();if(!nl.length)close();else{cur=nl[Math.min(i,nl.length-1)].id;show()}}}
+    else step(+k)});
+  show();
 }
+async function tmpOpen(id){return tmpPreview(id)}
 const scrollParent=el=>{for(let p=el.parentElement;p;p=p.parentElement){const o=getComputedStyle(p).overflowY;if((o==="auto"||o==="scroll")&&p.scrollHeight>p.clientHeight)return p}return null};
 /* drag & drop re-ordering (mouse + touch): grab the ⠿ handle; ArrowUp / ArrowDown also work on the handle */
 function makeSortable(list,onMove){
@@ -4263,30 +4636,56 @@ function openConvertTool(pre){
 
 /* ---------- 🗂 TEMPORARY FILES (cloud, deleted after 2 days) ---------- */
 function openTempTool(){
-  const up=[];
-  modal(toolHead("🗂","Temporary files","Attach photos and files, or keep results from the other tools. They sync in the cloud and are <b>deleted automatically after 2 days</b>. Everyone who uses this app can see them.")+
+  const up=[],SEL=new Set();
+  modal(toolHead("🗂","Temporary files","Attach photos and files, or keep results from the other tools. They sync in the cloud and are <b>deleted automatically after 2 days</b>. Everyone who uses this app can see them. Click a file to preview it.")+
   `<div class="tl-drop" id="tp-drop"><span style="font-size:28px">📎</span><div><b>Drop photos / files here</b> or click to attach<br><span class="hint">Any file up to ${fmtSize(TMP_MAX)} · kept for 2 days</span></div><input id="tp-f" type="file" multiple hidden></div>
-   <div id="tp-up"></div><div class="tl-sum"><span class="hint" id="tp-sum"></span><span class="row"><button class="btn sm danger" id="tp-clr">🗑 Delete all</button></span></div><div class="tmp-grid" id="tp-grid"></div>`,
+   <div id="tp-up"></div><div class="tl-sum"><span class="hint" id="tp-sum"></span><span class="row"><button class="btn sm" id="tp-sa" type="button">☑ Select all</button><button class="btn sm danger" id="tp-clr" type="button">🗑 Delete all</button></span></div>
+   <div class="tp-bar" id="tp-bar" hidden></div><div class="tmp-grid" id="tp-grid"></div>`,
   (bg,close)=>{
     bg.firstChild.style.maxWidth="980px";const $b=s=>$(s,bg);
+    const isPdfOrImg=t=>/pdf|^image\//.test(t);
+    const chosen=()=>{const l=tmpLive();return[...SEL].map(id=>l.find(m=>m.id===id)).filter(Boolean)};
+    function bar(){
+      const sel=chosen(),b=$b("#tp-bar");b.hidden=!sel.length;
+      b.innerHTML=sel.length?`<b>${sel.length} selected</b><span class="hint">${fmtSize(sel.reduce((n,m)=>n+m.size,0))}</span><span style="flex:1"></span><button class="btn sm pri" data-tb="dl" type="button">⬇ Download${sel.length>1?" (ZIP)":""}</button><button class="btn sm danger" data-tb="del" type="button">🗑 Delete</button><button class="btn sm" data-tb="x" type="button">✕ Clear</button>`:"";
+      const l=tmpLive();$b("#tp-sa").textContent=l.length&&sel.length===l.length?"☐ Clear selection":"☑ Select all";
+    }
     function draw(){
       if(!bg.isConnected||!$b("#tp-grid"))return;const l=tmpLive(),tot=l.reduce((n,m)=>n+m.size,0);
+      for(const id of [...SEL])if(!l.some(m=>m.id===id))SEL.delete(id);
       $b("#tp-sum").innerHTML=!fdb?"⚠ The cloud is not connected — temporary files are not available right now.":l.length?`<b>${l.length}</b> file(s) · ${fmtSize(tot)} · synced in the cloud`:"No temporary files";
-      $b("#tp-clr").disabled=!l.length;
+      $b("#tp-clr").disabled=!l.length;$b("#tp-sa").disabled=!l.length;
       $b("#tp-up").innerHTML=up.map(u=>`<div class="fcard"><span class="fth">⏳</span><div class="fmain"><div class="fname">${esc(u.name)}</div><div class="fmeta">${esc(u.st)}</div></div></div>`).join("");
-      $b("#tp-grid").innerHTML=l.length?l.map(m=>`<div class="tmpc"><div class="tmp-t">${m.thumb?`<img src="${m.thumb}" alt="">`:`<span>${tmpIcon(m.type)}</span>`}</div><div class="fname">${esc(m.name)}</div><div class="fmeta">${fmtSize(m.size)} · <span class="badge">${esc(m.source||"")}</span></div><div class="fmeta" title="Deleted automatically">⏳ ${tmpLeft(m.expires)}</div>
-        <div class="fact" style="justify-content:flex-start;margin-top:6px"><button class="btn sm" data-tp="open" data-id="${m.id}" title="Open">👁</button><button class="btn sm" data-tp="dl" data-id="${m.id}" title="Download">⬇</button>${isPdfOrImg(m.type)?`<button class="btn sm" data-tp="reduce" data-id="${m.id}" title="Open in File Size Reducer">🗜</button><button class="btn sm" data-tp="convert" data-id="${m.id}" title="Open in File Converter">🔄</button>`:""}<button class="btn sm danger" data-tp="del" data-id="${m.id}" title="Delete now">🗑</button></div></div>`).join(""):`<div class="empty" style="grid-column:1/-1">Nothing here yet — attach files above, or press ☁ Keep in the reducer / converter.</div>`;
+      $b("#tp-grid").innerHTML=l.length?l.map(m=>`<div class="tmpc${SEL.has(m.id)?" sel":""}" data-id="${m.id}"><label class="tmp-sel" title="Select"><input type="checkbox" data-tsel="${m.id}"${SEL.has(m.id)?" checked":""}></label><div class="tmp-t" data-tp="open" data-id="${m.id}" title="Click to preview">${m.thumb?`<img src="${m.thumb}" alt="">`:`<span>${tmpIcon(m.type)}</span>`}</div><div class="fname tmp-nm" data-tp="open" data-id="${m.id}" title="Click to preview">${esc(m.name)}</div><div class="fmeta">${fmtSize(m.size)} · <span class="badge">${esc(m.source||"")}</span></div><div class="fmeta" title="Deleted automatically">⏳ ${tmpLeft(m.expires)}</div>
+        <div class="fact" style="justify-content:flex-start;margin-top:6px"><button class="btn sm" data-tp="open" data-id="${m.id}" title="Preview">👁</button><button class="btn sm" data-tp="dl" data-id="${m.id}" title="Download">⬇</button>${isPdfOrImg(m.type)?`<button class="btn sm" data-tp="reduce" data-id="${m.id}" title="Open in File Size Reducer">🗜</button><button class="btn sm" data-tp="convert" data-id="${m.id}" title="Open in File Converter">🔄</button>`:""}<button class="btn sm danger" data-tp="del" data-id="${m.id}" title="Delete now">🗑</button></div></div>`).join(""):`<div class="empty" style="grid-column:1/-1">Nothing here yet — attach files above, or press ☁ Keep in the reducer / converter.</div>`;
+      bar();
     }
-    const isPdfOrImg=t=>/pdf|^image\//.test(t);
     async function add(files){
       for(const f of [...files]){const u={name:f.name,st:"Uploading…"};up.push(u);draw();const id=await tmpSave(f,f.name,"Attached");up.splice(up.indexOf(u),1);if(id)toast("Kept for 2 days ☁");draw()}}
+    async function bulkDl(){
+      const sel=chosen();if(!sel.length)return;
+      try{
+        if(sel.length===1){dlFile(sel[0].name,await tmpLoad(sel[0].id),sel[0].type);return}
+        toast(`Preparing ${sel.length} files…`);await ensureZip();const z=new JSZip(),uq=zipName();
+        for(const m of sel)z.file(uq(m.name),await tmpLoad(m.id));
+        dlFile(`Temporary-files-${todayStr()}.zip`,await z.generateAsync({type:"blob"}),"application/zip");toast("Downloaded ✓");
+      }catch(e){toast("Could not build the download — "+(e.message||"error"))}
+    }
+    async function bulkDel(){
+      const sel=chosen();if(!sel.length)return;
+      if(!confirm(`Delete ${sel.length} file${sel.length>1?"s":""} now? This cannot be undone.`))return;
+      for(const m of sel)await tmpDelete(m.id);SEL.clear();toast(`${sel.length} deleted`);draw();
+    }
     bindDrop($b("#tp-drop"),$b("#tp-f"),add);
     TMP.watch=()=>{if(!bg.isConnected){TMP.watch=null;return}draw()};
-    $b("#tp-clr").onclick=async()=>{if(!confirm("Delete ALL temporary files now? This cannot be undone."))return;for(const m of tmpLive())await tmpDelete(m.id)};
+    $b("#tp-clr").onclick=async()=>{if(!confirm("Delete ALL temporary files now? This cannot be undone."))return;for(const m of tmpLive())await tmpDelete(m.id);SEL.clear()};
+    $b("#tp-sa").onclick=()=>{const l=tmpLive();if(l.length&&SEL.size===l.length)SEL.clear();else l.forEach(m=>SEL.add(m.id));draw()};
+    $b("#tp-bar").addEventListener("click",e=>{const b=e.target.closest("[data-tb]");if(!b)return;const k=b.dataset.tb;if(k==="x"){SEL.clear();draw()}else if(k==="dl")bulkDl();else if(k==="del")bulkDel()});
+    $b("#tp-grid").addEventListener("change",e=>{const c=e.target.closest("[data-tsel]");if(!c)return;c.checked?SEL.add(c.dataset.tsel):SEL.delete(c.dataset.tsel);c.closest(".tmpc").classList.toggle("sel",c.checked);bar()});
     $b("#tp-grid").addEventListener("click",async e=>{
       const b=e.target.closest("[data-tp]");if(!b)return;const k=b.dataset.tp,id=b.dataset.id;
-      if(k==="open")return tmpOpen(id);
-      if(k==="del"){await tmpDelete(id);return}
+      if(k==="open")return tmpPreview(id);
+      if(k==="del"){await tmpDelete(id);SEL.delete(id);return}
       try{
         if(k==="dl"){const m=TMP.items.find(x=>x.id===id);dlFile(m.name,await tmpLoad(id),m.type);return}
         const f=await tmpFile(id);close();setTimeout(()=>k==="reduce"?openReduceTool([f]):openConvertTool([f]),250)
