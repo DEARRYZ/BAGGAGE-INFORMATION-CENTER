@@ -422,6 +422,28 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .pa.miss{padding:10px 12px;border-left-color:#d97706;font-size:14px}
 .pa-l.ov li{display:block}.pa-ob{width:100%;text-align:left;border:1px solid var(--line);border-left:4px solid var(--pc);background:var(--card);color:var(--ink);border-radius:10px;padding:6px 10px;cursor:pointer;min-height:0;display:flex;flex-direction:column}.pa-ob b{font-size:13.5px}.pa-ob small{color:var(--mut);font-size:12px}.pa-ob:hover{background:var(--soft)}
 @media(max-width:700px){#aiBtn{right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));width:48px;height:48px;font-size:22px}#aiPanel,#aiPanel.wide{inset:0;width:auto;height:auto;border-radius:0;z-index:96}.ai-in textarea{font-size:16px}.ai-ft{display:none}.ai-hb [data-ai=wide]{display:none}.ai-msgs{padding:12px 10px}.ai-m{max-width:96%}.pa-l li.kv em{width:38%}}
+
+
+/* v1.10.2 assistant overhaul */
+#aiBtn{width:52px;height:52px;background:linear-gradient(135deg,#8b5cf6,#2563eb);box-shadow:0 10px 28px rgba(79,70,229,.55),inset 0 1px 0 rgba(255,255,255,.35);animation:aiPulse 3.2s ease-in-out infinite}@keyframes aiPulse{0%,100%{box-shadow:0 10px 28px rgba(79,70,229,.55),0 0 0 0 rgba(139,92,246,.35)}50%{box-shadow:0 10px 28px rgba(79,70,229,.55),0 0 0 10px rgba(139,92,246,0)}}
+@media(min-width:701px){#aiBtn{display:none!important}}
+.ai-hbtn{display:inline-flex;align-items:center;gap:6px;flex:none;height:36px;padding:0 14px 0 11px;border-radius:18px;border:1px solid rgba(255,255,255,.45);background:linear-gradient(135deg,#8b5cf6,#2563eb);color:#fff;font-weight:800;font-size:13.5px;letter-spacing:.2px;cursor:pointer;min-height:0;box-shadow:0 4px 14px rgba(79,70,229,.45);transition:transform .15s,box-shadow .15s}.ai-hbtn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(79,70,229,.6)}.ai-hbtn.on{box-shadow:inset 0 0 0 2px #fff,0 4px 14px rgba(79,70,229,.45)}
+@media(max-width:700px){.ai-hbtn{display:none!important}}
+#aiPanel{top:12px;bottom:12px;right:12px;height:auto;width:450px;border-radius:22px;border:1px solid rgba(139,92,246,.28);box-shadow:0 26px 70px rgba(15,23,42,.5)}#aiPanel.wide{width:min(720px,calc(100vw - 24px))}
+.ai-h{padding:14px 14px 13px;background:radial-gradient(130% 160% at 0% 0%,#8b5cf6 0%,#4f46e5 42%,#2563eb 100%);gap:11px}.ai-av{width:38px;height:38px;background:rgba(255,255,255,.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}.ai-av svg{width:22px;height:22px}.ai-ht b{font-size:16px;letter-spacing:.2px}.ai-ht small{font-size:11.5px}
+.ai-msgs{padding:16px 14px;gap:12px;background:radial-gradient(90% 40% at 100% 0%,rgba(139,92,246,.08),transparent),linear-gradient(180deg,var(--soft),transparent 160px)}
+.ai-m{font-size:15px;line-height:1.55}.ai-m.user{background:linear-gradient(135deg,#6366f1,#2563eb);box-shadow:0 3px 10px rgba(79,70,229,.28)}.ai-m.bot{border-radius:16px 16px 16px 5px;border:1px solid var(--line);box-shadow:0 2px 8px rgba(15,35,60,.07)}
+.ai-m.bot p:first-child:not(:last-child){font-weight:700;font-size:15.5px}.ai-m.bot.lead-only{border-left:4px solid var(--pri2)}
+.ai-m.hero{align-self:stretch;max-width:100%;background:transparent;padding:0;display:flex;flex-direction:column;gap:12px}.ai-hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:8px 6px 2px}.ai-hico{width:60px;height:60px;border-radius:20px;background:linear-gradient(135deg,#8b5cf6,#2563eb);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(79,70,229,.4);margin-bottom:4px}.ai-hero b{font-size:19px}.ai-hero small{color:var(--mut);max-width:300px}
+.ai-tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ai-tile{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:10px 11px;cursor:pointer;min-height:0;transition:transform .12s,box-shadow .12s,border-color .12s}.ai-tile:hover{transform:translateY(-1px);border-color:var(--pri2);box-shadow:0 6px 16px rgba(37,99,235,.15)}.ai-tile>span{font-size:22px;flex:none}.ai-tile code{display:block;font-weight:800;font-size:13px;background:none;color:var(--pri);padding:0;overflow-wrap:anywhere}.ai-tile small{color:var(--mut);font-size:11.5px;line-height:1.25}
+.ai-chips.hide{display:none}.ai-sg{display:flex;gap:6px;padding:0 12px 8px;overflow-x:auto;scrollbar-width:none}.ai-sg:empty{display:none}.ai-sgc{flex:none;border:1px solid var(--pri2);background:var(--soft);color:var(--pri);border-radius:15px;padding:5px 12px;font-size:12.5px;font-weight:700;cursor:pointer;min-height:0}.ai-sgc.air{background:var(--card);color:var(--ink)}.ai-sgc:hover{background:var(--pri);color:#fff}
+.ai-in{margin:0 10px 4px;padding:6px 6px 6px 8px;border:1px solid var(--line);border-radius:24px;background:var(--card);box-shadow:0 2px 10px rgba(15,35,60,.08);align-items:flex-end}.ai-in:focus-within{border-color:var(--pri2);box-shadow:0 0 0 3px rgba(37,99,235,.15)}.ai-in textarea{border:0!important;background:transparent!important;box-shadow:none!important;outline:0;padding:9px 6px;min-height:38px}.ai-cmd{flex:none;width:38px;height:38px;border-radius:50%;border:0;background:var(--soft);color:var(--pri);font-weight:800;font-size:16px;cursor:pointer;min-height:0;padding:0}.ai-cmd:hover{background:var(--pri);color:#fff}.ai-in button[type=submit]{width:38px;height:38px}
+.ai-pal{margin:0 10px 8px;max-height:44vh;overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 8px 26px rgba(15,35,60,.18);padding:10px 12px;animation:aiIn .18s ease}.ai-pal[hidden]{display:none}.ai-pt{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--mut);margin-bottom:6px}.ai-pg{margin:8px 0}.ai-pg>b{font-size:12.5px}.ai-pg>div{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}.ai-pg button{border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:10px;padding:4px 10px;font-size:12.5px;cursor:pointer;min-height:0;font-family:ui-monospace,Menlo,monospace}.ai-pg button:hover{border-color:var(--pri2);background:var(--card)}
+.pa-m{padding:6px 12px 4px;display:flex;flex-direction:column;gap:10px}.pa-ms{display:flex;flex-direction:column;gap:3px}.pa-mt{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.3px;color:var(--mut)}.pa-mr{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px dashed var(--line)}.pa-mr:last-child{border:0}.pa-mr a{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;font-weight:600;color:var(--pri);text-decoration:none;overflow-wrap:anywhere;flex:1;min-width:0}.pa-mr a:hover{text-decoration:underline}.pa-mr small{color:var(--mut);flex:none;max-width:40%}
+.ai-ib{flex:none;border:1px solid var(--line);background:var(--card);border-radius:8px;width:30px;height:28px;cursor:pointer;min-height:0;padding:0;font-size:13px}.ai-ib:hover{border-color:var(--pri2);background:var(--soft)}
+.pa-dr{display:flex;flex-direction:column;gap:2px;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:11px;padding:8px 10px;cursor:pointer;min-height:0;width:100%}.pa-dr:hover{border-color:var(--pri2);background:var(--soft)}.pa-dr b{font-size:14px}.pa-dr small{color:var(--mut)}.pa-cat{align-self:flex-start;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;background:var(--soft);color:var(--pri);border-radius:7px;padding:1px 7px}.pa-fl{font-size:12px;color:var(--mut)}
+.pa-tx{font-size:14px;line-height:1.5;overflow-wrap:anywhere}.pa-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;padding:10px 12px 12px}.pa-tile{display:flex;flex-direction:column;align-items:center;gap:1px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 4px;cursor:pointer;min-height:0}.pa-tile:hover{border-color:var(--pri2);background:var(--soft)}.pa-tile>span{font-size:20px}.pa-tile b{font-size:19px}.pa-tile small{color:var(--mut);font-size:11px}.pa-tile.z{opacity:.55}
+@media(max-width:700px){#aiPanel,#aiPanel.wide{top:0;bottom:0;right:0;left:0;width:auto;border-radius:0}.ai-tiles{grid-template-columns:1fr 1fr}.ai-pal{max-height:50vh}}
 /* v1.9.1 temporary files: select, bulk actions, preview */
 .tmp-sel{position:absolute;top:10px;left:10px;z-index:2;background:rgba(255,255,255,.92);border-radius:7px;padding:3px 4px;line-height:0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25)}.tmp-sel input{width:18px;height:18px;min-height:0!important;margin:0;accent-color:var(--pri2)}
 .tmpc{position:relative;transition:box-shadow .12s,border-color .12s}.tmpc.sel{border-color:var(--pri2);box-shadow:0 0 0 2px var(--pri2)}.tmp-t{cursor:zoom-in}.tmp-nm{cursor:pointer}.tmp-nm:hover{text-decoration:underline}
@@ -636,8 +658,9 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.10.1";
+const VERSION="1.10.2";
 const CHANGELOG=[
+ {v:"1.10.2",d:"2026-11-15",items:["✨ Assistant overhaul: new look, a ✨ Ask button in the header next to the bell (floating button on phones), a home screen of one-tap commands, ⌘ command list, and live typing help (airline names complete themselves, topics appear as chips).","Smarter Airline Hub answers from very short commands — “tg email”, “qr email bkk”, “tg docs delay”, “tg ahl email”, “qr contacts” (your own tabs), “tg” (overview), “compare tg qr email”, “code for qatar” — with e-mail copy buttons, document cards and typo-tolerant airline names. Answers show a one-line headline first, then the card."]},
  {v:"1.10.1",d:"2026-11-14",items:["✨ Assistant now uses Gemini 3.8 Flash by default (Gemini 2.x models no longer work, so old settings move to 3.8 automatically). If the model name is not found for your key, the assistant picks the newest Flash model your key can use and remembers it; ↻ Load available models in ⚙ shows the exact list."]},
  {v:"1.10.0",d:"2026-11-14",items:["✨ Assistant (test feature, Administrator mode only) powered by Google Gemini: a chat button (or Alt+A) that helps you find things — files in Temporary files / Documents / Policy attachments, templates, airline policy, e-mails, bags, records — and prepares a phone / office record for you to check and Save.","Type short and get a straight answer: “tg ahl”, “qr dpr kit”, “compare tg qr ohd”. It remembers the airline you asked about last and uses the airline open in the Airline Hub.","Add your Gemini API key in the assistant’s ⚙ settings (kept only in your browser). Without a key it runs in basic mode with the same short commands."]},
  {v:"1.9.1",d:"2026-11-14",items:["🗂 Temporary files: tick several files (or ☑ Select all) and ⬇ Download them together as one ZIP, or 🗑 delete them in one go.","Click a file (picture, name or 👁) to preview it right inside the app — images, PDFs, text / CSV, audio and video — with ‹ › to move to the next file, plus download and delete buttons."]},
@@ -3808,6 +3831,78 @@ function policyAnswer(airs,keys,rawTopic){
   const last=airs[0],nx=last?POL_TOPICS.filter(t=>!t.sub&&!keys.some(k=>k.k===t.k)).slice(0,5):[];
   if(last&&keys.length)ui.push(`<div class="ai-row">${nx.map(t=>`<button class="ai-chip" data-aichip="${esc(last.code)} ${t.k}">${esc(t.name)}</button>`).join("")}<button class="ai-chip" data-aichip="emails for ${esc(last.code)}">📇 Emails</button></div>`);
   return{text:text.join("\n\n"),ui:ui.join("")}}
+/* ---- Airline Hub quick answers: policy · e-mails · documents · your own tabs ---- */
+const AI_ICON='<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6 5.6 1.9-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2z"/><path d="M19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9L19 14z" opacity=".85"/><path d="M5.5 15l.7 1.8 1.8.7-1.8.7L5.5 20l-.7-1.8L3 17.5l1.8-.7L5.5 15z" opacity=".7"/></svg>';
+const HUB_MAIL_RE=/\b(e-?mails?|mails?|address(es)?|อีเมล)\b/i,HUB_DOC_RE=/\b(docs?|documents?|files?|attachments?|papers?|certificates?|letters?|เอกสาร|ไฟล์)\b/i;
+const STOPQ=new Set("for of the to show me give get please need i want what whats is are how who where can do does a an and or with on in at tell find about all any from my our your it this that info overview summary detail details".split(" "));
+const escRe=s=>String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+const noteTabs=()=>hubTabs(true).filter(t=>t.kind==="note");
+function lev(a,b){const m=a.length,n=b.length;if(Math.abs(m-n)>1)return 9;const d=Array.from({length:m+1},(_,i)=>[i]);for(let j=1;j<=n;j++)d[0][j]=j;for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n]}
+function hubAirs(q){
+  const l=q.toLowerCase(),toks=q.split(/[\s,;/&+?!]+/).filter(Boolean),found=[];
+  DB.emaildir.forEach(a=>{const code=String(a.code).toLowerCase(),nm=String(a.name).toLowerCase(),first=nm.split(/[\s(]+/)[0];
+    const hit=toks.some(t=>t.toLowerCase()===code&&!POL_STOP.has(code))||(nm.length>=4&&l.includes(nm))||(first.length>=4&&toks.some(t=>{const w=t.toLowerCase();return w===first||(w.length>=5&&lev(w,first)<=1)}));
+    if(hit&&!found.includes(a))found.push(a)});
+  return found}
+function hubParse(q){
+  const airs=hubAirs(q),keys=[];POL_TOPICS.forEach(t=>{if(t.re.test(q)&&!keys.some(k=>k.k===t.k&&(k.sub||"")===(t.sub||"")))keys.push(t)});
+  const mail=HUB_MAIL_RE.test(q),docs=HUB_DOC_RE.test(q),notes=noteTabs().filter(t=>t.label.length>=3&&new RegExp("\\b"+escRe(t.label.toLowerCase())+"\\b","i").test(q));
+  return{airs,keys,mail,docs,notes,rest:hubRest(q,airs,notes)}}
+function hubRest(q,airs,notes){
+  const codes=new Set((airs||[]).map(a=>String(a.code).toLowerCase())),names=new Set((airs||[]).flatMap(a=>String(a.name).toLowerCase().split(/[\s(]+/))),labs=new Set((notes||[]).flatMap(t=>t.label.toLowerCase().split(/\s+/)));
+  return q.toLowerCase().split(/[\s,;/&+?!]+/).filter(w=>w.length>1&&!STOPQ.has(w)&&!codes.has(w)&&!names.has(w)&&!labs.has(w)&&!POL_TOPICS.some(t=>t.re.test(w))&&!HUB_MAIL_RE.test(w)&&!HUB_DOC_RE.test(w)&&!/^(policy|rule|rules|compare|vs|versus)$/.test(w))}
+const hubMiss=(a,what,sec)=>({miss:true,text:`[${a.code}] No ${what} recorded.`,ui:`<div class="pa miss"><b>${esc(a.code)}</b> — no ${esc(what)} recorded. <button class="btn sm" data-aiopen="air:${a.id}:${sec}">Open it ↗</button></div>`});
+function hubEmails(a,rest){
+  const subs=(a.subjects||[]).map(s=>({s,list:listEmails(s)})).filter(x=>x.list.length).map(x=>{if(!rest.length)return x;
+    const hit=rest.every(k=>String(x.s.name).toLowerCase().includes(k));return{s:x.s,list:hit?x.list:x.list.filter(e=>rest.every(k=>(e.addr+" "+(e.remark||"")).toLowerCase().includes(k)))}}).filter(x=>x.list.length);
+  const all=uniqAddr(subs.flatMap(x=>x.list));if(!all.length)return hubMiss(a,`e-mail${rest.length?" matching “"+rest.join(" ")+"”":""}`,"dir");
+  return{text:`[${a.code} · ${a.name}] E-mails:\n`+subs.map(x=>`${x.s.name}: ${x.list.map(e=>e.addr+(e.remark?` (${e.remark})`:"")).join("; ")}`).join("\n"),
+    ui:`<div class="pa" style="--pc:#0d9488"><div class="pa-h"><span class="pa-air">${esc(a.code)}</span><div class="pa-t"><b>E-mail addresses</b><small>${esc(a.name)} · ${all.length} address${all.length>1?"es":""}</small></div></div>
+    <div class="pa-m">${subs.map(x=>`<div class="pa-ms"><div class="pa-mt">${esc(x.s.name)}</div>${x.list.map(e=>`<div class="pa-mr"><a href="mailto:${esc(e.addr)}">${esc(e.addr)}</a>${e.remark?`<small>${esc(e.remark)}</small>`:""}<button class="ai-ib" data-aicopyt="${esc(e.addr)}" title="Copy">📋</button></div>`).join("")}</div>`).join("")}</div>
+    <div class="pa-f"><button class="btn sm pri" data-aicopyt="${esc(all.map(e=>e.addr).join("; "))}">📋 Copy all (${all.length})</button><button class="btn sm" data-aiopen="air:${a.id}:dir">Open in Emails ↗</button></div></div>`}}
+function hubDocs(a,rest){
+  const items=docFor(a).items.filter(i=>!rest.length||rest.every(k=>[i.title,i.note,catName(i.cat),...fileNamesOf(i)].join(" ").toLowerCase().includes(k)));
+  if(!items.length)return hubMiss(a,`document${rest.length?" matching “"+rest.join(" ")+"”":""}`,"docs");
+  return{text:`[${a.code} · ${a.name}] Documents:\n`+items.map(i=>`${i.title} [${catName(i.cat)}]${i.note?": "+i.note:""}${fileNamesOf(i).length?" 📎 "+fileNamesOf(i).join(", "):""}`).join("\n"),
+    ui:`<div class="pa" style="--pc:#4f46e5"><div class="pa-h"><span class="pa-air">${esc(a.code)}</span><div class="pa-t"><b>Documents</b><small>${esc(a.name)} · ${items.length} item${items.length>1?"s":""}</small></div></div>
+    <div class="pa-m">${items.slice(0,12).map(i=>{const f=fileNamesOf(i);return `<button class="pa-dr" data-aiopen="doc:${a.id}:${i.id}"><span class="pa-cat">${esc(catName(i.cat))}</span><b>${esc(i.title)}</b>${i.note?`<small>${esc(String(i.note).slice(0,110))}</small>`:""}${f.length?`<span class="pa-fl">${f.slice(0,3).map(n=>`📎 ${esc(n)}`).join("  ")}${f.length>3?` +${f.length-3}`:""}</span>`:""}</button>`}).join("")}</div>
+    <div class="pa-f"><button class="btn sm" data-aiopen="air:${a.id}:docs">Open in Documents ↗</button></div></div>`}}
+function hubNotes(a,tab,rest){
+  const items=((adFor(a).tabs||{})[tab.id]||[]).filter(i=>!rest.length||rest.every(k=>(i.title+" "+i.text).toLowerCase().includes(k)));
+  if(!items.length)return hubMiss(a,`${tab.label} entry${rest.length?" matching “"+rest.join(" ")+"”":""}`,tab.id);
+  return{text:`[${a.code} · ${tab.label}]\n`+items.map(i=>`${i.title}: ${txt(i.text).replace(/\n+/g," / ")}`).join("\n"),
+    ui:`<div class="pa" style="--pc:#d97706"><div class="pa-h"><span class="pa-air">${esc(a.code)}</span><div class="pa-t"><b>${esc(tab.icon)} ${esc(tab.label)}</b><small>${esc(a.name)} · ${items.length} entr${items.length>1?"ies":"y"}</small></div></div>
+    <div class="pa-m">${items.map(i=>`<div class="pa-ms"><div class="pa-mt">${esc(i.title)}</div><div class="pa-tx">${polFmt(txt(i.text)).replace(/\n/g,"<br>")}</div></div>`).join("")}</div>
+    <div class="pa-f"><button class="btn sm" data-aiopen="air:${a.id}:${tab.id}">Open in ${esc(tab.label)} ↗</button></div></div>`}}
+function hubOverview(a){
+  const pc=policyFor(a).doc.cards.length,mc=uniqAddr((a.subjects||[]).flatMap(listEmails)).length,dc=docFor(a).items.length,nt=noteTabs().map(t=>({t,n:((adFor(a).tabs||{})[t.id]||[]).length}));
+  const tiles=[["📘","Policy",pc,`${a.code} policy`],["📇","E-mails",mc,`${a.code} email`],["🗂","Documents",dc,`${a.code} docs`],...nt.map(x=>[x.t.icon,x.t.label,x.n,`${a.code} ${x.t.label.toLowerCase()}`])];
+  return{text:`[${a.code} · ${a.name}] Policy cards: ${pc}; e-mail addresses: ${mc}; documents: ${dc}${nt.map(x=>`; ${x.t.label}: ${x.n}`).join("")}`,
+    ui:`<div class="pa" style="--pc:#2563eb"><div class="pa-h"><span class="pa-air">${esc(a.code)}</span><div class="pa-t"><b>${esc(a.name)}</b><small>Airline Hub · tap a section</small></div></div><div class="pa-tiles">${tiles.map(([i,l,n,c])=>`<button class="pa-tile${n?"":" z"}" data-aichip="${esc(c)}"><span>${esc(i)}</span><b>${n}</b><small>${esc(l)}</small></button>`).join("")}</div></div>`}}
+function hubAnswer(airs,pq){
+  AIS.last={air:(airs[0]||{}).id};const T=[],U=[],add=r=>{if(r){T.push(r.text);U.push(r.ui)}};
+  const secs=[];if(pq.keys.length)secs.push("policy");if(pq.mail)secs.push("emails");if(pq.docs)secs.push("documents");pq.notes.forEach(t=>secs.push("note:"+t.id));
+  airs.forEach(a=>{
+    if(!secs.length){
+      if(pq.rest.length){let any=false;
+        [()=>policyAnswer([a],[],pq.rest.join(" ")),()=>hubEmails(a,pq.rest),()=>hubDocs(a,pq.rest),...noteTabs().map(t=>()=>hubNotes(a,t,pq.rest))].forEach(f=>{const r=f();if(r&&!r.miss&&!/No card found/.test(r.text||"")&&!/^Which airline/.test(r.text||"")){any=true;add(r)}});
+        if(!any){const o=hubOverview(a);add({text:o.text+`\nNothing matched “${pq.rest.join(" ")}”.`,ui:o.ui})}
+      }else add(hubOverview(a));return}
+    secs.forEach(s=>{
+      if(s==="policy")add(policyAnswer([a],pq.keys,""));else if(s==="emails")add(hubEmails(a,pq.rest));else if(s==="documents")add(hubDocs(a,pq.rest));
+      else{const t=noteTabs().find(x=>"note:"+x.id===s);if(t)add(hubNotes(a,t,pq.rest))}})});
+  return{text:T.join("\n\n"),ui:U.join("")}}
+const AI_TOOLS_HUB=({airlines,section,query})=>{
+  let airs=(Array.isArray(airlines)?airlines:[airlines]).filter(Boolean).map(findAir).filter(Boolean);
+  if(!airs.length){const c=aiCtx().air||(AIS.last&&DB.emaildir.find(x=>x.id===AIS.last.air));if(c)airs=[c]}
+  if(!airs.length)return{text:"Which airline? Known codes: "+DB.emaildir.map(a=>a.code).join(", ")};
+  const s=String(section||"").toLowerCase(),q=String(query||""),pq={airs,keys:[],mail:false,docs:false,notes:[],rest:[]};
+  if(s==="policy"){POL_TOPICS.forEach(t=>{if(t.re.test(q)&&!pq.keys.some(k=>k.k===t.k&&(k.sub||"")===(t.sub||"")))pq.keys.push(t)});if(!pq.keys.length)return policyAnswer(airs,[],q.replace(/\b(policy|rule|rules)\b/ig,"").trim())}
+  else if(s==="emails"){pq.mail=true;pq.rest=hubRest(q,airs,[])}
+  else if(s==="documents"){pq.docs=true;pq.rest=hubRest(q,airs,[])}
+  else if(s==="notes"){const nt=noteTabs(),hit=nt.filter(t=>q.toLowerCase().includes(t.label.toLowerCase()));pq.notes=hit.length?hit:nt;pq.rest=hubRest(q,airs,pq.notes)}
+  else if(s==="overview"||!s){pq.rest=q?hubRest(q,airs,[]):[]}
+  return hubAnswer(airs,pq)};
 /* ---- tools (used by Gemini and by basic mode). Each returns {text for the model, ui cards for the chat} ---- */
 const AI_TOOLS={
   search_templates({query,airline,type,audience}){
@@ -3870,7 +3965,9 @@ const AI_TOOLS={
     const p={};if(sec==="hub"){const a=findAir(airline);if(a)p.air=a.id;if(tab)p.tab=tab}if(sec==="contact"){p.tab=tab==="office"?"office":"phone";if(query)p.q=query}
     go(sec,p);if(innerWidth<=700)aiClose();return{text:`Opened ${sec}.`}}
 };
+AI_TOOLS.hub_lookup=AI_TOOLS_HUB;
 const AI_TOOLDEFS=[
+ {name:"hub_lookup",description:"Look up one or more airlines in the Airline Hub: policy rules, e-mail addresses, documents (with attachments) or the administrator’s own tabs (notes). Use this FIRST for any question about an airline. The user sees a formatted card with copy buttons.",input_schema:{type:"object",properties:{airlines:{type:"array",items:{type:"string"},description:"airline codes or names; leave empty to use the airline currently open / asked last"},section:{type:"string",enum:["policy","emails","documents","notes","overview"],description:"which part of the hub"},query:{type:"string",description:"policy topic (ahl, dpr, ohd, rush, compensation, kit, walkie, tracing, signage, documents) or filter words such as a station or subject (e.g. bkk, delay)"}},required:["section"]}},
  {name:"policy_lookup",description:"Look up the exact policy card(s) of one or more airlines for a topic (AHL delayed, DPR damaged, OHD on-hand, rush bag, compensation, toiletries kit, walkie talkie, tracing system, signage, documents/PIR). Use this first for ANY airline policy question, even when the user typed only two words like “tg ahl”. The user sees the formatted card.",input_schema:{type:"object",properties:{airlines:{type:"array",items:{type:"string"},description:"airline codes or names; leave empty to use the airline currently open"},topic:{type:"string",description:"ahl, dpr, ohd, rush, compensation, kit, walkie, tracing, signage, documents — or the user’s own words; empty for an overview"}},required:["topic"]}},
  {name:"find_files",description:"Locate FILES by name / keywords: Temporary files, airline Documents (with their attachments) and Policy attachments. The user sees clickable results that open the file or the place where it lives.",input_schema:{type:"object",properties:{query:{type:"string"}},required:["query"]}},
  {name:"search_app",description:"General search across the whole app (templates, airlines, policy cards, documents, e-mails…) — the same index as the Advance Search Bar. Use it to locate anything not covered by a more specific tool.",input_schema:{type:"object",properties:{query:{type:"string"}},required:["query"]}},
@@ -3915,13 +4012,16 @@ function basicHandle(text){
   if(/^(open|go to|goto|show|เปิด|ไปที่)\b/.test(l)){const m=[["contact","contact"],["history","contact"],["template","email"],["email","email"],["hub","hub"],["airline","hub"],["sorting","sorting"],["bag","sorting"],["home","home"]].find(x=>l.includes(x[0]));if(m){AI_TOOLS.open_section({section:m[1]});add("Opening "+m[1]+"…");return out}}
   if(ref&&/(bag|tag|find|where|กระเป๋า|แท็ก|หา)/.test(l)||/^(find|search|หา)\s+(bag|tag|กระเป๋า)/.test(l)){const r=AI_TOOLS.find_baggage({query:ref||q.replace(/^(find|search|หา)\s+(bag|tag|กระเป๋า)/i,"")});add(r.text.startsWith("No")?r.text:"Baggage found:",r.ui);return out}
   if(/(record|history|case).*(search|find|หา)|(search|find|หา).*(record|phone|call)/.test(l)){const r=AI_TOOLS.search_records({log:"both",query:q.replace(/(search|find|record|records|phone|call|history|หา)/ig," ")});add(r.text.startsWith("No")?r.text:"Matching records:",r.ui);return out}
-  if(/\b(files?|pdf|docx?|xlsx?|attachment|attached|ไฟล์)\b|where is|locate/.test(l)){const r=AI_TOOLS.find_files({query:q.replace(/\b(find|search|file|files|locate|where|is|the|for|my|a|an|please|ไฟล์|หา)\b/ig," ")});add(r.text.startsWith("No")?r.text:"Files found:",r.ui);return out}
+  if((/\b(files?|pdf|docx?|xlsx?|attachment|attached|ไฟล์)\b|where is|locate/.test(l))&&!hubAirs(q).length){const r=AI_TOOLS.find_files({query:q.replace(/\b(find|search|file|files|locate|where|is|the|for|my|a|an|please|ไฟล์|หา)\b/ig," ")});add(r.text.startsWith("No")?r.text:"Files found:",r.ui);return out}
+  {
+    const nm=/\b(code|iata)\b.*?\b(?:for|of)?\s*([a-z][a-z ]{2,})$/i.exec(q);if(nm){const a=findAir(nm[2].trim());if(a){add(`${a.name} = **${a.code}**`);return out}}
+    const who=/^(who|what)\s+(is|'s)\s+([a-z0-9]{2,3})\??$/i.exec(q);if(who){const a=DB.emaildir.find(x=>String(x.code).toLowerCase()===who[3].toLowerCase());if(a){add(`**${a.code}** = ${a.name}`);return out}}
+  }
   if(!/(template|เทมเพลต)/.test(l)){
-    const pq=polParse(q);let airs=pq.airs;
-    if(!airs.length&&pq.keys.length){const last=AIS.last&&DB.emaildir.find(x=>x.id===AIS.last.air),ca=aiCtx().air;airs=ca?[ca]:last?[last]:[]}
-    if(airs.length&&pq.mail){const r=AI_TOOLS.airline_info({airline:airs[0].code,topics:["emails"]});add(r.text.length>900?r.text.slice(0,900)+"…":r.text,r.ui);return out}
-    if(!pq.mail&&!pq.docs&&(pq.airs.length||pq.keys.length)){const r=policyAnswer(airs,pq.keys,"");add(airs.length?(pq.keys.length?"":"Here is the policy overview — tap a topic."):"Which airline do you mean?",r.ui);return out}
-    const a=pq.airs[0];if(a&&pq.docs){const r=AI_TOOLS.airline_info({airline:a.code,topics:["documents"]});add(r.text.length>900?r.text.slice(0,900)+"…":r.text,r.ui);return out}
+    const pq=hubParse(q);let airs=pq.airs;const sect=pq.keys.length||pq.mail||pq.docs||pq.notes.length;
+    if(!airs.length&&sect){const last=AIS.last&&DB.emaildir.find(x=>x.id===AIS.last.air),ca=aiCtx().air;airs=ca?[ca]:last?[last]:[]}
+    if(!airs.length&&sect){const r=policyAnswer([],pq.keys,"");add("Which airline do you mean?",r.ui);return out}
+    if(airs.length){const r=hubAnswer(airs,pq);add(sect?"":"",r.ui);return out}
   }
   if(/(template|เทมเพลต|ตัวอย่าง|reply|email for|mail for)/.test(l)||words(q).length<=5){const r=AI_TOOLS.search_templates({query:q.replace(/(find|search|template|templates|for|หา|เทมเพลต)/ig," ")});if(!r.text.startsWith("No")){add("These templates look relevant:",r.ui);return out}}
   {const r=AI_TOOLS.search_app({query:q});if(!r.text.startsWith("Nothing")&&!r.text.startsWith("Give")){add("I found these in the app:",r.ui);return out}}
@@ -3937,10 +4037,11 @@ function aiFmt(t){
     else if(m=l.match(/^#{1,4}\s+(.*)$/)){close();html+=`<h5>${inline(m[1])}</h5>`}
     else{close();html+=`<p>${inline(l)}</p>`}});
   close();return html}
-let aiBtn,aiPanel;
+let aiBtn,aiPanel,aiHdr,turnCards=[];
 const aiMsgs=()=>$("#ai-msgs");
 function aiAdd(role,html,raw){const d=document.createElement("div");d.className="ai-m "+role;d.innerHTML=html+(role==="bot"&&raw?`<button class="ai-cp" data-aicopy title="Copy">📋</button>`:"");if(raw)d.dataset.raw=raw;aiMsgs().appendChild(d);aiMsgs().scrollTop=aiMsgs().scrollHeight;return d}
-const aiBot=t=>aiAdd("bot",aiFmt(t),t),aiCards=h=>aiAdd("cards",h);
+const aiCards=h=>{const d=aiAdd("cards",h);turnCards.push(d);return d};
+const aiBot=t=>{const d=aiAdd("bot",aiFmt(t),t);if(turnCards.length)turnCards[0].before(d);aiMsgs().scrollTop=aiMsgs().scrollHeight;return d};   /* the headline answer always sits above the cards */
 function aiSystem(){
   const c=aiCtx(),types=[...new Set(DB.templates.map(t=>t.type))].join(", "),auds=[...new Set(DB.templates.map(t=>t.aud))].join(", ");
   return `You are the built-in assistant of the "BFS Baggage Service Information Center", a web app used by baggage service / ground-handling staff at Bangkok-Suvarnabhumi Airport (BKK). You are talking to the administrator. Help them find things and work faster.
@@ -3954,6 +4055,7 @@ Rules:
 - You can draft e-mails: read a template with get_template and fill it in, keep its structure, use [brackets] for missing details.
 - POLICY QUICK ANSWERS: users type very short messages such as "tg ahl", "qr dpr", "ek rush", "sq kit", "3k walkie", "compare tg qr ahl", "can 5j deliver INAD?" or just "ahl" (meaning the airline currently open, or the one discussed last). Call policy_lookup IMMEDIATELY (airlines + topic) — do not ask questions unless the airline is truly unknown. The app already shows the formatted policy card, so your text must be ONE short, direct line with the answer (e.g. "TG AHL: hand over the PIR + passenger letter; no delivery for INAD.") plus at most one caution. For comparisons give one line per airline. Never restate the whole card, never add greetings or closing offers. If no card exists, say so in one line.
 - For a specific question about a rule, read the policy_lookup result and answer that exact point in one or two sentences, quoting the step letter (e.g. "step B").
+- AIRLINE HUB QUICK ANSWERS: users type "<airline> <topic>" in one to three words: "tg ahl", "qr email", "tg email bkk", "ek docs delay", "qr station manager" (a custom tab), "compare tg qr email", "tg" (overview) or just "email" (the airline open or asked last). Call hub_lookup(airlines, section, query) IMMEDIATELY — section = policy | emails | documents | notes | overview. The app shows the formatted card with copy buttons, so reply with ONE short headline that answers the question (e.g. "QR has 3 e-mail addresses for BKK — copy them below."); for rule questions quote the exact rule and step letter. Never repeat addresses or card contents unless asked to write them into a message. Airline name ↔ code questions: answer from the directory in one line.
 - You have no access to system logins or passwords; if asked, say they are in Airline Hub › Systems and must be read there.
 - Reply in the user's language (Thai or English). Be brief and practical.`}
 function aiChips(){
@@ -3963,14 +4065,10 @@ function aiChips(){
   const s=$("#ai-sub");if(s){const nm={home:"Home",email:"Email Templates",hub:"Airline Hub",contact:"Contact History",sorting:"Sorting Bag Record"}[c.sec]||c.sec;s.textContent=`On ${nm}${a?" · "+a.code:""}`}}
 function aiMode(){const c=aiCfg(),m=$("#ai-mode");m.textContent=aiUsesAI()?"Gemini · "+c.model.replace("gemini-","").replace("-latest"," latest"):"Basic mode";m.className="ai-mode"+(aiUsesAI()?" on":"")}
 function aiWelcome(){
-  aiMsgs().innerHTML="";const pc=DB.emaildir.filter(x=>policyFor(x).doc.cards.length).map(x=>x.code),A=pc[0]||"TG",B=pc[1]||"QR";
-  aiAdd("bot welcome",`<div class="ai-wt"><span class="ai-av">✨</span><div><b>Hi! What are you looking for?</b><small>${aiUsesAI()?"Gemini AI — ask in Thai or English":"Basic mode — short commands (add your Gemini key in ⚙ to chat freely)"}</small></div></div>
-    <div class="ai-try"><div class="ai-tl">Type it short — I answer straight:</div>
-    <button data-aichip="${A} ahl"><code>${A} ahl</code><span>delayed-bag rule of ${A}</span></button>
-    <button data-aichip="find file delay"><code>find file delay</code><span>locate a file anywhere in the app</span></button>
-    <button data-aichip="compare ${A} ${B} ohd"><code>compare ${A} ${B} ohd</code><span>two airlines side by side</span></button>
-    <button data-aichip="new phone record"><code>new phone record</code><span>I fill the form, you press Save</span></button>
-    <button data-aichip="template delivery"><code>template delivery</code><span>find &amp; open an e-mail template</span></button></div>`);
+  aiMsgs().innerHTML="";const c=aiCtx(),pc=DB.emaildir.filter(x=>policyFor(x).doc.cards.length).map(x=>x.code),A=(c.air&&c.air.code)||pc[0]||"TG",B=pc.find(x=>x!==A)||"QR";
+  const nt=noteTabs()[0],tiles=[["📘",`${A} ahl`,"Delayed-bag rule",`${A} ahl`],["📇",`${A} email`,"E-mail addresses",`${A} email`],["🗂",`${A} docs`,"Documents & forms",`${A} docs`],["🔎","find file delay","Locate a file","find file delay"],["⚖",`compare ${A} ${B} ohd`,"Two airlines side by side",`compare ${A} ${B} ohd`],["📞","new phone record","I fill it, you Save","new phone record"],...(nt?[[nt.icon,`${A} ${nt.label.toLowerCase()}`,nt.label,`${A} ${nt.label.toLowerCase()}`]]:[])];
+  aiAdd("hero",`<div class="ai-hero"><span class="ai-hico">${AI_ICON.replace('width="22" height="22"','width="30" height="30"')}</span><b>What are you looking for?</b><small>${aiUsesAI()?"Gemini AI · type short, I answer straight":"Basic mode · short commands work — add your Gemini key in ⚙ to chat freely"}</small></div>
+    <div class="ai-tiles">${tiles.map(([i,t,s,cmd])=>`<button class="ai-tile" data-aichip="${esc(cmd)}"><span>${i}</span><div><code>${esc(t)}</code><small>${esc(s)}</small></div></button>`).join("")}</div>`);
   aiChips()}
 function aiSettings(){
   AIS.view="set";const c=aiCfg(),known=AI_MODELS.some(m=>m[0]===c.model);
@@ -4012,24 +4110,45 @@ async function aiAsk(text){
 async function aiSend(text){
   text=text.trim();if(!text||AIS.busy)return;
   if(!ADM.on){aiBot("The assistant is available in Administrator mode only.");return}
-  AIS.view="chat";aiAdd("user",esc(text).replace(/\n/g,"<br>"));AIS.busy=true;const th=aiAdd("bot think","<span class='dots'><i></i><i></i><i></i></span> <small>thinking…</small>");$("#ai-send").disabled=true;
+  AIS.view="chat";turnCards=[];aiSuggest();aiAdd("user",esc(text).replace(/\n/g,"<br>"));AIS.busy=true;const th=aiAdd("bot think","<span class='dots'><i></i><i></i><i></i></span> <small>thinking…</small>");$("#ai-send").disabled=true;
   try{if(aiUsesAI())await aiAsk(text);else basicHandle(text).forEach(o=>{aiBot(o.text);if(o.ui)aiCards(o.ui)})}
   catch(e){aiBot("⚠ AI error: "+e.message+"\nCheck the key / model in ⚙ — or switch AI off to use basic mode.")}
   th.remove();AIS.busy=false;$("#ai-send").disabled=false;aiMsgs().scrollTop=aiMsgs().scrollHeight}
-function aiOpenPanel(){if(!ADM.on)return;aiPanel.hidden=false;aiBtn.classList.add("hid");if(!aiMsgs().children.length)aiWelcome();else if(AIS.view==="chat")aiChips();aiMode();setTimeout(()=>$("#ai-in").focus(),60)}
-function aiClose(){aiPanel.hidden=true;aiBtn.classList.remove("hid")}
-function aiGate(){const on=!!ADM.on;if(aiBtn)aiBtn.style.display=on?"":"none";if(!on&&aiPanel&&!aiPanel.hidden){aiClose();AIS.api=[];AIS.drafts={};AIS.view="chat";aiMsgs().innerHTML=""}}
+/* typing help: airline names / codes complete themselves, topics appear as one-tap chips */
+function aiSuggest(){
+  const ta=$("#ai-in"),sg=$("#ai-sg"),ch=$("#ai-chips");if(!ta||!sg)return;const v=ta.value;
+  if(!v.trim()){sg.innerHTML="";ch.classList.remove("hide");return}
+  ch.classList.add("hide");const toks=v.split(/\s+/),last=toks[toks.length-1],lead=toks.slice(0,-1).join(" "),L=last.toLowerCase(),trailing=/\s$/.test(v),out=[];
+  if(!trailing&&/^[a-z0-9]+$/i.test(L)){DB.emaildir.filter(a=>{const c=String(a.code).toLowerCase(),n=String(a.name).toLowerCase();return(c.startsWith(L)&&c!==L)||(L.length>=2&&n.startsWith(L))}).slice(0,5).forEach(a=>out.push(`<button class="ai-sgc air" data-aisg="fill|${esc((lead?lead+" ":"")+a.code+" ")}"><b>${esc(a.code)}</b> ${esc(a.name)}</button>`))}
+  const hp=hubAirs(v),A=hp[0]||aiCtx().air||(AIS.last&&DB.emaildir.find(x=>x.id===AIS.last.air));
+  if(A&&(trailing||!out.length)){
+    const opts=[["ahl","AHL"],["dpr","DPR"],["ohd","OHD"],["rush","Rush bag"],["comp","Compensation"],["kit","Kit"],["walkie","Walkie"],["email","📇 E-mails"],["docs","🗂 Docs"],...noteTabs().map(t=>[t.label.toLowerCase(),`${t.icon} ${t.label}`])].filter(o=>!new RegExp("\\b"+escRe(o[0])+"\\b","i").test(v));
+    opts.slice(0,9).forEach(o=>out.push(`<button class="ai-sgc" data-aisg="send|${esc((hp.length?v.trim():A.code+" "+v.trim()).trim()+" "+o[0])}">${esc(o[1])}</button>`))}
+  sg.innerHTML=out.join("")}
+function aiPalette(){
+  const p=$("#ai-pal");p.hidden=!p.hidden;if(p.hidden)return;
+  const c=aiCtx(),pc=DB.emaildir.filter(x=>policyFor(x).doc.cards.length).map(x=>x.code),X=(c.air&&c.air.code)||pc[0]||"TG",A=pc[0]||"TG",B=pc.find(x=>x!==A)||"QR",nt=noteTabs();
+  const G=[["📘 Policy",[`${X} ahl`,`${X} dpr kit`,`${X} rush`,`compare ${A} ${B} ohd`,"ahl (airline open / last asked)"]],["📇 E-mails",[`${X} email`,`${X} email bkk`,`${A} ${B} email`]],["🗂 Documents & files",[`${X} docs`,`${X} docs delay`,"find file delay"]],...(nt.length?[[`${nt[0].icon} ${nt.map(t=>t.label).join(" · ")}`,nt.slice(0,3).map(t=>`${X} ${t.label.toLowerCase()}`)]]:[]),["🧳 Records & bags",["new phone record","new office record","find bag 0738123221","bags due today"]],["🔎 Anything",["template delivery address","code for qatar","open airline hub"]]];
+  p.innerHTML=`<div class="ai-pt">Command list — tap one to put it in the box</div>`+G.map(([t,l])=>`<div class="ai-pg"><b>${t}</b><div>${l.map(x=>`<button data-aiins="${esc(x.replace(/ \(.*\)$/,""))}">${esc(x)}</button>`).join("")}</div></div>`).join("")}
+function aiOpenPanel(){if(!ADM.on)return;aiPanel.hidden=false;aiBtn.classList.add("hid");aiHdr&&aiHdr.classList.add("on");if(!aiMsgs().children.length)aiWelcome();else if(AIS.view==="chat")aiChips();aiMode();setTimeout(()=>$("#ai-in").focus(),60)}
+function aiClose(){aiPanel.hidden=true;aiBtn.classList.remove("hid");aiHdr&&aiHdr.classList.remove("on")}
+function aiGate(){const on=!!ADM.on;if(aiBtn)aiBtn.style.display=on?"":"none";if(aiHdr)aiHdr.style.display=on?"":"none";if(!on&&aiPanel&&!aiPanel.hidden){aiClose();AIS.api=[];AIS.drafts={};AIS.view="chat";aiMsgs().innerHTML=""}}
 function aiInit(){
-  aiBtn=document.createElement("button");aiBtn.id="aiBtn";aiBtn.type="button";aiBtn.title="Assistant — administrator (Alt+A)";aiBtn.setAttribute("aria-label","Open the assistant");aiBtn.innerHTML="✨";document.body.appendChild(aiBtn);
+  aiBtn=document.createElement("button");aiBtn.id="aiBtn";aiBtn.type="button";aiBtn.title="Assistant — administrator (Alt+A)";aiBtn.setAttribute("aria-label","Open the assistant");aiBtn.innerHTML=AI_ICON;document.body.appendChild(aiBtn);
+  {const bell=$("#bellBtn");if(bell){aiHdr=document.createElement("button");aiHdr.id="aiHdr";aiHdr.type="button";aiHdr.className="ai-hbtn";aiHdr.title="Assistant — administrator (Alt+A)";aiHdr.innerHTML=AI_ICON.replace('width="22" height="22"','width="18" height="18"')+"<span>Ask</span>";bell.parentNode.insertBefore(aiHdr,bell);aiHdr.onclick=()=>aiPanel.hidden?aiOpenPanel():aiClose()}}
   aiPanel=document.createElement("div");aiPanel.id="aiPanel";aiPanel.hidden=true;aiPanel.setAttribute("role","dialog");aiPanel.setAttribute("aria-label","Assistant");
-  aiPanel.innerHTML=`<div class="ai-h"><span class="ai-av">✨</span><div class="ai-ht"><b>Assistant</b><small id="ai-sub"></small></div><span class="ai-mode" id="ai-mode"></span><span class="ai-hb"><button data-ai="wide" title="Wider / narrower">⤢</button><button data-ai="new" title="New chat">🗑</button><button data-ai="set" title="Settings">⚙</button><button data-ai="x" title="Close">✕</button></span></div>
-   <div class="ai-msgs" id="ai-msgs"></div><div class="ai-chips" id="ai-chips"></div>
-   <form class="ai-in" id="ai-form"><textarea id="ai-in" rows="1" placeholder="Type short — e.g. “tg ahl”, “find file delay”, “new phone record …”" aria-label="Message"></textarea><button type="submit" id="ai-send" title="Send">➤</button></form><div class="ai-ft">Enter to send · Shift+Enter new line · Alt+A to open / close · Test feature</div>`;
+  aiPanel.innerHTML=`<div class="ai-h"><span class="ai-av">${AI_ICON}</span><div class="ai-ht"><b>Assistant</b><small id="ai-sub"></small></div><span class="ai-mode" id="ai-mode"></span><span class="ai-hb"><button data-ai="wide" title="Wider / narrower">⤢</button><button data-ai="new" title="New chat">🗑</button><button data-ai="set" title="Settings">⚙</button><button data-ai="x" title="Close">✕</button></span></div>
+   <div class="ai-msgs" id="ai-msgs"></div>
+   <div class="ai-pal" id="ai-pal" hidden></div><div class="ai-chips" id="ai-chips"></div><div class="ai-sg" id="ai-sg"></div>
+   <form class="ai-in" id="ai-form"><button type="button" class="ai-cmd" data-ai="pal" title="Command list">⌘</button><textarea id="ai-in" rows="1" placeholder="Ask short — “tg ahl”, “qr email”, “find file delay”…" aria-label="Message"></textarea><button type="submit" id="ai-send" title="Send">➤</button></form><div class="ai-ft">Enter to send · Shift+Enter new line · ⌘ command list · Alt+A open / close</div>`;
   document.body.appendChild(aiPanel);
   aiBtn.onclick=aiOpenPanel;
   aiPanel.addEventListener("click",async e=>{
-    const a=e.target.closest("[data-ai]");if(a){const k=a.dataset.ai;if(k==="x")aiClose();else if(k==="wide")aiPanel.classList.toggle("wide");else if(k==="new"){AIS.api=[];AIS.drafts={};AIS.view="chat";aiWelcome();aiMode()}else if(k==="set")aiSettings();return}
-    const ch=e.target.closest("[data-aichip]");if(ch){aiSend(ch.dataset.aichip);return}
+    const a=e.target.closest("[data-ai]");if(a){const k=a.dataset.ai;if(k==="x")aiClose();else if(k==="pal")aiPalette();else if(k==="wide")aiPanel.classList.toggle("wide");else if(k==="new"){AIS.api=[];AIS.drafts={};AIS.view="chat";aiWelcome();aiMode()}else if(k==="set")aiSettings();return}
+    const cpt=e.target.closest("[data-aicopyt]");if(cpt){hubCopy(cpt.dataset.aicopyt);return}
+    const ins=e.target.closest("[data-aiins]");if(ins){const t=$("#ai-in");t.value=ins.dataset.aiins;$("#ai-pal").hidden=true;aiSuggest();t.focus();return}
+    const sg=e.target.closest("[data-aisg]");if(sg){const[m,...r]=sg.dataset.aisg.split("|"),v=r.join("|"),t=$("#ai-in");if(m==="send"){t.value="";aiSend(v)}else{t.value=v;aiSuggest();t.focus()}return}
+    const ch=e.target.closest("[data-aichip]");if(ch){$("#ai-pal").hidden=true;aiSend(ch.dataset.aichip);return}
     const go_=e.target.closest("[data-aigo]");if(go_){const f=AIS.hits[+go_.dataset.aigo];if(f){f();if(innerWidth<=700)aiClose()}return}
     const op=e.target.closest("[data-aiopen]");if(op){const[k,x,y]=op.dataset.aiopen.split(":");
       if(k==="tpl")aiOpen("email",{tpl:x});else if(k==="pol")aiOpen("policy",{air:x,cid:y});else if(k==="air")aiOpen("hub",{air:x,tab:y});else if(k==="rec")aiOpen("contact",{tab:x,q:y});
@@ -4056,7 +4175,7 @@ function aiInit(){
   const f=$("#ai-form"),ta=$("#ai-in");
   f.addEventListener("submit",e=>{e.preventDefault();const v=ta.value;ta.value="";ta.style.height="";aiSend(v)});
   ta.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();f.requestSubmit()}});
-  ta.addEventListener("input",()=>{ta.style.height="auto";ta.style.height=Math.min(ta.scrollHeight,120)+"px"});
+  ta.addEventListener("input",()=>{ta.style.height="auto";ta.style.height=Math.min(ta.scrollHeight,120)+"px";aiSuggest()});
   document.addEventListener("keydown",e=>{if(e.altKey&&e.key.toLowerCase()==="a"&&ADM.on){e.preventDefault();aiPanel.hidden?aiOpenPanel():aiClose()}else if(e.key==="Escape"&&!aiPanel.hidden&&!document.querySelector(".modalbg,#tmpView"))aiClose()});
   const _rnAi=render;render=function(){const r=_rnAi.apply(this,arguments);if(aiPanel&&!aiPanel.hidden&&AIS.view==="chat")aiChips();return r};
   aiGate()}
