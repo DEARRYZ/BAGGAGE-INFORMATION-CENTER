@@ -414,7 +414,7 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .pa{border:1px solid var(--line);border-left:5px solid var(--pc,#2563eb);border-radius:14px;background:var(--card);overflow:hidden;box-shadow:0 2px 10px rgba(15,35,60,.09);animation:aiIn .25s ease}
 .pa-h{display:flex;gap:10px;align-items:center;padding:9px 12px;background:color-mix(in srgb,var(--pc) 11%,transparent)}.pa-air{background:var(--pc);color:#fff;font-weight:800;border-radius:9px;padding:4px 9px;font-size:14px;letter-spacing:.4px}.pa-t{min-width:0}.pa-t b{display:block;font-size:15px;line-height:1.25}.pa-t small{color:var(--mut);font-size:12px}
 .pa-l{list-style:none;margin:0;padding:8px 12px 6px;display:flex;flex-direction:column;gap:8px}.pa-l li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45}
-.pa-l li.st b{flex:none;width:23px;height:23px;border-radius:50%;background:var(--pc);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.pa-l li.st>b{flex:none;width:23px;height:23px;border-radius:50%;background:var(--pc);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
 .pa-l li.kv{padding-bottom:6px;border-bottom:1px dashed var(--line)}.pa-l li.kv:last-child{border:0;padding-bottom:0}.pa-l li.kv em{flex:none;width:34%;max-width:140px;font-style:normal;font-weight:800;font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.3px;padding-top:3px}.pa-l li.kv span{flex:1}
 .pa-l li>i{flex:none;width:7px;height:7px;border-radius:50%;background:var(--pc);margin-top:8px}
 .pa-nil{background:var(--soft);color:var(--mut);border-radius:6px;padding:0 7px;font-size:12px;font-weight:800}
@@ -444,6 +444,25 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .pa-dr{display:flex;flex-direction:column;gap:2px;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:11px;padding:8px 10px;cursor:pointer;min-height:0;width:100%}.pa-dr:hover{border-color:var(--pri2);background:var(--soft)}.pa-dr b{font-size:14px}.pa-dr small{color:var(--mut)}.pa-cat{align-self:flex-start;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;background:var(--soft);color:var(--pri);border-radius:7px;padding:1px 7px}.pa-fl{font-size:12px;color:var(--mut)}
 .pa-tx{font-size:14px;line-height:1.5;overflow-wrap:anywhere}.pa-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;padding:10px 12px 12px}.pa-tile{display:flex;flex-direction:column;align-items:center;gap:1px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 4px;cursor:pointer;min-height:0}.pa-tile:hover{border-color:var(--pri2);background:var(--soft)}.pa-tile>span{font-size:20px}.pa-tile b{font-size:19px}.pa-tile small{color:var(--mut);font-size:11px}.pa-tile.z{opacity:.55}
 @media(max-width:700px){#aiPanel,#aiPanel.wide{top:0;bottom:0;right:0;left:0;width:auto;border-radius:0}.ai-tiles{grid-template-columns:1fr 1fr}.ai-pal{max-height:50vh}}
+
+
+/* v1.10.3 assistant: app theme colours, copy buttons, fixes */
+.ai-msgs>*{flex:none}.pa-l li{font-weight:400}.pa-l li span b{font-weight:800}.pa-mr,.pa-tx,.pa-dr small{font-weight:400}
+#aiBtn{background:linear-gradient(135deg,#0e6fc0,#07345e);border:2px solid rgba(255,255,255,.7);color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.35);animation:none}
+#aiBtn svg path:nth-child(n+2),.ai-hbtn svg path:nth-child(n+2),.ai-av svg path:nth-child(n+2),.ai-hico svg path:nth-child(n+2){fill:#f5b83d;opacity:1}
+.ai-hbtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.55);box-shadow:none;color:#fff}.ai-hbtn:hover{background:rgba(255,255,255,.26);box-shadow:none;transform:none}.ai-hbtn.on{background:rgba(255,255,255,.3);box-shadow:inset 0 0 0 1px #fff}
+#aiPanel{border:1px solid var(--line);box-shadow:0 22px 60px rgba(7,52,94,.45)}
+.ai-h{background:linear-gradient(120deg,#07345e,#0b4f8a 60%,#0e6fc0)}.ai-av{background:rgba(255,255,255,.14)}
+.ai-msgs{background:linear-gradient(180deg,var(--soft),transparent 140px)}
+.ai-m.user{background:linear-gradient(135deg,#0e6fc0,#0b4f8a);box-shadow:0 3px 10px rgba(11,79,138,.3)}
+.ai-hico{background:linear-gradient(135deg,#0e6fc0,#07345e);box-shadow:0 10px 26px rgba(11,79,138,.4)}
+.ai-in button[type=submit]{background:linear-gradient(135deg,#0e6fc0,#0b4f8a)}.ai-cmd{color:var(--pri2)}.ai-cmd:hover{background:var(--pri2);color:#fff}
+.ai-sgc{border-color:var(--pri2);color:var(--pri)}.ai-tile code{color:var(--pri2)}
+.ai-cp{opacity:.75;top:6px;right:6px;width:26px;height:26px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--mut);display:flex;align-items:center;justify-content:center;padding:0}.ai-cp:hover{opacity:1;color:var(--pri2);border-color:var(--pri2)}
+.ai-cpc{align-self:flex-end;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);color:var(--mut);border-radius:14px;padding:3px 11px;font-size:12px;font-weight:700;cursor:pointer;min-height:0;margin-top:-2px}.ai-cpc:hover{color:var(--pri2);border-color:var(--pri2)}
+.ai-ib,.ai-cpc,.ai-cp,.ai-chip,.btn{transition:background-color .15s,color .15s,border-color .15s}
+.ai-cpc.ok,.ai-ib.ok,.ai-cp.ok,.ai-chip.ok,.btn.ok{background:#16a34a!important;border-color:#16a34a!important;color:#fff!important}
+.ai-m.copyall{align-self:flex-end;max-width:100%;background:transparent;padding:0}.ai-ib svg,.ai-cp svg,.ai-cpc svg{display:block}
 /* v1.9.1 temporary files: select, bulk actions, preview */
 .tmp-sel{position:absolute;top:10px;left:10px;z-index:2;background:rgba(255,255,255,.92);border-radius:7px;padding:3px 4px;line-height:0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25)}.tmp-sel input{width:18px;height:18px;min-height:0!important;margin:0;accent-color:var(--pri2)}
 .tmpc{position:relative;transition:box-shadow .12s,border-color .12s}.tmpc.sel{border-color:var(--pri2);box-shadow:0 0 0 2px var(--pri2)}.tmp-t{cursor:zoom-in}.tmp-nm{cursor:pointer}.tmp-nm:hover{text-decoration:underline}
@@ -658,8 +677,9 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.10.2";
+const VERSION="1.10.3";
 const CHANGELOG=[
+ {v:"1.10.3",d:"2026-11-16",items:["✨ Assistant: fixed words such as “must / not” turning into circles in policy steps, an empty bubble under your question, the cut-off welcome screen, and the Policy button that kept showing the overview — “tg policy” now lists the airline’s policy topics.","Assistant and Ask button now use the web app’s own colours (navy blue with the gold accent).","Easier copying: every answer card has a Copy button, e-mail rows have a copy icon, Copy all (uses your ; / , separator) and As lines, and several answers can be copied together.","Smarter overall: greetings, “summary” (today at a glance), counts (“how many phone records today”), “what is AHL / DPR / OHD / PIR”, “latest phone record”, follow-ups such as “and qr?”, and a helpful reply when it does not understand."]},
  {v:"1.10.2",d:"2026-11-15",items:["✨ Assistant overhaul: new look, a ✨ Ask button in the header next to the bell (floating button on phones), a home screen of one-tap commands, ⌘ command list, and live typing help (airline names complete themselves, topics appear as chips).","Smarter Airline Hub answers from very short commands — “tg email”, “qr email bkk”, “tg docs delay”, “tg ahl email”, “qr contacts” (your own tabs), “tg” (overview), “compare tg qr email”, “code for qatar” — with e-mail copy buttons, document cards and typo-tolerant airline names. Answers show a one-line headline first, then the card."]},
  {v:"1.10.1",d:"2026-11-14",items:["✨ Assistant now uses Gemini 3.8 Flash by default (Gemini 2.x models no longer work, so old settings move to 3.8 automatically). If the model name is not found for your key, the assistant picks the newest Flash model your key can use and remembers it; ↻ Load available models in ⚙ shows the exact list."]},
  {v:"1.10.0",d:"2026-11-14",items:["✨ Assistant (test feature, Administrator mode only) powered by Google Gemini: a chat button (or Alt+A) that helps you find things — files in Temporary files / Documents / Policy attachments, templates, airline policy, e-mails, bags, records — and prepares a phone / office record for you to check and Save.","Type short and get a straight answer: “tg ahl”, “qr dpr kit”, “compare tg qr ohd”. It remembers the airline you asked about last and uses the airline open in the Airline Hub.","Add your Gemini API key in the assistant’s ⚙ settings (kept only in your browser). Without a key it runs in basic mode with the same short commands."]},
@@ -3833,6 +3853,7 @@ function policyAnswer(airs,keys,rawTopic){
   return{text:text.join("\n\n"),ui:ui.join("")}}
 /* ---- Airline Hub quick answers: policy · e-mails · documents · your own tabs ---- */
 const AI_ICON='<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6 5.6 1.9-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2z"/><path d="M19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9L19 14z" opacity=".85"/><path d="M5.5 15l.7 1.8 1.8.7-1.8.7L5.5 20l-.7-1.8L3 17.5l1.8-.7L5.5 15z" opacity=".7"/></svg>';
+const AI_COPY='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>';
 const HUB_MAIL_RE=/\b(e-?mails?|mails?|address(es)?|อีเมล)\b/i,HUB_DOC_RE=/\b(docs?|documents?|files?|attachments?|papers?|certificates?|letters?|เอกสาร|ไฟล์)\b/i;
 const STOPQ=new Set("for of the to show me give get please need i want what whats is are how who where can do does a an and or with on in at tell find about all any from my our your it this that info overview summary detail details".split(" "));
 const escRe=s=>String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
@@ -3846,8 +3867,8 @@ function hubAirs(q){
   return found}
 function hubParse(q){
   const airs=hubAirs(q),keys=[];POL_TOPICS.forEach(t=>{if(t.re.test(q)&&!keys.some(k=>k.k===t.k&&(k.sub||"")===(t.sub||"")))keys.push(t)});
-  const mail=HUB_MAIL_RE.test(q),docs=HUB_DOC_RE.test(q),notes=noteTabs().filter(t=>t.label.length>=3&&new RegExp("\\b"+escRe(t.label.toLowerCase())+"\\b","i").test(q));
-  return{airs,keys,mail,docs,notes,rest:hubRest(q,airs,notes)}}
+  const pol=/\b(policy|policies|rules?|นโยบาย)\b/i.test(q),mail=HUB_MAIL_RE.test(q),docs=HUB_DOC_RE.test(q),notes=noteTabs().filter(t=>t.label.length>=3&&new RegExp("\\b"+escRe(t.label.toLowerCase())+"\\b","i").test(q));
+  return{airs,keys,pol,mail,docs,notes,rest:hubRest(q,airs,notes)}}
 function hubRest(q,airs,notes){
   const codes=new Set((airs||[]).map(a=>String(a.code).toLowerCase())),names=new Set((airs||[]).flatMap(a=>String(a.name).toLowerCase().split(/[\s(]+/))),labs=new Set((notes||[]).flatMap(t=>t.label.toLowerCase().split(/\s+/)));
   return q.toLowerCase().split(/[\s,;/&+?!]+/).filter(w=>w.length>1&&!STOPQ.has(w)&&!codes.has(w)&&!names.has(w)&&!labs.has(w)&&!POL_TOPICS.some(t=>t.re.test(w))&&!HUB_MAIL_RE.test(w)&&!HUB_DOC_RE.test(w)&&!/^(policy|rule|rules|compare|vs|versus)$/.test(w))}
@@ -3858,8 +3879,8 @@ function hubEmails(a,rest){
   const all=uniqAddr(subs.flatMap(x=>x.list));if(!all.length)return hubMiss(a,`e-mail${rest.length?" matching “"+rest.join(" ")+"”":""}`,"dir");
   return{text:`[${a.code} · ${a.name}] E-mails:\n`+subs.map(x=>`${x.s.name}: ${x.list.map(e=>e.addr+(e.remark?` (${e.remark})`:"")).join("; ")}`).join("\n"),
     ui:`<div class="pa" style="--pc:#0d9488"><div class="pa-h"><span class="pa-air">${esc(a.code)}</span><div class="pa-t"><b>E-mail addresses</b><small>${esc(a.name)} · ${all.length} address${all.length>1?"es":""}</small></div></div>
-    <div class="pa-m">${subs.map(x=>`<div class="pa-ms"><div class="pa-mt">${esc(x.s.name)}</div>${x.list.map(e=>`<div class="pa-mr"><a href="mailto:${esc(e.addr)}">${esc(e.addr)}</a>${e.remark?`<small>${esc(e.remark)}</small>`:""}<button class="ai-ib" data-aicopyt="${esc(e.addr)}" title="Copy">📋</button></div>`).join("")}</div>`).join("")}</div>
-    <div class="pa-f"><button class="btn sm pri" data-aicopyt="${esc(all.map(e=>e.addr).join("; "))}">📋 Copy all (${all.length})</button><button class="btn sm" data-aiopen="air:${a.id}:dir">Open in Emails ↗</button></div></div>`}}
+    <div class="pa-m">${subs.map(x=>`<div class="pa-ms"><div class="pa-mt">${esc(x.s.name)}</div>${x.list.map(e=>`<div class="pa-mr"><a href="mailto:${esc(e.addr)}">${esc(e.addr)}</a>${e.remark?`<small>${esc(e.remark)}</small>`:""}<button class="ai-ib" data-aicopyt="${esc(e.addr)}" title="Copy">${AI_COPY}</button></div>`).join("")}</div>`).join("")}</div>
+    <div class="pa-f"><button class="btn sm pri" data-aicopyt="${esc(all.map(e=>e.addr).join((DB.ui.sep||";")+" "))}">${AI_COPY} Copy all (${all.length})</button><button class="btn sm" data-aicopyt="${esc(all.map(e=>e.addr).join("\n"))}">As lines</button><button class="btn sm" data-aiopen="air:${a.id}:dir">Open in Emails ↗</button></div></div>`}}
 function hubDocs(a,rest){
   const items=docFor(a).items.filter(i=>!rest.length||rest.every(k=>[i.title,i.note,catName(i.cat),...fileNamesOf(i)].join(" ").toLowerCase().includes(k)));
   if(!items.length)return hubMiss(a,`document${rest.length?" matching “"+rest.join(" ")+"”":""}`,"docs");
@@ -3881,7 +3902,8 @@ function hubOverview(a){
     ui:`<div class="pa" style="--pc:#2563eb"><div class="pa-h"><span class="pa-air">${esc(a.code)}</span><div class="pa-t"><b>${esc(a.name)}</b><small>Airline Hub · tap a section</small></div></div><div class="pa-tiles">${tiles.map(([i,l,n,c])=>`<button class="pa-tile${n?"":" z"}" data-aichip="${esc(c)}"><span>${esc(i)}</span><b>${n}</b><small>${esc(l)}</small></button>`).join("")}</div></div>`}}
 function hubAnswer(airs,pq){
   AIS.last={air:(airs[0]||{}).id};const T=[],U=[],add=r=>{if(r){T.push(r.text);U.push(r.ui)}};
-  const secs=[];if(pq.keys.length)secs.push("policy");if(pq.mail)secs.push("emails");if(pq.docs)secs.push("documents");pq.notes.forEach(t=>secs.push("note:"+t.id));
+  const secs=[];if(pq.keys.length||pq.pol)secs.push("policy");if(pq.mail)secs.push("emails");if(pq.docs)secs.push("documents");pq.notes.forEach(t=>secs.push("note:"+t.id));
+  if(secs.length)AIS.lastPq={keys:pq.keys,pol:pq.pol,mail:pq.mail,docs:pq.docs,notes:pq.notes};
   airs.forEach(a=>{
     if(!secs.length){
       if(pq.rest.length){let any=false;
@@ -4000,10 +4022,35 @@ function draftSave(card){
   if(!o)n.contact=g("contact");else n.rtype=g("rtype");
   putItem(d.log,n);delete AIS.drafts[card.dataset.dr];
   card.innerHTML=`<div class="ai-dt">✅ Saved to ${o?"Office 1st floor":"Phone Pick-up"}</div><div class="hint">${esc(n.topic)}${n.ref?" · "+esc(n.ref):""}${n.contact?" · "+esc(n.contact):""}</div><div class="ai-row"><button class="btn sm" data-aiopen="rec:${d.log}:${esc(n.ref||n.contact||"")}">Open Contact History ↗</button></div>`;toast("Record saved ✓")}
+/* ---- general logic: greetings, today at a glance, counts, glossary, latest records ---- */
+const GLOSS={ahl:["AHL","Delayed baggage — the bag did not arrive with the passenger; a delayed-baggage (AHL) report is opened and the bag is traced and delivered."],dpr:["DPR","Damaged baggage — a damage report (PIR) is opened; repair or compensation follows the airline’s rule."],ohd:["OHD","On-hand baggage — a bag found without an owner (unclaimed / mishandled) that is stored until it is matched to its owner."],pir:["PIR","Property Irregularity Report — the report opened for delayed, damaged or missing baggage."],inad:["INAD","Inadmissible passenger — refused entry; airlines usually do not deliver delayed bags to them."],wt:["WT","WorldTracer — the baggage tracing system used to follow up bags."]};
+function statsAnswer(){
+  const td=todayStr(),isT=r=>dayKey(r.ts)===td,sort=DB.sorting.filter(r=>!isMockRec(r)),jaat=sort.filter(r=>zoneOf(r)==="jaat"),tbt=sort.filter(r=>zoneOf(r)!=="jaat");
+  const t=[["📞","Phone today",DB.phone.filter(isT).length],["⏳","Phone pending",DB.phone.filter(r=>r.status==="Pending").length],["🏢","Office today",DB.office.filter(isT).length],["🧳","Sorting today",tbt.filter(r=>String(r.createdAt).slice(0,10)===td).length],["📦","In JAAT room",jaat.filter(r=>r.status!=="Done").length],["⚠","Due take-out",jDueList().length]];
+  return{text:`Today (${td}): `+t.map(x=>`${x[1]} ${x[2]}`).join(" · ")+` · ${DB.emaildir.length} airlines · ${DB.templates.length} templates`,
+    ui:`<div class="pa" style="--pc:#0b4f8a"><div class="pa-h"><span class="pa-air">📊</span><div class="pa-t"><b>Today at a glance</b><small>${esc(td)}</small></div></div><div class="pa-tiles">${t.map(([i,l,n])=>`<button class="pa-tile${n?"":" z"}" data-aichip="${/Due/.test(l)?"bags due today":/Phone/.test(l)?"latest phone records":"help"}"><span>${i}</span><b>${n}</b><small>${esc(l)}</small></button>`).join("")}</div></div>`}}
+AI_TOOLS.app_stats=()=>statsAnswer();
+AI_TOOLDEFS.push({name:"app_stats",description:"Counts for today: phone / office records, pending items, sorting bags, bags in the JAAT room, bags due for take-out, number of airlines and templates.",input_schema:{type:"object",properties:{}}});
+function smallTalk(q,l,add){
+  let m;
+  if(/^(hi|hello|hey|yo|สวัสดี|หวัดดี)\b/.test(l)&&words(q).length<=3){add("Hi! 👋 What do you need? Try “tg ahl”, “qr email” or “find file delay”.");return true}
+  if(/^(thanks|thank you|thx|ty|ขอบคุณ)/.test(l)){add("You’re welcome!");return true}
+  if(/^(help|\?|what can you do|commands?|how (do|to) (i )?use|ช่วย|ทำอะไรได้)/.test(l)){add(BASIC_HELP);return true}
+  if(/(what('s| is)? (the )?(date|time|day)|วันนี้วันที่|กี่โมง)/.test(l)){const d=new Date();add(`Today is **${d.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}** · ${d.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})}`);return true}
+  if(/(summary|dashboard|at a glance|overview today|status today|today.*(status|overview)|สรุป)/.test(l)){const r=statsAnswer();add("",r.ui);return true}
+  if(m=/how many (airlines?|templates?)/.exec(l)){add(m[1].startsWith("airline")?`**${DB.emaildir.length}** airlines in the directory.`:`**${DB.templates.length}** e-mail templates.`);return true}
+  if(m=/how many (phone|office|contact)( records| calls)?( today)?/.exec(l)){const arr=m[1]==="office"?DB.office:DB.phone,td=todayStr(),n=m[3]?arr.filter(r=>dayKey(r.ts)===td).length:arr.length;add(`**${n}** ${m[1]==="office"?"office":"phone"} record${n===1?"":"s"}${m[3]?" today":" in total"} · ${arr.filter(r=>r.status==="Pending").length} pending.`);return true}
+  if(/how many bags?/.test(l)){const r=statsAnswer();add("",r.ui);return true}
+  if(m=/^(?:what(?:'s| is| does)?|define|meaning of|ความหมาย)\s+(ahl|dpr|ohd|pir|inad|wt)\b/.exec(l)||/^(ahl|dpr|ohd|pir|inad|wt)\s+(meaning|mean|means|คือ)\??$/.exec(l)){const g=GLOSS[m[1]];add(`**${g[0]}** — ${g[1]}\n(Industry meaning. For an airline’s own rule ask “tg ${m[1]==="inad"||m[1]==="pir"||m[1]==="wt"?"docs":m[1]}”.)`);return true}
+  if(/\b(latest|last|recent|newest)\b.*\b(phone|call|office|record)/.test(l)){const off=/office/.test(l),arr=off?DB.office:DB.phone,top=arr.slice().sort((a,b)=>String(b.ts).localeCompare(String(a.ts))).slice(0,5);
+    if(!top.length){add("No records yet.");return true}
+    add("Latest records:",`<div class="ai-list">${top.map(r=>`<button class="ai-it" data-aiopen="rec:${off?"office":"phone"}:${esc(r.ref||r.contact||"")}"><b>${esc(r.ref||r.contact||"(no ref)")} · ${esc(r.topic)}</b><small>${esc(r.status)} · ${esc(fmt(r.ts))}</small></button>`).join("")}</div>`);return true}
+  return false}
 /* ---- basic mode (no key): understands simple commands ---- */
-const BASIC_HELP=`Basic mode understands short commands. Try:\n• “tg ahl” · “qr dpr kit” · “compare tg qr ohd”\n• “find file delay form” · “where is the PIR form”\n• “new phone record +66 81 234 5678 case file follow up BKKTG12345”\n• “template delivery address” · “emails for QR”\n• “find bag 0738123221” · “bags due today”\nAdd your Gemini key in ⚙ to chat freely in Thai or English.`;
+const BASIC_HELP=`Basic mode understands short commands. Try:\n• “summary” (today at a glance) · “what is ahl” · “latest phone record”\n• “tg ahl” · “qr dpr kit” · “compare tg qr ohd”\n• “find file delay form” · “where is the PIR form”\n• “new phone record +66 81 234 5678 case file follow up BKKTG12345”\n• “template delivery address” · “emails for QR”\n• “find bag 0738123221” · “bags due today”\nAdd your Gemini key in ⚙ to chat freely in Thai or English.`;
 function basicHandle(text){
   const q=text.trim(),l=q.toLowerCase(),out=[],add=(t,ui)=>out.push({text:t,ui});
+  if(smallTalk(q,l,add))return out;
   const phone=(q.match(/\+?\d[\d\s-]{7,}\d/)||[])[0],ref=(q.match(/\b[A-Za-z]{5}\d{5}\b|\b\d{10}\b|\b[A-Za-z]{2}\d{6}\b/)||[])[0];
   if(/(new|add|create|make|เพิ่ม|สร้าง|บันทึก).*(phone|call|record|โทร|เบอร์|บันทึก)|^(phone|call) record/.test(l)){
     const office=/office|ออฟฟิศ/.test(l),rest=q.replace(phone||"","").replace(ref||"","").replace(/(new|add|create|make|phone|call|record|office|pick-?up|ให้|บันทึก|เพิ่ม|สร้าง|เบอร์|โทร)/ig," ").replace(/\s+/g," ").trim();
@@ -4018,14 +4065,16 @@ function basicHandle(text){
     const who=/^(who|what)\s+(is|'s)\s+([a-z0-9]{2,3})\??$/i.exec(q);if(who){const a=DB.emaildir.find(x=>String(x.code).toLowerCase()===who[3].toLowerCase());if(a){add(`**${a.code}** = ${a.name}`);return out}}
   }
   if(!/(template|เทมเพลต)/.test(l)){
-    const pq=hubParse(q);let airs=pq.airs;const sect=pq.keys.length||pq.mail||pq.docs||pq.notes.length;
+    const pq=hubParse(q);let airs=pq.airs;let sect=pq.keys.length||pq.pol||pq.mail||pq.docs||pq.notes.length;
+    if(!sect&&airs.length&&AIS.lastPq&&/\b(same|and|also|what about|how about|then|แล้ว)\b/i.test(q)){Object.assign(pq,AIS.lastPq);sect=1}
     if(!airs.length&&sect){const last=AIS.last&&DB.emaildir.find(x=>x.id===AIS.last.air),ca=aiCtx().air;airs=ca?[ca]:last?[last]:[]}
     if(!airs.length&&sect){const r=policyAnswer([],pq.keys,"");add("Which airline do you mean?",r.ui);return out}
     if(airs.length){const r=hubAnswer(airs,pq);add(sect?"":"",r.ui);return out}
   }
   if(/(template|เทมเพลต|ตัวอย่าง|reply|email for|mail for)/.test(l)||words(q).length<=5){const r=AI_TOOLS.search_templates({query:q.replace(/(find|search|template|templates|for|หา|เทมเพลต)/ig," ")});if(!r.text.startsWith("No")){add("These templates look relevant:",r.ui);return out}}
   {const r=AI_TOOLS.search_app({query:q});if(!r.text.startsWith("Nothing")&&!r.text.startsWith("Give")){add("I found these in the app:",r.ui);return out}}
-  add(BASIC_HELP);return out}
+  {const pc=DB.emaildir.filter(x=>policyFor(x).doc.cards.length).map(x=>x.code),A=pc[0]||"TG";
+   add("I’m not sure what you mean — here are some things I can do:",`<div class="ai-row">${[`${A} ahl`,`${A} email`,`${A} policy`,"find file …","summary","help"].map(x=>`<button class="ai-chip" data-aichip="${esc(x)}">${esc(x)}</button>`).join("")}</div>`);return out}}
 /* ---- chat UI ---- */
 function aiFmt(t){
   const inline=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/`([^`]+)`/g,"<code>$1</code>");
@@ -4039,9 +4088,10 @@ function aiFmt(t){
   close();return html}
 let aiBtn,aiPanel,aiHdr,turnCards=[];
 const aiMsgs=()=>$("#ai-msgs");
-function aiAdd(role,html,raw){const d=document.createElement("div");d.className="ai-m "+role;d.innerHTML=html+(role==="bot"&&raw?`<button class="ai-cp" data-aicopy title="Copy">📋</button>`:"");if(raw)d.dataset.raw=raw;aiMsgs().appendChild(d);aiMsgs().scrollTop=aiMsgs().scrollHeight;return d}
-const aiCards=h=>{const d=aiAdd("cards",h);turnCards.push(d);return d};
-const aiBot=t=>{const d=aiAdd("bot",aiFmt(t),t);if(turnCards.length)turnCards[0].before(d);aiMsgs().scrollTop=aiMsgs().scrollHeight;return d};   /* the headline answer always sits above the cards */
+function aiAdd(role,html,raw){const d=document.createElement("div");d.className="ai-m "+role;d.innerHTML=html+(role==="bot"&&raw?`<button class="ai-cp" data-aicopy title="Copy answer">${AI_COPY}</button>`:"");if(raw)d.dataset.raw=raw;aiMsgs().appendChild(d);aiMsgs().scrollTop=aiMsgs().scrollHeight;return d}
+let turnPlain=[];
+const aiCards=(h,plain)=>{const d=aiAdd("cards",h);turnCards.push(d);if(plain){d.dataset.plain=plain;turnPlain.push(plain);d.insertAdjacentHTML("beforeend",`<button class="ai-cpc" data-aicopy2 title="Copy this answer">${AI_COPY}<span>Copy</span></button>`)}return d};
+const aiBot=t=>{if(!String(t||"").trim())return null;const d=aiAdd("bot",aiFmt(t),t);if(turnCards.length)turnCards[0].before(d);aiMsgs().scrollTop=aiMsgs().scrollHeight;return d};   /* the headline answer always sits above the cards */
 function aiSystem(){
   const c=aiCtx(),types=[...new Set(DB.templates.map(t=>t.type))].join(", "),auds=[...new Set(DB.templates.map(t=>t.aud))].join(", ");
   return `You are the built-in assistant of the "BFS Baggage Service Information Center", a web app used by baggage service / ground-handling staff at Bangkok-Suvarnabhumi Airport (BKK). You are talking to the administrator. Help them find things and work faster.
@@ -4056,6 +4106,7 @@ Rules:
 - POLICY QUICK ANSWERS: users type very short messages such as "tg ahl", "qr dpr", "ek rush", "sq kit", "3k walkie", "compare tg qr ahl", "can 5j deliver INAD?" or just "ahl" (meaning the airline currently open, or the one discussed last). Call policy_lookup IMMEDIATELY (airlines + topic) — do not ask questions unless the airline is truly unknown. The app already shows the formatted policy card, so your text must be ONE short, direct line with the answer (e.g. "TG AHL: hand over the PIR + passenger letter; no delivery for INAD.") plus at most one caution. For comparisons give one line per airline. Never restate the whole card, never add greetings or closing offers. If no card exists, say so in one line.
 - For a specific question about a rule, read the policy_lookup result and answer that exact point in one or two sentences, quoting the step letter (e.g. "step B").
 - AIRLINE HUB QUICK ANSWERS: users type "<airline> <topic>" in one to three words: "tg ahl", "qr email", "tg email bkk", "ek docs delay", "qr station manager" (a custom tab), "compare tg qr email", "tg" (overview) or just "email" (the airline open or asked last). Call hub_lookup(airlines, section, query) IMMEDIATELY — section = policy | emails | documents | notes | overview. The app shows the formatted card with copy buttons, so reply with ONE short headline that answers the question (e.g. "QR has 3 e-mail addresses for BKK — copy them below."); for rule questions quote the exact rule and step letter. Never repeat addresses or card contents unless asked to write them into a message. Airline name ↔ code questions: answer from the directory in one line.
+- GENERAL QUESTIONS: answer definitions (AHL, DPR, OHD, PIR…) and how-to questions briefly from your own knowledge, saying it is the general industry meaning and that the airline’s own rule is in its policy; for counts use app_stats. If the user says “same for qr” / “and dpr?” reuse the previous airline or topic.
 - You have no access to system logins or passwords; if asked, say they are in Airline Hub › Systems and must be read there.
 - Reply in the user's language (Thai or English). Be brief and practical.`}
 function aiChips(){
@@ -4103,17 +4154,17 @@ async function aiAsk(text){
     if(!cand||!cand.content||!(cand.content.parts||[]).length){const why=(resp.promptFeedback||{}).blockReason||(cand||{}).finishReason||"no answer";aiBot("⚠ The model returned no answer ("+why+"). Try rephrasing.");return}
     AIS.api.push(cand.content);const parts=cand.content.parts,tx=parts.filter(p=>p.text&&!p.thought).map(p=>p.text).join("").trim(),calls=parts.filter(p=>p.functionCall);
     if(tx)aiBot(tx);if(!calls.length)return;
-    const outs=[];for(const p of calls){const r=await runTool(p.functionCall.name,p.functionCall.args);outs.push({functionResponse:{...(p.functionCall.id?{id:p.functionCall.id}:{}),name:p.functionCall.name,response:{result:r.text||"done"}}});if(r.ui)aiCards(r.ui)}
+    const outs=[];for(const p of calls){const r=await runTool(p.functionCall.name,p.functionCall.args);outs.push({functionResponse:{...(p.functionCall.id?{id:p.functionCall.id}:{}),name:p.functionCall.name,response:{result:r.text||"done"}}});if(r.ui)aiCards(r.ui,r.text)}
     AIS.api.push({role:"user",parts:outs});
   }
   aiBot("I stopped after several steps — please ask again more specifically.")}
 async function aiSend(text){
   text=text.trim();if(!text||AIS.busy)return;
   if(!ADM.on){aiBot("The assistant is available in Administrator mode only.");return}
-  AIS.view="chat";turnCards=[];aiSuggest();aiAdd("user",esc(text).replace(/\n/g,"<br>"));AIS.busy=true;const th=aiAdd("bot think","<span class='dots'><i></i><i></i><i></i></span> <small>thinking…</small>");$("#ai-send").disabled=true;
-  try{if(aiUsesAI())await aiAsk(text);else basicHandle(text).forEach(o=>{aiBot(o.text);if(o.ui)aiCards(o.ui)})}
+  AIS.view="chat";turnCards=[];turnPlain=[];aiSuggest();aiAdd("user",esc(text).replace(/\n/g,"<br>"));AIS.busy=true;const th=aiAdd("bot think","<span class='dots'><i></i><i></i><i></i></span> <small>thinking…</small>");$("#ai-send").disabled=true;
+  try{if(aiUsesAI())await aiAsk(text);else basicHandle(text).forEach(o=>{if(o.text)aiBot(o.text);if(o.ui)aiCards(o.ui,o.text)})}
   catch(e){aiBot("⚠ AI error: "+e.message+"\nCheck the key / model in ⚙ — or switch AI off to use basic mode.")}
-  th.remove();AIS.busy=false;$("#ai-send").disabled=false;aiMsgs().scrollTop=aiMsgs().scrollHeight}
+  th.remove();if(turnPlain.length>1)aiAdd("copyall",`<button class="ai-chip" data-aicopyall>${AI_COPY} Copy all answers</button>`);AIS.busy=false;$("#ai-send").disabled=false;aiMsgs().scrollTop=aiMsgs().scrollHeight}
 /* typing help: airline names / codes complete themselves, topics appear as one-tap chips */
 function aiSuggest(){
   const ta=$("#ai-in"),sg=$("#ai-sg"),ch=$("#ai-chips");if(!ta||!sg)return;const v=ta.value;
@@ -4145,7 +4196,10 @@ function aiInit(){
   aiBtn.onclick=aiOpenPanel;
   aiPanel.addEventListener("click",async e=>{
     const a=e.target.closest("[data-ai]");if(a){const k=a.dataset.ai;if(k==="x")aiClose();else if(k==="pal")aiPalette();else if(k==="wide")aiPanel.classList.toggle("wide");else if(k==="new"){AIS.api=[];AIS.drafts={};AIS.view="chat";aiWelcome();aiMode()}else if(k==="set")aiSettings();return}
-    const cpt=e.target.closest("[data-aicopyt]");if(cpt){hubCopy(cpt.dataset.aicopyt);return}
+    const flash=b=>{if(!b)return;b.classList.add("ok");setTimeout(()=>b.classList.remove("ok"),1200)};
+    const cpt=e.target.closest("[data-aicopyt]");if(cpt){hubCopy(cpt.dataset.aicopyt);flash(cpt);return}
+    const cp2=e.target.closest("[data-aicopy2]");if(cp2){hubCopy(cp2.parentElement.dataset.plain||"");flash(cp2);return}
+    const cpa=e.target.closest("[data-aicopyall]");if(cpa){hubCopy(turnPlain.join("\n\n"));flash(cpa);return}
     const ins=e.target.closest("[data-aiins]");if(ins){const t=$("#ai-in");t.value=ins.dataset.aiins;$("#ai-pal").hidden=true;aiSuggest();t.focus();return}
     const sg=e.target.closest("[data-aisg]");if(sg){const[m,...r]=sg.dataset.aisg.split("|"),v=r.join("|"),t=$("#ai-in");if(m==="send"){t.value="";aiSend(v)}else{t.value=v;aiSuggest();t.focus()}return}
     const ch=e.target.closest("[data-aichip]");if(ch){$("#ai-pal").hidden=true;aiSend(ch.dataset.aichip);return}
@@ -4155,7 +4209,7 @@ function aiInit(){
       else if(k==="doc")aiOpen("documents",{air:x,did:y});else if(k==="tmp")tmpPreview(x);
       else if(k==="bag"){const r=DB.sorting.find(z=>z.id===x);aiOpen("sorting",{});if(r)setTimeout(()=>{const q=document.querySelector("#main [data-f=q]");if(q){q.value=r.tagNumber;q.dispatchEvent(new Event("input",{bubbles:true}))}},500)}
       return}
-    const cp=e.target.closest("[data-aicopy]");if(cp){hubCopy(cp.parentElement.dataset.raw||"");return}
+    const cp=e.target.closest("[data-aicopy]");if(cp){hubCopy(cp.parentElement.dataset.raw||"");flash(cp);return}
     const ds=e.target.closest("[data-dr-save]");if(ds){draftSave(ds.closest("[data-dr]"));return}
     const dx=e.target.closest("[data-dr-x]");if(dx){const c=dx.closest("[data-dr]");delete AIS.drafts[c.dataset.dr];c.innerHTML=`<div class="hint">Draft discarded.</div>`;return}
     const id=e.target.id;
