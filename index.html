@@ -463,6 +463,12 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .ai-ib,.ai-cpc,.ai-cp,.ai-chip,.btn{transition:background-color .15s,color .15s,border-color .15s}
 .ai-cpc.ok,.ai-ib.ok,.ai-cp.ok,.ai-chip.ok,.btn.ok{background:#16a34a!important;border-color:#16a34a!important;color:#fff!important}
 .ai-m.copyall{align-self:flex-end;max-width:100%;background:transparent;padding:0}.ai-ib svg,.ai-cp svg,.ai-cpc svg{display:block}
+
+
+/* v1.10.5 briefing attachments */
+.bb-files{display:flex;flex-wrap:wrap;gap:6px}.bb-fc{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--soft);border-radius:10px;padding:3px 4px 3px 8px;font-size:12.5px;max-width:100%}.bb-fc.new{border-style:dashed;border-color:var(--pri2)}.bb-fc small{color:var(--mut)}.bb-fc button{border:0;background:transparent;color:var(--mut);cursor:pointer;min-height:0;padding:0 5px;font-size:13px}.bb-fc button:hover{color:var(--bad)}
+.bp-files{margin:10px 0;border-top:1px solid var(--line);padding-top:8px}.bp-fh{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;color:var(--mut);margin-bottom:6px}
+.bp-file{display:flex;align-items:center;gap:9px;padding:6px 8px;border:1px solid var(--line);border-radius:11px;margin-bottom:6px;background:var(--card)}.bp-fi{flex:none;width:44px;height:44px;border-radius:8px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;cursor:pointer}.bp-fi img{width:100%;height:100%;object-fit:cover}.bp-fn{flex:1;min-width:0;cursor:pointer}.bp-fn b{display:block;font-size:13.5px;overflow-wrap:anywhere}.bp-fn small{color:var(--mut)}
 /* v1.9.1 temporary files: select, bulk actions, preview */
 .tmp-sel{position:absolute;top:10px;left:10px;z-index:2;background:rgba(255,255,255,.92);border-radius:7px;padding:3px 4px;line-height:0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25)}.tmp-sel input{width:18px;height:18px;min-height:0!important;margin:0;accent-color:var(--pri2)}
 .tmpc{position:relative;transition:box-shadow .12s,border-color .12s}.tmpc.sel{border-color:var(--pri2);box-shadow:0 0 0 2px var(--pri2)}.tmp-t{cursor:zoom-in}.tmp-nm{cursor:pointer}.tmp-nm:hover{text-decoration:underline}
@@ -677,8 +683,10 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.10.3";
+const VERSION="1.10.5";
 const CHANGELOG=[
+ {v:"1.10.5",d:"2026-11-17",items:["📎 Briefings can now carry attached files (up to 5 per briefing, 10 MB each). Add them with 📎 Add file when you post or edit a briefing; readers see them in the briefing with 👁 preview (images, PDF, text, audio / video), ⬇ download, and ⬇ All (ZIP). Files are removed together with the briefing, and the 🔍 search also finds file names."]},
+ {v:"1.10.4",d:"2026-11-17",items:["✉️ Email Templates › Draft in Outlook: drafts now open in one reusable “Outlook” tab instead of a new tab each time. Press ↗ Open my Outlook tab once (or just make the first draft) and every later draft goes to that same tab. You can switch this off with ♻ Reuse one Outlook tab. (Browsers cannot take over an Outlook tab you opened yourself — close it once and use the tab opened from here.)"]},
  {v:"1.10.3",d:"2026-11-16",items:["✨ Assistant: fixed words such as “must / not” turning into circles in policy steps, an empty bubble under your question, the cut-off welcome screen, and the Policy button that kept showing the overview — “tg policy” now lists the airline’s policy topics.","Assistant and Ask button now use the web app’s own colours (navy blue with the gold accent).","Easier copying: every answer card has a Copy button, e-mail rows have a copy icon, Copy all (uses your ; / , separator) and As lines, and several answers can be copied together.","Smarter overall: greetings, “summary” (today at a glance), counts (“how many phone records today”), “what is AHL / DPR / OHD / PIR”, “latest phone record”, follow-ups such as “and qr?”, and a helpful reply when it does not understand."]},
  {v:"1.10.2",d:"2026-11-15",items:["✨ Assistant overhaul: new look, a ✨ Ask button in the header next to the bell (floating button on phones), a home screen of one-tap commands, ⌘ command list, and live typing help (airline names complete themselves, topics appear as chips).","Smarter Airline Hub answers from very short commands — “tg email”, “qr email bkk”, “tg docs delay”, “tg ahl email”, “qr contacts” (your own tabs), “tg” (overview), “compare tg qr email”, “code for qatar” — with e-mail copy buttons, document cards and typo-tolerant airline names. Answers show a one-line headline first, then the card."]},
  {v:"1.10.1",d:"2026-11-14",items:["✨ Assistant now uses Gemini 3.8 Flash by default (Gemini 2.x models no longer work, so old settings move to 3.8 automatically). If the model name is not found for your key, the assistant picks the newest Flash model your key can use and remembers it; ↻ Load available models in ⚙ shows the exact list."]},
@@ -978,6 +986,16 @@ function mountEmail(root){
   return {refresh(){opts();list();tx.refresh()},goto(p){if(p.tpl)viewTemplate(p.tpl);if(p.telex){showTab("telex");tx.goto(p.telex)}if(p.airFilter){showTab("tpl");S.air=p.airFilter;S.q="";S.type="";S.page=1;const qi=$("[data-f=q]",root);if(qi)qi.value="";opts();list()}}};
 }
 /* open a new mail draft (subject + body) in Outlook on the web or the default mail app */
+const OL_TAB="bfs-outlook";
+/* the browser cannot see tabs you opened yourself, but a tab opened with a fixed name is found again — so every draft goes to the same “bfs-outlook” tab */
+function openMailTab(url){
+  if(DB.ui.mailReuse===false)return window.open(url,"_blank","noopener");
+  const w=window.open(url,OL_TAB);
+  if(w){try{w.focus()}catch(e){}if(!lsGet("bfs-ol-seen","")){lsSet("bfs-ol-seen","1");toast("Draft opened in the “Outlook” tab — later drafts reuse this same tab")}}
+  return w}
+function openOutlookTab(kind){
+  const w=window.open(kind==="live"?"https://outlook.live.com/mail/":"https://outlook.office.com/mail/",DB.ui.mailReuse===false?"_blank":OL_TAB);
+  if(!w)toast("Pop-up blocked — allow pop-ups for this page");else{try{w.focus()}catch(e){}toast("Outlook tab ready — drafts will open here")}}
 function draftMail(kind,subject,body){
   const enc=s=>encodeURIComponent(s),crlf=body.replace(/\r?\n/g,"\r\n"),base=kind==="live"?"https://outlook.live.com/mail/0/deeplink/compose?":"https://outlook.office.com/mail/deeplink/compose?";
   let url=kind==="mailto"?`mailto:?subject=${enc(subject)}&body=${enc(crlf)}`:`${base}subject=${enc(subject)}&body=${enc(crlf)}`;
@@ -985,7 +1003,7 @@ function draftMail(kind,subject,body){
     copy(body,"Content is long — copied; paste it into the draft (Ctrl+V)");
     url=kind==="mailto"?`mailto:?subject=${enc(subject)}&body=${enc("(paste the content here — it is on your clipboard)")}`:`${base}subject=${enc(subject)}&body=${enc("(paste the content here — it is on your clipboard)")}`;
   }
-  if(kind==="mailto")location.href=url;else if(!window.open(url,"_blank","noopener"))toast("Pop-up blocked — allow pop-ups for this page");
+  if(kind==="mailto")location.href=url;else if(!openMailTab(url))toast("Pop-up blocked — allow pop-ups for this page");
 }
 function viewTemplate(id){
   const t=DB.templates.find(x=>x.id===id);if(!t)return;
@@ -1001,14 +1019,15 @@ function viewTemplate(id){
       $("#mv",bg).innerHTML=`${noTh?'<div class="note">No Thai version yet — showing English. Use Edit to add one.</div>':""}${L==="th"&&t.thAuto?'<div class="note">⚠ Thai version was auto-translated from English. Please review before sending, and edit to confirm.</div>':""}${noZh?'<div class="note">No Chinese version yet — showing English. Use Edit to add one.</div>':""}${L==="zh"&&zhOf(t)&&zhIsAuto(t)?'<div class="note">⚠ Chinese version was translated from English. Please review before sending, and edit to confirm.</div>':""}
       <div class="lbl">Subject <span class="hint" style="text-transform:none;font-weight:400">— click the text to copy</span></div><div class="cpw" data-c="s" title="Click to copy the subject"><div class="body" style="max-height:none">${esc(t.subject||"—")}</div><span class="cpdot"></span></div>
       <div class="lbl">Content (${L==="th"&&t.th?"Thai":L==="zh"&&zhOf(t)?"Chinese":"English"}) <span class="hint" style="text-transform:none;font-weight:400">— click the text to copy</span></div><div class="cpw" data-c="b" title="Click to copy the content"><div class="body">${esc(body)}</div><span class="cpdot"></span></div>
-      <div class="row" style="margin-top:12px"><button class="btn pri" id="ol-go" title="Open a new mail draft with this subject and content">📧 Draft in Outlook</button><select id="ol-t" style="width:auto" aria-label="Where to open the draft"><option value="office"${(DB.ui.mailT||"office")==="office"?" selected":""}>Outlook on the web (work / school)</option><option value="live"${DB.ui.mailT==="live"?" selected":""}>Outlook.com (personal)</option><option value="mailto"${DB.ui.mailT==="mailto"?" selected":""}>Default mail app</option></select></div>`;
+      <div class="row" style="margin-top:12px"><button class="btn pri" id="ol-go" title="Open a new mail draft with this subject and content">📧 Draft in Outlook</button><select id="ol-t" style="width:auto" aria-label="Where to open the draft"><option value="office"${(DB.ui.mailT||"office")==="office"?" selected":""}>Outlook on the web (work / school)</option><option value="live"${DB.ui.mailT==="live"?" selected":""}>Outlook.com (personal)</option><option value="mailto"${DB.ui.mailT==="mailto"?" selected":""}>Default mail app</option></select><label class="chk" title="Every draft opens in the same Outlook tab instead of a new tab"><input type="checkbox" id="ol-re"${DB.ui.mailReuse!==false?" checked":""}> ♻ Reuse one Outlook tab</label><button class="btn sm" id="ol-tab" type="button" title="Open Outlook once from here: this tab then receives every draft. (If you opened Outlook yourself, close that tab first — the browser cannot control tabs it did not open.)">↗ Open my Outlook tab</button></div>`;
       $$("[data-ml]",bg).forEach(b=>b.classList.toggle("on",b.dataset.ml===L));
     };
     show();
-    bg.addEventListener("change",e=>{if(e.target.id==="ol-t"){DB.ui.mailT=e.target.value;save()}});
+    bg.addEventListener("change",e=>{if(e.target.id==="ol-t"){DB.ui.mailT=e.target.value;save()}else if(e.target.id==="ol-re"){DB.ui.mailReuse=e.target.checked;save();toast(e.target.checked?"Drafts will reuse one Outlook tab":"Each draft opens in a new tab")}});
     bg.addEventListener("click",e=>{
       const ml=e.target.closest("[data-ml]");if(ml){L=ml.dataset.ml;show()}
       if(e.target.closest("#ol-go"))draftMail($("#ol-t",bg).value,t.subject||"",tBody(t,L));
+      if(e.target.closest("#ol-tab"))openOutlookTab($("#ol-t",bg).value);
       const c=e.target.closest("[data-c]");if(c&&!String(getSelection()).trim()){const txt=c.dataset.c==="s"?t.subject:tBody(t,L);if(txt){copy(txt,c.dataset.c==="s"?"Subject copied ✓":"Content copied ✓");c.classList.add("copied");setTimeout(()=>c.classList.remove("copied"),1400)}}
       const fm=e.target.closest("[data-favm]");if(fm){const tt=DB.templates.find(x=>x.id===t.id)||t,nv=!tt.fav;putItem("templates",{...tt,fav:nv});fm.textContent=nv?"★ In favorites":"☆ Add to favorites"}
       if(e.target.closest("[data-edit]")){close();editTemplate(t.id)}
@@ -3506,6 +3525,68 @@ const TRACK=new Set(["policy","docs","emaildir","airdata","telex","templates"]);
 const _putTrk=putItem;putItem=function(col,o){if(TRACK.has(col)){try{trackChange(col,o.id,o)}catch(e){console.warn("change log",e)}}return _putTrk(col,o)};
 const _delTrk=delItem;delItem=function(col,id){if(TRACK.has(col)&&ADM.on&&col!=="policy"&&col!=="docs"&&col!=="airdata"){try{trackChange(col,id,null)}catch(e){console.warn("change log",e)}}return _delTrk(col,id)};
 
+/* ---- briefing attachments (stored in the cloud in 900 KB pieces, removed together with the briefing) ---- */
+const BF_MAX=10*1048576,BF_COUNT=5,BF_CACHE={};let bfPending=[],bfRemoved=new Set();
+async function bfUpload(file,bid){
+  if(!fdb){toast("Attachments need the cloud connection");return null}
+  if(file.size>BF_MAX){toast(`${file.name} is larger than ${fmtSize(BF_MAX)}`);return null}
+  const fid=uid("f"),u8=new Uint8Array(await file.arrayBuffer()),n=Math.max(1,Math.ceil(u8.length/TMP_CHUNK));
+  try{
+    for(let i=0;i<n;i+=3){const b=fdb.batch();for(let j=i;j<Math.min(n,i+3);j++)b.set(fdb.collection("brf_chunks").doc(fid+"_"+j),{fid,bid,i:j,data:firebase.firestore.Blob.fromUint8Array(u8.subarray(j*TMP_CHUNK,(j+1)*TMP_CHUNK))});await tmo(b.commit(),60000)}
+    let thumb="";if(/^image\//.test(file.type)){try{thumb=await tmpThumb(file)}catch(e){}}
+    BF_CACHE[fid]=file;return{id:fid,name:file.name,size:file.size,type:file.type||"application/octet-stream",chunks:n,thumb};
+  }catch(e){toast(`Could not attach ${file.name} (${e.message==="timeout"?"no connection":"upload failed"})`);for(let j=0;j<n;j++)fdb.collection("brf_chunks").doc(fid+"_"+j).delete().catch(()=>{});return null}
+}
+async function bfLoad(f){
+  if(BF_CACHE[f.id])return BF_CACHE[f.id];
+  const docs=await Promise.all(Array.from({length:f.chunks},(_,i)=>fdb.collection("brf_chunks").doc(f.id+"_"+i).get()));
+  const b=new Blob(docs.map(d=>{if(!d.exists)throw new Error("The attachment is no longer available");return d.data().data.toUint8Array()}),{type:f.type});
+  if(b.size<=6*1048576)BF_CACHE[f.id]=b;return b}
+function bfDeleteFiles(files){(files||[]).forEach(f=>{delete BF_CACHE[f.id];if(!fdb)return;for(let i=0;i<f.chunks;i+=400){const b=fdb.batch();for(let j=i;j<Math.min(f.chunks,i+400);j++)b.delete(fdb.collection("brf_chunks").doc(f.id+"_"+j));b.commit().catch(()=>{})}})}
+async function bfDownloadAll(b){
+  const fs=b.files||[];if(!fs.length)return;
+  try{if(fs.length===1){dlFile(fs[0].name,await bfLoad(fs[0]),fs[0].type);return}
+    toast(`Preparing ${fs.length} files…`);await ensureZip();const z=new JSZip(),uq=zipName();for(const f of fs)z.file(uq(f.name),await bfLoad(f));
+    dlFile(`Briefing-files-${todayStr()}.zip`,await z.generateAsync({type:"blob"}),"application/zip")}
+  catch(e){toast("Could not download — "+(e.message||"error"))}}
+/* preview any list of cloud files (images, PDFs, text, audio / video) with ‹ › */
+async function filePreview(files,startId,load){
+  document.getElementById("tmpView")?.remove();
+  const ov=document.createElement("div");ov.id="tmpView";document.body.appendChild(ov);let cur=startId,url=null;
+  const close=()=>{document.removeEventListener("keydown",kd);if(url)URL.revokeObjectURL(url);ov.remove()},kd=e=>{if(e.key==="Escape")close();else if(e.key==="ArrowLeft")step(-1);else if(e.key==="ArrowRight")step(1)};
+  document.addEventListener("keydown",kd);
+  async function show(){
+    const i=files.findIndex(x=>x.id===cur),m=files[i];if(!m){close();return}
+    if(url){URL.revokeObjectURL(url);url=null}
+    ov.innerHTML=`<div class="av-h"><b>${esc(m.name)}</b><span class="hint" style="color:#cbd5e1">${i+1} / ${files.length} · ${fmtSize(m.size)}</span><button class="btn sm" data-tv="-1" ${i?"":"disabled"}>‹</button><button class="btn sm" data-tv="1" ${i<files.length-1?"":"disabled"}>›</button><button class="btn sm" data-tv="dl">⬇ Download</button><button class="btn sm" data-tv="x">✕ Close</button></div><div class="av-s fit tv-body"><div class="tv-nop">Loading…</div></div>`;
+    const body=ov.querySelector(".tv-body");
+    try{const b=await load(m);if(cur!==m.id)return;const t=m.type||"",n=m.name.toLowerCase();
+      if(/^image\//.test(t)){url=URL.createObjectURL(b);body.innerHTML=`<img src="${url}" alt="">`}
+      else if(/pdf/.test(t)||n.endsWith(".pdf")){url=URL.createObjectURL(new Blob([b],{type:"application/pdf"}));body.className="av-s tv-body";body.innerHTML=`<iframe class="tv-frame" src="${url}" title="${esc(m.name)}"></iframe>`}
+      else if(/^(video|audio)\//.test(t)){url=URL.createObjectURL(b);body.innerHTML=/^video/.test(t)?`<video src="${url}" controls style="max-width:100%;max-height:100%"></video>`:`<audio src="${url}" controls></audio>`}
+      else if(/^text\/|^application\/(json|xml)$|\+xml$|csv/.test(t)||/\.(txt|csv|json|md|log|xml|html?|tsv)$/.test(n)){const tx=await b.text();body.className="av-s tv-body";body.innerHTML=`<pre class="tv-pre">${esc(tx.slice(0,40000))}${tx.length>40000?"\n… (the preview shows the first 40,000 characters)":""}</pre>`}
+      else body.innerHTML=`<div class="tv-nop"><div style="font-size:52px">${tmpIcon(t)}</div><b>${esc(m.name)}</b><div>${esc(t||"unknown type")} · ${fmtSize(m.size)}</div><div class="hint">No preview for this file type — download it to open.</div></div>`;
+    }catch(e){body.innerHTML=`<div class="tv-nop">⚠ ${esc(e.message||"Could not load the file")}</div>`}
+  }
+  function step(d){const i=files.findIndex(x=>x.id===cur)+d;if(i>=0&&i<files.length){cur=files[i].id;show()}}
+  ov.addEventListener("click",async e=>{const b=e.target.closest("[data-tv]");if(!b)return;const k=b.dataset.tv;if(k==="x")close();else if(k==="dl"){const m=files.find(x=>x.id===cur);try{dlFile(m.name,await load(m),m.type)}catch(x){toast("Could not download the file")}}else step(+k)});
+  show();
+}
+function bfDrawFiles(){
+  const h=$("#bb-files");if(!h)return;const old=(briefEdit&&briefEdit.files||[]).filter(f=>!bfRemoved.has(f.id));
+  h.innerHTML=[...old.map(f=>`<span class="bb-fc" title="${esc(f.name)}">${tmpIcon(f.type)} <b>${esc(f.name.length>26?f.name.slice(0,24)+"…":f.name)}</b> <small>${fmtSize(f.size)}</small><button type="button" data-bfxe="${f.id}" aria-label="Remove">✕</button></span>`),
+    ...bfPending.map((f,i)=>`<span class="bb-fc new" title="${esc(f.name)}">${tmpIcon(f.type)} <b>${esc(f.name.length>26?f.name.slice(0,24)+"…":f.name)}</b> <small>${fmtSize(f.size)}</small><button type="button" data-bfx="${i}" aria-label="Remove">✕</button></span>`)].join("")||`<span class="hint">No files attached</span>`}
+async function saveBrief(){
+  const t=$("#bb-t").value.trim(),x=$("#bb-x").value.trim(),from=$("#bb-f").value.trim();if(!t){toast("Please enter a title");return}
+  const btn=document.querySelector('[data-bp="saveb"]');if(btn){btn.disabled=true;btn.textContent="Saving…"}
+  lsSet(BELL_FROM,from);const now=new Date().toISOString(),pri=$("#bb-i").checked?"imp":"",pin=$("#bb-p").checked,bid=briefEdit?briefEdit.id:"b"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+  const keep=(briefEdit&&briefEdit.files||[]).filter(f=>!bfRemoved.has(f.id)),gone=(briefEdit&&briefEdit.files||[]).filter(f=>bfRemoved.has(f.id)),added=[];
+  if(bfPending.length)toast(`Uploading ${bfPending.length} file${bfPending.length>1?"s":""}…`);
+  for(const pf of bfPending){const m=await bfUpload(pf.file,bid);if(m)added.push(m)}
+  bfDeleteFiles(gone);
+  const rec=briefEdit?{...briefEdit,title:t,text:x,pri,from,upd:now,pin,pinTs:pin?(briefEdit.pinTs||now):"",files:[...keep,...added]}:{id:bid,ts:now,title:t,text:x,pri,from,pin,pinTs:pin?now:"",dev:devId(),files:added};
+  putItem("briefings",rec);setRead(rec.id,true);const was=briefEdit;briefEdit=null;bfPending=[];bfRemoved.clear();bellTab="brf";bellFilter="all";
+  if(was&&bellView){bellMode="view";bellView=rec.id}else bellMode="list";bellPaint();renderBell();toast(was?"Saved ✓":"Briefing posted ✓")}
 /* ---- read / unread status (kept per device) ---- */
 const BELL_BASE="bfs-bell-base",BELL_READ="bfs-bell-read",BELL_UNREAD="bfs-bell-unread",BELL_FROM="bfs-bell-from";
 let bellN=-1,bellMode="list",bellTab="upd",bellFilter="all",briefEdit=null,bellQ="",bellSearchOn=false,bellView=null,bellOrder=[];
@@ -3516,7 +3597,7 @@ const isRead=n=>jget(BELL_UNREAD).has(n.id)?false:(jget(BELL_READ).has(n.id)||n.
 function setRead(ids,val){const r=jget(BELL_READ),u=jget(BELL_UNREAD);[].concat(ids).forEach(id=>{if(val){u.delete(id);r.add(id)}else{r.delete(id);u.add(id)}});jset(BELL_READ,r);jset(BELL_UNREAD,u)}
 const briefList=q=>{   /* newest first, pinned on top; pinned ones never expire from the list; a search looks at every stored briefing */
   if(!bellOn("brief"))return[];const lim=Date.now()-14*864e5,w=String(q||"").toLowerCase().split(/\s+/).filter(Boolean);
-  return DB.briefings.filter(b=>w.length?w.every(x=>[b.title,b.text,b.from].join(" ").toLowerCase().includes(x)):(b.pin||new Date(b.ts).getTime()>=lim))
+  return DB.briefings.filter(b=>w.length?w.every(x=>[b.title,b.text,b.from,...(b.files||[]).map(f=>f.name)].join(" ").toLowerCase().includes(x)):(b.pin||new Date(b.ts).getTime()>=lim))
     .sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)||(b.pin?String(b.pinTs||b.ts).localeCompare(String(a.pinTs||a.ts)):b.ts.localeCompare(a.ts))).slice(0,80)};
 const updMatch=(n,q)=>{const w=String(q||"").toLowerCase().split(/\s+/).filter(Boolean);if(!w.length)return true;
   const h=[n.air,n.name,n.summary,subName(noteKey(n)),...(n.detail||[]),...(n.changes||[]).map(c=>c.item+" "+(c.fields||[]).map(f=>f.label+" "+(f.lines?f.lines.map(l=>l[1]).join(" "):f.text||"")).join(" "))].join(" ").toLowerCase();return w.every(x=>h.includes(x))};
@@ -3548,16 +3629,17 @@ function bellPaint(){
       <label>Briefing<textarea id="bb-x" rows="6" placeholder="What does the team need to know?">${esc(e?e.text:"")}</textarea></label>
       <label class="chk" style="flex-direction:row"><input type="checkbox" id="bb-i"${e&&e.pri==="imp"?" checked":""}> ⚠ Important</label>
       <label class="chk" style="flex-direction:row"><input type="checkbox" id="bb-p"${e&&e.pin?" checked":""}> 📌 Pin to the top</label>
+      <label>Attachments <span style="font-weight:400;text-transform:none">(optional · up to ${BF_COUNT} files · ${fmtSize(BF_MAX)} each)</span></label><div id="bb-files" class="bb-files"></div><div><button type="button" class="btn sm" data-bp="attach">📎 Add file</button><input id="bb-file" type="file" multiple hidden></div>
       <label>From (optional)<input id="bb-f" maxlength="40" value="${esc(e?e.from||"":lsGet(BELL_FROM,""))}" placeholder="your name / shift"></label>
       <div class="row"><button class="btn pri" data-bp="saveb">✔ ${e?"Save changes":"Post briefing"}</button></div>
-      <p class="hint">Everyone using the app will see it as <b>Unread</b> until they open it.</p></div>`;setTimeout(()=>{const t=$("#bb-t");t&&t.focus()},30);return}
+      <p class="hint">Everyone using the app will see it as <b>Unread</b> until they open it.</p></div>`;setTimeout(()=>{const t=$("#bb-t");t&&t.focus();bfDrawFiles()},30);return}
   if(bellMode==="view"){
     const b=DB.briefings.find(x=>x.id===bellView);if(!b){bellMode="list";bellPaint();return}
     const i=bellOrder.indexOf(b.id),can=ADM.on||b.dev===devId(),un=!isRead(b);
     p.innerHTML=`<div class="bp-h"><button class="btn sm" data-bp="backv">← Back</button><span class="row" style="gap:5px"><button class="btn sm" data-bv="-1" ${i>0?"":"disabled"} title="Previous">‹</button><span class="hint">${i>=0?i+1:"–"} / ${bellOrder.length}</span><button class="btn sm" data-bv="1" ${i>=0&&i<bellOrder.length-1?"":"disabled"} title="Next">›</button><button class="btn sm${b.pin?" pri":""}" data-bpin="${b.id}" title="${b.pin?"Unpin":"Pin to the top"}">📌 ${b.pin?"Pinned":"Pin"}</button></span></div>
       <div class="bp-view"><h3>${esc(b.title)}</h3><div class="bp-sec">${b.pri==="imp"?`<span class="bp-chip imp">⚠ Important</span>`:""}${stChip(un)}<small>${esc(b.from?b.from+" · ":"")}${esc(fmt(b.ts))}${b.upd?" · edited":""}</small></div>
       <div class="bp-body">${nlHTML(b.text)||'<span class="hint">No further details.</span>'}</div>
-      <div class="row bp-va"><button class="btn sm" data-bcopy="${b.id}">📋 Copy</button><button class="btn sm" data-brd="${b.id}">${un?"✓ Mark read":"↺ Mark unread"}</button>${can?`<button class="btn sm" data-bbe="${b.id}">✏️ Edit</button><button class="btn sm danger" data-bbd="${b.id}">🗑 Delete</button>`:""}</div></div>`;return}
+      ${(b.files||[]).length?`<div class="bp-files"><div class="bp-fh">📎 Attachments (${b.files.length})${b.files.length>1?` <button class="btn sm" data-bfall="${b.id}">⬇ All (ZIP)</button>`:""}</div>${b.files.map(f=>`<div class="bp-file"><span class="bp-fi" data-bfo="${f.id}">${f.thumb?`<img src="${f.thumb}" alt="">`:tmpIcon(f.type)}</span><div class="bp-fn" data-bfo="${f.id}"><b>${esc(f.name)}</b><small>${fmtSize(f.size)}</small></div><button class="btn sm" data-bfo="${f.id}" title="Preview">👁</button><button class="btn sm" data-bfd="${f.id}" title="Download">⬇</button></div>`).join("")}</div>`:""}<div class="row bp-va"><button class="btn sm" data-bcopy="${b.id}">📋 Copy</button><button class="btn sm" data-brd="${b.id}">${un?"✓ Mark read":"↺ Mark unread"}</button>${can?`<button class="btn sm" data-bbe="${b.id}">✏️ Edit</button><button class="btn sm danger" data-bbd="${b.id}">🗑 Delete</button>`:""}</div></div>`;return}
   /* ---- list ---- */
   const ups=bellList(),brs=briefList(),cu=ups.filter(n=>!isRead(n)).length,cb=brs.filter(n=>!isRead(n)).length,q=bellQ.trim();
   let list=bellTab==="upd"?ups.filter(n=>updMatch(n,q)):briefList(q);
@@ -3569,7 +3651,7 @@ function bellPaint(){
     body=list.length?list.map(n=>{const k=noteKey(n),un=!isRead(n);return `<div class="bp-i ${un?"new":"read"}" data-bn="${n.id}"><span class="bp-dot"></span><div style="min-width:0;flex:1"><div class="bp-sec"><span class="bp-chip">${esc(grpName(k.startsWith("email")?"email":"hub"))}</span><span class="bp-chip sub">${esc(subName(k)||n.sub||"")}</span>${stChip(un)}</div><b>${n.air?hiq(n.air+" · "+n.name,q):"Email template"}</b><div>${hiq(n.summary||(n.detail||[]).slice(0,3).join(" · "),q)}</div>${snippet(n)}<small>${esc(fmt(n.ts))} · tap to see the change log</small></div><div class="bp-ac"><button class="bp-ib" data-brd="${n.id}" title="${un?"Mark as read":"Mark as unread"}">${un?"✓":"↺"}</button></div></div>`}).join(""):`<div class="empty" style="padding:18px 8px">${q?`Nothing matches “${esc(q)}”.`:bellFilter==="unread"?"No unread updates 🎉":"No updates in the last 30 days"+(bellOff().length?" for the sections you selected":"")+"."}</div>`;
   }else{
     const item=b=>{const un=!isRead(b),pre=txt(b.text).replace(/\s+/g," ").slice(0,170);
-      return `<div class="bp-i br ${un?"new":"read"}${b.pri==="imp"?" imp":""}${b.pin?" pin":""}" data-bb="${b.id}"><span class="bp-dot"></span><div style="min-width:0;flex:1"><div class="bp-bt"><b>${hiq(b.title,q)}</b></div>${pre?`<div class="bp-bx cl">${hiq(pre,q)}</div>`:""}<div class="bp-sec">${b.pri==="imp"?`<span class="bp-chip imp">⚠ Important</span>`:""}${stChip(un)}<small>${esc(b.from?b.from+" · ":"")}${esc(fmt(b.ts))}</small></div></div><div class="bp-ac"><button class="bp-ib${b.pin?" on":""}" data-bpin="${b.id}" title="${b.pin?"Unpin":"Pin to the top"}">📌</button><button class="bp-ib" data-brd="${b.id}" title="${un?"Mark as read":"Mark as unread"}">${un?"✓":"↺"}</button></div></div>`};
+      return `<div class="bp-i br ${un?"new":"read"}${b.pri==="imp"?" imp":""}${b.pin?" pin":""}" data-bb="${b.id}"><span class="bp-dot"></span><div style="min-width:0;flex:1"><div class="bp-bt"><b>${hiq(b.title,q)}</b></div>${pre?`<div class="bp-bx cl">${hiq(pre,q)}</div>`:""}<div class="bp-sec">${b.pri==="imp"?`<span class="bp-chip imp">⚠ Important</span>`:""}${(b.files||[]).length?`<span class="bp-chip sub">📎 ${b.files.length}</span>`:""}${stChip(un)}<small>${esc(b.from?b.from+" · ":"")}${esc(fmt(b.ts))}</small></div></div><div class="bp-ac"><button class="bp-ib${b.pin?" on":""}" data-bpin="${b.id}" title="${b.pin?"Unpin":"Pin to the top"}">📌</button><button class="bp-ib" data-brd="${b.id}" title="${un?"Mark as read":"Mark as unread"}">${un?"✓":"↺"}</button></div></div>`};
     if(!list.length)body=`<div class="empty" style="padding:18px 8px">${q?`No briefing matches “${esc(q)}”.`:bellFilter==="unread"?"No unread briefings 🎉":bellFilter==="pin"?"Nothing pinned yet — tap 📌 on a briefing to keep it on top.":"No briefings yet — press ＋ New to post a quick one for the team."}</div>`;
     else{let last="";body=list.map(b=>{const g=b.pin?"📌 Pinned":dayLbl(b.ts),h=g!==last?`<div class="bp-gh">${esc(g)}</div>`:"";last=g;return h+item(b)}).join("")}
   }
@@ -3599,32 +3681,37 @@ function openChangeLog(id){
    if(a){const k=a.dataset.bp;
      if(k==="readall"){setRead((bellTab==="upd"?bellList():briefList()).map(n=>n.id),true);bellPaint();renderBell()}
      else if(k==="set"){bellMode="set";bellPaint()}
-     else if(k==="back"||k==="backv"||k==="cancelb"){k==="cancelb"&&briefEdit&&bellView?(bellMode="view",briefEdit=null,bellPaint()):toList()}
+     else if(k==="back"||k==="backv"||k==="cancelb"){bfPending=[];bfRemoved.clear();k==="cancelb"&&briefEdit&&bellView?(bellMode="view",briefEdit=null,bellPaint()):toList()}
      else if(k==="all"||k==="none"){lsSet(BELL_PREF,JSON.stringify({off:k==="all"?[]:bellSources().flatMap(g=>g.items.map(i=>i.key))}));bellPaint();renderBell()}
      else if(k==="clear"&&confirm("Delete all update notices for everyone?")){DB.notices.slice().forEach(n=>delItem("notices",n.id));bp.hidden=true}
-     else if(k==="newb"){briefEdit=null;bellMode="new";bellPaint()}
+     else if(k==="newb"){briefEdit=null;bfPending=[];bfRemoved.clear();bellMode="new";bellPaint()}
+     else if(k==="attach"){$("#bb-file").click()}
      else if(k==="qs"){if(bellSearchOn&&!bellQ){bellSearchOn=false}else bellSearchOn=true;bellPaint();setTimeout(()=>{const q=$("#bq");q&&q.focus()},20)}
      else if(k==="qx"){bellQ="";bellSearchOn=false;bellPaint()}
-     else if(k==="saveb"){
-       const t=$("#bb-t").value.trim(),x=$("#bb-x").value.trim(),from=$("#bb-f").value.trim();if(!t){toast("Please enter a title");return}
-       lsSet(BELL_FROM,from);const now=new Date().toISOString(),pri=$("#bb-i").checked?"imp":"",pin=$("#bb-p").checked;
-       const rec=briefEdit?{...briefEdit,title:t,text:x,pri,from,upd:now,pin,pinTs:pin?(briefEdit.pinTs||now):""}:{id:"b"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),ts:now,title:t,text:x,pri,from,pin,pinTs:pin?now:"",dev:devId()};
-       putItem("briefings",rec);setRead(rec.id,true);const was=briefEdit;briefEdit=null;bellTab="brf";bellFilter="all";
-       if(was&&bellView){bellMode="view";bellView=rec.id}else bellMode="list";bellPaint();renderBell();toast(was?"Saved ✓":"Briefing posted ✓")}
+     else if(k==="saveb"){saveBrief()}
      return}
    const t=e.target.closest("[data-bt]");if(t){bellTab=t.dataset.bt;if(bellFilter==="pin"&&bellTab!=="brf")bellFilter="all";bellPaint();return}
    const f=e.target.closest("[data-bf]");if(f){bellFilter=f.dataset.bf;bellPaint();return}
    const pn=e.target.closest("[data-bpin]");if(pn){const b=DB.briefings.find(x=>x.id===pn.dataset.bpin);if(b){const on=!b.pin;putItem("briefings",{...b,pin:on,pinTs:on?new Date().toISOString():""});toast(on?"📌 Pinned":"Unpinned");setTimeout(()=>{bellPaint();renderBell()},0)}return}
    const rd=e.target.closest("[data-brd]");if(rd){const id=rd.dataset.brd,n=DB.notices.find(x=>x.id===id)||DB.briefings.find(x=>x.id===id);if(n){setRead(id,!isRead(n));bellPaint();renderBell()}return}
    const vv=e.target.closest("[data-bv]");if(vv){const i=bellOrder.indexOf(bellView)+ +vv.dataset.bv;if(i>=0&&i<bellOrder.length)openView(bellOrder[i]);return}
-   const cp=e.target.closest("[data-bcopy]");if(cp){const b=DB.briefings.find(x=>x.id===cp.dataset.bcopy);if(b)hubCopy(b.title+"\n"+(b.text||"")+(b.from?"\n— "+b.from:""));return}
-   const be=e.target.closest("[data-bbe]");if(be){briefEdit=DB.briefings.find(x=>x.id===be.dataset.bbe)||null;bellMode="new";bellPaint();return}
-   const bd=e.target.closest("[data-bbd]");if(bd){if(confirm("Delete this briefing for everyone?")){delItem("briefings",bd.dataset.bbd);toList();renderBell()}return}
+   const cp=e.target.closest("[data-bcopy]");if(cp){const b=DB.briefings.find(x=>x.id===cp.dataset.bcopy);if(b)hubCopy(b.title+"\n"+(b.text||"")+((b.files||[]).length?"\nAttachments: "+b.files.map(f=>f.name).join(", "):"")+(b.from?"\n— "+b.from:""));return}
+   const bx=e.target.closest("[data-bfx]");if(bx){bfPending.splice(+bx.dataset.bfx,1);bfDrawFiles();return}
+   const bxe=e.target.closest("[data-bfxe]");if(bxe){bfRemoved.add(bxe.dataset.bfxe);bfDrawFiles();return}
+   const bfo=e.target.closest("[data-bfo]");if(bfo){const b=DB.briefings.find(x=>x.id===bellView);if(b&&(b.files||[]).length)filePreview(b.files,bfo.dataset.bfo,bfLoad);return}
+   const bfd=e.target.closest("[data-bfd]");if(bfd){const b=DB.briefings.find(x=>x.id===bellView),f=b&&(b.files||[]).find(z=>z.id===bfd.dataset.bfd);if(f)bfLoad(f).then(bl=>dlFile(f.name,bl,f.type)).catch(x=>toast("Could not download — "+(x.message||"error")));return}
+   const bfa=e.target.closest("[data-bfall]");if(bfa){const b=DB.briefings.find(x=>x.id===bfa.dataset.bfall);if(b)bfDownloadAll(b);return}
+   const be=e.target.closest("[data-bbe]");if(be){briefEdit=DB.briefings.find(x=>x.id===be.dataset.bbe)||null;bfPending=[];bfRemoved.clear();bellMode="new";bellPaint();return}
+   const bd=e.target.closest("[data-bbd]");if(bd){if(confirm("Delete this briefing for everyone?")){const bb0=DB.briefings.find(x=>x.id===bd.dataset.bbd);bfDeleteFiles(bb0&&bb0.files);delItem("briefings",bd.dataset.bbd);toList();renderBell()}return}
    const bi=e.target.closest("[data-bb]");if(bi){openView(bi.dataset.bb);return}
    const it=e.target.closest("[data-bn]");if(it){const id=it.dataset.bn;setRead(id,true);bp.hidden=true;renderBell();openChangeLog(id)}
  });
  bp.addEventListener("input",e=>{if(e.target.id==="bq"){const pos=e.target.selectionStart;bellQ=e.target.value;bellPaint();const q=$("#bq");if(q){q.focus();q.setSelectionRange(pos,pos)}}});
- bp.addEventListener("change",e=>{const c=e.target.closest("[data-bk]");if(!c)return;const off=new Set(bellOff());c.checked?off.delete(c.dataset.bk):off.add(c.dataset.bk);lsSet(BELL_PREF,JSON.stringify({off:[...off]}));renderBell()});
+ bp.addEventListener("change",e=>{
+   if(e.target.id==="bb-file"){const have=(briefEdit&&briefEdit.files||[]).filter(f=>!bfRemoved.has(f.id)).length+bfPending.length;let room=BF_COUNT-have;
+     for(const f of [...e.target.files]){if(room<=0){toast(`Up to ${BF_COUNT} files per briefing`);break}if(f.size>BF_MAX){toast(`${f.name} is larger than ${fmtSize(BF_MAX)}`);continue}bfPending.push({file:f,name:f.name,size:f.size,type:f.type});room--}
+     e.target.value="";if(!fdb)toast("Attachments need the cloud connection — they will not upload now");bfDrawFiles();return}
+   const c=e.target.closest("[data-bk]");if(!c)return;const off=new Set(bellOff());c.checked?off.delete(c.dataset.bk):off.add(c.dataset.bk);lsSet(BELL_PREF,JSON.stringify({off:[...off]}));renderBell()});
  document.addEventListener("pointerdown",e=>{if(!bp.hidden&&!e.target.closest("#bellPanel")&&!e.target.closest("#bellBtn")&&!e.target.closest(".modalbg"))bp.hidden=true});
  document.addEventListener("keydown",e=>{
    if(bp.hidden)return;const typing=/^(INPUT|TEXTAREA)$/.test((e.target||{}).tagName||"");
@@ -3634,7 +3721,7 @@ function openChangeLog(id){
 }
 const _raBell=refreshAll;refreshAll=function(){_raBell();renderBell()};
 setTimeout(renderBell,0);
-setInterval(()=>{if(ADM.on){const lim=Date.now()-30*864e5;DB.notices.filter(n=>new Date(n.ts).getTime()<lim).slice(0,20).forEach(n=>delItem("notices",n.id));DB.briefings.filter(n=>!n.pin&&new Date(n.ts).getTime()<lim).slice(0,20).forEach(n=>delItem("briefings",n.id))}},6e5);
+setInterval(()=>{if(ADM.on){const lim=Date.now()-30*864e5;DB.notices.filter(n=>new Date(n.ts).getTime()<lim).slice(0,20).forEach(n=>delItem("notices",n.id));DB.briefings.filter(n=>!n.pin&&new Date(n.ts).getTime()<lim).slice(0,20).forEach(n=>{bfDeleteFiles(n.files);delItem("briefings",n.id)})}},6e5);
 
 /* ============ 🪧 PAGING SIGN: A4 landscape sign for delayed bags ============ */
 const PG_FONT='Arial,"Liberation Sans",Helvetica,"Noto Sans Thai","Leelawadee UI",Tahoma,sans-serif';
