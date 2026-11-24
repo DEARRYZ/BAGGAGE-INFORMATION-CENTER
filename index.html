@@ -469,6 +469,19 @@ body.adm-on #wdock{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .bb-files{display:flex;flex-wrap:wrap;gap:6px}.bb-fc{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--soft);border-radius:10px;padding:3px 4px 3px 8px;font-size:12.5px;max-width:100%}.bb-fc.new{border-style:dashed;border-color:var(--pri2)}.bb-fc small{color:var(--mut)}.bb-fc button{border:0;background:transparent;color:var(--mut);cursor:pointer;min-height:0;padding:0 5px;font-size:13px}.bb-fc button:hover{color:var(--bad)}
 .bp-files{margin:10px 0;border-top:1px solid var(--line);padding-top:8px}.bp-fh{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;color:var(--mut);margin-bottom:6px}
 .bp-file{display:flex;align-items:center;gap:9px;padding:6px 8px;border:1px solid var(--line);border-radius:11px;margin-bottom:6px;background:var(--card)}.bp-fi{flex:none;width:44px;height:44px;border-radius:8px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;cursor:pointer}.bp-fi img{width:100%;height:100%;object-fit:cover}.bp-fn{flex:1;min-width:0;cursor:pointer}.bp-fn b{display:block;font-size:13.5px;overflow-wrap:anywhere}.bp-fn small{color:var(--mut)}
+
+
+/* v1.10.6 pre-draft */
+.pd{border:1px solid var(--pri2);border-radius:14px;padding:12px;margin-top:12px;background:var(--card)}.pd-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}.pd-top .btn{margin-left:auto}.pd-hh{font-weight:800}
+.pd-zs{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pd-z{border:2px dashed var(--line);border-radius:12px;padding:6px 8px;min-height:68px;transition:border-color .12s,background-color .12s}.pd-z.over{border-color:var(--pri2);background:rgba(14,111,192,.1)}.pd-zt{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;color:var(--mut)}.pd-zt small{color:var(--pri2)}.pd-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.pd-chip{display:inline-flex;align-items:center;gap:3px;border:1px solid var(--line);background:var(--soft);border-radius:16px;padding:2px 3px 2px 2px;font-size:12.5px;max-width:100%}.pd-ca{overflow-wrap:anywhere}.pd-chip button{border:0;background:transparent;color:var(--mut);cursor:pointer;min-height:0;padding:0 5px;font-size:13px}.pd-chip button:hover{color:var(--pri2)}
+.pd-h{cursor:grab;touch-action:none;user-select:none;padding:2px 6px;color:var(--mut);font-size:14px;line-height:1}.pd-h:hover{color:var(--pri2)}.pd-src{opacity:.4}
+.pd-ghost{position:fixed;z-index:300;pointer-events:none;transform:translate(-50%,-130%);background:var(--pri2);color:#fff;border-radius:14px;padding:4px 12px;font-size:13px;box-shadow:0 8px 22px rgba(0,0,0,.4);max-width:80vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pd-ad{display:flex;gap:6px;margin:8px 0}.pd-ad input{flex:1;min-width:0}.pd-pk{margin-top:4px}.pd-pk .row select{flex:0 1 46%}.pd-pk .row input{flex:1;min-width:0}
+.pd-list{max-height:250px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:4px 8px;margin-top:6px}.pd-sg{margin:6px 0}.pd-sh{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}.pd-sh b{font-size:11.5px;text-transform:uppercase;letter-spacing:.3px;color:var(--mut)}.pd-sh .btn{min-height:0;padding:1px 8px;font-size:11.5px}
+.pd-row{display:flex;align-items:center;gap:6px;padding:3px 0;border-bottom:1px dashed var(--line)}.pd-row:last-child{border:0}.pd-row.used .pd-ra{opacity:.5;text-decoration:line-through}.pd-ra{flex:1;min-width:0;font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--pri2);cursor:pointer;overflow-wrap:anywhere}.pd-row small{color:var(--mut);flex:none;max-width:34%}.pd-row .btn{min-height:0;padding:1px 8px;font-size:11.5px;flex:none}
+.pd-l{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--mut);margin:8px 0 3px}.pd-l .hint{text-transform:none;font-weight:400}#pd-sub,#pd-body{width:100%}
+@media(max-width:700px){.pd-zs{grid-template-columns:1fr}.pd-pk .row{flex-wrap:wrap}.pd-pk .row select{flex:1 1 100%}.pd-list{max-height:220px}}
 /* v1.9.1 temporary files: select, bulk actions, preview */
 .tmp-sel{position:absolute;top:10px;left:10px;z-index:2;background:rgba(255,255,255,.92);border-radius:7px;padding:3px 4px;line-height:0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25)}.tmp-sel input{width:18px;height:18px;min-height:0!important;margin:0;accent-color:var(--pri2)}
 .tmpc{position:relative;transition:box-shadow .12s,border-color .12s}.tmpc.sel{border-color:var(--pri2);box-shadow:0 0 0 2px var(--pri2)}.tmp-t{cursor:zoom-in}.tmp-nm{cursor:pointer}.tmp-nm:hover{text-decoration:underline}
@@ -683,8 +696,9 @@ tbody tr.jrow-due{background:color-mix(in srgb,#f0a000 16%,var(--card))}tbody tr
 
 <script>
 /* ============ CONFIG ============ */
-const VERSION="1.10.5";
+const VERSION="1.10.6";
 const CHANGELOG=[
+ {v:"1.10.6",d:"2026-11-22",items:["✍ Email Templates › Pre-draft (To / CC): open any template and press ✍ Pre-draft. Pick an airline (the template’s airline is chosen for you) and drag its station / staff e-mails — by the ⠿ handle, works on phones too — into To or CC, or just tap an address (CC button for CC; ＋ To all / ＋ CC all per group). Type or paste extra addresses, edit the subject and content, then ↗ Push to Outlook: the draft opens with the recipients filled in, in your reusable Outlook tab. Recipients are remembered per template; Copy To / Copy CC and Clear are included."]},
  {v:"1.10.5",d:"2026-11-17",items:["📎 Briefings can now carry attached files (up to 5 per briefing, 10 MB each). Add them with 📎 Add file when you post or edit a briefing; readers see them in the briefing with 👁 preview (images, PDF, text, audio / video), ⬇ download, and ⬇ All (ZIP). Files are removed together with the briefing, and the 🔍 search also finds file names."]},
  {v:"1.10.4",d:"2026-11-17",items:["✉️ Email Templates › Draft in Outlook: drafts now open in one reusable “Outlook” tab instead of a new tab each time. Press ↗ Open my Outlook tab once (or just make the first draft) and every later draft goes to that same tab. You can switch this off with ♻ Reuse one Outlook tab. (Browsers cannot take over an Outlook tab you opened yourself — close it once and use the tab opened from here.)"]},
  {v:"1.10.3",d:"2026-11-16",items:["✨ Assistant: fixed words such as “must / not” turning into circles in policy steps, an empty bubble under your question, the cut-off welcome screen, and the Policy button that kept showing the overview — “tg policy” now lists the airline’s policy topics.","Assistant and Ask button now use the web app’s own colours (navy blue with the gold accent).","Easier copying: every answer card has a Copy button, e-mail rows have a copy icon, Copy all (uses your ; / , separator) and As lines, and several answers can be copied together.","Smarter overall: greetings, “summary” (today at a glance), counts (“how many phone records today”), “what is AHL / DPR / OHD / PIR”, “latest phone record”, follow-ups such as “and qr?”, and a helpful reply when it does not understand."]},
@@ -996,37 +1010,100 @@ function openMailTab(url){
 function openOutlookTab(kind){
   const w=window.open(kind==="live"?"https://outlook.live.com/mail/":"https://outlook.office.com/mail/",DB.ui.mailReuse===false?"_blank":OL_TAB);
   if(!w)toast("Pop-up blocked — allow pop-ups for this page");else{try{w.focus()}catch(e){}toast("Outlook tab ready — drafts will open here")}}
-function draftMail(kind,subject,body){
+/* ---- pre-draft: put airline station / staff e-mails into To and CC by drag & drop, edit the text, push to Outlook ---- */
+const PD_RE=/^[^@\s,;]+@[^@\s,;]+\.[^@\s,;]+$/;
+const pdParse=s=>String(s||"").split(/[\s,;]+/).map(x=>x.trim().replace(/^<|>$/g,"")).filter(x=>PD_RE.test(x));
+function preDraftMount(host,t,getBody,push){
+  DB.ui.pdr=DB.ui.pdr||{};const mem=DB.ui.pdr[t.id]||{to:[],cc:[],air:""};
+  const S={to:[...mem.to],cc:[...mem.cc],q:"",sub:t.subject||"",body:getBody(),edited:false,air:""};
+  const airs=DB.emaildir.slice().sort((x,y)=>String(x.code).localeCompare(String(y.code))),tpl=String(t.airline||"").toLowerCase();
+  S.air=(DB.emaildir.find(a=>String(a.code).toLowerCase()===tpl)||{}).id||mem.air||DB.ui.pdAir||"";
+  let tm=0;const persist=()=>{DB.ui.pdr[t.id]={to:S.to,cc:S.cc,air:S.air};DB.ui.pdAir=S.air;clearTimeout(tm);tm=setTimeout(save,500)};
+  host.innerHTML=`<div class="pd"><div class="pd-top"><b>✍ Pre-draft</b><span class="hint">Drag <span class="pd-hh">⠿</span> an address into To or CC — or tap it — then push the draft to Outlook</span><button class="btn sm" data-pdx type="button" title="Close">✕</button></div>
+    <div class="pd-zs"><div class="pd-z" data-pdz="to"><div class="pd-zt">To <small id="pd-nt"></small></div><div class="pd-chips" id="pd-to"></div></div><div class="pd-z" data-pdz="cc"><div class="pd-zt">CC <small id="pd-nc"></small></div><div class="pd-chips" id="pd-cc"></div></div></div>
+    <div class="pd-ad"><input id="pd-add" placeholder="Type or paste address(es) — Enter adds to To" autocomplete="off"><button class="btn sm" data-pdadd="to" type="button">＋ To</button><button class="btn sm" data-pdadd="cc" type="button">＋ CC</button></div>
+    <div class="pd-pk"><div class="row" style="gap:6px"><select id="pd-air" aria-label="Airline"><option value="">— choose airline —</option>${airs.map(a=>`<option value="${a.id}">${esc(a.code)} · ${esc(a.name)}</option>`).join("")}</select><input id="pd-q" type="search" placeholder="Filter stations / staff…" autocomplete="off"></div><div class="pd-list" id="pd-list"></div></div>
+    <label class="pd-l">Subject</label><input id="pd-sub"><label class="pd-l">Content <span class="hint" id="pd-ed"></span></label><textarea id="pd-body" rows="8"></textarea>
+    <div class="row" style="margin-top:8px"><button class="btn pri" data-pdpush type="button">↗ Push to Outlook</button><button class="btn sm" data-pdcopy="to" type="button">Copy To</button><button class="btn sm" data-pdcopy="cc" type="button">Copy CC</button><button class="btn sm danger" data-pdclr type="button">Clear</button></div></div>`;
+  const $h=s=>host.querySelector(s);
+  $h("#pd-air").value=S.air;$h("#pd-sub").value=S.sub;$h("#pd-body").value=S.body;
+  const chip=(a,z)=>`<span class="pd-chip" data-pdc="${esc(a)}" data-pdf="${z}"><span class="pd-h" data-pdh title="Drag to To / CC">⠿</span><span class="pd-ca">${esc(a)}</span><button type="button" data-pdmv="${z==="to"?"cc":"to"}" data-a="${esc(a)}" title="Move to ${z==="to"?"CC":"To"}">⇄</button><button type="button" data-pdrm="${z}" data-a="${esc(a)}" title="Remove">✕</button></span>`;
+  function zones(){
+    $h("#pd-to").innerHTML=S.to.map(a=>chip(a,"to")).join("")||`<span class="hint">Drop addresses here</span>`;$h("#pd-cc").innerHTML=S.cc.map(a=>chip(a,"cc")).join("")||`<span class="hint">Drop addresses here</span>`;
+    $h("#pd-nt").textContent=S.to.length?`· ${S.to.length}`:"";$h("#pd-nc").textContent=S.cc.length?`· ${S.cc.length}`:""}
+  function picker(){
+    const a=DB.emaildir.find(x=>x.id===S.air),L=$h("#pd-list");if(!a){L.innerHTML=`<div class="hint" style="padding:8px">Choose an airline to see its station and staff e-mails.</div>`;return}
+    const w=S.q.toLowerCase().split(/\s+/).filter(Boolean),groups=(a.subjects||[]).map(s=>({s,list:listEmails(s).filter(e=>!w.length||w.every(k=>(s.name+" "+e.addr+" "+(e.remark||"")).toLowerCase().includes(k)))})).filter(g=>g.list.length);
+    L.innerHTML=groups.length?groups.map((g,gi)=>`<div class="pd-sg"><div class="pd-sh"><b>${esc(g.s.name)}</b><span><button type="button" class="btn sm" data-pdall="to" data-g="${gi}">＋ To all</button><button type="button" class="btn sm" data-pdall="cc" data-g="${gi}">＋ CC all</button></span></div>${g.list.map(e=>`<div class="pd-row${S.to.includes(e.addr)||S.cc.includes(e.addr)?" used":""}" data-pdc="${esc(e.addr)}" data-pdf=""><span class="pd-h" data-pdh title="Drag into To or CC">⠿</span><span class="pd-ra" data-pdadd1="to" data-a="${esc(e.addr)}" title="Tap to add to To">${esc(e.addr)}</span>${e.remark?`<small>${esc(e.remark)}</small>`:""}<button type="button" class="btn sm" data-pdadd1="cc" data-a="${esc(e.addr)}">CC</button></div>`).join("")}</div>`).join(""):`<div class="hint" style="padding:8px">${a.subjects&&a.subjects.length?"No address matches.":"This airline has no e-mail addresses yet."}</div>`;
+    host._groups=groups}
+  function add(addr,z){addr=String(addr).trim();if(!PD_RE.test(addr))return false;const o=z==="to"?"cc":"to",lc=addr.toLowerCase();S[o]=S[o].filter(x=>x.toLowerCase()!==lc);if(!S[z].some(x=>x.toLowerCase()===lc))S[z].push(addr);zones();picker();persist();return true}
+  zones();picker();
+  host.addEventListener("input",e=>{
+    if(e.target.id==="pd-q"){S.q=e.target.value;picker()}
+    else if(e.target.id==="pd-sub")S.sub=e.target.value;
+    else if(e.target.id==="pd-body"){S.body=e.target.value;S.edited=true;$h("#pd-ed").textContent="· edited (the language buttons will no longer replace it)"}});
+  host.addEventListener("change",e=>{if(e.target.id==="pd-air"){S.air=e.target.value;picker();persist()}});
+  host.addEventListener("keydown",e=>{if(e.target.id==="pd-add"&&e.key==="Enter"){e.preventDefault();const l=pdParse(e.target.value);if(!l.length){toast("Enter a valid e-mail address");return}l.forEach(x=>add(x,"to"));e.target.value=""}});
+  host.addEventListener("click",e=>{
+    let b;
+    if(e.target.closest("[data-pdx]")){host.hidden=true;return}
+    if(b=e.target.closest("[data-pdadd]")){const i=$h("#pd-add"),l=pdParse(i.value);if(!l.length){toast("Enter a valid e-mail address");return}l.forEach(x=>add(x,b.dataset.pdadd));i.value="";return}
+    if(b=e.target.closest("[data-pdadd1]")){add(b.dataset.a,b.dataset.pdadd1);return}
+    if(b=e.target.closest("[data-pdall]")){const g=(host._groups||[])[+b.dataset.g];if(g)g.list.forEach(x=>add(x.addr,b.dataset.pdall));return}
+    if(b=e.target.closest("[data-pdmv]")){add(b.dataset.a,b.dataset.pdmv);return}
+    if(b=e.target.closest("[data-pdrm]")){const z=b.dataset.pdrm;S[z]=S[z].filter(x=>x!==b.dataset.a);zones();picker();persist();return}
+    if(b=e.target.closest("[data-pdcopy]")){const l=S[b.dataset.pdcopy];if(!l.length){toast("Nothing to copy");return}copy(l.join(DB.ui.sep?DB.ui.sep+" ":"; "),(b.dataset.pdcopy==="to"?"To":"CC")+" copied ✓");return}
+    if(e.target.closest("[data-pdclr]")){if(!S.to.length&&!S.cc.length||confirm("Clear all To / CC recipients?")){S.to=[];S.cc=[];zones();picker();persist()}return}
+    if(e.target.closest("[data-pdpush]")){if(!S.to.length&&!S.cc.length&&!confirm("No recipients added. Push the draft anyway?"))return;push(S.sub,S.body,S.to,S.cc)}
+  });
+  /* pointer drag from the ⠿ handle (works with mouse and touch) */
+  host.addEventListener("pointerdown",e=>{
+    const h=e.target.closest("[data-pdh]");if(!h||e.button>0)return;e.preventDefault();
+    const chipEl=h.closest("[data-pdc]"),addr=chipEl.dataset.pdc,ghost=document.createElement("div");ghost.className="pd-ghost";ghost.textContent=addr;document.body.appendChild(ghost);chipEl.classList.add("pd-src");
+    try{h.setPointerCapture(e.pointerId)}catch(x){}
+    const zoneAt=ev=>{const el=document.elementFromPoint(ev.clientX,ev.clientY);return el&&el.closest("[data-pdz]")};
+    const mv=ev=>{ghost.style.left=ev.clientX+"px";ghost.style.top=ev.clientY+"px";const z=zoneAt(ev);host.querySelectorAll("[data-pdz]").forEach(x=>x.classList.toggle("over",x===z))};
+    const up=ev=>{h.removeEventListener("pointermove",mv);h.removeEventListener("pointerup",up);h.removeEventListener("pointercancel",up);const z=zoneAt(ev);ghost.remove();chipEl.classList.remove("pd-src");host.querySelectorAll("[data-pdz]").forEach(x=>x.classList.remove("over"));if(z&&ev.type!=="pointercancel")add(addr,z.dataset.pdz)};
+    h.addEventListener("pointermove",mv);h.addEventListener("pointerup",up);h.addEventListener("pointercancel",up);mv(e)});
+  return{get:()=>({to:S.to.slice(),cc:S.cc.slice(),subject:S.sub,body:S.body}),syncBody(){if(!S.edited){S.body=getBody();$h("#pd-body").value=S.body}}}
+}
+function draftMail(kind,subject,body,to,cc){
+  to=to||[];cc=cc||[];
   const enc=s=>encodeURIComponent(s),crlf=body.replace(/\r?\n/g,"\r\n"),base=kind==="live"?"https://outlook.live.com/mail/0/deeplink/compose?":"https://outlook.office.com/mail/deeplink/compose?";
-  let url=kind==="mailto"?`mailto:?subject=${enc(subject)}&body=${enc(crlf)}`:`${base}subject=${enc(subject)}&body=${enc(crlf)}`;
+  const addr=l=>l.map(x=>enc(x).replace(/%40/g,"@")).join(kind==="mailto"?",":";");
+  const mk=bd=>kind==="mailto"?`mailto:${addr(to)}?${cc.length?`cc=${addr(cc)}&`:""}subject=${enc(subject)}&body=${enc(bd)}`:`${base}${to.length?`to=${addr(to)}&`:""}${cc.length?`cc=${addr(cc)}&`:""}subject=${enc(subject)}&body=${enc(bd)}`;
+  let url=mk(crlf);
   if(url.length>7000){ // too long for a link: open the draft with the subject only and put the content on the clipboard
     copy(body,"Content is long — copied; paste it into the draft (Ctrl+V)");
-    url=kind==="mailto"?`mailto:?subject=${enc(subject)}&body=${enc("(paste the content here — it is on your clipboard)")}`:`${base}subject=${enc(subject)}&body=${enc("(paste the content here — it is on your clipboard)")}`;
+    url=mk("(paste the content here — it is on your clipboard)");
   }
   if(kind==="mailto")location.href=url;else if(!openMailTab(url))toast("Pop-up blocked — allow pop-ups for this page");
+  else if(to.length||cc.length)toast(`Draft pushed to Outlook · To ${to.length}${cc.length?" · CC "+cc.length:""}`);
 }
+
 function viewTemplate(id){
   const t=DB.templates.find(x=>x.id===id);if(!t)return;
   const lang=DB.ui.lang;noteRecent({k:"tpl",id:t.id});
   modal(`<div class="mhead"><div style="min-width:0"><span class="chip al">${esc(airLabel(t.airline))}</span>${tagsHTML(t)}<h3 style="margin:6px 0 0">${esc(dEn(t))}</h3>${dTh(t)?`<div class="th-sub">${esc(dTh(t))}</div>`:""}</div><button class="btn sm x" data-close>✕</button></div>
   <div class="seg" style="margin:8px 0"><button data-ml="en" class="${lang==="en"?"on":""}">EN</button><button data-ml="th" class="${lang==="th"?"on":""}">ไทย</button><button data-ml="zh" class="${lang==="zh"?"on":""}">中文</button></div>
-  <div id="mv"></div>
+  <div id="mv"></div><div id="pd" hidden></div>
   <div class="lbl">Update history</div><ul class="hist" style="margin:0;padding-left:18px;font-size:13px">${(t.hist||[]).length?t.hist.slice().reverse().map(h=>`<li>${esc(h.d)} : ${esc(h.t)}</li>`).join(""):"<li>No history</li>"}</ul>
   <div class="row" style="margin-top:14px;justify-content:flex-end"><button class="btn" data-favm>${t.fav?"★ In favorites":"☆ Add to favorites"}</button><button class="btn danger adm" data-del>🗑 Delete</button><button class="btn adm" data-edit>✏️ Edit</button></div>`,(bg,close)=>{
-    let L=lang;
+    let L=lang,PD=null;
     const show=()=>{
       const body=tBody(t,L),noTh=L==="th"&&!t.th,noZh=L==="zh"&&!zhOf(t);
       $("#mv",bg).innerHTML=`${noTh?'<div class="note">No Thai version yet — showing English. Use Edit to add one.</div>':""}${L==="th"&&t.thAuto?'<div class="note">⚠ Thai version was auto-translated from English. Please review before sending, and edit to confirm.</div>':""}${noZh?'<div class="note">No Chinese version yet — showing English. Use Edit to add one.</div>':""}${L==="zh"&&zhOf(t)&&zhIsAuto(t)?'<div class="note">⚠ Chinese version was translated from English. Please review before sending, and edit to confirm.</div>':""}
       <div class="lbl">Subject <span class="hint" style="text-transform:none;font-weight:400">— click the text to copy</span></div><div class="cpw" data-c="s" title="Click to copy the subject"><div class="body" style="max-height:none">${esc(t.subject||"—")}</div><span class="cpdot"></span></div>
       <div class="lbl">Content (${L==="th"&&t.th?"Thai":L==="zh"&&zhOf(t)?"Chinese":"English"}) <span class="hint" style="text-transform:none;font-weight:400">— click the text to copy</span></div><div class="cpw" data-c="b" title="Click to copy the content"><div class="body">${esc(body)}</div><span class="cpdot"></span></div>
-      <div class="row" style="margin-top:12px"><button class="btn pri" id="ol-go" title="Open a new mail draft with this subject and content">📧 Draft in Outlook</button><select id="ol-t" style="width:auto" aria-label="Where to open the draft"><option value="office"${(DB.ui.mailT||"office")==="office"?" selected":""}>Outlook on the web (work / school)</option><option value="live"${DB.ui.mailT==="live"?" selected":""}>Outlook.com (personal)</option><option value="mailto"${DB.ui.mailT==="mailto"?" selected":""}>Default mail app</option></select><label class="chk" title="Every draft opens in the same Outlook tab instead of a new tab"><input type="checkbox" id="ol-re"${DB.ui.mailReuse!==false?" checked":""}> ♻ Reuse one Outlook tab</label><button class="btn sm" id="ol-tab" type="button" title="Open Outlook once from here: this tab then receives every draft. (If you opened Outlook yourself, close that tab first — the browser cannot control tabs it did not open.)">↗ Open my Outlook tab</button></div>`;
-      $$("[data-ml]",bg).forEach(b=>b.classList.toggle("on",b.dataset.ml===L));
+      <div class="row" style="margin-top:12px"><button class="btn pri" id="ol-go" title="Open a new mail draft with this subject and content">📧 Draft in Outlook</button><button class="btn" id="pd-open" type="button" title="Add To / CC recipients by drag & drop, edit the text, then push to Outlook">✍ Pre-draft (To / CC)</button><select id="ol-t" style="width:auto" aria-label="Where to open the draft"><option value="office"${(DB.ui.mailT||"office")==="office"?" selected":""}>Outlook on the web (work / school)</option><option value="live"${DB.ui.mailT==="live"?" selected":""}>Outlook.com (personal)</option><option value="mailto"${DB.ui.mailT==="mailto"?" selected":""}>Default mail app</option></select><label class="chk" title="Every draft opens in the same Outlook tab instead of a new tab"><input type="checkbox" id="ol-re"${DB.ui.mailReuse!==false?" checked":""}> ♻ Reuse one Outlook tab</label><button class="btn sm" id="ol-tab" type="button" title="Open Outlook once from here: this tab then receives every draft. (If you opened Outlook yourself, close that tab first — the browser cannot control tabs it did not open.)">↗ Open my Outlook tab</button></div>`;
+      $$("[data-ml]",bg).forEach(b=>b.classList.toggle("on",b.dataset.ml===L));PD&&PD.syncBody();
     };
     show();
     bg.addEventListener("change",e=>{if(e.target.id==="ol-t"){DB.ui.mailT=e.target.value;save()}else if(e.target.id==="ol-re"){DB.ui.mailReuse=e.target.checked;save();toast(e.target.checked?"Drafts will reuse one Outlook tab":"Each draft opens in a new tab")}});
     bg.addEventListener("click",e=>{
       const ml=e.target.closest("[data-ml]");if(ml){L=ml.dataset.ml;show()}
-      if(e.target.closest("#ol-go"))draftMail($("#ol-t",bg).value,t.subject||"",tBody(t,L));
+      if(e.target.closest("#ol-go")){const P=PD&&PD.get();draftMail($("#ol-t",bg).value,P?P.subject:(t.subject||""),P?P.body:tBody(t,L),P?P.to:[],P?P.cc:[])}
+      if(e.target.closest("#pd-open")){const h=$("#pd",bg);if(!PD)PD=preDraftMount(h,t,()=>tBody(t,L),(sub,body,to,cc)=>draftMail($("#ol-t",bg).value,sub,body,to,cc));h.hidden=!h.hidden;if(!h.hidden)h.scrollIntoView({block:"nearest",behavior:"smooth"})}
       if(e.target.closest("#ol-tab"))openOutlookTab($("#ol-t",bg).value);
       const c=e.target.closest("[data-c]");if(c&&!String(getSelection()).trim()){const txt=c.dataset.c==="s"?t.subject:tBody(t,L);if(txt){copy(txt,c.dataset.c==="s"?"Subject copied ✓":"Content copied ✓");c.classList.add("copied");setTimeout(()=>c.classList.remove("copied"),1400)}}
       const fm=e.target.closest("[data-favm]");if(fm){const tt=DB.templates.find(x=>x.id===t.id)||t,nv=!tt.fav;putItem("templates",{...tt,fav:nv});fm.textContent=nv?"★ In favorites":"☆ Add to favorites"}
